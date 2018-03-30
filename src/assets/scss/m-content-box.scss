@@ -1,0 +1,29 @@
+.content-box {
+  display: flex;
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+  a {
+    border: 1px solid #adb5bd;
+    color: #373737 !important;
+    text-align: left;
+    text-decoration: none !important;
+    display: flex;
+    flex: 1;
+    flex-flow: column;
+  }
+  &-description {
+    padding: 30px;
+  }
+  h5 {
+    text-transform: uppercase;
+  }
+  p {
+    margin: 0 !important;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .content-box {
+    margin-bottom: 30px !important;
+  }
+}

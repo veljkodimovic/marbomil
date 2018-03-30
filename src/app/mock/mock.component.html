@@ -1,13 +1,163 @@
-<mat-progress-bar mode="buffer"></mat-progress-bar>
-<p>
-  MOCK WORKS!!!
-</p>
-<mat-progress-bar mode="indeterminate"></mat-progress-bar>
-
-<div class="container">
-  <mat-form-field>
-    <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+<div id="homepageSlider" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="../../assets/images/mainBanner.jpg" alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="../../assets/images/kvalitetBanner.jpg" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="../../assets/images/servisBanner.jpg" alt="Third slide">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#homepageSlider" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#homepageSlider" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
 </div>
+
+<section class="homepage-25">
+  <h3>25 godina sa Vama.</h3>
+</section>
+
+<section class="homepage-banners">
+  <div class="row no-gutters">
+    <div class="col-sm-4">
+      <a href="">
+        <img src="../../assets/images/pic1.png" alt="Oprema za kupatila">
+        <span>Oprema za kupatila</span>
+      </a>
+    </div>
+    <div class="col-sm-4">
+      <a href="">
+        <img src="../../assets/images/pic2.png" alt="Delovi slavina i ventila">
+        <span>Delovi slavina i ventila</span>
+      </a>
+    </div>
+    <div class="col-sm-4">
+      <a href="">
+        <img src="../../assets/images/pic3.png" alt="Slavine i ventili">
+        <span>Slavine i ventili</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="homepage-description">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <p>
+          Marbomil je jedna od vodećih robnih marki slavina i druge opreme za kupatilo u reigonu. <br>
+          Naši proizvodi su atestirani i bezbedni za upotrebu. Podležu dugotrajnim garancijama <br>
+          i rigoroznoj kontroli kvaliteta. <br>
+          Kvalitet proizvoda garantovan je dvadesetpetogodišnjim iskustvom <br>
+          u proizvodnji vodovodnih armatura. <br>
+          Marmobil slavine i druge proizvode možete kupiti u više storina <br>
+          maloprodajnih objekata u Srbiji, Hrvatskoj, Makedoniji i Crnoj Godi.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="homepage-boxes">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 content-box">
+        <a href="#">
+          <img src="../../assets/images/pic5.png" alt="Proizvodi">
+          <div class="content-box-description">
+            <h5>Proizvodi</h5>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel magna fermentum, tristique dui a.</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-3 content-box">
+        <a href="#">
+          <img src="../../assets/images/pic6.png" alt="Katalog">
+          <div class="content-box-description">
+            <h5>Preuzmi katalog <i class="fas fa-download"></i></h5>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel magna fermentum, tristique dui a.</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-3 content-box">
+        <a href="#">
+          <img src="../../assets/images/pic7.png" alt="Atesti">
+          <div class="content-box-description">
+            <h5>Atesti</h5>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel magna fermentum, tristique dui a.</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-3 content-box">
+        <a href="#">
+          <img src="../../assets/images/pic8.png" alt="Video materijali">
+          <div class="content-box-description">
+            <h5>Video materijali</h5>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel magna fermentum, tristique dui a.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <a href="#">
+          <img src="../../assets/images/logo/logo_footer.png" class="footer-logo">
+        </a>
+      </div>
+      <div class="col-md-3">
+        <ul class="footer-links">
+          <li>
+            <a href="#">Naslovna strana</a>
+          </li>
+          <li>
+            <a href="#">O nama</a>
+          </li>
+          <li>
+            <a href="#">Proizvodi</a>
+          </li>
+          <li>
+            <a href="#">Kontakt</a>
+          </li>
+        </ul>
+        <ul class="footer-info">
+          <li>Marbomil kontakt informacije</li>
+          <li>Marbomil doo</li>
+        </ul>
+        <a href="#" class="footer-download">Download sekcija <i class="fas fa-download"></i>
+        </a>
+      </div>
+      <div class="col-auto footer-contact">
+        <ul>
+          <li>
+            <span>Sedište:</span> Vojvođanska 370G, 11271 Surčin, Beograd, Srbija
+          </li>
+          <li>
+            <span>Telefon:</span> <a href="tel:+381118442245">+381 (11) 844-22-45</a>
+          </li>
+          <li>
+            <span>Fax:</span> +381 (11) 844-22-48
+          </li>
+          <li>
+            <span>E-mail:</span> <a href="mailto:info@marbomil.co.rs">info@marbomil.co.rs</a>
+          </li>
+        </ul>
+        <form class="footer-newsletter form-inline">
+          <input class="form-control" type="search" placeholder="Marbomil prijava na vesti" aria-label="Search">
+          <button class="footer-newsletter-submit" type="submit">Prijava</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</footer>

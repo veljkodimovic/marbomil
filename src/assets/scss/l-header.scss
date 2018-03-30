@@ -1,0 +1,45 @@
+.header-top {
+  padding-right: 0;
+  padding-bottom: 0;
+  .nav-link {
+    padding: 0 5px;
+    font-size: 12px;
+  }
+}
+.header-bottom {
+  align-items: flex-end;
+  padding: 0;
+  .nav-link {
+    padding: 5px 0 !important;
+    margin-right: 40px;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    border-bottom: 2px solid $white;
+  }
+  .nav-item.active > .nav-link {
+    border-bottom: 2px solid $primary;
+  }
+}
+
+.header-search {
+  position: relative;
+  input {
+    border-radius: 40px;
+    font-size: 13px;
+    padding-left: 50px;
+  }
+  .btn {
+    position: absolute;
+    left: 1px;
+    color: $primary;
+    line-height: 1;
+    border: none;
+    border-radius: 40px;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .logo {
+    width: 150px;
+  }
+}

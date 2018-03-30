@@ -14,4 +14,17 @@ body {
   flex-direction: column;
   margin: 0;
   height: 100%;
+  font-family: "Roboto", sans-serif;
+  line-height: 1.3;
 }
+
+img {
+  max-width: 100%;
+}
+
+@import "../assets/scss/l-header";
+@import "../assets/scss/l-footer";
+
+@import "../assets/scss/m-content-box";
+
+@import "../assets/scss/c-homepage";

@@ -1,44 +1,67 @@
-<mat-toolbar class="mat-elevation-z6 navbar" color="primary">
-  <div fxHide.gt-sm fxLayoutAlign="start center">
-    <button class="menu-button" mat-icon-button (click)="sidenav.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span class="title">{{title}}</span>
-  </div>
-  <div fxHide.lt-md>
-    <a class="brand" translate>APP_NAME</a>
-    <!-- <button mat-button routerLink="/home" routerLinkActive="active">
-      <i class="fa fa-home"></i>
-      <span translate>Home</span>
-    </button>
-    <button mat-button routerLink="/about" routerLinkActive="active">
-      <i class="fa fa-question-circle"></i>
-      <span translate>About</span>
-    </button> -->
-    <button mat-button routerLink="/mock" routerLinkActive="active">
-      <i class="fa fa-question-circle"></i>
-      <span>Mock</span>
-    </button>
-  </div>
-  <span fxFlex></span>
-  <button mat-icon-button [matMenuTriggerFor]="languageMenu">
-    <mat-icon>language</mat-icon>
-  </button>
-  <mat-menu #languageMenu="matMenu">
-    <button mat-menu-item *ngFor="let language of languages" (click)="setLanguage(language)">
-        {{language}}
+<header class="container">
+  <div class="row">
+    <nav class="header-top col navbar navbar-expand">
+      <div class="navbar-nav  ml-auto">
+        <a class="nav-item nav-link text-uppercase" routerLink="/mock" routerLinkActive="active">
+          <span translate>Ser</span>
+        </a>
+        <a class="nav-item nav-link text-uppercase" routerLink="/mock" routerLinkActive="active">
+          <span translate>Eng</span>
+        </a>
+        <a class="nav-item nav-link text-uppercase" routerLink="/mock" routerLinkActive="active">
+          <span translate>Rus</span>
+        </a>
+        <a class="nav-item nav-link text-uppercase" routerLink="/mock" routerLinkActive="active">
+          <span translate>Alb</span>
+        </a>
+      </div>
+    </nav>
+    <div class="w-100"></div>
+    <nav class="header-bottom col navbar navbar-expand-lg">
+      <a class="navbar-brand" href="#" translate><img src="../../../../assets/images/logo/logo_header.png" class="logo"></a>
+      <button class="navbar-toggler" type="button" aria-controls="navbar-menu"
+              aria-label="Toggle navigation" (click)="toggleMenu()" [attr.aria-expanded]="!menuHidden">
+        <span class="navbar-toggler-icon"></span>
       </button>
-  </mat-menu>
-  <button mat-icon-button [matMenuTriggerFor]="userMenu">
-    <mat-icon>person</mat-icon>
-  </button>
-  <mat-menu #userMenu="matMenu">
-    <mat-list>
-      <mat-list-item>
-        <span translate>Logged in as</span>&nbsp;<b>{{username}}</b>
-      </mat-list-item>
-      <mat-divider></mat-divider>
-    </mat-list>
-    <button mat-menu-item (click)="logout()" translate>Logout</button>
-  </mat-menu>
-</mat-toolbar>
+      <div id="navbar-menu" class="collapse navbar-collapse float-xs-none" [ngbCollapse]="menuHidden">
+        <ul class="navbar-nav  ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link text-uppercase" routerLink="/mock" routerLinkActive="active">
+              <span translate>Marbomil</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-uppercase" routerLink="/mock" routerLinkActive="active">
+              <span translate>Proizvodi</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-uppercase" routerLink="/mock" routerLinkActive="active">
+              <span translate>Kvalitet</span>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-uppercase" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span translate>Servis</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-uppercase" routerLink="/mock" routerLinkActive="active">
+              <span translate>Gde kupiti</span>
+            </a>
+          </li>
+        </ul>
+        <form class="header-search form-inline my-2 my-lg-0">
+          <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+          <input class="form-control" type="search" aria-label="Search">
+        </form>
+      </div>
+    </nav>
+  </div>
+</header>
+

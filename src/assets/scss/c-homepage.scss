@@ -1,0 +1,70 @@
+.homepage-25 {
+  text-align: center;
+  padding: 90px 0;
+  h3[_ngcontent-c3] {
+    font-size: 50px;
+    font-weight: 300;
+    color: $primary;
+    line-height: 1;
+    margin: 0;
+  }
+}
+
+.homepage-banners {
+  a {
+    display: block;
+    color: $white !important;
+    text-decoration: none;
+    line-height: 0;
+    position: relative;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  span {
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 16px;
+    line-height: 1;
+    margin-top: -8px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+}
+
+.homepage-description {
+  padding: 130px 0;
+  background: url("/assets/images/pic4.png") no-repeat center center;
+  background-size: cover;
+  p {
+    margin: 0 0 0 60px !important;
+    color: $white;
+    text-align: left;
+    font-weight: 300;
+  }
+}
+
+.homepage-boxes {
+  .container {
+    padding: 50px 1rem !important;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .homepage-description {
+    p {
+      margin: 0 !important;
+    }
+  }
+  .homepage-25 {
+    h3 {
+      font-size: 36px;
+    }
+  }
+}

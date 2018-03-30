@@ -14,6 +14,7 @@ import { I18nService } from '../../i18n.service';
 export class HeaderComponent implements OnInit {
 
   @Input() sidenav: MatSidenav;
+  menuHidden = true;
 
   constructor(private router: Router,
               private titleService: Title,
@@ -21,6 +22,10 @@ export class HeaderComponent implements OnInit {
               private i18nService: I18nService) { }
 
   ngOnInit() { }
+
+  toggleMenu() {
+    this.menuHidden = !this.menuHidden;
+  }
 
   setLanguage(language: string) {
     this.i18nService.language = language;

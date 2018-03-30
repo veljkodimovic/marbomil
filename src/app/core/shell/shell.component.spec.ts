@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AuthenticationService } from '../authentication/authentication.service';
 import { MockAuthenticationService } from '../authentication/authentication.service.mock';
@@ -17,7 +17,7 @@ describe('ShellComponent', () => {
       imports: [
         RouterTestingModule,
         TranslateModule.forRoot(),
-        BrowserAnimationsModule,
+        NgbModule.forRoot(),
         CoreModule
       ],
       providers: [

@@ -57,6 +57,11 @@ $theme-colors: (
 $grid-gutter-width: 16px;
 $card-group-margin: 8px;
 
+// Carousel
+$carousel-control-icon-width: 60px;
+$carousel-control-prev-icon-bg: none;
+$carousel-control-next-icon-bg: none;
+
 // Use Bootstrap defaults for other variables, imported here so we can access all app variables in one place when used
 // in components.
 @import "~bootstrap/scss/_functions";

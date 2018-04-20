@@ -1,7 +1,5 @@
 .content-box {
   display: flex;
-  padding-left: 8px !important;
-  padding-right: 8px !important;
   a {
     border: 1px solid #adb5bd;
     color: #373737 !important;
@@ -25,5 +23,39 @@
 @include media-breakpoint-down(sm) {
   .content-box {
     margin-bottom: 30px !important;
+  }
+}
+
+.categories-list-item {
+  margin-bottom: 30px;
+  a {
+    color: $primary !important;
+    border: none;
+    box-shadow: 0px 2px 6px 0px #ddd;
+  }
+  .content-box-description {
+    padding: 30px 15px;
+  }
+  h5 {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+}
+
+.product-categories-item {
+  margin-bottom: 30px;
+  a {
+    background: $primary;
+    color: $white !important;
+  }
+  .content-box-description {
+    padding: 30px 15px;
+  }
+  h5 {
+    text-align: center;
+    text-transform: none;
+    font-size: 16px;
+    margin-bottom: 0;
   }
 }

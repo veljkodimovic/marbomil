@@ -1,0 +1,40 @@
+.sidenav {
+  text-align: left;
+  &-title {
+    color: $primary;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: block;
+  }
+  &-list {
+    list-style: none;
+    margin: 0 0 20px;
+    padding: 0;
+  }
+  &-link {
+    display: inline-block;
+    color: $black;
+    padding: 13px 20px;
+    line-height: 1;
+    position: relative;
+    &:hover {
+      color: $primary;
+      text-decoration: none;
+    }
+    &.active {
+      color: $white !important;
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: -9999px;
+        background: $primary;
+        z-index: -1;
+      }
+    }
+  }
+}

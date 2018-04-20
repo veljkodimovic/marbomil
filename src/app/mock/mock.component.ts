@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-mock',
-  templateUrl: './mock.component.html',
+  templateUrl: 'html/product.html',
   styleUrls: ['./mock.component.scss']
 })
 export class MockComponent implements OnInit {

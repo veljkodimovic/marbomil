@@ -1,0 +1,32 @@
+.contact-form {
+  margin-bottom: 80px;
+  .form-group {
+    position: relative;
+    margin-bottom: 60px;
+  }
+  input {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    padding-left: 180px;
+    &:focus {
+      border: none;
+      border-bottom: 1px solid #ddd;
+      box-shadow: none;
+    }
+  }
+  label {
+    position: absolute;
+    font-size: 20px;
+    line-height: 47px;
+    top: 0;
+    left: 50px;
+    margin: 0;
+    font-weight: 300;
+    color: #555;
+  }
+  textarea {
+    min-height: 200px;
+    border-color: #ddd !important;
+    box-shadow: none !important;
+  }
+}

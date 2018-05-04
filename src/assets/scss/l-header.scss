@@ -27,6 +27,22 @@
   .navbar-nav > .nav-item {
     padding-bottom: 1rem;
   }
+  .dropdown-menu {
+    padding: 0;
+    margin: 0;
+    top: 35px;
+    border: none;
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+  }
+  .dropdown-item {
+    padding: 10px 15px;
+    text-transform: uppercase;
+    font-size: 14px;
+    &:hover {
+      color: $white;
+      background: $primary;
+    }
+  }
 }
 
 .header-search {
@@ -51,6 +67,27 @@
     .dropdown-menu {
       display: block;
     }
+  }
+}
+
+.breadcrumbs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-flow: row wrap;
+  width: 723px;
+  float: right;
+  li {
+    padding-left: 30px;
+    &:first-child {
+      padding-left: 0;
+    }
+  }
+  a {
+    text-transform: uppercase;
+    color: #777;
+    font-weight: 300;
   }
 }
 

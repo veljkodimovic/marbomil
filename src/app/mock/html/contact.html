@@ -1,43 +1,29 @@
 <div class="container">
   <div class="row">
-    <div class="col-12">
-      <ul class="breadcrumbs">
-        <li>
-          <a href="#">Proizvodi</a>
-        </li>
-        <li>
-          <a href="#">Baterije</a>
-        </li>
-        <li>
-          <a href="#">Individualni proizvodi</a>
-        </li>
-        <li>
-          <a href="#">Baterija za umivaonik / standard</a>
-        </li>
-      </ul>
+    <div class="col-sm-12 page-title-icon">
+      <h1>Kontakt</h1>
     </div>
   </div>
-</div>
-<div class="container single-product">
   <div class="row">
-    <div class="col-sm-6">
-      <img src="../../../assets/images/ind.proizvod.png" alt="">
-      <img src="../../../assets/images/ind.proizvod.png" alt="">
-    </div>
-    <div class="col-sm-6">
-      <h1>Standard</h1>
-      <div class="single-product-data">
-        <p>Šifra: 433543</p>
-        <p>Cena: 4,010.00</p>
-        <p>Dimenzije proizvoda (ŠxVxD): 300x200x175mm</p>
-      </div>
-      <p class="single-product-description">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam auctor lacus vel bibendum egestas. Phasellus ultricies ipsum eu massa commodo, in varius ex malesuada. Mauris pharetra quam eget ipsum ullamcorper, sit amet egestas velit dapibus.
-      </p>
-      <p class="single-product-price-info">
-        Cene su iskazane u dinarima sa uključenim PDV-om. Ne možemo Vam garantovati da su sve fotografije potpuno verne, a cene ažurne, iako će Marbomil nastojati da ove informacije budu tačne.
-      </p>
-      <a href="#" class="add-to-cart btn btn-primary btn-lg">Dodaj u korpu</a>
+    <div class="col-sm-6 offset-sm-3">
+      <form action="" class="contact-form">
+        <div class="form-group">
+          <label for="contact-name">Ime i prezime</label>
+          <input type="text" class="form-control form-control-lg" id="contact-name" >
+        </div>
+        <div class="form-group">
+          <label for="contact-phone">Tel:</label>
+          <input type="text" class="form-control form-control-lg" id="contact-phone" >
+        </div>
+        <div class="form-group">
+          <label for="contact-city">Grad</label>
+          <input type="text" class="form-control form-control-lg" id="contact-city" >
+        </div>
+        <div class="form-group">
+          <textarea class="form-control form-control-lg" id="messagenote" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn large-btn btn-primary mb-2">Posalji</button>
+      </form>
     </div>
   </div>
 </div>

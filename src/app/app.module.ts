@@ -11,6 +11,8 @@ import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
 // import { HomeModule } from './home/home.module';
 // import { AboutModule } from './about/about.module';
+import { AdminModule } from './admin/admin.module';
+import { BannerModule } from './banner/banner.module';
 import { MockModule } from './mock/mock.module';
 import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
@@ -29,6 +31,8 @@ import { AppRoutingModule } from './app-routing.module';
     SharedModule,
     // HomeModule,
     // AboutModule,
+    AdminModule,
+    BannerModule,
     MockModule,
     LoginModule,
     AppRoutingModule

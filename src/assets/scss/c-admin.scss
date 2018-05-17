@@ -1,0 +1,140 @@
+.admin-panels {
+  padding: 100px 50px;
+}
+
+.admin-panel {
+  display: block;
+  position: relative;
+  text-align: center;
+  background: $primary;
+  padding-top: 100%;
+  margin-bottom: 20px;
+  a {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    color: $white;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+  p {
+    text-transform: uppercase;
+    margin-top: 50px;
+    font-size: 40px;
+  }
+  i {
+    font-size: 5vw;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .admin-panels {
+    padding: 100px 0;
+  }
+  .admin-panel {
+    i {
+      font-size: 50px;
+    }
+    p {
+      font-size: 20px;
+      margin-top: 20px;
+    }
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  .admin-panels {
+    padding: 50px 0;
+  }
+  .admin-panel {
+    i {
+      font-size: 25vw;
+    }
+    p {
+      font-size: 30px;
+      margin-top: 30px;
+    }
+  }
+}
+
+.admin-list {
+  &-item {
+    display: flex;
+    padding: 20px 0;
+    border-bottom: 1px solid $gray-200;
+  }
+}
+
+.banner-image,
+.banner-title,
+.banner-link,
+.banner-text {
+  padding: 0 20px 0 0;
+}
+.banner-image {
+  width: 150px;
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.banner-link,
+.banner-text {
+  width: 200px;
+  word-break: break-all;
+}
+
+.banner-title {
+  flex: 1;
+}
+
+.banner-edit {
+  a {
+    display: inline-block;
+    margin-left: 10px;
+  }
+}
+
+.remove-link {
+  color: $red;
+  &:hover {
+    color: $red;
+  }
+}
+
+.admin-headline {
+  margin: 50px 0;
+}
+
+.dropzone-wrapp {
+  padding: 20px;
+  height: 150px;
+  margin-bottom: 30px;
+  border-radius: 4px;
+  background: $gray-200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.btn-primary {
+  background: $blue-dark;
+  border-color: $blue-dark;
+  color: $white;
+  text-transform: uppercase;
+  border-radius: 10px;
+  padding: 10px 25px;
+  letter-spacing: 0.5px;
+}
+
+.form-control {
+  border-radius: 5px;
+}

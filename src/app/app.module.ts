@@ -12,7 +12,7 @@ import { SharedModule } from '@app/shared';
 // import { HomeModule } from './home/home.module';
 // import { AboutModule } from './about/about.module';
 import { AdminModule } from './admin/admin.module';
-import { BannerModule } from './banner/banner.module';
+//import { BannerModule } from './banner/banner.module';
 import { MockModule } from './mock/mock.module';
 import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
@@ -32,7 +32,7 @@ import { AppRoutingModule } from './app-routing.module';
     // HomeModule,
     // AboutModule,
     AdminModule,
-    BannerModule,
+    //BannerModule,
     MockModule,
     LoginModule,
     AppRoutingModule

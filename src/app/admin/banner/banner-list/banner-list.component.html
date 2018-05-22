@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <h1 class="admin-headline">Banner lista</h1>
+      <h1 class="admin-headline">Baneri</h1>
       <div class="admin-list" *ngIf="bannerData">
         <div class="admin-list-item" *ngFor="let book of bannerData.data">
           <div class="banner-image">
@@ -17,7 +17,7 @@
             <span>{{book.avatar}}</span>
           </div>
           <div class="banner-edit">
-            <a routerLink="/banner/{{book.id}}"><i class="fas fa-pencil-alt"></i></a>
+            <a routerLink="/admin/banner/{{book.id}}"><i class="fas fa-pencil-alt"></i></a>
             <a href="#" class="remove-link"><i class="fas fa-trash"></i></a>
           </div>
         </div>

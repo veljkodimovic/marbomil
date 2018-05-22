@@ -9,8 +9,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class BannerViewComponent implements OnInit {
 
-  private banner: any;
-  private link: any;
+   banner: any;
+   link: any;
   constructor(private svc: BannerService, private route: ActivatedRoute) {}
 
   ngOnInit() {

@@ -8,7 +8,7 @@ import { BannerService } from '../banner.service';
 })
 export class BannerListComponent implements OnInit {
 
-  private bannerData: any;
+   bannerData: any;
 
   constructor(private svc: BannerService) {}
 

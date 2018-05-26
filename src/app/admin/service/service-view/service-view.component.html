@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12" *ngIf="service">
+      <h1 class="admin-headline">
+        {{ service.first_name }} <span>Edit</span>
+        <a class="admin-headline-link" routerLink="/admin/service">
+          <i class="fas fa-chevron-left"></i> Back to list
+        </a>
+      </h1>
+    </div>
+  </div>
+  <form action="">
+    <div class="row">
+      <div class="col-md-5">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2831.285743984208!2d20.29799991572848!3d44.79536497909883!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475a69200cec400f%3A0xb636c3befcf4bcb7!2z0JLQvtGY0LLQvtGS0LDQvdGB0LrQsCAzNzBHLCDQodGD0YDRh9C40L0gMTEyNzE!5e0!3m2!1ssr!2srs!4v1527325882723" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+      </div>
+      <div class="col-md-6 offset-md-1">
+        <div class="" *ngIf="service">
+          <div class="form-group row">
+            <label for="name" class="col-md-2 col-form-label">Naziv</label>
+            <div class="col-md-10">
+              <input type="text" class="form-control" id="name" value="{{ service.first_name }}">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="address" class="col-md-2 col-form-label">Adresa</label>
+            <div class="col-md-10">
+              <input type="text" class="form-control" id="address" value="{{ service.first_name }}">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="city" class="col-md-2 col-form-label">Grad</label>
+            <div class="col-md-10">
+              <input type="text" class="form-control" id="city" value="{{ service.first_name }}">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="country" class="col-md-2 col-form-label">Drzava</label>
+            <div class="col-md-10">
+              <input type="text" class="form-control" id="country" value="{{ service.first_name }}">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="phone" class="col-md-2 col-form-label">Telefon</label>
+            <div class="col-md-10">
+              <input type="text" class="form-control" id="phone" value="{{ service.first_name }}">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="email" class="col-md-2 col-form-label">Email</label>
+            <div class="col-md-10">
+              <input type="email" class="form-control" id="email" value="{{ service.first_name }}">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="website" class="col-md-2 col-form-label">Website</label>
+            <div class="col-md-10">
+              <input type="text" class="form-control" id="website" value="{{ service.first_name }}">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-10 offset-md-2">
+              <button type="submit" class="btn btn-primary">Sačuvaj</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

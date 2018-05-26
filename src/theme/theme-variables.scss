@@ -6,6 +6,9 @@
 $fa-font-path: "~@fortawesome/fontawesome-free-webfonts/webfonts";
 $enable-rounded: false;
 
+// Font import
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,900&subset=latin-ext');
+
 // ---------------------------------------------------------------------------
 // Bootstrap variables
 //
@@ -62,6 +65,9 @@ $card-group-margin: 8px;
 $carousel-control-icon-width: 60px;
 $carousel-control-prev-icon-bg: none;
 $carousel-control-next-icon-bg: none;
+
+// Headings
+$headings-font-family: 'Raleway', sans-serif;
 
 // Use Bootstrap defaults for other variables, imported here so we can access all app variables in one place when used
 // in components.

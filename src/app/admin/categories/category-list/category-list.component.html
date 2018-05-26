@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1 class="admin-headline">
+        Kategorije
+        <a class="admin-headline-link" routerLink="/admin">
+          <i class="fas fa-chevron-left"></i> Back to admin
+        </a>
+      </h1>
+    </div>
+  </div>
+  <div class="row admin-list" *ngIf="categoryData">
+    <div class="col-lg-6" *ngFor="let book of categoryData.data">
+      <div class="admin-list-item">
+        <div class="row">
+          <div class="col-4">
+            <a routerLink="/admin/category/{{book.id}}">
+              <img src="{{book.avatar}}" alt="{{book.first_name}}">
+            </a>
+          </div>
+          <div class="col-7">
+            <p><a class="admin-list-name" routerLink="/admin/category/{{book.id}}">{{book.first_name}}</a></p>
+          </div>
+          <div class="col-1 admin-list-links">
+            <a routerLink="/admin/category/{{book.id}}"><i class="fas fa-pencil-alt"></i></a>
+            <a href="#" class="remove-link"><i class="fas fa-trash"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

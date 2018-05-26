@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12" *ngIf="collection">
+      <h1 class="admin-headline">
+        {{ collection.first_name }} <span>Edit</span>
+        <a class="admin-headline-link" routerLink="/admin/collection">
+          <i class="fas fa-chevron-left"></i> Back to list
+        </a>
+      </h1>
+    </div>
+  </div>
+  <form action="">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="dropzone-wrapp">
+          <span>Drop files here</span>
+        </div>
+      </div>
+      <div class="col-md-6 offset-md-1">
+        <div class="" *ngIf="collection">
+          <div class="form-group row">
+            <label for="name" class="col-md-2 col-form-label">Naziv</label>
+            <div class="col-md-10">
+              <input type="text" class="form-control" id="name" value="{{ collection.first_name }}">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="parentCollection" class="col-md-2 col-form-label">Parent Collection</label>
+            <div class="col-md-10">
+              <select class="form-control" id="parentCollection">
+                <option>Kolekcija 1</option>
+                <option>Kolekcija 2</option>
+                <option>Kolekcija 3</option>
+                <option>Kolekcija 4</option>
+                <option>Kolekcija 5</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="category" class="col-md-2 col-form-label">Category</label>
+            <div class="col-md-10">
+              <select class="form-control" id="category">
+                <option>Kategorija 1</option>
+                <option>Kategorija 2</option>
+                <option>Kategorija 3</option>
+                <option>Kategorija 4</option>
+                <option>Kategorija 5</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-10 offset-md-2">
+              <button type="submit" class="btn btn-primary">Sačuvaj</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -65,9 +65,40 @@
 
 .admin-list {
   &-item {
-    display: flex;
-    padding: 20px 0;
+    padding: 20px 10px;
     border-bottom: 1px solid $gray-200;
+  }
+  &-links {
+    text-align: right;
+    a {
+      font-size: 18px;
+      margin-bottom: 5px;
+      display: block;
+    }
+  }
+  &-name {
+    font-size: 28px;
+    font-weight: 300;
+    text-decoration: none !important;
+    small {
+      font-size: 70%;
+    }
+  }
+  &-video {
+    align-items: flex-end;
+    margin-top: 10px;
+    p {
+      margin-bottom: 0;
+    }
+    .admin-list-links {
+      a {
+        display: inline-block;
+        margin-left: 5px;
+      }
+    }
+  }
+  &-contact {
+    line-height: 1.6;
   }
 }
 
@@ -111,6 +142,20 @@
 
 .admin-headline {
   margin: 50px 0;
+  font-weight: 900;
+  text-transform: uppercase;
+  &-link {
+    float: right;
+    color: $gray-800;
+    text-transform: uppercase;
+    font-size: 60%;
+    font-weight: 400;
+    line-height: 57px;
+  }
+  span {
+    font-weight: 400;
+    font-size: 70%;
+  }
 }
 
 .dropzone-wrapp {
@@ -137,4 +182,10 @@
 
 .form-control {
   border-radius: 5px;
+}
+
+.row {
+  iframe {
+    max-width: 100%;
+  }
 }

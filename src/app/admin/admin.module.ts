@@ -14,6 +14,34 @@ import { BannerService } from './banner/banner.service';
 import { AdminComponent } from './admin.component';
 import { QuoteService } from './quote.service';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { CategoryViewComponent } from './categories/category-view/category-view.component';
+import { CategoryListComponent } from './categories/category-list/category-list.component';
+import { CategoryService} from './categories/categories.service';
+import { CollectionsComponent } from './collections/collections.component';
+import { CollectionViewComponent } from './collections/collection-view/collection-view.component';
+import { CollectionListComponent } from './collections/collection-list/collection-list.component';
+import { CollectionService} from './collections/collections.service';
+import { VideoComponent } from './video/video.component';
+import { VideoViewComponent } from './video/video-view/video-view.component';
+import { VideoListComponent } from './video/video-list/video-list.component';
+import { VideoService} from './video/video.service';
+import { AtestComponent } from './atest/atest.component';
+import { AtestViewComponent } from './atest/atest-view/atest-view.component';
+import { AtestListComponent } from './atest/atest-list/atest-list.component';
+import { AtestService } from './atest/atest.service';
+import { CatalogueComponent } from './catalogue/catalogue.component';
+import { CatalogueViewComponent } from './catalogue/catalogue-view/catalogue-view.component';
+import { CatalogueListComponent } from './catalogue/catalogue-list/catalogue-list.component';
+import { CatalogueService } from './catalogue/catalogue.service';
+import { ServiceComponent } from './service/service.component';
+import { ServiceViewComponent } from './service/service-view/service-view.component';
+import { ServiceListComponent } from './service/service-list/service-list.component';
+import { ServiceService } from './service/service.service';
+import { SalesComponent } from './sales/sales.component';
+import { SalesViewComponent } from './sales/sales-view/sales-view.component';
+import { SalesListComponent } from './sales/sales-list/sales-list.component';
+import { SalesService } from './sales/sales.service';
 
 @NgModule({
   imports: [
@@ -30,11 +58,39 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     AdminPanelComponent,
     BannerViewComponent,
     BannerListComponent,
-    BannerComponent
+    BannerComponent,
+    CategoriesComponent,
+    CategoryListComponent,
+    CategoryViewComponent,
+    CollectionsComponent,
+    CollectionListComponent,
+    CollectionViewComponent,
+    VideoComponent,
+    VideoListComponent,
+    VideoViewComponent,
+    AtestComponent,
+    AtestListComponent,
+    AtestViewComponent,
+    CatalogueComponent,
+    CatalogueListComponent,
+    CatalogueViewComponent,
+    ServiceComponent,
+    ServiceListComponent,
+    ServiceViewComponent,
+    SalesComponent,
+    SalesListComponent,
+    SalesViewComponent
   ],
   providers: [
     QuoteService,
-    BannerService
+    BannerService,
+    CategoryService,
+    CollectionService,
+    VideoService,
+    AtestService,
+    CatalogueService,
+    ServiceService,
+    SalesService
   ]
 })
 export class AdminModule { }

@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12" *ngIf="video">
+      <h1 class="admin-headline">
+        {{ video.first_name }} <span>Edit</span>
+        <a class="admin-headline-link" routerLink="/admin/video">
+          <i class="fas fa-chevron-left"></i> Back to list
+        </a>
+      </h1>
+    </div>
+  </div>
+  <form action="">
+    <div class="row">
+      <div class="col-md-5">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/DeW0CIAlbkA?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+      <div class="col-md-6 offset-md-1">
+        <div class="" *ngIf="video">
+          <div class="form-group row">
+            <label for="name" class="col-md-2 col-form-label">Naziv</label>
+            <div class="col-md-10">
+              <input type="text" class="form-control" id="name" value="{{ video.first_name }}">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="videoLink" class="col-md-2 col-form-label">Link</label>
+            <div class="col-md-10">
+              <input type="text" class="form-control" id="videoLink" value="DeW0CIAlbkA">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-10 offset-md-2">
+              <button type="submit" class="btn btn-primary">Sačuvaj</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

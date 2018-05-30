@@ -35,7 +35,7 @@
     transition: all 0.5s;
   }
   i {
-    font-size: 5vw;
+    font-size: 70px;
     margin-right: 25px;
     transition: all 0.5s;
     color: $primary;
@@ -45,7 +45,7 @@
       transform: scale(1.1);
     }
     i {
-      transform: scale(0.9);
+      transform: scale(0.8);
     }
   }
 }
@@ -60,7 +60,6 @@
     }
     p {
       font-size: 20px;
-      margin-top: 20px;
     }
   }
 }
@@ -71,11 +70,10 @@
   }
   .admin-panel {
     i {
-      font-size: 25vw;
+      font-size: 60px;
     }
     p {
-      font-size: 30px;
-      margin-top: 30px;
+      font-size: 28px;
     }
   }
 }

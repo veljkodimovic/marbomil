@@ -42,6 +42,10 @@ import { SalesComponent } from './sales/sales.component';
 import { SalesViewComponent } from './sales/sales-view/sales-view.component';
 import { SalesListComponent } from './sales/sales-list/sales-list.component';
 import { SalesService } from './sales/sales.service';
+import { ProductComponent } from './product/product.component';
+import { ProductViewComponent } from './product/product-view/product-view.component';
+import { ProductListComponent } from './product/product-list/product-list.component';
+import { ProductService } from './product/product.service';
 
 @NgModule({
   imports: [
@@ -79,7 +83,10 @@ import { SalesService } from './sales/sales.service';
     ServiceViewComponent,
     SalesComponent,
     SalesListComponent,
-    SalesViewComponent
+    SalesViewComponent,
+    ProductComponent,
+    ProductListComponent,
+    ProductViewComponent
   ],
   providers: [
     QuoteService,
@@ -90,7 +97,8 @@ import { SalesService } from './sales/sales.service';
     AtestService,
     CatalogueService,
     ServiceService,
-    SalesService
+    SalesService,
+    ProductService
   ]
 })
 export class AdminModule { }

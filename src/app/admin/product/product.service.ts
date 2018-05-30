@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class BannerService {
+export class ProductService {
 
   private url = 'https://reqres.in/api/users?page=2';
   private urlDetail = 'https://reqres.in/api/users';
@@ -14,7 +14,7 @@ export class BannerService {
     return this.http.get<any>(this.url);
   }
 
-  getBannerById(id: string): Observable<any> {
+  getProductById(id: string): Observable<any> {
     const url = `${this.urlDetail}/${id}`;
     return this.http.get<any>(url);
   }

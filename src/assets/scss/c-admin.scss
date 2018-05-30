@@ -6,30 +6,47 @@
   display: block;
   position: relative;
   text-align: center;
-  background: $primary;
-  padding-top: 100%;
+  //background: $primary;
+  //padding-top: 100%;
   margin-bottom: 20px;
   a {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 20px;
+    //position: absolute;
+    //top: 0;
+    //right: 0;
+    //bottom: 0;
+    //left: 0;
+    padding: 60px 20px;
     color: $white;
     display: flex;
-    flex-flow: column;
+    flex-flow: row;
     align-items: center;
-    justify-content: center;
+    //justify-content: center;
     text-decoration: none;
   }
   p {
     text-transform: uppercase;
-    margin-top: 50px;
+    //margin-top: 50px;
     font-size: 28px;
+    font-weight: 900;
+    color: $black;
+    border-bottom: 5px solid $black;
+    text-align: left;
+    margin: 0;
+    transition: all 0.5s;
   }
   i {
     font-size: 5vw;
+    margin-right: 25px;
+    transition: all 0.5s;
+    color: $primary;
+  }
+  &:hover {
+    p {
+      transform: scale(1.1);
+    }
+    i {
+      transform: scale(0.9);
+    }
   }
 }
 
@@ -151,10 +168,24 @@
     font-size: 60%;
     font-weight: 400;
     line-height: 57px;
+    &.new {
+      margin-left: 20px;
+      color: $primary;
+    }
   }
   span {
     font-weight: 400;
     font-size: 70%;
+  }
+}
+
+.price {
+  display: block;
+  font-weight: 900;
+  font-size: 32px;
+  &-old {
+    color: red;
+    text-decoration: line-through;
   }
 }
 
@@ -170,14 +201,21 @@
   text-transform: uppercase;
 }
 
-.btn-primary {
-  background: $blue-dark;
-  border-color: $blue-dark;
-  color: $white;
+.btn {
   text-transform: uppercase;
   border-radius: 10px;
   padding: 10px 25px;
   letter-spacing: 0.5px;
+  i {
+    margin-right: 5px;
+    margin-left: -5px;
+  }
+}
+
+.btn-primary {
+  background: $blue-dark;
+  border-color: $blue-dark;
+  color: $white;
 }
 
 .form-control {

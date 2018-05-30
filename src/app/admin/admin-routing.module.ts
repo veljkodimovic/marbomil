@@ -20,6 +20,8 @@ import { ServiceViewComponent } from './service/service-view/service-view.compon
 import { ServiceComponent } from './service/service.component';
 import { SalesViewComponent } from './sales/sales-view/sales-view.component';
 import { SalesComponent } from './sales/sales.component';
+import { ProductViewComponent } from './product/product-view/product-view.component';
+import { ProductComponent } from './product/product.component';
 
 const routes: Routes = Route.withShell([
   { path: 'admin/banners', component: BannerComponent, data: { title: extract('Banner') } },
@@ -38,6 +40,8 @@ const routes: Routes = Route.withShell([
   { path: 'admin/service/:id', component: ServiceViewComponent, data: { title: extract('Service View') } },
   { path: 'admin/sales', component: SalesComponent, data: { title: extract('Sales') } },
   { path: 'admin/sales/:id', component: SalesViewComponent, data: { title: extract('Sales View') } },
+  { path: 'admin/product', component: ProductComponent, data: { title: extract('Product') } },
+  { path: 'admin/product/:id', component: ProductViewComponent, data: { title: extract('Product View') } },
   { path: 'admin', component: AdminComponent, data: { title: extract('Admin') } }
 ]);
 

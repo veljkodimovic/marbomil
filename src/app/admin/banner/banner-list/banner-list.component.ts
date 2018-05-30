@@ -13,7 +13,7 @@ export class BannerListComponent implements OnInit {
   constructor(private svc: BannerService) {}
 
   ngOnInit() {
-    this.svc.getBanners().subscribe(data => {
+    this.svc.getProduct().subscribe(data => {
       this.bannerData = data;
     });
   }

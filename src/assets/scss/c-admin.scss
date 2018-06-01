@@ -6,39 +6,38 @@
   display: block;
   position: relative;
   text-align: center;
-  //background: $primary;
-  //padding-top: 100%;
+  background: $primary;
+  padding-top: 100%;
   margin-bottom: 20px;
   a {
-    //position: absolute;
-    //top: 0;
-    //right: 0;
-    //bottom: 0;
-    //left: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     padding: 60px 20px;
     color: $white;
     display: flex;
-    flex-flow: row;
+    flex-flow: column;
     align-items: center;
-    //justify-content: center;
+    justify-content: center;
     text-decoration: none;
   }
   p {
     text-transform: uppercase;
-    //margin-top: 50px;
+    margin-top: 50px;
     font-size: 28px;
     font-weight: 900;
-    color: $black;
-    border-bottom: 5px solid $black;
-    text-align: left;
-    margin: 0;
+    //color: $black;
+    //border-bottom: 5px solid $black;
+    //text-align: left;
     transition: all 0.5s;
   }
   i {
     font-size: 70px;
     margin-right: 25px;
     transition: all 0.5s;
-    color: $primary;
+    //color: $primary;
   }
   &:hover {
     p {
@@ -156,7 +155,10 @@
 }
 
 .admin-headline {
-  margin: 50px 0;
+  margin-top: 50px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid;
+  margin-bottom: 25px;
   font-weight: 900;
   text-transform: uppercase;
   &-link {

@@ -1,15 +1,23 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-sm-12">
-      <h1 class="admin-headline">
+    <div class="col">
+      <h1 class="admin-headline container">
         Kategorije
-        <a class="admin-headline-link new" routerLink="/admin">
-          <i class="fas fa-plus"></i> Add new
-        </a>
-        <a class="admin-headline-link" routerLink="/admin">
-          <i class="fas fa-chevron-left"></i> Back to admin
-        </a>
+        <div class="admin-headline-link">
+          <a class="admin-headline-link" routerLink="/admin">
+            <i class="fas fa-chevron-left"></i> Nazad
+          </a>
+        </div>
       </h1>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row justify-content-end mb-4">
+    <div class="col-auto">
+      <a class="btn btn-primary" routerLink="/admin">
+        <i class="fas fa-plus"></i> Dodaj novi
+      </a>
     </div>
   </div>
   <div class="row admin-list" *ngIf="categoryData">

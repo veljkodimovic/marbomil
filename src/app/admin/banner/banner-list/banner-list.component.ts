@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BannerService } from '../banner.service';
+import { Router } from '@angular/router';
+import { Banner } from '../../../core/types/banner';
 
 @Component({
   selector: 'app-banner-list',
@@ -8,14 +10,21 @@ import { BannerService } from '../banner.service';
 })
 export class BannerListComponent implements OnInit {
 
-   bannerData: any;
+  bannerData: Banner[];
 
-  constructor(private svc: BannerService) {}
+  constructor(private svc: BannerService,
+    private router: Router,
+  ) { }
 
   ngOnInit() {
-    this.svc.getProduct().subscribe(data => {
+    this.svc.getAllBanners().subscribe(data => {
+      console.log(data);
       this.bannerData = data;
     });
+  }
+
+  goTo(banner: Banner) {
+    this.router.navigate(['/admin/banner/' + banner.id]);
   }
 
 }

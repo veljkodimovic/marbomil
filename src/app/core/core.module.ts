@@ -8,16 +8,18 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from '@app/material.module';
 import { ShellComponent } from './shell/shell.component';
 import { HeaderComponent } from './shell/header/header.component';
+import { FooterComponent } from './shell/footer/footer.component';
 import { RouteReusableStrategy } from './route-reusable-strategy';
 import { AuthenticationService } from './authentication/authentication.service';
 import { AuthenticationGuard } from './authentication/authentication.guard';
 import { I18nService } from './i18n.service';
 import { HttpService } from './http/http.service';
 import { HttpCacheService } from './http/http-cache.service';
+import { PersistenceService } from './persistence.service';
 
 export function createHttpService(backend: ConnectionBackend,
-                                  defaultOptions: RequestOptions,
-                                  httpCacheService: HttpCacheService) {
+  defaultOptions: RequestOptions,
+  httpCacheService: HttpCacheService) {
   return new HttpService(backend, defaultOptions, httpCacheService);
 }
 
@@ -32,11 +34,13 @@ export function createHttpService(backend: ConnectionBackend,
   ],
   declarations: [
     HeaderComponent,
+    FooterComponent,
     ShellComponent
   ],
   providers: [
     AuthenticationService,
     AuthenticationGuard,
+    PersistenceService,
     I18nService,
     HttpCacheService,
     {

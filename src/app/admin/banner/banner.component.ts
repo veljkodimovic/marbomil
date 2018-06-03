@@ -9,16 +9,12 @@ import { finalize } from 'rxjs/operators';
 })
 export class BannerComponent implements OnInit {
 
-  quote: string;
   isLoading: boolean;
 
   constructor() { }
 
   ngOnInit() {
     this.isLoading = true;
-    // this.quoteService.getRandomQuote({ category: 'dev' })
-    //   .pipe(finalize(() => { this.isLoading = false; }))
-    //   .subscribe((quote: string) => { this.quote = quote; });
   }
 
 }

@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
+import { ImageCropperComponent, CropperSettings, ImageCropperModule } from 'ng2-img-cropper';
+
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
@@ -17,15 +21,15 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CategoryViewComponent } from './categories/category-view/category-view.component';
 import { CategoryListComponent } from './categories/category-list/category-list.component';
-import { CategoryService} from './categories/categories.service';
+import { CategoryService } from './categories/categories.service';
 import { CollectionsComponent } from './collections/collections.component';
 import { CollectionViewComponent } from './collections/collection-view/collection-view.component';
 import { CollectionListComponent } from './collections/collection-list/collection-list.component';
-import { CollectionService} from './collections/collections.service';
+import { CollectionService } from './collections/collections.service';
 import { VideoComponent } from './video/video.component';
 import { VideoViewComponent } from './video/video-view/video-view.component';
 import { VideoListComponent } from './video/video-list/video-list.component';
-import { VideoService} from './video/video.service';
+import { VideoService } from './video/video.service';
 import { AtestComponent } from './atest/atest.component';
 import { AtestViewComponent } from './atest/atest-view/atest-view.component';
 import { AtestListComponent } from './atest/atest-list/atest-list.component';
@@ -54,7 +58,9 @@ import { ProductService } from './product/product.service';
     CoreModule,
     SharedModule,
     FlexLayoutModule,
-    MaterialModule,
+    SimpleNotificationsModule.forRoot(),
+    ImageCropperModule,
+    FormsModule,
     AdminRoutingModule
   ],
   declarations: [

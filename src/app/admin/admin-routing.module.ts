@@ -26,6 +26,7 @@ import { ProductComponent } from './product/product.component';
 const routes: Routes = Route.withShell([
   { path: 'admin/banners', component: BannerComponent, data: { title: extract('Banner') } },
   { path: 'admin/banner/:id', component: BannerViewComponent, data: { title: extract('Banner View') } },
+  { path: 'admin/banner/new', component: BannerViewComponent, data: { title: extract('Banner View') } },
   { path: 'admin/category', component: CategoriesComponent, data: { title: extract('Category') } },
   { path: 'admin/category/:id', component: CategoryViewComponent, data: { title: extract('Category View') } },
   { path: 'admin/collection', component: CollectionsComponent, data: { title: extract('Collection') } },

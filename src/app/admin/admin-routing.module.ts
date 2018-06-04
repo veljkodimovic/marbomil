@@ -31,6 +31,7 @@ const routes: Routes = Route.withShell([
   { path: 'admin/category/:id', component: CategoryViewComponent, data: { title: extract('Category View') } },
   { path: 'admin/collection', component: CollectionsComponent, data: { title: extract('Collection') } },
   { path: 'admin/collection/:id', component: CollectionViewComponent, data: { title: extract('Collection View') } },
+  { path: 'admin/collection/new', component: CollectionViewComponent, data: { title: extract('Collection View') } },
   { path: 'admin/video', component: VideoComponent, data: { title: extract('Video') } },
   { path: 'admin/video/:id', component: VideoViewComponent, data: { title: extract('Video View') } },
   { path: 'admin/atest', component: AtestComponent, data: { title: extract('Atest') } },

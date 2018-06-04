@@ -1,11 +1,21 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12" *ngIf="banner">
-      <h1 class="admin-headline" *ngIf="isEditMode">Izmena Postojećeg</h1>
-      <h1 class="admin-headline" *ngIf="!isEditMode">Kreiranje Novog</h1>
+      <h1 class="admin-headline" *ngIf="isEditMode">Izmena Postojećeg
+        <a class="admin-headline-link" routerLink="/admin/banners">
+          <i class="fas fa-chevron-left"></i> Back to list
+        </a>
+      </h1>
+      <h1 class="admin-headline" *ngIf="!isEditMode">Kreiranje Novog
+        <a class="admin-headline-link" routerLink="/admin/banners">
+          <i class="fas fa-chevron-left"></i> Back to list
+        </a>
+      </h1>
     </div>
   </div>
   <form action="">
+    <simple-notifications></simple-notifications>
+
     <div class="row">
       <div class="col-md-12 ">
         <div class="" *ngIf="banner">

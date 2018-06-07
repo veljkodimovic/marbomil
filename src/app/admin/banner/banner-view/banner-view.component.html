@@ -3,12 +3,12 @@
     <div class="col-sm-12" *ngIf="banner">
       <h1 class="admin-headline" *ngIf="isEditMode">Izmena Postojećeg
         <a class="admin-headline-link" routerLink="/admin/banners">
-          <i class="fas fa-chevron-left"></i> Back to list
+          <i class="fas fa-chevron-left"></i> Nazad na listu
         </a>
       </h1>
       <h1 class="admin-headline" *ngIf="!isEditMode">Kreiranje Novog
         <a class="admin-headline-link" routerLink="/admin/banners">
-          <i class="fas fa-chevron-left"></i> Back to list
+          <i class="fas fa-chevron-left"></i> Nazad na listu
         </a>
       </h1>
     </div>
@@ -17,7 +17,38 @@
     <simple-notifications></simple-notifications>
 
     <div class="row">
-      <div class="col-md-12 ">
+      <div class="col-lg-5">
+        <div>
+          <div class="form-group position-fix">
+            <h5 class="control-label" translate>Slika <span class="mandatory">*</span></h5>
+            <div class="initial-image banner-image">
+              <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+            </div>
+            <div class="image-note">
+              <label class="control-label" translate>Napomena</label>
+              <p class="form-control-static">Minimalna dimenzija slike je <span>1920x300px</span>. Za veće rezolucije, razmera će biti sačuvana.</p>
+            </div>
+            <div [hidden]="true" class="file-upload">
+              <input #fileInput id="custom-input" [hidden]="true" required type="file" (change)="fileChangeListener($event)">
+            </div>
+            <div class="image-buttons">
+              <div>
+              </div>
+              <button class="btn btn-add" translate (click)="uploadImage()">Dodaj Sliku</button>
+              <button class="btn btn-remove" translate (click)="removeImage()">Izbriši Sliku</button>
+            </div>
+          </div>
+          <div class="form-group margin-top-30">
+            <h5 class="control-label" translate>Banner Preview</h5>
+            <div class="image-preview">
+              <span class="result rounded" *ngIf="data.image">
+                <img style="width: 100%; height: auto;" [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+            </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 offset-lg-1">
         <div class="" *ngIf="banner">
           <div class="form-group row">
             <label for="name" class="col-md-2 col-form-label">Naziv</label>
@@ -37,46 +68,12 @@
               <input type="text" class="form-control" id="link" [(ngModel)]="banner.url" name="url">
             </div>
           </div>
-
-        </div>
-      </div>
-      <div class="col-md-12">
-        <div>
-          <div class="form-group position-fix">
-            <label class="control-label" translate>Slika</label> <span class="mandatory">*</span>
-            <div class="initial-image banner-image">
-              <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+          <div class="row">
+            <div class="col-sm-10 offset-md-2">
+              <button type="submit" class="btn btn-primary" (click)="saveOnClick()"><i class="fas fa-save"></i> Sačuvaj</button>
+              <a href="/admin/banners" class="btn btn-secondary"><i class="fas fa-ban"></i> Otkaži</a>
+              <a href="#" class="btn btn-danger" *ngIf="isEditMode"><i class="fas fa-trash"></i> Izbriši</a>
             </div>
-            <div class="image-note">
-              <label class="control-label" translate>Napomena</label>
-              <p class="form-control-static">Minimalna dimenzija slike je <span>1920x300px</span>. Za veće rezolucije, razmera će biti sačuvana.</p>
-            </div>
-            <div [hidden]="true" class="file-upload">
-              <input #fileInput id="custom-input" [hidden]="true" required type="file" (change)="fileChangeListener($event)">
-            </div>
-            <div class="image-buttons">
-              <div>
-              </div>
-              <button class="btn btn-add" translate (click)="uploadImage()">Dodaj Sliku</button>
-              <button class="btn btn-remove" translate (click)="removeImage()">Izbriši Sliku</button>
-            </div>
-          </div>
-          <div class="form-group margin-top-30">
-            <label class="control-label" translate>Banner Preview</label>
-            <div class="image-preview">
-              <span class="result rounded" *ngIf="data.image">
-                <img style="width: 100%; height: auto;" [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
-            </span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 ">
-        <div class="row">
-          <div class="col-sm-12">
-            <button type="submit" class="btn btn-primary" (click)="saveOnClick()"><i class="fas fa-save"></i> Sačuvaj</button>
-            <a href="/admin/banners" class="btn btn-secondary"><i class="fas fa-ban"></i> Otkaži</a>
-            <a href="#" class="btn btn-danger" *ngIf="isEditMode"><i class="fas fa-trash"></i> Izbriši</a>
           </div>
         </div>
       </div>

@@ -88,6 +88,7 @@
       font-size: 18px;
       margin-bottom: 5px;
       display: block;
+      cursor: pointer;
     }
   }
   &-name {
@@ -96,6 +97,9 @@
     text-decoration: none !important;
     small {
       font-size: 70%;
+    }
+    &:hover {
+      color: $primary !important;
     }
   }
   &-video {
@@ -122,9 +126,10 @@
 .banner-text {
   padding: 0 20px 0 0;
 }
+
 .banner-image {
-  width: 150px;
-  img {
+  img,
+  canvas {
     max-width: 100%;
     height: auto;
   }
@@ -226,4 +231,34 @@
   iframe {
     max-width: 100%;
   }
+}
+
+a:not([href]):not([tabindex]) {
+  cursor: pointer;
+}
+
+.banner-list-image {
+  width: 90%;
+  max-width: 100%;
+  height: 200px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  img {
+    max-width: none;
+    height: 100%;
+  }
+}
+
+app-shell {
+  display: flex;
+  flex-flow: column;
+  height: 100vh;
+}
+
+app-banner,
+app-banner-view {
+  flex: 1 0 auto;
+  padding-bottom: 20px;
 }

@@ -37,8 +37,8 @@ export class BannerViewComponent implements OnInit {
     this.cropperSettings.height = 300;
     this.cropperSettings.croppedWidth = 1920;
     this.cropperSettings.croppedHeight = 300;
-    this.cropperSettings.canvasWidth = 1124;
-    this.cropperSettings.canvasHeight = 176;
+    this.cropperSettings.canvasWidth = 460;
+    this.cropperSettings.canvasHeight = 259;
     this.cropperSettings.noFileInput = true;
     this.cropperSettings.keepAspect = true;
     this.cropperSettings.preserveSize = true;

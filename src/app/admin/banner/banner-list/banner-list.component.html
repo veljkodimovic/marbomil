@@ -25,12 +25,12 @@
       <div class="admin-list-item">
         <div class="row">
           <div class="col-11 col-sm-7" style="margin-bottom: 10px;">
-            <a>
+            <a (click)="goTo(banner)" class="banner-list-image">
               <img src="{{'data:image/png;base64,'+banner.imageCrop}}" (click)="goTo(banner)">
             </a>
           </div>
           <div class="col-11 col-sm-4 order-2 order-sm-1">
-            <p><a class="admin-list-name">{{banner.title}}</a></p>
+            <p><a (click)="goTo(banner)" class="admin-list-name">{{banner.title}}</a></p>
             <p>{{banner.desc}}</p>
           </div>
           <div class="col-1 admin-list-links order-1 order-sm-2">

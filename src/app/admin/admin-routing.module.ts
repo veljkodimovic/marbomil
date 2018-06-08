@@ -29,6 +29,7 @@ const routes: Routes = Route.withShell([
   { path: 'admin/banner/new', component: BannerViewComponent, data: { title: extract('Banner View') } },
   { path: 'admin/category', component: CategoriesComponent, data: { title: extract('Category') } },
   { path: 'admin/category/:id', component: CategoryViewComponent, data: { title: extract('Category View') } },
+  { path: 'admin/category/new', component: CategoryViewComponent, data: { title: extract('Category View') } },
   { path: 'admin/collection', component: CollectionsComponent, data: { title: extract('Collection') } },
   { path: 'admin/collection/:id', component: CollectionViewComponent, data: { title: extract('Collection View') } },
   { path: 'admin/collection/new', component: CollectionViewComponent, data: { title: extract('Collection View') } },

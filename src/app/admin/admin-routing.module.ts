@@ -44,6 +44,7 @@ const routes: Routes = Route.withShell([
   { path: 'admin/sales/:id', component: SalesViewComponent, data: { title: extract('Sales View') } },
   { path: 'admin/product', component: ProductComponent, data: { title: extract('Product') } },
   { path: 'admin/product/:id', component: ProductViewComponent, data: { title: extract('Product View') } },
+    { path: 'admin/product/new', component: ProductViewComponent, data: { title: extract('Product View') } },
   { path: 'admin', component: AdminComponent, data: { title: extract('Admin') } }
 ]);
 

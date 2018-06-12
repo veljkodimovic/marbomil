@@ -18,7 +18,8 @@ export class CollectionService {
 
   activeCollection: Collection;
   headers: Headers;
-  constructor(private http: Http, private persistenceService: PersistenceService) {
+  constructor(private http: Http,
+     private persistenceService: PersistenceService) {
 
   }
 

@@ -16,27 +16,26 @@
 <div class="container">
   <div class="row justify-content-end mb-4">
     <div class="col-auto">
-      <a class="btn btn-primary" routerLink="/admin">
+      <a class="btn btn-primary" routerLink="/admin/product/new">
         <i class="fas fa-plus"></i> Dodaj novi
       </a>
     </div>
   </div>
   <div class="row admin-list" *ngIf="productData">
-    <div class="col-lg-6" *ngFor="let book of productData.data">
+    <div class="col-lg-6" *ngFor="let product of productData.data">
       <div class="admin-list-item">
         <div class="row">
           <div class="col-11 col-sm-4" style="margin-bottom: 10px;">
-            <a routerLink="/admin/product/{{book.id}}">
-              <img src="{{book.avatar}}" alt="{{book.first_name}}">
+            <a routerLink="/admin/product/{{product.id}}">
+              <img src="{{'data:image/png;base64,'+collection.imageCrop}}" >
             </a>
           </div>
           <div class="col-11 col-sm-7 order-2 order-sm-1">
-            <p><a class="admin-list-name" routerLink="/admin/product/{{book.id}}">{{book.first_name}}</a></p>
-            <p><span class="price">3900,00 RSD</span><span class="price-old">5800,00 RSD</span></p>
+            <p><a class="admin-list-name" routerLink="/admin/product/{{product.id}}">{{product.title}}</a></p>
+            <p><span class="price">{{product.priceNew}}</span><span class="price-old">{{product.priceOld}}</span></p>
           </div>
           <div class="col-1 admin-list-links order-1 order-sm-2">
-            <a routerLink="/admin/product/{{book.id}}"><i class="fas fa-link"></i></a>
-            <a routerLink="/admin/product/{{book.id}}"><i class="fas fa-pencil-alt"></i></a>
+            <a routerLink="/admin/product/{{product.id}}"><i class="fas fa-pencil-alt"></i></a>
             <a href="#" class="remove-link"><i class="fas fa-trash"></i></a>
           </div>
         </div>

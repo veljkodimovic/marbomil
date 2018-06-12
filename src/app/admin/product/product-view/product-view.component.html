@@ -1,113 +1,186 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-12" *ngIf="product">
-      <h1 class="admin-headline">{{ product.first_name }} Edit</h1>
+    <div class="col-sm-12">
+      <h1 class="admin-headline" *ngIf="isEditMode">Izmena Postojećeg
+        <a class="admin-headline-link" routerLink="/admin/collection">
+          <i class="fas fa-chevron-left"></i> Nazad na listu
+        </a>
+      </h1>
+      <h1 class="admin-headline" *ngIf="!isEditMode">Kreiranje Novog
+        <a class="admin-headline-link" routerLink="/admin/collection">
+          <i class="fas fa-chevron-left"></i> Nazad na listu
+        </a>
+      </h1>
     </div>
   </div>
   <form action="">
+    <simple-notifications></simple-notifications>
     <div class="row">
-      <div class="col-md-5">
-        <h5>Slike proizvoda</h5>
-        <div class="dropzone-wrapp">
-          <span>Drop files here</span>
-        </div>
-        <h5>Tehnički crtež</h5>
-        <div class="dropzone-wrapp">
-          <span>Drop files here</span>
-        </div>
-      </div>
-      <div class="col-md-6 offset-md-1">
-        <div class="" *ngIf="product">
+      <div class="col-md-12 ">
+        <div class="">
           <div class="form-group row">
             <label for="name" class="col-md-2 col-form-label">Naziv</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="name" value="{{ product.first_name }}">
+              <input type="text" class="form-control" id="name" [(ngModel)]="product.title" name="title">
             </div>
           </div>
           <div class="form-group row">
             <label for="pid" class="col-md-2 col-form-label">Šifra</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="pid" value="{{ product.first_name }}">
+              <input type="text" class="form-control" id="pid" [(ngModel)]="product.code" name="code">
             </div>
           </div>
           <div class="form-group row">
             <label for="price" class="col-md-2 col-form-label">Cena</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="price" value="{{ product.first_name }}">
+              <input type="text" class="form-control" id="price" [(ngModel)]="product.price" name="price">
             </div>
           </div>
           <div class="form-group row">
             <label for="discount" class="col-md-2 col-form-label">Popust</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="discount" value="{{ product.first_name }}">
+              <input type="text" class="form-control" id="discount" [(ngModel)]="product.discount" name="discount">
             </div>
           </div>
           <div class="form-group row">
             <label for="discountdate" class="col-md-2 col-form-label">Popust do</label>
             <div class="col-md-10">
-              <input type="date" class="form-control" id="discountdate" value="{{ product.first_name }}">
+              <input type="date" class="form-control" id="discountdate" [(ngModel)]="product.discountDate" name="discountDate">
             </div>
           </div>
           <div class="form-group row">
             <label for="parentCollection" class="col-md-2 col-form-label">Kolekcija</label>
             <div class="col-md-10">
-              <select class="form-control" id="parentCollection">
-                <option>Kolekcija 1</option>
-                <option>Kolekcija 2</option>
-                <option>Kolekcija 3</option>
-                <option>Kolekcija 4</option>
-                <option>Kolekcija 5</option>
+              <select class="form-control" id="parentCollection" [(ngModel)]="product.collectionId" name="collectionId">
+                <option  *ngFor="let col of collections;index as i" [ngValue]="col.id" name="col.title" >{{col.title}}</option>
               </select>
             </div>
           </div>
           <div class="form-group row">
             <label for="category" class="col-md-2 col-form-label">Kategorija</label>
             <div class="col-md-10">
-              <select class="form-control" id="category">
-                <option>Kategorija 1</option>
-                <option>Kategorija 2</option>
-                <option>Kategorija 3</option>
-                <option>Kategorija 4</option>
-                <option>Kategorija 5</option>
+              <select class="form-control" id="category" [(ngModel)]="product.categoryId" name="categoryId">
+                  <option  *ngFor="let col of categories;index as i" [ngValue]="col.id" name="col.title" >{{col.title}}</option>
               </select>
             </div>
           </div>
           <div class="form-group row">
             <label for="text" class="col-md-2 col-form-label">Opis</label>
             <div class="col-md-10">
-              <textarea type="text" class="form-control" id="text" >{{ product.avatar }}</textarea>
+              <textarea type="text" class="form-control" id="text" [(ngModel)]="product.desc" name="desc"></textarea>
             </div>
           </div>
           <div class="form-group row">
             <label for="width" class="col-md-2 col-form-label">Širina</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="width" value="{{ product.last_name }}">
+              <input type="text" class="form-control" id="width" [(ngModel)]="product.widthData" name="widthData">
             </div>
           </div>
           <div class="form-group row">
             <label for="height" class="col-md-2 col-form-label">Visina</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="height" value="{{ product.last_name }}">
+              <input type="text" class="form-control" id="height" [(ngModel)]="product.heightData" name="heightData">
             </div>
           </div>
           <div class="form-group row">
             <label for="depth" class="col-md-2 col-form-label">Dubina</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="depth" value="{{ product.last_name }}">
+              <input type="text" class="form-control" id="depth" [(ngModel)]="product.numberOnSite" name="numberOnSite">
             </div>
           </div>
           <div class="form-group row">
             <label for="stock" class="col-md-2 col-form-label">Količina</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="stock" value="{{ product.last_name }}">
+              <input type="text" class="form-control" id="stock" [(ngModel)]="product.depthData" name="depthData">
             </div>
           </div>
-          <div class="row">
-            <div class="col-sm-10 offset-md-2">
-              <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Sačuvaj</button>
-              <a href="/admin/product" class="btn btn-secondary"><i class="fas fa-ban"></i> Otkaži</a>
-              <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i> Izbriši</a>
+
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="row row-collections">
+          <div class="col-sm-4 col-to-12">
+            <label class="control-label" translate>Slika Proizvoda</label> <span class="mandatory">*</span>
+            <div class="initial-image image-collections">
+              <img-cropper #cropper [image]="data" [settings]="cropperSettings" (onCrop)="cropped($event)"></img-cropper>
             </div>
+          </div>
+          <div class="col-sm-4 col-to-8">
+            <label class="control-label" translate>Pregled</label>
+
+            <div *ngIf="!data.image" id="preview" class="initial-image image-collections preview"></div>
+            <div id="preview" class=" image-collections preview">
+              <span class="result rounded">
+          <img *ngIf="data.image"  class="preview-size" [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+        </span>
+            </div>
+          </div>
+          <div class="col-sm-4 col-to-8">
+            <div class="image-note inline">
+              <label class="control-label" translate>Note</label>
+              <p class="form-control-static">Minnimum size of the images should be <span>900x600px</span>. For the greater images, aspect ratio should be preserved.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-12" style="margin-left:10px">
+            <label class="control-label" translate>Sve Slike Proizvoda</label>
+            <div class="images-row">
+              <a [ngClass]="{active: i==activeImageIndex}" *ngFor="let productImage of images;index as i">
+             <img *ngIf="productImage.imageCrop" id="image"  [src]="productImage.imageCrop" (click)="setActiveImage(productImage)">
+           </a>
+            </div>
+            <div class="image-buttons">
+              <button class="btn btn-add" translate (click)="uploadImage()">Dodaj Sliku</button>
+              <button class="btn btn-remove" translate (click)="removeImage()">Obriši Sliku</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="col-md-12">
+        <h5>Tehnički crtež</h5>
+        <div class="row ">
+          <div [hidden]="true">
+            <input #fileInput type="file" id="imgFile" [hidden]="true" required (change)="fileChangeListener($event)">
+          </div>
+          <div class="col-sm-4 col-to-12">
+            <label class="control-label" translate>Slika</label> <span class="mandatory">*</span>
+            <div class="initial-image image-collections">
+              <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+            </div>
+            <br>
+            <div class="image-buttons">
+              <button class="btn btn-add" translate (click)="uploadImage()">Dodaj Crtež</button>
+              <button class="btn btn-remove" translate (click)="removeImage()">Obriši Crtež</button>
+            </div>
+          </div>
+          <div class="col-sm-4 col-to-8">
+            <label class="control-label" translate>Pregled</label>
+            <div class="image-preview preview-collections">
+              <span class="result rounded" *ngIf="data.image">
+                        <img class="cropper-size" style="max-height:240px" [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+                      </span>
+            </div>
+          </div>
+          <div class="col-sm-4 col-to-8">
+            <div class="image-note inline">
+              <label class="control-label" translate>Napomena:</label>
+              <p class="form-control-static">Minimalna dimenzija slike je <span>900x600px</span>. Za slike većih dimenzija, razmera će biti sačuvana.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6" style="padding-top:40px; padding-bottom:20px;">
+        <div class="row">
+          <div class="col-sm-10 ">
+            <button type="submit" class="btn btn-primary" (click)="saveOnClick()"><i class="fas fa-save"></i> Sačuvaj</button>
+            <a href="/admin/product" class="btn btn-secondary"><i class="fas fa-ban"></i> Otkaži</a>
+            <a class="btn btn-danger" *ngIf="isEditMode"><i class="fas fa-trash"></i> Izbriši</a>
           </div>
         </div>
       </div>

@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 import { NotificationsService } from 'angular2-notifications';
-import {Category} from '@app/core/types/category';
-import {CategoryService} from '@app/admin/categories/categories.service';
+import { Category } from '@app/core/types/category';
+import { CategoryService } from '@app/admin/categories/categories.service';
 
 @Component({
   selector: 'app-category-view',
@@ -19,7 +19,7 @@ export class CategoryViewComponent implements OnInit {
   cropperSettings: CropperSettings;
   image: any;
   data: any;
-  category: Category = new Category(0, "", "", "", "");
+  category: Category = new Category(0, '', '', '', '');
   isLoading: boolean;
   setImage: boolean = false;
   originalImg: string = '';
@@ -94,6 +94,7 @@ export class CategoryViewComponent implements OnInit {
   }
 
   saveOnClick() {
+    console.log(this.data);
     if (this.data.image) {
 
       this.disableSave = true;

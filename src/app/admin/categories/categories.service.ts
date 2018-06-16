@@ -5,7 +5,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { PersistenceService } from '../../core/persistence.service';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import {Category} from '@app/core/types/category';
+import { Category } from '@app/core/types/category';
 
 const routes = {
   category: () => `/category/`
@@ -20,7 +20,7 @@ export class CategoryService {
 
   }
 
-  //Categories region
+  // Categories region
   getAllCategories(): Observable<any[]> {
 
     return this.http.get(routes.category())
@@ -39,7 +39,7 @@ export class CategoryService {
   }
 
   createCategory(body: Category): Observable<any> {
-    //let bodyString = JSON.stringify(body);
+    // let bodyString = JSON.stringify(body);
 
     return this.http.post(routes.category(), body)
       .map((res: Response) => res)
@@ -47,7 +47,7 @@ export class CategoryService {
   }
 
   updateCategory(body: Category): Observable<any> {
-    //let bodyString = JSON.stringify(body);
+    // let bodyString = JSON.stringify(body);
 
     return this.http.put(routes.category() + body.id, body)
       .map((res: Response) => res)
@@ -61,6 +61,6 @@ export class CategoryService {
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
-  //end of category
+  // end of category
 
 }

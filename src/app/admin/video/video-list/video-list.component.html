@@ -3,11 +3,9 @@
     <div class="col">
       <h1 class="admin-headline container">
         Video materijali
-        <div class="admin-headline-link">
-          <a class="admin-headline-link" routerLink="/admin">
-            <i class="fas fa-chevron-left"></i> Nazad
-          </a>
-        </div>
+        <a class="admin-headline-link" routerLink="/admin">
+          <i class="fas fa-chevron-left"></i> Nazad
+        </a>
       </h1>
     </div>
   </div>
@@ -15,27 +13,43 @@
 <div class="container">
   <div class="row justify-content-end mb-4">
     <div class="col-auto">
-      <a class="btn btn-primary" routerLink="/admin">
+      <a class="btn btn-primary" routerLink="/admin/video/new">
         <i class="fas fa-plus"></i> Dodaj novi
       </a>
     </div>
   </div>
   <div class="row admin-list" *ngIf="videoData">
-    <div class="col-sm-6 col-md-4" *ngFor="let book of videoData.data">
+    <div class="col-sm-6 col-md-4" *ngFor="let video of videoData">
       <div class="admin-list-item">
-        <a routerLink="/admin/video/{{book.id}}">
-          <img width="100%" src="{{book.avatar}}" alt="{{book.first_name}}">
+        <a (click)="goTo(video)">
+          <img src="{{'data:image/png;base64,'+video.imageCrop}}" alt="">
         </a>
         <div class="row admin-list-video">
           <div class="col-9">
-            <p><a class="admin-list-name" routerLink="/admin/collection/{{book.id}}">{{book.first_name}}</a></p>
+            <p><a class="admin-list-name" (click)="goTo(video)">{{video.title}}</a></p>
           </div>
           <div class="col-3 admin-list-links">
-            <a routerLink="/admin/video/{{book.id}}"><i class="fas fa-pencil-alt"></i></a>
-            <a href="#" class="remove-link"><i class="fas fa-trash"></i></a>
+            <a routerLink="/admin/video/{{video.id}}"><i class="fas fa-pencil-alt"></i></a>
+            <a (click)="openModal(content, video)" class="remove-link"><i class="fas fa-trash"></i></a>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Brisanje</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Da li ste sigurni da hocete da izbrišete ovaj video</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="c('Close click')">Odustani</button>
+    <button type="button" class="btn btn-danger" (click)="deleteAction(video)">Obriši</button>
+  </div>
+</ng-template>

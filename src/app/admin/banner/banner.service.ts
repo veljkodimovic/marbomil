@@ -11,7 +11,6 @@ const routes = {
   banners: () => `/banners/`
 };
 
-
 @Injectable()
 export class BannerService {
 
@@ -21,9 +20,9 @@ export class BannerService {
 
   }
 
-  //Banners region
+  // Banners region
   getAllBanners(): Observable<any[]> {
-
+    console.log(this.http.get(routes.banners()));
     return this.http.get(routes.banners())
       .map((res: Response) => res.json())
       .map(body =>
@@ -40,7 +39,7 @@ export class BannerService {
   }
 
   createBanner(body: Banner): Observable<any> {
-    //let bodyString = JSON.stringify(body);
+    // let bodyString = JSON.stringify(body);
 
     return this.http.post(routes.banners(), body)
       .map((res: Response) => res)
@@ -48,7 +47,7 @@ export class BannerService {
   }
 
   updateBanner(body: Banner): Observable<any> {
-    //let bodyString = JSON.stringify(body);
+    // let bodyString = JSON.stringify(body);
 
     return this.http.put(routes.banners() + body.id, body)
       .map((res: Response) => res)
@@ -62,6 +61,6 @@ export class BannerService {
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
-  //end of banners
+  // end of banners
 
 }

@@ -153,9 +153,9 @@
 }
 
 .remove-link {
-  color: $red;
+  color: $red !important;
   &:hover {
-    color: $red;
+    color: $red !important;
   }
 }
 
@@ -258,7 +258,19 @@ app-shell {
 }
 
 app-banner,
-app-banner-view {
+app-banner-view,
+app-video,
+app-video-view,
+app-atest,
+app-atest-view,
+app-catalogue,
+app-catalogue-view,
+app-collections,
+app-collection-view,
+app-sales,
+app-sales-view,
+app-service,
+app-service-view {
   flex: 1 0 auto;
   padding-bottom: 20px;
 }

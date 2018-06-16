@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SalesComponent implements OnInit {
 
+  isLoading: boolean;
+
   constructor() { }
 
   ngOnInit() {
+    this.isLoading = true;
   }
 
 }

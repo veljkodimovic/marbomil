@@ -31,6 +31,7 @@ export class VideoListComponent implements OnInit {
   deleteAction(video: Video) {
     this.svc.deleteVideo(video.id).subscribe(res => {
       console.log('Deleted');
+      this.router.navigate(['/admin/video/']);
     });
   }
 

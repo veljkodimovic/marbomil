@@ -31,6 +31,7 @@ export class CatalogueListComponent implements OnInit {
   deleteAction(catalogue: Catalogue) {
     this.svc.deleteCatalogue(catalogue.id).subscribe(res => {
       console.log('Deleted');
+      this.router.navigate(['/admin/catalogue/']);
     });
   }
 

@@ -32,6 +32,7 @@ export class BannerListComponent implements OnInit {
   deleteAction(banner: Banner) {
     this.svc.deleteBanner(banner.id).subscribe(res => {
       console.log('Deleted');
+      this.router.navigate(['/admin/banner/']);
     });
   }
 

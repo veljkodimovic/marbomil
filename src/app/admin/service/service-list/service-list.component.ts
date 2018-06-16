@@ -31,6 +31,7 @@ export class ServiceListComponent implements OnInit {
   deleteAction(service: Service) {
     this.svc.deleteService(service.id).subscribe(res => {
       console.log('Deleted');
+      this.router.navigate(['/admin/service/']);
     });
   }
 

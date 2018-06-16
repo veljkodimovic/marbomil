@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CollectionService } from '../collections.service';
 import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-collection-list',
@@ -14,6 +15,7 @@ export class CollectionListComponent implements OnInit {
   categoryData: any = [];
 
   constructor(private svc: CollectionService,
+              private router: Router,
               private modalService: NgbModal) { }
 
   ngOnInit() {
@@ -41,6 +43,7 @@ export class CollectionListComponent implements OnInit {
   deleteAction(collection: Collection) {
     this.svc.deleteCollection(collection.id).subscribe(res => {
       console.log('Deleted');
+      this.router.navigate(['/admin/collection/']);
     });
   }
 

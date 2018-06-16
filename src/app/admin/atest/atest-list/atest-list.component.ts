@@ -31,6 +31,7 @@ export class AtestListComponent implements OnInit {
   deleteAction(atest: Atest) {
     this.svc.deleteAtest(atest.id).subscribe(res => {
       console.log('Deleted');
+      this.router.navigate(['/admin/atest/']);
     });
   }
 

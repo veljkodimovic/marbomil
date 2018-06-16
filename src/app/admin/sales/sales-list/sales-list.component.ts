@@ -31,6 +31,7 @@ export class SalesListComponent implements OnInit {
   deleteAction(sales: Sales) {
     this.svc.deleteSales(sales.id).subscribe(res => {
       console.log('Deleted');
+      this.router.navigate(['/admin/sales/']);
     });
   }
 

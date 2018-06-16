@@ -40,6 +40,7 @@ export class CategoryListComponent implements OnInit {
   deleteAction(category: Category) {
     this.svc.deleteCategory(category.id).subscribe(res => {
       console.log('Deleted');
+      this.router.navigate(['/admin/category/']);
     });
   }
 

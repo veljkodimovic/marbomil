@@ -39,7 +39,9 @@ export class AtestListComponent implements OnInit {
 
   performDelete(event: any) {
     this.svc.deleteAtest(this.activeAtest.id).subscribe(res => {
-      this.router.navigate(['/admin/atest/']);
+      this.svc.getAllAtests().subscribe(data=> {
+        this.atestData = data;
+      });
     });
   }
 

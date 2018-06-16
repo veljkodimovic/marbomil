@@ -56,7 +56,9 @@ export class CollectionListComponent implements OnInit {
 
   performDelete(event: any) {
     this.svc.deleteCollection(this.activeCollection.id).subscribe(res => {
-      this.router.navigate(['/admin/collection/']);
+      this.svc.getAllCollections().subscribe(data=> {
+        this.collectionData = data;
+      });
     });
   }
 

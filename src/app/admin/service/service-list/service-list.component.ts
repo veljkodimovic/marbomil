@@ -39,7 +39,9 @@ export class ServiceListComponent implements OnInit {
 
   performDelete(event: any) {
     this.svc.deleteService(this.activeService.id).subscribe(res => {
-      this.router.navigate(['/admin/service/']);
+      this.svc.getAllServices().subscribe(data => {
+        this.serviceData = data;
+      });
     });
   }
 

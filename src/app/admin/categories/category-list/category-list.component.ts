@@ -41,7 +41,9 @@ export class CategoryListComponent implements OnInit {
 
   performDelete(event: any) {
     this.svc.deleteCategory(this.activeCategory.id).subscribe(res => {
-      this.router.navigate(['/admin/category/']);
+      this.svc.getAllCategories().subscribe(data=> {
+        this.categoryData = data;
+      });
     });
   }
 

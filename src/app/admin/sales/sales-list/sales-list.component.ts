@@ -39,7 +39,9 @@ export class SalesListComponent implements OnInit {
 
   performDelete(event: any) {
     this.svc.deleteSales(this.activeSales.id).subscribe(res => {
-      this.router.navigate(['/admin/sales/']);
+      this.svc.getAllSales().subscribe(data => {
+        this.salesData = data;
+      });
     });
   }
 

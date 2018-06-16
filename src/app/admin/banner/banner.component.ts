@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 
-
 @Component({
   selector: 'app-banner',
   templateUrl: './banner.component.html',

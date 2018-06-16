@@ -1,36 +1,62 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12" *ngIf="video">
-      <h1 class="admin-headline">
-        {{ video.first_name }} <span>Edit</span>
+      <h1 class="admin-headline" *ngIf="isEditMode">Izmena Postojećeg
         <a class="admin-headline-link" routerLink="/admin/video">
-          <i class="fas fa-chevron-left"></i> Back to list
+          <i class="fas fa-chevron-left"></i> Nazad na listu
+        </a>
+      </h1>
+      <h1 class="admin-headline" *ngIf="!isEditMode">Kreiranje Novog
+        <a class="admin-headline-link" routerLink="/admin/video">
+          <i class="fas fa-chevron-left"></i> Nazad na listu
         </a>
       </h1>
     </div>
-  </div>
   <form action="">
+    <simple-notifications></simple-notifications>
     <div class="row">
       <div class="col-md-5">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/DeW0CIAlbkA?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div class="form-group position-fix">
+          <h5 class="control-label" translate>Slika</h5>
+          <div class="initial-image banner-image">
+            <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+          </div>
+          <div class="image-note">
+            <label class="control-label" translate>Napomena</label>
+            <p class="form-control-static">Minimalna dimenzija slike je <span>600x400px</span>. Za veće rezolucije, razmera će biti sačuvana.</p>
+          </div>
+          <div [hidden]="true" class="file-upload">
+            <input #fileInput id="custom-input" [hidden]="true" required type="file" (change)="fileChangeListener($event)">
+          </div>
+          <div class="image-buttons">
+            <div>
+            </div>
+            <button class="btn btn-add" translate (click)="uploadImage()">Dodaj Sliku</button>
+            <button class="btn btn-remove" translate (click)="removeImage()">Izbriši Sliku</button>
+          </div>
+        </div>
+        <div class="" *ngIf="video">
+          <h5>Video preview</h5>
+          <iframe width="560" height="315" [src]="videoUrl" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
       </div>
       <div class="col-md-6 offset-md-1">
         <div class="" *ngIf="video">
           <div class="form-group row">
             <label for="name" class="col-md-2 col-form-label">Naziv</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="name" value="{{ video.first_name }}">
+              <input type="text" class="form-control" id="name" [(ngModel)]="video.title" name="title">
             </div>
           </div>
           <div class="form-group row">
             <label for="videoLink" class="col-md-2 col-form-label">Link</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="videoLink" value="DeW0CIAlbkA">
+              <input type="text" class="form-control" id="videoLink" [(ngModel)]="video.url" name="url">
             </div>
           </div>
           <div class="row">
             <div class="col-sm-10 offset-md-2">
-              <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Sačuvaj</button>
+              <button type="submit" class="btn btn-primary" (click)="saveOnClick()"><i class="fas fa-save"></i> Sačuvaj</button>
               <a href="/admin/video" class="btn btn-secondary"><i class="fas fa-ban"></i> Otkaži</a>
               <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i> Izbriši</a>
             </div>

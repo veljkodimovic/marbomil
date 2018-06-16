@@ -166,5 +166,4 @@ export class BannerViewComponent implements OnInit {
     }
   }
 
-
 }

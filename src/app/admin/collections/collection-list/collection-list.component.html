@@ -23,19 +23,19 @@
       <div class="admin-list-item">
         <div class="row">
           <div class="col-11 col-sm-4" style="margin-bottom: 10px;">
-            <a routerLink="/admin/collection/{{collection.id}}">
+            <a (click)="goTo(collection)">
               <img src="{{'data:image/png;base64,'+collection.imageCrop}}" >
             </a>
           </div>
           <div class="col-sm-7 order-2 order-sm-1">
-            <p><a class="admin-list-name" routerLink="/admin/collection/{{collection.id}}">{{collection.title}}</a></p>
+            <p><a class="admin-list-name" (click)="goTo(collection)">{{collection.title}}</a></p>
             <p>
               <strong *ngIf="collection.parentId >0">Nad kolekcija: </strong><a>{{getCollectionName(collection.parentId)}}</a> <br>
               <strong *ngIf="collection.categoryId >0">Kategorija: </strong><a>{{getCategoryName(collection.categoryId)}}</a>
             </p>
           </div>
           <div class="col-1 admin-list-links order-1 order-sm-2">
-            <a routerLink="/admin/collection/{{collection.id}}"><i class="fas fa-pencil-alt"></i></a>
+            <a (click)="goTo(collection)"><i class="fas fa-pencil-alt"></i></a>
             <a (click)="openModal(collection)" class="remove-link"><i class="fas fa-trash"></i></a>
           </div>
         </div>

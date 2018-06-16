@@ -33,6 +33,10 @@ export class CollectionListComponent implements OnInit {
     });
   }
 
+  goTo(collection: Collection) {
+    this.router.navigate(['/admin/collection/' + collection.id]);
+  }
+
   getCollectionName(id: number) {
     if (this.collectionData.length > 0 && id > 0) {
       return this.collectionData.find((x: any) => x.id = id).title;

@@ -24,7 +24,6 @@ export class BannerListComponent implements OnInit {
 
   ngOnInit() {
     this.svc.getAllBanners().subscribe(data => {
-      console.log(data);
       this.bannerData = data;
     });
   }
@@ -41,7 +40,9 @@ export class BannerListComponent implements OnInit {
 
   performDelete(event: any) {
     this.svc.deleteBanner(this.activeBanner.id).subscribe(res => {
-      this.router.navigate(['/admin/banner/']);
+      this.svc.getAllBanners().subscribe(data => {
+        this.bannerData = data;
+      });
     });
   }
 

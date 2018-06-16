@@ -8,9 +8,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 const routes = {
-  products: () => `/products/`,
-  collection: () => `/collection/`,
-  category: () => `/category/`
+  products: () => `/api/products/`,
+  collection: () => `/api/collection/`,
+  category: () => `/api/category/`
 };
 
 
@@ -25,35 +25,28 @@ export class ProductService {
 
   getProducts(): Observable<any> {
     return this.http.get(routes.products())
-      .map((res: Response) => res.json())
-      .map(body =>
-        body)
+      .map((res: Response) => res)
       .catch(err => this.persistenceService.handleError(err));
   }
 
   //collection region
-  getAllCollections(): Observable<any[]> {
+  getAllCollections(): Observable<any> {
 
     return this.http.get(routes.collection())
-      .map((res: Response) => res.json())
-      .map(body =>
-        body)
+      .map((res: Response) => res)
       .catch(err => this.persistenceService.handleError(err));
   }
 
-  getAllCategories(): Observable<any[]> {
+  getAllCategories(): Observable<any> {
     return this.http.get(routes.category())
-      .map((res: Response) => res.json())
-      .map(body =>
-        body)
+      .map((res: Response) => res)
       .catch(err => this.persistenceService.handleError(err));
   }
 
   getProductById(id: number): Observable<any> {
 
     return this.http.get(routes.products() + id)
-      .map((res: Response) => res.json())
-      .map(body => body)
+      .map((res: Response) => res)
       .catch((err) => this.persistenceService.handleError(err));
   }
 

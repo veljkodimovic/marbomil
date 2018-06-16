@@ -2,9 +2,14 @@ import { NgModule, Component, Input, Output, EventEmitter, Renderer, ElementRef,
 import { ProductService } from '../product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { FormsModule } from "@angular/forms";
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 import { NotificationsService } from 'angular2-notifications';
 import { Product } from '../../../core/types/product';
+import { Collection } from '../../../core/types/collection';
+import { Category } from '../../../core/types/category';
+import { ImageModel } from '../../../core/types/imageModel';
+import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal';
 
 @Component({
   selector: 'app-product-view',
@@ -13,11 +18,17 @@ import { Product } from '../../../core/types/product';
 })
 export class ProductViewComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef;
+  @ViewChild('fileInput2') fileInput2: ElementRef;
   @ViewChild('cropper', undefined)
   cropper: ImageCropperComponent;
+  @ViewChild('cropper2', undefined)
+  cropper2: ImageCropperComponent;
   cropperSettings: CropperSettings;
+  @ViewChild(DeleteModalComponent)
+  private modal: DeleteModalComponent;
   image: any;
   data: any;
+  data2: any;
   product: Product = new Product(0, "", "", "", 0, 0, "", 0, 0, 0, 0, 0, 0, [], "");
   link: any;
   isLoading: boolean;
@@ -27,13 +38,13 @@ export class ProductViewComponent implements OnInit {
   disableSave: boolean = false;
   blockAll: boolean = false;
   activeImageIndex: number = -1;
-  images: any[] = [];
+  images: ImageModel[] = [];
   deletedImages: number[] = [];
   productImages: any[] = [];
   productImagesBases: any[] = [];
   cropedOriginalImages: any[] = [];
-  collections: any[] = [];
-  categories: any[] = [];
+  collections: Collection[] = [];
+  categories: Category[] = [];
   activeImageIndexNew: number = -1;
   activeImageIndexUpdated: number = -1;
   nestoImage: any;
@@ -52,6 +63,7 @@ export class ProductViewComponent implements OnInit {
     this.cropperSettings.keepAspect = true;
     this.cropperSettings.preserveSize = true;
     this.data = {};
+    this.data2 = {};
   }
 
   ngOnInit() {
@@ -62,6 +74,8 @@ export class ProductViewComponent implements OnInit {
       this.isEditMode = true;
       this.getProductDetails();
     }
+
+
 
     this.svc.getAllCollections().subscribe((data: any) => {
       this.collections = data;
@@ -85,6 +99,10 @@ export class ProductViewComponent implements OnInit {
         console.log(this.images);
 
       }
+      var image2: any = new Image();
+      image2.src = 'data:image/jpeg;base64,' + this.product.productDrawing;
+      this.cropper2.settings = this.cropperSettings;
+      this.cropper2.setImage(image2);
 
     });
   }
@@ -133,6 +151,16 @@ export class ProductViewComponent implements OnInit {
     return Math.round(bytes / 1024);
   }
 
+  openModal() {
+    this.modal.openModal();
+  }
+
+  performDelete(event: any) {
+    this.svc.deleteProduct(this.product.id).subscribe(res => {
+      this.router.navigate(['/admin/product/']);
+    });
+  }
+
 
   fileChangeListener($event: any) {
     var image: any = new Image();
@@ -141,36 +169,37 @@ export class ProductViewComponent implements OnInit {
     var that = this;
 
     myReader.onloadend = function(loadEvent: any) {
-      var sizeKb = that.calculateKBFromBytes(+loadEvent.loaded);
-      if (sizeKb > 500) {
-        that.fileInput.nativeElement.value = "";
-        that.notificationService.error('Image size', 'Maximum image size should be 500 KB.',
-          {
-            timeOut: 5000,
-            showProgressBar: true,
-            pauseOnHover: false,
-            clickToClose: false,
-            maxLength: 100
-          });
-      } else {
-        image.src = loadEvent.target.result;
 
-        that.cropper.setImage(image);
-        var imageModel: any;
-        imageModel.image = loadEvent.target.result;
-        imageModel.index = that.images.length;
-        that.images.push(imageModel);
-        that.productImagesBases.push(loadEvent.target.result);
+      image.src = loadEvent.target.result;
 
-        if (that.isEditMode) {
-          imageModel.isNew = true;
-        }
-        that.setActiveImage(imageModel);
+      that.cropper.setImage(image);
+      var imageModel = new ImageModel();
+      imageModel.image = loadEvent.target.result;
+      imageModel.index = that.images.length;
+      that.images.push(imageModel);
+      that.productImagesBases.push(loadEvent.target.result);
+
+      if (that.isEditMode) {
+        imageModel.isNew = true;
       }
-
-
+      that.setActiveImage(imageModel);
 
     };
+    myReader.readAsDataURL(file);
+  }
+
+  fileChangeListener2($event: any) {
+    var image: any = new Image();
+    var file: File = $event.target.files[0];
+    var myReader: FileReader = new FileReader();
+    var that = this;
+    myReader.onloadend = function(loadEvent: any) {
+      image.src = loadEvent.target.result;
+      that.originalImg = image.src;
+      that.cropper2.setImage(image);
+      that.setImage = true;
+    };
+
     myReader.readAsDataURL(file);
   }
 
@@ -196,25 +225,31 @@ export class ProductViewComponent implements OnInit {
       this.blockAll = true;
       var index = 0;
       var indexFile = 0;
-      if (!this.isEditMode) {
-        for (let value of this.images) {
-          var imageString = value.imageCrop.split('base64,');
-          var imageStringOrig = this.images[value.index].image.split('base64,')
-          this.product.images.push({ id: 0, index: value.index, imageCrop: imageString[imageString.length - 1], image: imageStringOrig[imageStringOrig.length - 1] });
-        }
-      } else {
-        //Images
-        for (let value of this.images.filter(x => x.isNew)) {
-          var imageString = value.imageCrop.split('base64,');
-          var imageStringOrig = this.images[value.index].image.split('base64,')
-          this.product.newImages.push({ id: 0, index: value.index, imageCrop: imageString[imageString.length - 1], image: imageStringOrig[imageStringOrig.length - 1] });
-        }
-        for (let value of this.images.filter(x => x.isDirty && !x.isNew && !x.isDeleted)) {
-          var imageString = value.imageCrop.split('base64,');
-          var imageStringOrig = this.images[value.index].image.split('base64,')
-          this.product.updatedImages.push({ id: value.id, index: value.index, imageCrop: imageString[imageString.length - 1], image: imageStringOrig[imageStringOrig.length - 1] });
-        }
-        this.product.deletedImages = this.deletedImages;
+      // if (!this.isEditMode) {
+      for (let value of this.images) {
+        var imageString = value.imageCrop.split('base64,');
+        var imageStringOrig = this.images[value.index].image.split('base64,')
+        this.product.images.push({ id: 0, index: value.index, imageCrop: imageString[imageString.length - 1], image: imageStringOrig[imageStringOrig.length - 1] });
+      }
+      // } else {
+      //   //Images
+      //   for (let value of this.images.filter(x => x.isNew)) {
+      //     var imageString = value.imageCrop.split('base64,');
+      //     var imageStringOrig = this.images[value.index].image.split('base64,')
+      //     this.product.newImages.push({ id: 0, index: value.index, imageCrop: imageString[imageString.length - 1], image: imageStringOrig[imageStringOrig.length - 1] });
+      //   }
+      //   for (let value of this.images.filter(x => x.isDirty && !x.isNew && !x.isDeleted)) {
+      //     var imageString = value.imageCrop.split('base64,');
+      //     var imageStringOrig = this.images[value.index].image.split('base64,')
+      //     this.product.updatedImages.push({ id: value.id, index: value.index, imageCrop: imageString[imageString.length - 1], image: imageStringOrig[imageStringOrig.length - 1] });
+      //   }
+      //   this.product.deletedImages = this.deletedImages;
+      // }
+      var imageString2 = this.data2.image.split('base64,');
+      if (this.setImage) {
+        this.product.productDrawing = imageString2[imageString2.length - 1];
+        //  var imageStringOrig = this.originalImg.split('base64,');
+        //this.collection.image = imageStringOrig[imageStringOrig.length - 1];
       }
 
       if (this.isEditMode) {
@@ -222,7 +257,8 @@ export class ProductViewComponent implements OnInit {
           .finally(() => { this.isLoading = false; })
           .subscribe((response: any) => {
             this.blockAll = false;
-            this.handleResponse(response);
+            //this.handleResponse(response);
+            this.router.navigate(['/admin/product']);
           });
       }
       else {
@@ -230,7 +266,8 @@ export class ProductViewComponent implements OnInit {
           .finally(() => { this.isLoading = false; })
           .subscribe((response: any) => {
             this.blockAll = false;
-            this.handleResponse(response);
+            //this.handleResponse(response);
+            this.router.navigate(['/admin/product']);
           });
       }
 
@@ -249,6 +286,8 @@ export class ProductViewComponent implements OnInit {
   handleResponse(response: any) {
     this.disableSave = false;
     if (!response.ok) {
+
+      console.log(response);
       var body = JSON.parse(response._body)
       this.notificationService.error(body.title, body.description,
         {
@@ -269,6 +308,17 @@ export class ProductViewComponent implements OnInit {
         });
     }
     this.isEditMode = true;
+  }
+
+  uploadImage2() {
+    let event = new MouseEvent('click', { bubbles: true });
+    this.renderer.invokeElementMethod(
+      this.fileInput2.nativeElement, 'dispatchEvent', [event]);
+  }
+
+  removeImage2() {
+    this.data2 = {};
+    this.cropper2.reset();
   }
 
 

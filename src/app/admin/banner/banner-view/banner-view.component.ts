@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Banner } from '../../../core/types/banner';
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 import { NotificationsService } from 'angular2-notifications';
+import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal';
 
 @Component({
   selector: 'app-banner-view',
@@ -15,6 +16,8 @@ export class BannerViewComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef;
   @ViewChild('cropper', undefined)
   cropper: ImageCropperComponent;
+  @ViewChild(DeleteModalComponent)
+  private modal: DeleteModalComponent;
   cropperSettings: CropperSettings;
   image: any;
   data: any;
@@ -80,6 +83,16 @@ export class BannerViewComponent implements OnInit {
   removeImage() {
     this.data = {};
     this.cropper.reset();
+  }
+
+  openModal() {
+    this.modal.openModal();
+  }
+
+  performDelete(event: any) {
+    this.svc.deleteBanner(this.banner.id).subscribe(res => {
+      this.router.navigate(['/admin/banner/']);
+    });
   }
 
 

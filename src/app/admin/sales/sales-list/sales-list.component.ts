@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SalesService } from '../sales.service';
 import { Router } from '@angular/router';
 import { Sales } from '@app/core/types/sales';
-import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-sales-list',
@@ -14,8 +14,8 @@ export class SalesListComponent implements OnInit {
   salesData: Sales[];
 
   constructor(private svc: SalesService,
-              private router: Router,
-              private modalService: NgbModal) {}
+    private router: Router,
+    private modalService: NgbModal) { }
 
   ngOnInit() {
     this.svc.getAllSales().subscribe(data => {
@@ -36,7 +36,7 @@ export class SalesListComponent implements OnInit {
   }
 
   openModal(content: any) {
-    this.modalService.open(content, { centered: true });
+    this.modalService.open(content);
   }
 
 }

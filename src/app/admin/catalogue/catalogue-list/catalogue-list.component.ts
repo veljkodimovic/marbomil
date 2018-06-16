@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CatalogueService } from '../catalogue.service';
 import { Router } from '@angular/router';
 import { Catalogue } from '../../../core/types/catalogue';
-import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-catalogue-list',
@@ -14,8 +14,8 @@ export class CatalogueListComponent implements OnInit {
   catalogueData: Catalogue[];
 
   constructor(private svc: CatalogueService,
-              private router: Router,
-              private modalService: NgbModal
+    private router: Router,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit() {
@@ -36,7 +36,7 @@ export class CatalogueListComponent implements OnInit {
   }
 
   openModal(content: any) {
-    this.modalService.open(content, { centered: true });
+    this.modalService.open(content);
   }
 
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AtestService } from '../atest.service';
 import { Router } from '@angular/router';
 import { Atest } from '../../../core/types/atest';
-import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-atest-list',
@@ -14,8 +14,8 @@ export class AtestListComponent implements OnInit {
   atestData: Atest[];
 
   constructor(private svc: AtestService,
-              private router: Router,
-              private modalService: NgbModal
+    private router: Router,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit() {
@@ -36,7 +36,7 @@ export class AtestListComponent implements OnInit {
   }
 
   openModal(content: any) {
-    this.modalService.open(content, { centered: true });
+    this.modalService.open(content);
   }
 
 }

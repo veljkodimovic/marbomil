@@ -1,14 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from '@app/core/types/category';
-import {CategoryService} from '@app/admin/categories/categories.service';
-import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { CategoryService } from '@app/admin/categories/categories.service';
+import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 export class NgbdModalContent {
   @Input() category: Category;
 
   constructor(private svc: CategoryService,
-              public activeModal: NgbActiveModal) {}
+    public activeModal: NgbActiveModal) { }
 }
 
 @Component({
@@ -22,8 +22,8 @@ export class CategoryListComponent implements OnInit {
   categoryData: Category[];
 
   constructor(private svc: CategoryService,
-              private router: Router,
-              private modalService: NgbModal
+    private router: Router,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit() {
@@ -45,7 +45,7 @@ export class CategoryListComponent implements OnInit {
   }
 
   openModal(content: any) {
-    this.modalService.open(content, { centered: true });
+    this.modalService.open(content);
   }
 
 }

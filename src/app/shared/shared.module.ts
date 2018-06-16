@@ -4,6 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MaterialModule } from '@app/material.module';
 import { LoaderComponent } from './loader/loader.component';
+import { DeleteModalComponent } from './delete-modal/delete-modal';
 
 @NgModule({
   imports: [
@@ -12,10 +13,12 @@ import { LoaderComponent } from './loader/loader.component';
     CommonModule
   ],
   declarations: [
-    LoaderComponent
+    LoaderComponent,
+    DeleteModalComponent
   ],
   exports: [
-    LoaderComponent
+    LoaderComponent,
+    DeleteModalComponent
   ]
 })
 export class SharedModule { }

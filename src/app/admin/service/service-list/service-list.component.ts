@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../service.service';
 import { Router } from '@angular/router';
 import { Service } from '@app/core/types/service';
-import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-service-list',
@@ -14,8 +14,8 @@ export class ServiceListComponent implements OnInit {
   serviceData: Service[];
 
   constructor(private svc: ServiceService,
-              private router: Router,
-              private modalService: NgbModal) {}
+    private router: Router,
+    private modalService: NgbModal) { }
 
   ngOnInit() {
     this.svc.getAllServices().subscribe(data => {
@@ -36,7 +36,7 @@ export class ServiceListComponent implements OnInit {
   }
 
   openModal(content: any) {
-    this.modalService.open(content, { centered: true });
+    this.modalService.open(content);
   }
 
 }

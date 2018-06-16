@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CollectionService } from '../collections.service';
-import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {Router} from '@angular/router';
+import { Collection } from '../../../core/types/collection';
+import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-collection-list',
@@ -15,8 +16,8 @@ export class CollectionListComponent implements OnInit {
   categoryData: any = [];
 
   constructor(private svc: CollectionService,
-              private router: Router,
-              private modalService: NgbModal) { }
+    private router: Router,
+    private modalService: NgbModal) { }
 
   ngOnInit() {
     this.svc.getAllCollections().subscribe(data => {
@@ -48,7 +49,7 @@ export class CollectionListComponent implements OnInit {
   }
 
   openModal(content: any) {
-    this.modalService.open(content, { centered: true });
+    this.modalService.open(content);
   }
 
 }

@@ -5,7 +5,7 @@ import { Route, extract } from '@app/core';
 import { MockComponent } from './mock.component';
 
 const routes: Routes = Route.withShell([
-    { path: '', redirectTo: '/mock', pathMatch: 'full' },
+
   { path: 'mock', component: MockComponent, data: { title: extract('Mock') } }
 ]);
 

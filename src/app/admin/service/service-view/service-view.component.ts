@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Service } from '@app/core/types/service';
 import { NotificationsService } from 'angular2-notifications';
 import { DomSanitizer } from '@angular/platform-browser';
+import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 
 @Component({
   selector: 'app-service-view',
@@ -12,6 +13,8 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./service-view.component.scss']
 })
 export class ServiceViewComponent implements OnInit {
+  @ViewChild(DeleteModalComponent)
+  private modal: DeleteModalComponent;
   image: any;
   data: any;
   service: Service = new Service(0, '', '', '', '', '', '', '', '', '', '', '');
@@ -74,8 +77,6 @@ export class ServiceViewComponent implements OnInit {
     }
   }
 
-
-
   handleResponse(response: any) {
     this.disableSave = false;
     if (!response.ok) {
@@ -99,6 +100,16 @@ export class ServiceViewComponent implements OnInit {
         });
       this.isEditMode = true;
     }
+  }
+
+  openModal() {
+    this.modal.openModal();
+  }
+
+  performDelete(event: any) {
+    this.svc.deleteService(this.service.id).subscribe(res => {
+      this.router.navigate(['/admin/service/']);
+    });
   }
 
 }

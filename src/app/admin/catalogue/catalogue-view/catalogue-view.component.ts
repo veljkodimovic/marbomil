@@ -2,8 +2,9 @@ import { NgModule, Component, Input, Output, EventEmitter, Renderer, ElementRef,
 import { CatalogueService } from '../catalogue.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { Catalogue } from '../../../core/types/catalogue';
+import { Catalogue } from '@app/core/types/catalogue';
 import { NotificationsService } from 'angular2-notifications';
+import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 
 @Component({
   selector: 'app-catalogue-view',
@@ -12,8 +13,10 @@ import { NotificationsService } from 'angular2-notifications';
 })
 export class CatalogueViewComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef;
+  @ViewChild(DeleteModalComponent)
+  private modal: DeleteModalComponent;
   data: any;
-  catalogue: Catalogue = new Catalogue(0, '', '', '','');
+  catalogue: Catalogue = new Catalogue(0, '', '', '', '');
   link: any;
   isLoading: boolean;
   isEditMode: boolean = true;
@@ -107,6 +110,16 @@ export class CatalogueViewComponent implements OnInit {
         });
       this.isEditMode = true;
     }
+  }
+
+  openModal() {
+    this.modal.openModal();
+  }
+
+  performDelete(event: any) {
+    this.svc.deleteCatalogue(this.catalogue.id).subscribe(res => {
+      this.router.navigate(['/admin/catalogue/']);
+    });
   }
 
 }

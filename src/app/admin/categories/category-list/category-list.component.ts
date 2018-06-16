@@ -1,15 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from '@app/core/types/category';
 import { CategoryService } from '@app/admin/categories/categories.service';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
-export class NgbdModalContent {
-  @Input() category: Category;
-
-  constructor(private svc: CategoryService,
-    public activeModal: NgbActiveModal) { }
-}
+import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 
 @Component({
   selector: 'app-category-list',
@@ -18,8 +12,11 @@ export class NgbdModalContent {
 })
 
 export class CategoryListComponent implements OnInit {
-
+  @ViewChild(DeleteModalComponent)
+  private modal: DeleteModalComponent;
   categoryData: Category[];
+
+  activeCategory: Category;
 
   constructor(private svc: CategoryService,
     private router: Router,
@@ -37,15 +34,15 @@ export class CategoryListComponent implements OnInit {
     this.router.navigate(['/admin/category/' + category.id]);
   }
 
-  deleteAction(category: Category) {
-    this.svc.deleteCategory(category.id).subscribe(res => {
-      console.log('Deleted');
-      this.router.navigate(['/admin/category/']);
-    });
+  openModal(category: Category) {
+    this.activeCategory = category;
+    this.modal.openModal();
   }
 
-  openModal(content: any) {
-    this.modalService.open(content);
+  performDelete(event: any) {
+    this.svc.deleteCategory(this.activeCategory.id).subscribe(res => {
+      this.router.navigate(['/admin/category/']);
+    });
   }
 
 }

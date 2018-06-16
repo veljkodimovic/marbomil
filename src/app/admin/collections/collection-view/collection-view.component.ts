@@ -5,7 +5,8 @@ import { FormsModule } from "@angular/forms";
 import { NotificationsService } from 'angular2-notifications';
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Collection } from "../../../core/types/collection"
+import { Collection } from '@app/core/types/collection';
+import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 
 @Component({
   selector: 'app-collection-view',
@@ -16,6 +17,8 @@ export class CollectionViewComponent implements OnInit {
 
   @ViewChild('fileInput') fileInput: ElementRef;
   @ViewChild('fileInput2') fileInput2: ElementRef;
+  @ViewChild(DeleteModalComponent)
+  private modal: DeleteModalComponent;
   @ViewChild('cropper', undefined)
   cropper: ImageCropperComponent;
   collectionId: number = 0;
@@ -198,6 +201,17 @@ export class CollectionViewComponent implements OnInit {
           maxLength: 100
         });
     }
+  }
+
+  openModal(atest: Collection) {
+    this.activeCollection = atest;
+    this.modal.openModal();
+  }
+
+  performDelete(event: any) {
+    this.svc.deleteCollection(this.activeCollection.id).subscribe(res => {
+      this.router.navigate(['/admin/collection/']);
+    });
   }
 
 

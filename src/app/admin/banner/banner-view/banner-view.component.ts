@@ -2,10 +2,10 @@ import { NgModule, Component, Input, Output, EventEmitter, Renderer, ElementRef,
 import { BannerService } from '../banner.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { Banner } from '../../../core/types/banner';
+import { Banner } from '@app/core/types/banner';
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 import { NotificationsService } from 'angular2-notifications';
-import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal';
+import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 
 @Component({
   selector: 'app-banner-view',
@@ -21,7 +21,7 @@ export class BannerViewComponent implements OnInit {
   cropperSettings: CropperSettings;
   image: any;
   data: any;
-  banner: Banner = new Banner(0, "", "", "", "", "", "");
+  banner: Banner = new Banner(0, '', '', '', '', '', '');
   link: any;
   isLoading: boolean;
   setImage: boolean = false;
@@ -51,8 +51,7 @@ export class BannerViewComponent implements OnInit {
   ngOnInit() {
     if (this.router.url.indexOf('new') != -1) {
       this.isEditMode = false;
-    }
-    else {
+    } else {
       this.isEditMode = true;
       this.getBannerDetails();
     }
@@ -60,10 +59,10 @@ export class BannerViewComponent implements OnInit {
   }
 
   fileChangeListener($event: any) {
-    var image: any = new Image();
-    var file: File = $event.target.files[0];
-    var myReader: FileReader = new FileReader();
-    var that = this;
+    const image: any = new Image();
+    const file: File = $event.target.files[0];
+    const myReader: FileReader = new FileReader();
+    const that = this;
     myReader.onloadend = function(loadEvent: any) {
       image.src = loadEvent.target.result;
       that.originalImg = image.src;
@@ -75,7 +74,7 @@ export class BannerViewComponent implements OnInit {
   }
 
   uploadImage() {
-    let event = new MouseEvent('click', { bubbles: true });
+    const event = new MouseEvent('click', { bubbles: true });
     this.renderer.invokeElementMethod(
       this.fileInput.nativeElement, 'dispatchEvent', [event]);
   }
@@ -100,7 +99,7 @@ export class BannerViewComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.svc.getBannerById(parseInt(id)).subscribe(data => {
       this.banner = data;
-      var image: any = new Image();
+      const image: any = new Image();
       image.src = 'data:image/jpeg;base64,' + this.banner.image;
       this.cropper.settings = this.cropperSettings;
       this.cropper.setImage(image);
@@ -113,10 +112,10 @@ export class BannerViewComponent implements OnInit {
       this.disableSave = true;
       this.blockAll = true;
 
-      var imageString = this.data.image.split('base64,');
+      const imageString = this.data.image.split('base64,');
       if (this.setImage) {
         this.banner.imageCrop = imageString[imageString.length - 1];
-        var imageStringOrig = this.originalImg.split('base64,');
+        const imageStringOrig = this.originalImg.split('base64,');
         this.banner.image = imageStringOrig[imageStringOrig.length - 1];
       }
       if (this.isEditMode) {
@@ -127,14 +126,13 @@ export class BannerViewComponent implements OnInit {
             this.blockAll = false;
             this.handleResponse(response);
           });
-      }
-      else {
+      } else {
         this.svc.createBanner(this.banner)
           .finally(() => { this.isLoading = false; this.router.navigate(['/admin/banners']); })
           .subscribe((response: any) => {
             this.blockAll = false;
             this.handleResponse(response);
-            var id = +response._body;
+            const id = +response._body;
             this.banner.id = id;
 
           });
@@ -151,12 +149,10 @@ export class BannerViewComponent implements OnInit {
     }
   }
 
-
-
   handleResponse(response: any) {
     this.disableSave = false;
     if (!response.ok) {
-      var body = JSON.parse(response._body)
+      const body = JSON.parse(response._body);
       this.notificationService.error(body.title, body.description,
         {
           timeOut: 5000,
@@ -165,8 +161,7 @@ export class BannerViewComponent implements OnInit {
           clickToClose: false,
           maxLength: 100
         });
-    }
-    else {
+    } else {
       this.notificationService.success('Success', 'Banner saved successfully.',
         {
           timeOut: 5000,

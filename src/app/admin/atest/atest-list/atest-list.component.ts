@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { AtestService } from '../atest.service';
 import { Router } from '@angular/router';
-import { Atest } from '../../../core/types/atest';
+import { Atest } from '@app/core/types/atest';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 
 @Component({
   selector: 'app-atest-list',
@@ -10,8 +11,11 @@ import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-
   styleUrls: ['./atest-list.component.scss']
 })
 export class AtestListComponent implements OnInit {
-
+  @ViewChild(DeleteModalComponent)
+  private modal: DeleteModalComponent;
   atestData: Atest[];
+
+  activeAtest: Atest;
 
   constructor(private svc: AtestService,
     private router: Router,
@@ -28,15 +32,15 @@ export class AtestListComponent implements OnInit {
     this.router.navigate(['/admin/atest/' + atest.id]);
   }
 
-  deleteAction(atest: Atest) {
-    this.svc.deleteAtest(atest.id).subscribe(res => {
-      console.log('Deleted');
-      this.router.navigate(['/admin/atest/']);
-    });
+  openModal(atest: Atest) {
+    this.activeAtest = atest;
+    this.modal.openModal();
   }
 
-  openModal(content: any) {
-    this.modalService.open(content);
+  performDelete(event: any) {
+    this.svc.deleteAtest(this.activeAtest.id).subscribe(res => {
+      this.router.navigate(['/admin/atest/']);
+    });
   }
 
 }

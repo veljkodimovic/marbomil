@@ -6,6 +6,7 @@ import { Video } from '@app/core/types/video';
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 import { NotificationsService } from 'angular2-notifications';
 import { DomSanitizer } from '@angular/platform-browser';
+import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 
 @Component({
   selector: 'app-video-view',
@@ -14,6 +15,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class VideoViewComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef;
+  @ViewChild(DeleteModalComponent)
+  private modal: DeleteModalComponent;
   @ViewChild('cropper', undefined)
   cropper: ImageCropperComponent;
   cropperSettings: CropperSettings;
@@ -143,8 +146,6 @@ export class VideoViewComponent implements OnInit {
     }
   }
 
-
-
   handleResponse(response: any) {
     this.disableSave = false;
     if (!response.ok) {
@@ -157,8 +158,7 @@ export class VideoViewComponent implements OnInit {
           clickToClose: false,
           maxLength: 100
         });
-    }
-    else {
+    } else {
       this.notificationService.success('Success', 'Video saved successfully.',
         {
           timeOut: 5000,
@@ -169,6 +169,16 @@ export class VideoViewComponent implements OnInit {
         });
       this.isEditMode = true;
     }
+  }
+
+  openModal() {
+    this.modal.openModal();
+  }
+
+  performDelete(event: any) {
+    this.svc.deleteVideo(this.video.id).subscribe(res => {
+      this.router.navigate(['/admin/video/']);
+    });
   }
 
 }

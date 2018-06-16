@@ -5,6 +5,7 @@ import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 import { NotificationsService } from 'angular2-notifications';
 import { Category } from '@app/core/types/category';
 import { CategoryService } from '@app/admin/categories/categories.service';
+import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 
 @Component({
   selector: 'app-category-view',
@@ -14,6 +15,8 @@ import { CategoryService } from '@app/admin/categories/categories.service';
 export class CategoryViewComponent implements OnInit {
 
   @ViewChild('fileInput') fileInput: ElementRef;
+  @ViewChild(DeleteModalComponent)
+  private modal: DeleteModalComponent;
   @ViewChild('cropper', undefined)
   cropper: ImageCropperComponent;
   cropperSettings: CropperSettings;
@@ -137,8 +140,6 @@ export class CategoryViewComponent implements OnInit {
     }
   }
 
-
-
   handleResponse(response: any) {
     this.disableSave = false;
     if (!response.ok) {
@@ -151,8 +152,7 @@ export class CategoryViewComponent implements OnInit {
           clickToClose: false,
           maxLength: 100
         });
-    }
-    else {
+    } else {
       this.notificationService.success('Success', 'Category saved successfully.',
         {
           timeOut: 5000,
@@ -163,6 +163,16 @@ export class CategoryViewComponent implements OnInit {
         });
       this.isEditMode = true;
     }
+  }
+
+  openModal() {
+    this.modal.openModal();
+  }
+
+  performDelete(event: any) {
+    this.svc.deleteCategory(this.category.id).subscribe(res => {
+      this.router.navigate(['/admin/category/']);
+    });
   }
 
 }

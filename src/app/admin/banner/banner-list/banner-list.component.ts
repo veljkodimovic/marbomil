@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { BannerService } from '../banner.service';
 import { Router } from '@angular/router';
-import { Banner } from '../../../core/types/banner';
+import { Banner } from '@app/core/types/banner';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal';
+import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 
 @Component({
   selector: 'app-banner-list',
@@ -32,7 +32,6 @@ export class BannerListComponent implements OnInit {
   goTo(banner: Banner) {
     this.router.navigate(['/admin/banner/' + banner.id]);
   }
-
 
   openModal(banner: Banner) {
     this.activeBanner = banner;

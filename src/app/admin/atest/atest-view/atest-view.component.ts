@@ -2,8 +2,9 @@ import { NgModule, Component, Input, Output, EventEmitter, Renderer, ElementRef,
 import { AtestService } from '../atest.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { Atest } from '../../../core/types/atest';
+import { Atest } from '@app/core/types/atest';
 import { NotificationsService } from 'angular2-notifications';
+import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 
 @Component({
   selector: 'app-atest-view',
@@ -12,6 +13,8 @@ import { NotificationsService } from 'angular2-notifications';
 })
 export class AtestViewComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef;
+  @ViewChild(DeleteModalComponent)
+  private modal: DeleteModalComponent;
   data: any;
   atest: Atest = new Atest(0, '', '', '');
   link: any;
@@ -57,14 +60,13 @@ export class AtestViewComponent implements OnInit {
           this.blockAll = false;
           this.handleResponse(response);
         });
-    }
-    else {
+    } else {
       this.svc.createAtest(this.atest)
         .finally(() => { this.isLoading = false; this.router.navigate(['/admin/atest']); })
         .subscribe((response: any) => {
           this.blockAll = false;
           this.handleResponse(response);
-          var id = +response._body;
+          const id = +response._body;
           this.atest.id = id;
 
         });
@@ -72,10 +74,10 @@ export class AtestViewComponent implements OnInit {
   }
 
   onFileChange(event: any) {
-    var that = this;
+    const that = this;
     console.log(that);
     if(event.target.files.length > 0) {
-      let file = event.target.files[0];
+      const file = event.target.files[0];
       console.log(file);
       that.atest.file = file;
       console.log(that);
@@ -86,7 +88,7 @@ export class AtestViewComponent implements OnInit {
   handleResponse(response: any) {
     this.disableSave = false;
     if (!response.ok) {
-      var body = JSON.parse(response._body)
+      const body = JSON.parse(response._body)
       this.notificationService.error(body.title, body.description,
         {
           timeOut: 5000,
@@ -95,8 +97,7 @@ export class AtestViewComponent implements OnInit {
           clickToClose: false,
           maxLength: 100
         });
-    }
-    else {
+    } else {
       this.notificationService.success('Success', 'Atest saved successfully.',
         {
           timeOut: 5000,
@@ -107,6 +108,16 @@ export class AtestViewComponent implements OnInit {
         });
       this.isEditMode = true;
     }
+  }
+
+  openModal() {
+    this.modal.openModal();
+  }
+
+  performDelete(event: any) {
+    this.svc.deleteAtest(this.atest.id).subscribe(res => {
+      this.router.navigate(['/admin/atest/']);
+    });
   }
 
 }

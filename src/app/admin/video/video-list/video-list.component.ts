@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { VideoService } from '../video.service';
 import { Router } from '@angular/router';
 import { Video } from '@app/core/types/video';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 
 @Component({
   selector: 'app-video-list',
@@ -10,8 +11,11 @@ import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-
   styleUrls: ['./video-list.component.scss']
 })
 export class VideoListComponent implements OnInit {
-
+  @ViewChild(DeleteModalComponent)
+  private modal: DeleteModalComponent;
   videoData: Video[];
+
+  activeVideo: Video;
 
   constructor(private svc: VideoService,
     private router: Router,
@@ -28,15 +32,15 @@ export class VideoListComponent implements OnInit {
     this.router.navigate(['/admin/video/' + video.id]);
   }
 
-  deleteAction(video: Video) {
-    this.svc.deleteVideo(video.id).subscribe(res => {
-      console.log('Deleted');
-      this.router.navigate(['/admin/video/']);
-    });
+  openModal(video: Video) {
+    this.activeVideo = video;
+    this.modal.openModal();
   }
 
-  openModal(content: any) {
-    this.modalService.open(content);
+  performDelete(event: any) {
+    this.svc.deleteVideo(this.activeVideo.id).subscribe(res => {
+      this.router.navigate(['/admin/video/']);
+    });
   }
 
 }

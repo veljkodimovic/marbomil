@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Sales } from '@app/core/types/sales';
 import { NotificationsService } from 'angular2-notifications';
 import { DomSanitizer } from '@angular/platform-browser';
+import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 
 @Component({
   selector: 'app-sales-view',
@@ -12,6 +13,8 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./sales-view.component.scss']
 })
 export class SalesViewComponent implements OnInit {
+  @ViewChild(DeleteModalComponent)
+  private modal: DeleteModalComponent;
   image: any;
   data: any;
   sales: Sales = new Sales(0, '', '', '', '', '', '', '', '', '', '', '');
@@ -74,12 +77,10 @@ export class SalesViewComponent implements OnInit {
       }
   }
 
-
-
   handleResponse(response: any) {
     this.disableSave = false;
     if (!response.ok) {
-      const body = JSON.parse(response._body)
+      const body = JSON.parse(response._body);
       this.notificationService.error(body.title, body.description,
         {
           timeOut: 5000,
@@ -99,6 +100,17 @@ export class SalesViewComponent implements OnInit {
         });
       this.isEditMode = true;
     }
+  }
+
+  openModal(sales: Sales) {
+    this.activeSales = sales;
+    this.modal.openModal();
+  }
+
+  performDelete(event: any) {
+    this.svc.deleteSales(this.activeSales.id).subscribe(res => {
+      this.router.navigate(['/admin/sales/']);
+    });
   }
 
 }

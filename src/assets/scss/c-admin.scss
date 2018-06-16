@@ -215,6 +215,9 @@
     margin-right: 5px;
     margin-left: -5px;
   }
+  &-danger {
+    color: $white !important;
+  }
 }
 
 .btn-primary {
@@ -257,20 +260,24 @@ app-shell {
   height: 100vh;
 }
 
-app-banner,
-app-banner-view,
-app-video,
-app-video-view,
 app-atest,
 app-atest-view,
+app-banner,
+app-banner-view,
 app-catalogue,
 app-catalogue-view,
+app-categories,
+app-category-view,
 app-collections,
 app-collection-view,
+app-product,
+app-product-view,
 app-sales,
 app-sales-view,
 app-service,
-app-service-view {
+app-service-view,
+app-video,
+app-video-view {
   flex: 1 0 auto;
   padding-bottom: 20px;
 }

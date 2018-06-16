@@ -32,26 +32,12 @@
           </div>
           <div class="col-1 admin-list-links">
             <a  (click)="goTo(category)"><i class="fas fa-pencil-alt"></i></a>
-            <a class="remove-link" (click)="openModal(content)"><i class="fas fa-trash"></i></a>
+            <a class="remove-link" (click)="openModal($event)"><i class="fas fa-trash"></i></a>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <delete-modal (deleteConfirmed)="performDelete($event)">
+  </delete-modal>
 </div>
-
-<ng-template #content let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title">Brisanje</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <p>Da li ste sigurni da hocete da izbrišete ovu kategoriju</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="c('Close click')">Odustani</button>
-    <button type="button" class="btn btn-danger" (click)="deleteAction(category)">Obriši</button>
-  </div>
-</ng-template>

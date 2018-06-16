@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { SalesService } from '../sales.service';
 import { Router } from '@angular/router';
 import { Sales } from '@app/core/types/sales';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 
 @Component({
   selector: 'app-sales-list',
@@ -10,8 +11,11 @@ import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-
   styleUrls: ['./sales-list.component.scss']
 })
 export class SalesListComponent implements OnInit {
-
+  @ViewChild(DeleteModalComponent)
+  private modal: DeleteModalComponent;
   salesData: Sales[];
+
+  activeSales: Sales;
 
   constructor(private svc: SalesService,
     private router: Router,
@@ -28,15 +32,14 @@ export class SalesListComponent implements OnInit {
     this.router.navigate(['/admin/sales/' + sales.id]);
   }
 
-  deleteAction(sales: Sales) {
-    this.svc.deleteSales(sales.id).subscribe(res => {
-      console.log('Deleted');
-      this.router.navigate(['/admin/sales/']);
-    });
+  openModal() {
+    this.modal.openModal();
   }
 
-  openModal(content: any) {
-    this.modalService.open(content);
+  performDelete(event: any) {
+    this.svc.deleteSales(this.sales.id).subscribe(res => {
+      this.router.navigate(['/admin/sales/']);
+    });
   }
 
 }

@@ -102,13 +102,12 @@ export class SalesViewComponent implements OnInit {
     }
   }
 
-  openModal(sales: Sales) {
-    this.activeSales = sales;
+  openModal() {
     this.modal.openModal();
   }
 
   performDelete(event: any) {
-    this.svc.deleteSales(this.activeSales.id).subscribe(res => {
+    this.svc.deleteSales(this.sales.id).subscribe(res => {
       this.router.navigate(['/admin/sales/']);
     });
   }

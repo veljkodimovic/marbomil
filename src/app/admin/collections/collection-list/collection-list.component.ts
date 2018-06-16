@@ -45,12 +45,13 @@ export class CollectionListComponent implements OnInit {
     }
   }
 
-  openModal() {
+  openModal(atest: Collection) {
+    this.activeCollection = atest;
     this.modal.openModal();
   }
 
   performDelete(event: any) {
-    this.svc.deleteCollection(this.collection.id).subscribe(res => {
+    this.svc.deleteCollection(this.activeCollection.id).subscribe(res => {
       this.router.navigate(['/admin/collection/']);
     });
   }

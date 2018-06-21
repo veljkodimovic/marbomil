@@ -1,10 +1,14 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12" *ngIf="catalogue">
-      <h1 class="admin-headline">
-        {{ catalogue.first_name }} <span>Edit</span>
+      <h1 class="admin-headline" *ngIf="isEditMode">Izmena Postojećeg
         <a class="admin-headline-link" routerLink="/admin/catalogue">
-          <i class="fas fa-chevron-left"></i> Back to list
+          <i class="fas fa-chevron-left"></i> Nazad na listu
+        </a>
+      </h1>
+      <h1 class="admin-headline" *ngIf="!isEditMode">Kreiranje Novog
+        <a class="admin-headline-link" routerLink="/admin/catalogue">
+          <i class="fas fa-chevron-left"></i> Nazad na listu
         </a>
       </h1>
     </div>

@@ -16,9 +16,10 @@
     font-size: 14px;
     letter-spacing: 0.2px;
     border-bottom: 2px solid $white;
-  }
-  .nav-item.active > .nav-link {
-    border-bottom: 2px solid $primary;
+    color: $primary !important;
+    &.active {
+      border-bottom: 2px solid $primary;
+    }
   }
   .logo,
   .header-search {
@@ -38,8 +39,10 @@
     padding: 10px 15px;
     text-transform: uppercase;
     font-size: 14px;
-    &:hover {
-      color: $white;
+    color: $primary !important;
+    &:hover,
+    &.active {
+      color: $white !important;
       background: $primary;
     }
   }

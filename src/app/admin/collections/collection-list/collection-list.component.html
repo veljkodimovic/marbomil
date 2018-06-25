@@ -30,8 +30,8 @@
           <div class="col-sm-7 order-2 order-sm-1">
             <p><a class="admin-list-name" (click)="goTo(collection)">{{collection.title}}</a></p>
             <p>
-              <strong *ngIf="collection.parentId >0">Nad kolekcija: </strong><a>{{getCollectionName(collection.parentId)}}</a> <br>
-              <strong *ngIf="collection.categoryId >0">Kategorija: </strong><a>{{getCategoryName(collection.categoryId)}}</a>
+              <span *ngIf="collection.parentId >0"><strong>Nad kolekcija: </strong><a>{{getCollectionName(collection.parentId)}}</a> <br></span>
+              <span *ngIf="collection.categoryId >0"><strong>Kategorija: </strong><a>{{getCategoryName(collection.categoryId)}}</a></span>
             </p>
           </div>
           <div class="col-1 admin-list-links order-1 order-sm-2">

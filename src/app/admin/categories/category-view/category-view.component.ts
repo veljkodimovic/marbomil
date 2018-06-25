@@ -23,6 +23,7 @@ export class CategoryViewComponent implements OnInit {
   image: any;
   data: any;
   category: Category = new Category(0, '', '', '', '');
+  categories: any[] = [];
   isLoading: boolean;
   setImage: boolean = false;
   originalImg: string = '';
@@ -51,11 +52,15 @@ export class CategoryViewComponent implements OnInit {
   ngOnInit() {
     if (this.router.url.indexOf('new') != -1) {
       this.isEditMode = false;
-    }
-    else {
+    } else {
       this.isEditMode = true;
       this.getCategoryDetails();
     }
+
+    this.svc.getAllCategories().subscribe((data: any) => {
+      this.categories = data;
+      this.categories.splice(this.categories.indexOf(this.category.title), 1);
+    });
   }
 
   fileChangeListener($event: any) {

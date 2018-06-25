@@ -1,0 +1,89 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-auto" *ngIf="banner">
+      <img src="{{'data:image/png;base64,'+banner.imageCrop}}" alt="">
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 page-title-icon">
+      <img src="../../../assets/images/icons/montaza.png" width="50" alt="">
+      <h1>Ovlašćeni Marmobil servisi</h1>
+    </div>
+  </div>
+  <div class="container service-list">
+    <div class="row service-block" *ngIf="serviceSerbia.length">
+      <div class="col-sm-3 offset-sm-1">
+        <h3 class="service-country">Srbija</h3>
+        <div class="service-item" *ngFor="let service of serviceSerbia">
+          <h4 class="service-city">{{service.city}}</h4>
+          <p>
+            {{service.title}} <br>
+            {{service.street}} <br>
+            {{service.postal}} {{service.city}} <br>
+            Tel: <a href="tel:{{service.phone}}">{{service.phone}}</a> <br>
+            Email: <a href="mailto:{{service.email}}">{{service.email}}</a>
+          </p>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <img src="../../../assets/images/ovlasceniServis.png" alt="">
+      </div>
+    </div>
+    <div class="row service-block" *ngIf="serviceMacedonia.length">
+      <div class="col-sm-3 offset-sm-1">
+        <h3 class="service-country">Makedonija</h3>
+        <div class="service-item" *ngFor="let service of serviceMacedonia">
+          <h4 class="service-city">{{service.city}}</h4>
+          <p>
+            {{service.title}} <br>
+            {{service.street}} <br>
+            {{service.postal}} {{service.city}} <br>
+            Tel: <a href="tel:{{service.phone}}">{{service.phone}}</a> <br>
+            Email: <a href="mailto:{{service.email}}">{{service.email}}</a>
+          </p>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <img src="../../../assets/images/ovlasceniServis.png" alt="">
+      </div>
+    </div>
+    <div class="row service-block" *ngIf="serviceMontenegro.length">
+      <div class="col-sm-3 offset-sm-1">
+        <h3 class="service-country">Crna Gora</h3>
+        <div class="service-item" *ngFor="let service of serviceMontenegro">
+          <h4 class="service-city">{{service.city}}</h4>
+          <p>
+            {{service.title}} <br>
+            {{service.street}} <br>
+            {{service.postal}} {{service.city}} <br>
+            Tel: <a href="tel:{{service.phone}}">{{service.phone}}</a> <br>
+            Email: <a href="mailto:{{service.email}}">{{service.email}}</a>
+          </p>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <img src="../../../assets/images/ovlasceniServis.png" alt="">
+      </div>
+    </div>
+    <div class="row service-block" *ngIf="serviceRSrpska.length">
+      <div class="col-sm-3 offset-sm-1">
+        <h3 class="service-country">Republika Srpska</h3>
+        <div class="service-item" *ngFor="let service of serviceRSrpska">
+          <h4 class="service-city">{{service.city}}</h4>
+          <p>
+            {{service.title}} <br>
+            {{service.street}} <br>
+            {{service.postal}} {{service.city}} <br>
+            Tel: <a href="tel:{{service.phone}}">{{service.phone}}</a> <br>
+            Email: <a href="mailto:{{service.email}}">{{service.email}}</a>
+          </p>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <img src="../../../assets/images/ovlasceniServis.png" alt="">
+      </div>
+    </div>
+  </div>
+</div>

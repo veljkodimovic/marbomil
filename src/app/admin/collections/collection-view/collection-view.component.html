@@ -29,7 +29,8 @@
             <label for="parentCollection" class="col-md-2 col-form-label">Nad Kolekcija</label>
             <div class="col-md-10">
               <select class="form-control" id="parentCollection" [(ngModel)]="collection.parentId" name="parentId">
-                  <option  *ngFor="let col of collections;index as i" [ngValue]="col.id" name="col.title" >{{col.title}}</option>
+                <option value=""></option>
+                <option  *ngFor="let col of collections;index as i" [ngValue]="col.id" name="col.title" >{{col.title}}</option>
               </select>
             </div>
           </div>
@@ -37,7 +38,8 @@
             <label for="category" class="col-md-2 col-form-label">Kategorija</label>
             <div class="col-md-10">
               <select class="form-control" id="category" [(ngModel)]="collection.categoryId" name="categoryId">
-                    <option  *ngFor="let col of categories;index as i" [ngValue]="col.id" name="col.title" >{{col.title}}</option>
+                <option value=""></option>
+                <option  *ngFor="let col of categories;index as i" [ngValue]="col.id" name="col.title" >{{col.title}}</option>
               </select>
             </div>
           </div>
@@ -79,7 +81,7 @@
         <div class="row">
           <div class="col-sm-12">
             <button type="submit" class="btn btn-primary" (click)="saveOnClick()"><i class="fas fa-save"></i> Sačuvaj</button>
-            <a href="/admin/banners" class="btn btn-secondary"><i class="fas fa-ban"></i> Otkaži</a>
+            <a routerLink="/admin/banners" class="btn btn-secondary"><i class="fas fa-ban"></i> Otkaži</a>
             <a class="btn btn-danger" *ngIf="isEditMode" (click)="openModal()"><i class="fas fa-trash"></i> Izbriši</a>
           </div>
         </div>

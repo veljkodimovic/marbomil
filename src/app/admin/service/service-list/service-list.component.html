@@ -27,9 +27,9 @@
             <div class="row admin-list-contact">
               <p class="col-sm-6">{{service.street}}, {{service.postal}} {{service.city}}, {{service.region}}, {{service.country}}</p>
               <p class="col-sm-6">
-                <i class="fas fa-phone"></i> <a href="tel:{{service.phone}}"></a>{{service.phone}}<br>
-                <i class="fas fa-envelope"></i> <a href="mailto:{{service.email}}">{{service.email}}</a> <br>
-                <i class="fas fa-globe"></i> <a href="{{service.website}}">{{service.website}}</a>
+                <span *ngIf="service.phone"><i class="fas fa-phone"></i> <a href="tel:{{service.phone}}"></a>{{service.phone}}<br></span>
+                <span *ngIf="service.email"><i class="fas fa-envelope"></i> <a href="mailto:{{service.email}}">{{service.email}}</a> <br></span>
+                <span *ngIf="service.website"><i class="fas fa-globe"></i> <a href="{{service.website}}">{{service.website}}</a></span>
               </p>
             </div>
           </div>

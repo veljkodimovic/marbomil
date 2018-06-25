@@ -68,14 +68,14 @@ export class CollectionViewComponent implements OnInit {
   ngOnInit() {
     if (this.router.url.indexOf('new') != -1) {
       this.isEditMode = false;
-    }
-    else {
+    } else {
       this.isEditMode = true;
       this.getCollectionDetails();
     }
 
     this.svc.getAllCollections().subscribe((data: any) => {
       this.collections = data;
+      this.collections.splice(this.collections.indexOf(this.collection), 1);
     });
 
     this.svc.getAllCategories().subscribe((data: any) => {

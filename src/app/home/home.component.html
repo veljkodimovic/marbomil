@@ -1,14 +1,99 @@
-<div class="container">
-  <mat-card>
-    <p>
-      <img class="logo" src="assets/ngx-rocket-logo.png" alt="angular logo"/>
-    </p>
-    <mat-card-content>
-      <mat-card-title translate>Hello world !</mat-card-title>
-      <mat-card-subtitle>
-        <app-loader [isLoading]="isLoading" size="1.5"></app-loader>
-        <q [hidden]="isLoading">{{quote}}</q>
-      </mat-card-subtitle>
-    </mat-card-content>
-  </mat-card>
-</div>
+<ngb-carousel>
+  <ng-template ngbSlide>
+    <img class="d-block w-100" src="../../assets/images/mainBanner.jpg" alt="First slide">
+  </ng-template>
+  <ng-template ngbSlide>
+    <img class="d-block w-100" src="../../assets/images/kvalitetBanner.jpg" alt="Second slide">
+  </ng-template>
+  <ng-template ngbSlide>
+    <img class="d-block w-100" src="../../assets/images/servisBanner.jpg" alt="Third slide">
+  </ng-template>
+</ngb-carousel>
+
+<section class="homepage-25">
+  <h3>25 godina sa Vama.</h3>
+</section>
+
+<section class="homepage-banners">
+  <div class="row no-gutters">
+    <div class="col-sm-4">
+      <a href="">
+        <img src="../../assets/images/pic1.png" alt="Oprema za kupatila">
+        <span>Oprema za kupatila</span>
+      </a>
+    </div>
+    <div class="col-sm-4">
+      <a href="">
+        <img src="../../assets/images/pic2.png" alt="Delovi slavina i ventila">
+        <span>Delovi slavina i ventila</span>
+      </a>
+    </div>
+    <div class="col-sm-4">
+      <a href="">
+        <img src="../../assets/images/pic3.png" alt="Slavine i ventili">
+        <span>Slavine i ventili</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="homepage-description">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <p>
+          Marbomil je jedna od vodećih robnih marki slavina i druge opreme za kupatilo u reigonu. <br>
+          Naši proizvodi su atestirani i bezbedni za upotrebu. Podležu dugotrajnim garancijama <br>
+          i rigoroznoj kontroli kvaliteta. <br>
+          Kvalitet proizvoda garantovan je dvadesetpetogodišnjim iskustvom <br>
+          u proizvodnji vodovodnih armatura. <br>
+          Marmobil slavine i druge proizvode možete kupiti u više storina <br>
+          maloprodajnih objekata u Srbiji, Hrvatskoj, Makedoniji i Crnoj Godi.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="homepage-boxes">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 content-box">
+        <a href="#">
+          <img src="../../assets/images/pic5.png" alt="Proizvodi">
+          <div class="content-box-description">
+            <h5>Proizvodi</h5>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel magna fermentum, tristique dui a.</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-3 content-box">
+        <a href="#">
+          <img src="../../assets/images/pic6.png" alt="Katalog">
+          <div class="content-box-description">
+            <h5>Preuzmi katalog <i class="fas fa-download"></i></h5>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel magna fermentum, tristique dui a.</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-3 content-box">
+        <a href="#">
+          <img src="../../assets/images/pic7.png" alt="Atesti">
+          <div class="content-box-description">
+            <h5>Atesti</h5>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel magna fermentum, tristique dui a.</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-3 content-box">
+        <a href="#">
+          <img src="../../assets/images/pic8.png" alt="Video materijali">
+          <div class="content-box-description">
+            <h5>Video materijali</h5>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel magna fermentum, tristique dui a.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

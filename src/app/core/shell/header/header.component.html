@@ -26,27 +26,27 @@
       <div id="navbar-menu" class="collapse navbar-collapse float-xs-none" [ngbCollapse]="menuHidden">
         <ul class="navbar-nav  ml-auto">
           <li class="nav-item active">
-            <a class="nav-link text-uppercase" routerLink="/mock" routerLinkActive="active">
+            <a routerLinkActive="active" class="nav-link text-uppercase" routerLink="/home" routerLinkActive="active">
               <span translate>Marbomil</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-uppercase" routerLink="/mock" routerLinkActive="active">
+            <a routerLinkActive="active" class="nav-link text-uppercase" routerLink="/mock" routerLinkActive="active">
               <span translate>Proizvodi</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-uppercase" routerLink="/mock" routerLinkActive="active">
+            <a routerLinkActive="active" class="nav-link text-uppercase" routerLink="/mock" routerLinkActive="active">
               <span translate>Kvalitet</span>
             </a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-uppercase" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle text-uppercase" (click)="goToPage('servis')" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span translate>Servis</span>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Servis</a>
-              <a class="dropdown-item" href="#">Garancija</a>
+              <a routerLinkActive="active" class="dropdown-item" routerLink="/servis">Servis</a>
+              <a routerLinkActive="active" class="dropdown-item" routerLink="/garancija">Garancija</a>
             </div>
           </li>
           <li class="nav-item">

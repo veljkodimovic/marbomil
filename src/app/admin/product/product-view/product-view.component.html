@@ -182,7 +182,7 @@
         <div class="row">
           <div class="col-sm-10 ">
             <button type="submit" class="btn btn-primary" (click)="saveOnClick()"><i class="fas fa-save"></i> Sačuvaj</button>
-            <a href="/admin/product" class="btn btn-secondary"><i class="fas fa-ban"></i> Otkaži</a>
+            <a routerLink="/admin/product" class="btn btn-secondary"><i class="fas fa-ban"></i> Otkaži</a>
             <a class="btn btn-danger" (click)="openModal()" *ngIf="isEditMode"><i class="fas fa-trash"></i> Izbriši</a>
           </div>
         </div>

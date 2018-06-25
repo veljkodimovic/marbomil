@@ -24,7 +24,6 @@ import { ProductViewComponent } from './product/product-view/product-view.compon
 import { ProductComponent } from './product/product.component';
 
 const routes: Routes = Route.withShell([
-  { path: '', redirectTo: '/admin', pathMatch: 'full' },
   { path: 'admin/banners', component: BannerComponent, data: { title: extract('Banner') } },
   { path: 'admin/banner/:id', component: BannerViewComponent, data: { title: extract('Banner View') } },
   { path: 'admin/banner/new', component: BannerViewComponent, data: { title: extract('Banner View') } },

@@ -1,8 +1,8 @@
 import {Component, OnInit, Input, ViewChild} from '@angular/core';
-import { Router } from '@angular/router';
-import { Category } from '@app/core/types/category';
 import { CategoryService } from '@app/admin/categories/categories.service';
+import { Category } from '@app/core/types/category';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 
 @Component({
@@ -15,6 +15,7 @@ export class CategoryListComponent implements OnInit {
   @ViewChild(DeleteModalComponent)
   private modal: DeleteModalComponent;
   categoryData: Category[];
+  categoryAllData: any = [];
 
   activeCategory: Category;
 
@@ -27,11 +28,18 @@ export class CategoryListComponent implements OnInit {
     this.svc.getAllCategories().subscribe(data => {
       console.log(data);
       this.categoryData = data;
+      this.categoryAllData = data;
     });
   }
 
   goTo(category: Category) {
     this.router.navigate(['/admin/category/' + category.id]);
+  }
+
+  getCategoryName(id: number) {
+    if (this.categoryAllData.length > 0 && id > 0) {
+      return this.categoryAllData.find((x: any) => x.id = id).title;
+    }
   }
 
   openModal(category: Category) {

@@ -1,4 +1,4 @@
-import { NgModule, Component, Input, Output, EventEmitter, Renderer, ElementRef, forwardRef, OnInit, ViewChild } from '@angular/core';
+import { NgModule, Component, Input, Output, Directive, EventEmitter, Renderer, ElementRef, forwardRef, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { SalesService } from '@app/admin/sales/sales.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { Sales } from '@app/core/types/sales';
 import { NotificationsService } from 'angular2-notifications';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
+import { } from '@types/googlemaps';
 
 @Component({
   selector: 'app-sales-view',
@@ -24,6 +25,9 @@ export class SalesViewComponent implements OnInit {
   isEditMode: boolean = true;
   disableSave: boolean = false;
   blockAll: boolean = false;
+  @ViewChild('gmap')
+  gmapElement: ElementRef;
+  map: google.maps.Map;
 
   constructor(private svc: SalesService,
               private renderer: Renderer,
@@ -41,15 +45,23 @@ export class SalesViewComponent implements OnInit {
       this.isEditMode = true;
       this.getSalesDetails();
     }
-
   }
 
   getSalesDetails(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.svc.getSalesById(parseInt(id)).subscribe(data => {
       this.sales = data;
-      this.salesUrl = 'https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d2869.0043462972526!2d' + this.sales.latitude + '!3d' + this.sales.longitude + '!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ssr!2srs!4v1529128003032';
-      this.salesUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.salesUrl);
+      const uluru = {lat: parseFloat(this.sales.latitude), lng: parseFloat(this.sales.longitude)};
+      const mapProp = {
+        center: uluru,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
+      const marker = new google.maps.Marker({
+        position: uluru,
+        map: this.map
+      });
     });
   }
 

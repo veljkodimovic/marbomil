@@ -14,6 +14,8 @@ import { ServiceComponent } from './service/service.component';
 import { ServiceService } from './service/service.service';
 import { WarrantyComponent } from '@app/home/warranty/warranty.component';
 import { WarrantyService } from '@app/home/warranty/warranty.service';
+import { QualityComponent } from '@app/home/quality/quality.component';
+import { QualityService } from '@app/home/quality/quality.service';
 import { ContactComponent } from '@app/home/contact/contact.component';
 
 @NgModule({
@@ -30,12 +32,14 @@ import { ContactComponent } from '@app/home/contact/contact.component';
   declarations: [
     ServiceComponent,
     WarrantyComponent,
+    QualityComponent,
     ContactComponent,
     HomeComponent
   ],
   providers: [
     ServiceService,
     WarrantyService,
+    QualityService,
     QuoteService
   ]
 })

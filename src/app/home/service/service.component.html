@@ -13,8 +13,8 @@
     </div>
   </div>
   <div class="container service-list">
-    <div class="row service-block" *ngIf="serviceSerbia.length">
-      <div class="col-sm-3 offset-sm-1">
+    <div class="row service-block">
+      <div class="col-sm-3 offset-sm-1" *ngIf="serviceSerbia.length">
         <h3 class="service-country">Srbija</h3>
         <div class="service-item" *ngFor="let service of serviceSerbia">
           <h4 class="service-city">{{service.city}}</h4>
@@ -28,11 +28,11 @@
         </div>
       </div>
       <div class="col-md-7">
-        <img src="../../../assets/images/ovlasceniServis.png" alt="">
+        <div #gmapSrb style="width:100%; height:400px;"></div>
       </div>
     </div>
-    <div class="row service-block" *ngIf="serviceMacedonia.length">
-      <div class="col-sm-3 offset-sm-1">
+    <div class="row service-block">
+      <div class="col-sm-3 offset-sm-1" *ngIf="serviceMacedonia.length">
         <h3 class="service-country">Makedonija</h3>
         <div class="service-item" *ngFor="let service of serviceMacedonia">
           <h4 class="service-city">{{service.city}}</h4>
@@ -46,11 +46,11 @@
         </div>
       </div>
       <div class="col-md-7">
-        <img src="../../../assets/images/ovlasceniServis.png" alt="">
+        <div #gmapMcd style="width:100%; height:400px;"></div>
       </div>
     </div>
-    <div class="row service-block" *ngIf="serviceMontenegro.length">
-      <div class="col-sm-3 offset-sm-1">
+    <div class="row service-block">
+      <div class="col-sm-3 offset-sm-1" *ngIf="serviceMontenegro.length">
         <h3 class="service-country">Crna Gora</h3>
         <div class="service-item" *ngFor="let service of serviceMontenegro">
           <h4 class="service-city">{{service.city}}</h4>
@@ -64,11 +64,11 @@
         </div>
       </div>
       <div class="col-md-7">
-        <img src="../../../assets/images/ovlasceniServis.png" alt="">
+        <div #gmapMne style="width:100%; height:400px;"></div>
       </div>
     </div>
-    <div class="row service-block" *ngIf="serviceRSrpska.length">
-      <div class="col-sm-3 offset-sm-1">
+    <div class="row service-block">
+      <div class="col-sm-3 offset-sm-1" *ngIf="serviceRSrpska.length">
         <h3 class="service-country">Republika Srpska</h3>
         <div class="service-item" *ngFor="let service of serviceRSrpska">
           <h4 class="service-city">{{service.city}}</h4>
@@ -82,7 +82,7 @@
         </div>
       </div>
       <div class="col-md-7">
-        <img src="../../../assets/images/ovlasceniServis.png" alt="">
+        <div #gmapBih style="width:100%; height:400px;"></div>
       </div>
     </div>
   </div>

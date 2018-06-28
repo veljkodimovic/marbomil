@@ -6,6 +6,7 @@ import { Service } from '@app/core/types/service';
 import { NotificationsService } from 'angular2-notifications';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
+import { } from '@types/googlemaps';
 
 @Component({
   selector: 'app-service-view',
@@ -24,6 +25,9 @@ export class ServiceViewComponent implements OnInit {
   isEditMode: boolean = true;
   disableSave: boolean = false;
   blockAll: boolean = false;
+  @ViewChild('gmap')
+  gmapElement: ElementRef;
+  map: google.maps.Map;
 
   constructor(private svc: ServiceService,
               private renderer: Renderer,
@@ -48,8 +52,19 @@ export class ServiceViewComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.svc.getServiceById(parseInt(id)).subscribe(data => {
       this.service = data;
-      this.serviceUrl = 'https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d2869.0043462972526!2d' + this.service.latitude + '!3d' + this.service.longitude + '!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ssr!2srs!4v1529128003032';
-      this.serviceUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.serviceUrl);
+      if (this.service.latitude.length && this.service.longitude.length) {
+        const uluru = {lat: parseFloat(this.service.latitude), lng: parseFloat(this.service.longitude)};
+        const mapProp = {
+          center: uluru,
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
+        const marker = new google.maps.Marker({
+          position: uluru,
+          map: this.map
+        });
+      }
     });
   }
 

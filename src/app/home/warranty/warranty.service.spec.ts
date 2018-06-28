@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { WarrantyService } from './warranty.service';
 
-describe('ServiceService', () => {
+describe('WarrantyService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [WarrantyService]

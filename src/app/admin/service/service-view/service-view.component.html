@@ -17,9 +17,7 @@
     <simple-notifications></simple-notifications>
     <div class="row">
       <div class="col-md-5">
-        <div *ngIf="service.longitude && service.latitude">
-          <iframe [src]="serviceUrl" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-        </div>
+        <div #gmap style="width:100%; height:400px;"></div>
       </div>
       <div class="col-md-6 offset-md-1">
         <div class="" *ngIf="service">

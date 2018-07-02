@@ -16,7 +16,6 @@ import { BannerListComponent } from './banner/banner-list/banner-list.component'
 import { BannerComponent } from './banner/banner.component';
 import { BannerService } from './banner/banner.service';
 import { AdminComponent } from './admin.component';
-import { QuoteService } from './quote.service';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CategoryViewComponent } from './categories/category-view/category-view.component';
@@ -95,7 +94,6 @@ import { ProductService } from './product/product.service';
     ProductViewComponent
   ],
   providers: [
-    QuoteService,
     BannerService,
     CategoryService,
     CollectionService,

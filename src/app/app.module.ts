@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
 import { HomeModule } from './home/home.module';
+import { ShopModule } from './shop/shop.module';
 // import { AboutModule } from './about/about.module';
 import { AdminModule } from './admin/admin.module';
 import { MockModule } from './mock/mock.module';
@@ -28,6 +29,7 @@ import { AppRoutingModule } from './app-routing.module';
     NgbModule.forRoot(),
     CoreModule,
     SharedModule,
+    ShopModule,
     HomeModule,
     // AboutModule,
     AdminModule,

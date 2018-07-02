@@ -17,11 +17,13 @@ export class HeaderComponent implements OnInit {
   menuHidden = true;
 
   constructor(private router: Router,
-              private titleService: Title,
-              private authenticationService: AuthenticationService,
-              private i18nService: I18nService) { }
+    private titleService: Title,
+    private authenticationService: AuthenticationService,
+    private i18nService: I18nService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    console.log(this.i18nService.supportedLanguages);
+  }
 
   toggleMenu() {
     this.menuHidden = !this.menuHidden;

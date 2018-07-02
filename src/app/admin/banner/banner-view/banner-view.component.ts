@@ -37,11 +37,11 @@ export class BannerViewComponent implements OnInit {
     private route: ActivatedRoute) {
     this.cropperSettings = new CropperSettings();
     this.cropperSettings.width = 1920;
-    this.cropperSettings.height = 300;
+    this.cropperSettings.height = 679;
     this.cropperSettings.croppedWidth = 1920;
-    this.cropperSettings.croppedHeight = 300;
+    this.cropperSettings.croppedHeight = 679;
     this.cropperSettings.canvasWidth = 460;
-    this.cropperSettings.canvasHeight = 259;
+    this.cropperSettings.canvasHeight = 162;
     this.cropperSettings.noFileInput = true;
     this.cropperSettings.keepAspect = true;
     this.cropperSettings.preserveSize = true;

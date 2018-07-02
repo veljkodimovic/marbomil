@@ -18,7 +18,6 @@ import { ShopLogoComponent } from './shop-logo/shop-logo.component';
 import { CarouselService } from './carusel/carusel.service';
 import { EquipmentService } from './equipment/equipment.service';
 import { SectionsService } from './sections/sections.service';
-import { QuoteService } from './quote.service';
 import { ServiceComponent } from './service/service.component';
 import { ServiceService } from './service/service.service';
 import { WarrantyComponent } from '@app/home/warranty/warranty.component';
@@ -56,8 +55,7 @@ import { ContactComponent } from '@app/home/contact/contact.component';
     SectionsService,
     EquipmentService,
     WarrantyService,
-    QualityService,
-    QuoteService
+    QualityService
   ]
 })
 export class HomeModule { }

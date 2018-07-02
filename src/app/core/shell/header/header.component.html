@@ -2,16 +2,16 @@
   <div class="row">
     <nav class="header-top col navbar navbar-expand">
       <div class="navbar-nav  ml-auto">
-        <a class="nav-item nav-link text-uppercase" routerLink="/mock" routerLinkActive="active">
+        <a class="nav-item nav-link text-uppercase" (click)="setLanguage('sr-Latn')" routerLinkActive="active">
           <span translate>Ser</span>
         </a>
-        <a class="nav-item nav-link text-uppercase" routerLink="/mock" routerLinkActive="active">
+        <a class="nav-item nav-link text-uppercase" (click)="setLanguage('en-US')" routerLinkActive="active">
           <span translate>Eng</span>
         </a>
-        <a class="nav-item nav-link text-uppercase" routerLink="/mock" routerLinkActive="active">
+        <a class="nav-item nav-link text-uppercase" (click)="setLanguage('rus')" routerLinkActive="active">
           <span translate>Rus</span>
         </a>
-        <a class="nav-item nav-link text-uppercase" routerLink="/mock" routerLinkActive="active">
+        <a class="nav-item nav-link text-uppercase" (click)="setLanguage('alb')" routerLinkActive="active">
           <span translate>Alb</span>
         </a>
       </div>
@@ -19,8 +19,7 @@
     <div class="w-100"></div>
     <nav class="header-bottom col navbar navbar-expand-lg">
       <a class="navbar-brand" href="#" translate><img src="../../../../assets/images/logo/logo_header.png" class="logo"></a>
-      <button class="navbar-toggler" type="button" aria-controls="navbar-menu"
-              aria-label="Toggle navigation" (click)="toggleMenu()" [attr.aria-expanded]="!menuHidden">
+      <button class="navbar-toggler" type="button" aria-controls="navbar-menu" aria-label="Toggle navigation" (click)="toggleMenu()" [attr.aria-expanded]="!menuHidden">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div id="navbar-menu" class="collapse navbar-collapse float-xs-none" [ngbCollapse]="menuHidden">
@@ -32,12 +31,12 @@
           </li>
           <li class="nav-item">
             <a routerLinkActive="active" class="nav-link text-uppercase" routerLink="/mock" routerLinkActive="active">
-              <span translate>Proizvodi</span>
+              <span translate>Products</span>
             </a>
           </li>
           <li class="nav-item">
             <a routerLinkActive="kvalitet" class="nav-link text-uppercase" routerLink="/kvalitet" routerLinkActive="active">
-              <span translate>Kvalitet</span>
+              <span translate>Quality</span>
             </a>
           </li>
           <li class="nav-item dropdown">
@@ -46,12 +45,12 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a routerLinkActive="active" class="dropdown-item" routerLink="/servis">Servis</a>
-              <a routerLinkActive="active" class="dropdown-item" routerLink="/garancija">Garancija</a>
+              <a routerLinkActive="active" class="dropdown-item" routerLink="/garancija">Guarantee</a>
             </div>
           </li>
           <li class="nav-item">
             <a class="nav-link text-uppercase" routerLink="/mock" routerLinkActive="active">
-              <span translate>Gde kupiti</span>
+              <span translate>Where To Buy</span>
             </a>
           </li>
         </ul>
@@ -63,4 +62,3 @@
     </nav>
   </div>
 </header>
-

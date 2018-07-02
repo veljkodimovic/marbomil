@@ -9,6 +9,15 @@ import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
+import { CarouselComponent } from './carusel/carusel.component';
+import { EquipmentComponent } from './equipment/equipment.component';
+import { PromoComponent } from './promo/promo.component';
+import { SectionsComponent } from './sections/sections.component';
+import { ShopLogoComponent } from './shop-logo/shop-logo.component';
+
+import { CarouselService } from './carusel/carusel.service';
+import { EquipmentService } from './equipment/equipment.service';
+import { SectionsService } from './sections/sections.service';
 import { QuoteService } from './quote.service';
 import { ServiceComponent } from './service/service.component';
 import { ServiceService } from './service/service.service';
@@ -34,10 +43,18 @@ import { ContactComponent } from '@app/home/contact/contact.component';
     WarrantyComponent,
     QualityComponent,
     ContactComponent,
+    CarouselComponent,
+    EquipmentComponent,
+    PromoComponent,
+    SectionsComponent,
+    ShopLogoComponent,
     HomeComponent
   ],
   providers: [
     ServiceService,
+    CarouselService,
+    SectionsService,
+    EquipmentService,
     WarrantyService,
     QualityService,
     QuoteService

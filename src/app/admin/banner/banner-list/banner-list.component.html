@@ -22,12 +22,12 @@
     <div class="col-lg-6" *ngFor="let banner of bannerData">
       <div class="admin-list-item">
         <div class="row">
-          <div class="col-11 col-sm-7" style="margin-bottom: 10px;">
+          <div class="col-11 col-sm-11" style="margin-bottom: 10px;">
             <a (click)="goTo(banner)" class="banner-list-image">
-              <img src="{{'data:image/png;base64,'+banner.imageCrop}}" (click)="goTo(banner)">
+              <img  src="{{'data:image/png;base64,'+banner.imageCrop}}" (click)="goTo(banner)">
             </a>
           </div>
-          <div class="col-11 col-sm-4 order-2 order-sm-1">
+          <div class="col-11 col-sm-9 order-2 order-sm-1">
             <p><a (click)="goTo(banner)" class="admin-list-name">{{banner.title}}</a></p>
             <p>{{banner.desc}}</p>
           </div>

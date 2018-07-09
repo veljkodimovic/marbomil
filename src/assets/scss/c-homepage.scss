@@ -1,6 +1,7 @@
 .homepage-25 {
   text-align: center;
   padding: 90px 0;
+
   h3[_ngcontent-c3] {
     font-size: 50px;
     font-weight: 300;
@@ -12,6 +13,7 @@
 
 .homepage-banners {
   text-align: center;
+
   a {
     display: block;
     color: $white !important;
@@ -19,10 +21,21 @@
     line-height: 0;
     position: relative;
   }
+
   img {
     max-width: 100%;
     height: auto;
   }
+
+  .equipment {
+    &:hover {
+      span {
+        transform: scale(1.2);
+        transition: all 0.5s;
+      }
+    }
+  }
+
   span {
     position: absolute;
     display: block;
@@ -43,6 +56,7 @@
   padding: 130px 0;
   background: url("/assets/images/pic4.png") no-repeat center center;
   background-size: cover;
+
   p {
     margin: 0 0 0 60px !important;
     color: $white;
@@ -55,15 +69,34 @@
   .container,
   .container-fluid {
     padding: 50px 1rem !important;
+
+    .content-box {
+      &:hover {
+        p {
+          transform: scale(1.05);
+          transition: all 0.5s;
+        }
+
+        h5 {
+          transform: scale(1.05);
+          transition: all 0.5s;
+        }
+
+        img {
+          transform: scale(0.95);
+          transition: all 0.5s;
+        }
+      }
+    }
   }
 }
-
 @include media-breakpoint-down(sm) {
   .homepage-description {
     p {
       margin: 0 !important;
     }
   }
+
   .homepage-25 {
     h3 {
       font-size: 36px;

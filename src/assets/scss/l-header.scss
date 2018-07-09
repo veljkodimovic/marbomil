@@ -90,9 +90,12 @@
   }
   a {
     text-transform: uppercase;
-    color: #777;
+    color: #777 !important;
     font-size: 12px;
     font-weight: 300;
+    &:hover {
+      text-decoration: underline !important;
+    }
   }
   .fas {
     padding-left: 15px;

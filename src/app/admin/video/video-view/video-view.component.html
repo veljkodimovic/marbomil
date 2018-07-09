@@ -32,12 +32,12 @@
           <div class="image-buttons">
             <div>
             </div>
-            <button class="btn btn-add" translate (click)="uploadImage()">Dodaj Sliku</button>
-            <button class="btn btn-remove" translate (click)="removeImage()">Izbriši Sliku</button>
+            <button class="btn btn-primary" translate (click)="uploadImage()">Dodaj Sliku</button>
+            <button class="btn btn-danger" translate (click)="removeImage()">Izbriši Sliku</button>
           </div>
         </div>
         <div class="" *ngIf="video">
-          <h5>Video preview</h5>
+          <h5>Pregled</h5>
           <iframe width="560" height="315" [src]="videoUrl" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
       </div>

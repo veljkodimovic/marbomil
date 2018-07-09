@@ -52,7 +52,9 @@
             <label for="parentCollection" class="col-md-2 col-form-label">Kolekcija</label>
             <div class="col-md-10">
               <select class="form-control" id="parentCollection" [(ngModel)]="product.collectionId" name="collectionId">
-                <option  *ngFor="let col of collections;index as i" [ngValue]="col.id" name="col.title" >{{col.title}}</option>
+                <optgroup *ngFor="let colParent of collectionsParents" label="{{colParent.title}}">
+                  <option  *ngFor="let col of getCollectionsById(colParent.id)" [ngValue]="col.id" name="col.title" >{{col.title}}</option>
+                </optgroup>
               </select>
             </div>
           </div>
@@ -137,8 +139,8 @@
            </a>
             </div>
             <div class="image-buttons" style="margin-top: 20px;">
-              <button class="btn btn-add" translate (click)="uploadImage()">Dodaj Sliku</button>
-              <button class="btn btn-remove" translate (click)="removeImage()">Obriši Sliku</button>
+              <button class="btn btn-primary" translate (click)="uploadImage()">Dodaj Sliku</button>
+              <button class="btn btn-danger" translate (click)="removeImage()">Obriši Sliku</button>
             </div>
           </div>
 
@@ -158,8 +160,8 @@
             </div>
             <br>
             <div class="image-buttons">
-              <button class="btn btn-add" translate (click)="uploadImage2()">Dodaj Crtež</button>
-              <button class="btn btn-remove" translate (click)="removeImage2()">Obriši Crtež</button>
+              <button class="btn btn-primary" translate (click)="uploadImage2()">Dodaj Crtež</button>
+              <button class="btn btn-danger" translate (click)="removeImage2()">Obriši Crtež</button>
             </div>
           </div>
           <div class="col-sm-4 col-to-8">

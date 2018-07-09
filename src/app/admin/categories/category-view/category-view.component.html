@@ -30,14 +30,12 @@
             <input #fileInput id="custom-input" [hidden]="true" required type="file" (change)="fileChangeListener($event)">
           </div>
           <div class="image-buttons">
-            <div>
-            </div>
-            <button class="btn btn-add" translate (click)="uploadImage()">Dodaj Sliku</button>
-            <button class="btn btn-remove" translate (click)="removeImage()">Izbriši Sliku</button>
+            <button class="btn btn-primary" translate (click)="uploadImage()">Dodaj Sliku</button>
+            <button class="btn btn-danger" translate (click)="removeImage()">Izbriši Sliku</button>
           </div>
         </div>
         <div class="form-group margin-top-30">
-          <h5 class="control-label" translate>Category Preview</h5>
+          <h5 class="control-label" translate>Pregled</h5>
           <div class="image-preview">
               <span class="result rounded" *ngIf="data.image">
                 <img style="width: 100%; height: auto;" [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">

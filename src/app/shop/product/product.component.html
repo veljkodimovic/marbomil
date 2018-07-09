@@ -1,0 +1,28 @@
+<div class="container" style="padding-top: 80px;">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="sidenav">
+        <div  *ngFor="let collection of collectionParentData">
+          <a (click)="goTo(collection)" class="sidenav-title">{{collection.title}}</a>
+          <ul class="sidenav-list">
+            <li class="sidenav-item"  *ngFor="let collection of getCollectionsById(collection.id)">
+              <a class="sidenav-link" [ngClass]="{active: collection.id==activeCollectionId}" (click)="goToProducts(collection)">{{collection.title}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <div class="row categories-list">
+        <div class="col-sm-4 product-categories-item content-box" *ngFor="let product of getProductsByCollection(activeCollectionId)">
+          <a (click)="goToProduct(product)">
+            <img src="{{'data:image/png;base64,'+product.images[0].imageCrop}}" alt="{{product.title}}">
+            <div class="content-box-description">
+              <h5>{{product.title}}</h5>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

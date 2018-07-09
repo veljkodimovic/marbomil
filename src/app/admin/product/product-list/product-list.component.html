@@ -30,7 +30,7 @@
           </div>
           <div class="col-11 col-sm-7 order-2 order-sm-1">
             <p><a class="admin-list-name" routerLink="/admin/product/{{product.id}}">{{product.title}}</a></p>
-            <p><span class="price">{{product.price}}</span><span class="price-old">{{product.price * product.discount}}</span></p>
+            <p class="price">{{product.price * ((100 - product.discount)/100) | number : '1.2-2'}} RSD<span *ngIf="product.discount > 0" class="price-old">{{product.price | number : '1.2-2'}}  RSD</span></p>
           </div>
           <div class="col-1 admin-list-links order-1 order-sm-2">
             <a routerLink="/admin/product/{{product.id}}"><i class="fas fa-pencil-alt"></i></a>

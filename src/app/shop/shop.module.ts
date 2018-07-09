@@ -9,7 +9,12 @@ import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
 import { ShopRoutingModule } from './shop-routing.module';
 import { CategoriesComponent } from './categories/categories.component';
+import { CategoryService } from '@app/shop/categories/categories.service';
 import { CollectionsComponent } from './collections/collections.component';
+import { CollectionService} from '@app/shop/collections/collections.service';
+import { ProductComponent } from '@app/shop/product/product.component';
+import { ProductViewComponent } from '@app/shop/product/product-view/product-view.component';
+import { ProductService } from '@app/shop/product/product.service';
 
 @NgModule({
   imports: [
@@ -24,10 +29,14 @@ import { CollectionsComponent } from './collections/collections.component';
   ],
   declarations: [
     CategoriesComponent,
-    CollectionsComponent
+    CollectionsComponent,
+    ProductComponent,
+    ProductViewComponent
   ],
   providers: [
-
+    CategoryService,
+    CollectionService,
+    ProductService
   ]
 })
 export class ShopModule { }

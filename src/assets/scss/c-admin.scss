@@ -189,7 +189,10 @@
   font-weight: 900;
   font-size: 32px;
   &-old {
+    display: block;
     color: red;
+    font-size: 70%;
+    font-weight: 300;
     text-decoration: line-through;
   }
 }
@@ -258,26 +261,30 @@ app-shell {
   display: flex;
   flex-flow: column;
   height: 100vh;
+  router-outlet + * {
+    flex: 1 0 auto;
+    padding-bottom: 20px;
+  }
 }
 
-app-atest,
-app-atest-view,
-app-banner,
-app-banner-view,
-app-catalogue,
-app-catalogue-view,
-app-categories,
-app-category-view,
-app-collections,
-app-collection-view,
-app-product,
-app-product-view,
-app-sales,
-app-sales-view,
-app-service,
-app-service-view,
-app-video,
-app-video-view {
-  flex: 1 0 auto;
-  padding-bottom: 20px;
-}
+//app-atest,
+//app-atest-view,
+//app-banner,
+//app-banner-view,
+//app-catalogue,
+//app-catalogue-view,
+//app-categories,
+//app-category-view,
+//app-collections,
+//app-collection-view,
+//app-product,
+//app-product-view,
+//app-sales,
+//app-sales-view,
+//app-service,
+//app-service-view,
+//app-video,
+//app-video-view {
+//  flex: 1 0 auto;
+//  padding-bottom: 20px;
+//}

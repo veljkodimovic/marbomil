@@ -1,16 +1,39 @@
 .single-product {
   text-align: left !important;
+  margin-top: 100px;
   h1 {
     color: $primary;
-    font-size: 72px;
+    font-size: 55px;
+    line-height: 1.1;
     font-weight: 300;
     letter-spacing: 1px;
     margin-bottom: 60px;
   }
   &-data {
     p {
-      font-size: 24px;
+      font-size: 22px;
       margin-bottom: 5px;
+      span {
+        font-size: 18px;
+        font-weight: 300;
+        color: rgba(0,0,0,0.6);
+      }
+      &.single-product-price {
+        font-size: 32px;
+        color: $primary;
+        font-weight: bold;
+        .single-product-price-currency {
+          color: inherit;
+          font-size: inherit;
+          text-transform: uppercase;
+        }
+        .single-product-price-old {
+          display: block;
+          font-size: 70%;
+          font-weight: 300;
+          text-decoration: line-through;
+        }
+      }
     }
     margin-bottom: 70px;
   }

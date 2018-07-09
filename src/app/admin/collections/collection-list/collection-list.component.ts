@@ -39,13 +39,13 @@ export class CollectionListComponent implements OnInit {
 
   getCollectionName(id: number) {
     if (this.collectionData.length > 0 && id > 0) {
-      return this.collectionData.find((x: any) => x.id = id).title;
+      return this.collectionData.find((x: any) => x.id === id).title;
     }
   }
 
   getCategoryName(id: number) {
     if (this.categoryData.length > 0 && id > 0) {
-      return this.categoryData.find((x: any) => x.id = id).title;
+      return this.categoryData.find((x: any) => x.id === id).title;
     }
   }
 
@@ -56,7 +56,7 @@ export class CollectionListComponent implements OnInit {
 
   performDelete(event: any) {
     this.svc.deleteCollection(this.activeCollection.id).subscribe(res => {
-      this.svc.getAllCollections().subscribe(data=> {
+      this.svc.getAllCollections().subscribe(data => {
         this.collectionData = data;
       });
     });

@@ -1,7 +1,7 @@
 .sidenav {
   text-align: left;
   &-title {
-    color: $primary;
+    color: $primary !important;
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 20px;

@@ -44,6 +44,8 @@ export class ProductViewComponent implements OnInit {
   productImagesBases: any[] = [];
   cropedOriginalImages: any[] = [];
   collections: Collection[] = [];
+  collectionsParents: Collection[] = [];
+  collectionsRoot: Collection[] = [];
   categories: Category[] = [];
   activeImageIndexNew: number = -1;
   activeImageIndexUpdated: number = -1;
@@ -79,6 +81,7 @@ export class ProductViewComponent implements OnInit {
 
     this.svc.getAllCollections().subscribe((data: any) => {
       this.collections = data;
+      this.collectionsParents = this.collections.filter(x => x.parentId === null);
     });
 
     this.svc.getAllCategories().subscribe((data: any) => {
@@ -319,6 +322,14 @@ export class ProductViewComponent implements OnInit {
   removeImage2() {
     this.data2 = {};
     this.cropper2.reset();
+  }
+
+  getCollectionsById(id: number) {
+    if (this.collections.length > 0 && id > 0) {
+      return this.collections.filter((x: any) => x.parentId === id);
+    } else {
+      return [];
+    }
   }
 
 

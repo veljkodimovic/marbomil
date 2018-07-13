@@ -1,3 +1,7 @@
+*:focus {
+  outline: 0 !important;
+}
+
 .header-top {
   padding-right: 0;
   padding-bottom: 0;
@@ -10,6 +14,10 @@
   align-items: flex-end;
   padding: 0;
   margin: 0 !important;
+  .navbar-toggler {
+    border: none;
+    color: $primary;
+  }
   .nav-link {
     padding: 5px 0 !important;
     margin-right: 40px;
@@ -63,6 +71,7 @@
     border: none;
     border-radius: 40px;
     background: none;
+    padding: 7px 0 7px 20px;
   }
 }
 
@@ -80,7 +89,7 @@
   margin: 0;
   display: flex;
   flex-flow: row wrap;
-  width: 723px;
+  width: 772px;
   float: right;
   li {
     padding-left: 15px;
@@ -104,8 +113,31 @@
   }
 }
 
-@include media-breakpoint-down(sm) {
+@include media-breakpoint-only(lg) {
+  .breadcrumbs {
+    width: auto;
+    float: left;
+    margin-left: 260px;
+  }
+  .header-bottom {
+    .header-search {
+      input {
+        width: 170px;
+      }
+    }
+    .nav-link {
+      margin-right: 30px;
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
   .logo {
     width: 150px;
+  }
+
+  .breadcrumbs {
+    float: left;
+    width: auto;
   }
 }

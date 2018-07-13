@@ -1,5 +1,5 @@
 footer {
-  padding: 70px 0 100px;
+  padding: 40px 0 60px;
   background: $primary;
   color: $white !important;
   text-transform: uppercase !important;
@@ -54,13 +54,20 @@ footer {
     background: #1465aa;
     color: $white;
     border-radius: 10px !important;
-    padding: 18px 25px;
+    padding: 16px 25px;
     border: none;
     position: absolute;
     top: 0;
     right: 0;
     text-transform: uppercase !important;
     letter-spacing: 0.5px;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .footer-contact {
+    margin-top: 20px;
+    margin-left: 0 !important;
   }
 }
 

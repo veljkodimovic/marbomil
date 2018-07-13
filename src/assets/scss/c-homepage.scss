@@ -28,10 +28,12 @@
   }
 
   .equipment {
+    span {
+      transition: all 0.5s;
+    }
     &:hover {
       span {
         transform: scale(1.2);
-        transition: all 0.5s;
       }
     }
   }
@@ -69,25 +71,6 @@
   .container,
   .container-fluid {
     padding: 50px 1rem !important;
-
-    .content-box {
-      &:hover {
-        p {
-          transform: scale(1.05);
-          transition: all 0.5s;
-        }
-
-        h5 {
-          transform: scale(1.05);
-          transition: all 0.5s;
-        }
-
-        img {
-          transform: scale(0.95);
-          transition: all 0.5s;
-        }
-      }
-    }
   }
 }
 @include media-breakpoint-down(sm) {

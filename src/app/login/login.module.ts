@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
 import { LoginRoutingModule } from './login-routing.module';
@@ -14,6 +15,7 @@ import { LoginComponent } from './login.component';
     CommonModule,
     ReactiveFormsModule,
     TranslateModule,
+    CoreModule,
     SharedModule,
     NgbModule,
     MaterialModule,

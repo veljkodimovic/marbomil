@@ -1,8 +1,16 @@
-.contact-form {
+.contact-form,
+.login-form {
   margin-bottom: 80px;
   .form-group {
     position: relative;
     margin-bottom: 60px;
+  }
+  .form-check {
+    margin-bottom: 60px;
+    height: 47px;
+    input {
+      margin-top: 15px;
+    }
   }
   input {
     border: none;

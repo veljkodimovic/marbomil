@@ -17,6 +17,7 @@ export class CollectionsComponent implements OnInit {
   categoryData: Category[];
   collectionData: any = [];
   activeCollectionId: number;
+  activeCategoryId: any;
 
   constructor(private svc: CollectionService,
               private router: Router,
@@ -55,6 +56,16 @@ export class CollectionsComponent implements OnInit {
     }
   }
 
+  getActiveCategory(id: number) {
+    if (this.activeCollectionId > 0 && id > 0 && this.collectionData.length > 0) {
+      const activeCollection = this.collectionData.find((x: any) => x.id === this.activeCollectionId);
+      this.activeCategoryId = activeCollection.categoryId;
+      return this.activeCategoryId;
+    } else {
+      return null;
+    }
+  }
+
   getCollectionById(id: number) {
     if (this.collectionData.length > 0 && id > 0) {
       return this.collectionData.find((x: any) => x.categoryId === id);
@@ -63,6 +74,10 @@ export class CollectionsComponent implements OnInit {
 
   goTo(collection: Collection) {
     this.router.navigate(['/collections'], { queryParams: { id: collection.id } });
+  }
+
+  goToCategory(category: Category) {
+    this.router.navigate(['/categories/' + category.id]);
   }
 
   goToProduct(collection: Collection) {

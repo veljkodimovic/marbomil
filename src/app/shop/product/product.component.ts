@@ -32,7 +32,8 @@ export class ProductComponent implements OnInit {
 
     this.svc.getAllCollections().subscribe(data => {
       this.collectionData = data;
-      this.collectionParentData = this.collectionData.filter((x: any) => x.parentId === null);
+      const activeCollection = this.collectionData.find((x: any) => x.id === this.activeCollectionId);
+      this.collectionParentData = this.collectionData.filter((x: any) => x.parentId === null && x.categoryId === activeCollection.categoryId);
     });
 
     this.svc.getProducts().subscribe(data => {

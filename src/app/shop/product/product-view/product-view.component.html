@@ -6,7 +6,7 @@
           <a routerLink="/categories">Proizvodi</a><i class="fas fa-chevron-right"></i>
         </li>
         <li *ngIf="productCategory">
-          <a routerLink="/categories">{{productCategory.title}}</a><i class="fas fa-chevron-right"></i>
+          <a routerLink="/categories/{{productCategory.id}}">{{productCategory.title}}</a><i class="fas fa-chevron-right"></i>
         </li>
         <li *ngIf="productCollection">
           <a (click)="goTo(productCollection)">{{productCollection.title}}</a><i class="fas fa-chevron-right"></i>

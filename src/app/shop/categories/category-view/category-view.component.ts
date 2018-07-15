@@ -1,24 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Renderer} from '@angular/core';
 import { Category } from '@app/core/types/category';
 import { Collection } from '@app/core/types/collection';
 import { finalize } from 'rxjs/operators';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { CategoryService } from '@app/shop/categories/categories.service';
 
 @Component({
-  selector: 'categories',
-  templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.scss']
+  selector: 'app-category-view',
+  templateUrl: './category-view.component.html',
+  styleUrls: ['./category-view.component.scss']
 })
-export class CategoriesComponent implements OnInit {
+export class CategoryViewComponent implements OnInit {
 
   isLoading: boolean;
   categoryData: Category[];
   collectionData: any = [];
+  activeCategoryId: any;
 
-  constructor(private svc: CategoryService,
-              private router: Router
-  ) { }
+  constructor(private svc: CategoryService, private renderer: Renderer,
+              private router: Router,
+              private route: ActivatedRoute) {
+    this.activeCategoryId = parseInt(this.route.snapshot.paramMap.get('id'));
+  }
 
 
   ngOnInit() {
@@ -41,8 +44,13 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
-  goTo(category: Category) {
+  goToCollection (collection: Collection) {
+    this.router.navigate(['/collections'], { queryParams: { id: collection.id } });
+  }
+
+  goToCategory (category: Category) {
     this.router.navigate(['/categories/' + category.id]);
+    this.activeCategoryId = category.id;
   }
 
 }

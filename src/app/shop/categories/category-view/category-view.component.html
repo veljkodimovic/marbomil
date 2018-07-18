@@ -2,10 +2,13 @@
   <div class="row">
     <div class="col-sm-3">
       <div class="sidenav">
-        <div  *ngFor="let category of categoryData">
-          <a (click)="goToCategory(category)" class="sidenav-title">{{category.title}}</a>
+        <div>
+          <a (click)="goToCategoryHome()" class="sidenav-title" translate>All Categories</a>
+        </div>
+        <div *ngFor="let category of categoryData">
+          <a (click)="goToCategory(category)" [ngClass]="{active: category.id==activeCategoryId}" class="sidenav-title">{{category.title}}</a>
           <ul class="sidenav-list" *ngIf="category.id == activeCategoryId">
-            <li class="sidenav-item"  *ngFor="let collection of getCollectionsById(category.id)">
+            <li class="sidenav-item" *ngFor="let collection of getCollectionsById(category.id)">
               <a class="sidenav-link" (click)="goToCollection(collection)">{{collection.title}}</a>
             </li>
           </ul>
@@ -19,6 +22,13 @@
             <img src="{{'data:image/png;base64,'+collection.imageCrop}}" alt="{{collection.title}}">
             <div class="content-box-description">
               <h5>{{collection.title}}</h5>
+            </div>
+          </a>
+        </div>
+        <div class="col-sm-4 categories-list-item content-box" *ngIf="getCollectionsById(activeCategoryId).length == 0">
+          <a>
+            <div class="content-box-description">
+              <h5 translate>No Items To Show</h5>
             </div>
           </a>
         </div>

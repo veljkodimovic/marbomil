@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '@app/core/types/category';
 import { Collection } from '@app/core/types/collection';
-import { ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CollectionService } from '@app/shop/collections/collections.service';
 import { finalize } from 'rxjs/operators';
 
@@ -20,12 +20,12 @@ export class CollectionsComponent implements OnInit {
   activeCategoryId: any;
 
   constructor(private svc: CollectionService,
-              private router: Router,
-              private route: ActivatedRoute
+    private router: Router,
+    private route: ActivatedRoute
   ) {
-      this.route.queryParams.subscribe(params => {
-        this.activeCollectionId = parseInt(params['id']);
-      });
+    this.route.queryParams.subscribe(params => {
+      this.activeCollectionId = parseInt(params['id']);
+    });
   }
 
   ngOnInit() {
@@ -82,6 +82,10 @@ export class CollectionsComponent implements OnInit {
 
   goToProduct(collection: Collection) {
     this.router.navigate(['/products/list'], { queryParams: { id: collection.id } });
+  }
+
+  goToCategoryHome() {
+    this.router.navigate(['/categories']);
   }
 
 }

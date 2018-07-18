@@ -2,10 +2,10 @@
   <div class="row">
     <div class="col-sm-3">
       <div class="sidenav">
-        <div  *ngFor="let collection of collectionParentData">
+        <div *ngFor="let collection of collectionParentData">
           <a (click)="goTo(collection)" class="sidenav-title">{{collection.title}}</a>
           <ul class="sidenav-list">
-            <li class="sidenav-item"  *ngFor="let collection of getCollectionsById(collection.id)">
+            <li class="sidenav-item" *ngFor="let collection of getCollectionsById(collection.id)">
               <a class="sidenav-link" [ngClass]="{active: collection.id==activeCollectionId}" (click)="goToProducts(collection)">{{collection.title}}</a>
             </li>
           </ul>
@@ -19,6 +19,13 @@
             <img src="{{'data:image/png;base64,'+product.images[0].imageCrop}}" alt="{{product.title}}">
             <div class="content-box-description">
               <h5>{{product.title}}</h5>
+            </div>
+          </a>
+        </div>
+        <div class="col-sm-4 categories-list-item content-box" *ngIf="getProductsByCollection(activeCollectionId).length == 0">
+          <a>
+            <div class="content-box-description">
+              <h5 translate>No Products To Show</h5>
             </div>
           </a>
         </div>

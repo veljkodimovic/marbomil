@@ -2,10 +2,13 @@
   <div class="row">
     <div class="col-sm-3">
       <div class="sidenav">
-        <div  *ngFor="let category of categoryData">
+        <div>
+          <a (click)="goToCategoryHome()" class="sidenav-title" translate>All Categories</a>
+        </div>
+        <div *ngFor="let category of categoryData">
           <a (click)="goToCategory(category)" class="sidenav-title">{{category.title}}</a>
           <ul class="sidenav-list" *ngIf="category.id == getActiveCategory(activeCollectionId)">
-            <li class="sidenav-item"  *ngFor="let collection of getCollectionsByCatId(category.id)">
+            <li class="sidenav-item" *ngFor="let collection of getCollectionsByCatId(category.id)">
               <a class="sidenav-link" [ngClass]="{active: collection.id==activeCollectionId}" (click)="goTo(collection)">{{collection.title}}</a>
             </li>
           </ul>

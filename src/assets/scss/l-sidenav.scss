@@ -1,29 +1,60 @@
 .sidenav {
   text-align: left;
+
   &-title {
     color: $primary !important;
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 20px;
     display: block;
+
+    &:hover {
+      color: $primary;
+      text-decoration: none;
+    }
+
+    &.active {
+      color: $white !important;
+      display: inline-block;
+      padding: 13px 20px 13px 0;
+      line-height: 1;
+      position: relative;
+
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: -9999px;
+        background: $primary;
+        z-index: -1;
+      }
+    }
   }
+
   &-list {
     list-style: none;
     margin: 0 0 20px;
     padding: 0;
   }
+
   &-link {
     display: inline-block;
     color: $black;
     padding: 13px 20px;
     line-height: 1;
     position: relative;
+
     &:hover {
       color: $primary;
       text-decoration: none;
     }
+
     &.active {
       color: $white !important;
+
       &:after {
         content: '';
         display: block;

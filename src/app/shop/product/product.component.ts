@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Collection } from '@app/core/types/collection';
 import { Product } from '@app/core/types/product';
-import { ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '@app/shop/product/product.service';
 
 
@@ -14,13 +14,13 @@ export class ProductComponent implements OnInit {
 
   isLoading: boolean;
   collectionData: any = [];
-  collectionParentData: any = [];
+  collectionParentData: any[] = [];
   productData: any = [];
   activeCollectionId: number;
 
   constructor(private svc: ProductService,
-              private router: Router,
-              private route: ActivatedRoute
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.route.queryParams.subscribe(params => {
       this.activeCollectionId = parseInt(params['id']);
@@ -34,6 +34,7 @@ export class ProductComponent implements OnInit {
       this.collectionData = data;
       const activeCollection = this.collectionData.find((x: any) => x.id === this.activeCollectionId);
       this.collectionParentData = this.collectionData.filter((x: any) => x.parentId === null && x.categoryId === activeCollection.categoryId);
+      this.collectionParentData.reverse();
     });
 
     this.svc.getProducts().subscribe(data => {
@@ -43,7 +44,8 @@ export class ProductComponent implements OnInit {
 
   getCollectionsById(id: number) {
     if (this.collectionData.length > 0 && id > 0) {
-      return this.collectionData.filter((x: any) => x.parentId === id);
+      let collectionsDataTemp: any[] = this.collectionData.filter((x: any) => x.parentId === id);
+      return collectionsDataTemp.sort();
     } else {
       return [];
     }

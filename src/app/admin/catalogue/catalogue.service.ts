@@ -60,6 +60,13 @@ export class CatalogueService {
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
+  uploadCatalogue(file: File) {
+    this.http.post('https://file.io', file)
+      .subscribe(event => {
+        console.log('done');
+      });
+  }
+
   // end of catalogue
 
 }

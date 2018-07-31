@@ -2,7 +2,7 @@ export class Video {
   id: number;
   title: string;
   image: string;
-  url: string;
+  url: string|any;
   imageUrl: string;
   imageCrop: string;
 

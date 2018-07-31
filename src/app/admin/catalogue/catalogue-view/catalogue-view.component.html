@@ -17,7 +17,7 @@
     <simple-notifications></simple-notifications>
     <div class="row">
       <div class="col-md-5">
-        <div class="dropzone-wrapp">
+        <div class="dropzone-wrapp" (drop)="onDropFile($event)" (dragover)="onDragOverFile($event)">
           <span>Drop files here</span>
         </div>
       </div>
@@ -44,7 +44,7 @@
           <div class="form-group row">
             <label for="file" class="col-md-2 col-form-label">File</label>
             <div class="col-md-10">
-              <input type="file" class="form-control-file" id="file">
+              <input type="file" class="form-control-file" id="file" (change)="selectFile($event)">
             </div>
           </div>
           <div class="row">

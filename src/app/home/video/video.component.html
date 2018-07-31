@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-auto" *ngIf="banner">
+      <img src="{{'data:image/png;base64,'+banner.imageCrop}}" alt="">
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 class="admin-headline container">
+        Video materijali
+      </h1>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row" *ngIf="videoData">
+    <div class="col-sm-6" *ngFor="let video of videoData">
+      <div class="video-list-item">
+        <iframe width="560" height="315" [src]="video.url" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <p class="video-name" (click)="goTo(video)">{{video.title}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+

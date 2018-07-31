@@ -25,6 +25,11 @@ import { WarrantyService } from '@app/home/warranty/warranty.service';
 import { QualityComponent } from '@app/home/quality/quality.component';
 import { QualityService } from '@app/home/quality/quality.service';
 import { ContactComponent } from '@app/home/contact/contact.component';
+import { VideoComponent } from '@app/home/video/video.component';
+import { VideoService } from '@app/home/video/video.service';
+import { CatalogueComponent } from '@app/home/catalogue/catalogue.component';
+import { AtestComponent } from '@app/home/atest/atest.component';
+import { DownloadComponent } from '@app/home/download/download.component';
 
 @NgModule({
   imports: [
@@ -47,6 +52,10 @@ import { ContactComponent } from '@app/home/contact/contact.component';
     PromoComponent,
     SectionsComponent,
     ShopLogoComponent,
+    VideoComponent,
+    CatalogueComponent,
+    AtestComponent,
+    DownloadComponent,
     HomeComponent
   ],
   providers: [
@@ -55,6 +64,7 @@ import { ContactComponent } from '@app/home/contact/contact.component';
     SectionsService,
     EquipmentService,
     WarrantyService,
+    VideoService,
     QualityService
   ]
 })

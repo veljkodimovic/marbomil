@@ -1,10 +1,12 @@
 import { NgModule, Component, Input, Output, EventEmitter, Renderer, ElementRef, forwardRef, OnInit, ViewChild } from '@angular/core';
-import { CatalogueService } from '../catalogue.service';
+import { Catalogue } from '@app/core/types/catalogue';
+import { CatalogueService } from '@app/admin/catalogue/catalogue.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { Catalogue } from '@app/core/types/catalogue';
 import { NotificationsService } from 'angular2-notifications';
 import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
+import { UploadService } from '@app/shared/upload/upload.service';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-catalogue-view',
@@ -27,6 +29,7 @@ export class CatalogueViewComponent implements OnInit {
               private renderer: Renderer,
               private notificationService: NotificationsService,
               private router: Router,
+              private upload: UploadService,
               private route: ActivatedRoute) {
     this.data = {};
   }
@@ -120,6 +123,52 @@ export class CatalogueViewComponent implements OnInit {
     this.svc.deleteCatalogue(this.catalogue.id).subscribe(res => {
       this.router.navigate(['/admin/catalogue/']);
     });
+  }
+
+  // At the drag drop area
+  // (drop)="onDropFile($event)"
+  onDropFile(event: DragEvent) {
+    event.preventDefault();
+    this.uploadFile(event.dataTransfer.files);
+  }
+
+  // At the drag drop area
+  // (dragover)="onDragOverFile($event)"
+  onDragOverFile(event: any) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+
+  // At the file input element
+  // (change)="selectFile($event)"
+  selectFile(event: any) {
+    this.uploadFile(event.target.files);
+  }
+
+  uploadFile(files: FileList) {
+    if (files.length == 0) {
+      console.log("No file selected!");
+      return
+
+    }
+    const file: File = files[0];
+
+    this.upload.uploadFile("/assets/files/", file)
+      .subscribe(
+        event => {
+          if (event.type == HttpEventType.UploadProgress) {
+            const percentDone = Math.round(100 * event.loaded / event.total);
+            console.log(`File is ${percentDone}% loaded.`);
+          } else if (event instanceof HttpResponse) {
+            console.log('File is completely loaded!');
+          }
+        },
+        (err) => {
+          console.log("Upload Error:", err);
+        }, () => {
+          console.log("Upload done");
+        }
+      )
   }
 
 }

@@ -8,9 +8,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 const routes = {
-  products: () => `/api/products/`,
-  collection: () => `/api/collection/`,
-  category: () => `/api/category/`
+  products: () => `/products/`,
+  collection: () => `/collection/`,
+  category: () => `/category/`
 };
 
 

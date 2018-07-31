@@ -49,6 +49,7 @@ import { ProductComponent } from './product/product.component';
 import { ProductViewComponent } from './product/product-view/product-view.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { ProductService } from './product/product.service';
+import { UploadService } from '@app/shared/upload/upload.service';
 
 @NgModule({
   imports: [
@@ -102,7 +103,8 @@ import { ProductService } from './product/product.service';
     CatalogueService,
     ServiceService,
     SalesService,
-    ProductService
+    ProductService,
+    UploadService
   ]
 })
 export class AdminModule { }

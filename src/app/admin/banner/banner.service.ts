@@ -22,7 +22,6 @@ export class BannerService {
 
   // Banners region
   getAllBanners(): Observable<any[]> {
-    console.log(this.http.get(routes.banners()));
     return this.http.get(routes.banners())
       .map((res: Response) => res.json())
       .map(body =>

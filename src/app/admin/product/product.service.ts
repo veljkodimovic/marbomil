@@ -20,12 +20,13 @@ export class ProductService {
   activeProduct: Product;
   headers: Headers;
 
-  constructor(private http: HttpClient,
+  constructor(private http: Http,
     private persistenceService: PersistenceService) { }
 
   getProducts(): Observable<any> {
     return this.http.get(routes.products())
-      .map((res: Response) => res)
+      .map((res: Response) => res.json())
+      .map(body => body)
       .catch(err => this.persistenceService.handleError(err));
   }
 
@@ -33,20 +34,22 @@ export class ProductService {
   getAllCollections(): Observable<any> {
 
     return this.http.get(routes.collection())
-      .map((res: Response) => res)
+      .map((res: Response) => res.json())
+      .map(body => body)
       .catch(err => this.persistenceService.handleError(err));
   }
 
   getAllCategories(): Observable<any> {
     return this.http.get(routes.category())
-      .map((res: Response) => res)
+      .map((res: Response) => res.json())
       .catch(err => this.persistenceService.handleError(err));
   }
 
   getProductById(id: number): Observable<any> {
 
     return this.http.get(routes.products() + id)
-      .map((res: Response) => res)
+      .map((res: Response) => res.json())
+      .map(body => body)
       .catch((err) => this.persistenceService.handleError(err));
   }
 

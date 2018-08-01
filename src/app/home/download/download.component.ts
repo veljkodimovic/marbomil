@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Banner} from '@app/core/types/banner';
-import { AtestService } from '@app/admin/atest/atest.service';
 import { Atest } from '@app/core/types/atest';
+import { AtestService } from '@app/admin/atest/atest.service';
+import { Catalogue } from '@app/core/types/catalogue';
+import { CatalogueService } from '@app/admin/catalogue/catalogue.service';
 
 @Component({
   selector: 'app-home-download',
@@ -10,12 +12,17 @@ import { Atest } from '@app/core/types/atest';
 })
 export class DownloadComponent implements OnInit {
 
-  downloadData: Atest[];
-  constructor(private svc: AtestService) { }
+  atestData: Atest[];
+  catalogueData: Catalogue[];
+  constructor(private atestSvc: AtestService,
+              private catalogueSvc: CatalogueService) { }
 
   ngOnInit() {
-    this.svc.getAllAtests().subscribe(data => {
-      this.downloadData = data;
+    this.atestSvc.getAllAtests().subscribe(data => {
+      this.atestData = data;
+    });
+    this.catalogueSvc.getAllCatalogues().subscribe(data => {
+      this.catalogueData = data;
     });
   }
 

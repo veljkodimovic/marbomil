@@ -11,6 +11,8 @@ import { VideoComponent } from '@app/home/video/video.component';
 import { CatalogueComponent } from '@app/home/catalogue/catalogue.component';
 import { AtestComponent } from '@app/home/atest/atest.component';
 import { DownloadComponent } from '@app/home/download/download.component';
+import { NotFoundComponent } from '@app/home/404/404.component';
+import { AboutUsComponent } from '@app/home/about-us/about-us.component';
 
 const routes: Routes = Route.withShell([
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -22,6 +24,8 @@ const routes: Routes = Route.withShell([
   { path: 'katalog', component: CatalogueComponent, data: { title: extract('Katalog') } },
   { path: 'atest', component: AtestComponent, data: { title: extract('Atesti') } },
   { path: 'download', component: DownloadComponent, data: { title: extract('Dokumenta') } },
+  { path: '404', component: NotFoundComponent, data: { title: extract('404') } },
+  { path: 'about-us', component: AboutUsComponent, data: { title: extract('O nama') } },
   { path: 'home', component: HomeComponent, data: { title: extract('Home') } }
 ]);
 

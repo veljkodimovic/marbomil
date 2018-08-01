@@ -2,6 +2,25 @@
   outline: 0 !important;
 }
 
+app-shell {
+  display: flex;
+  flex-flow: column;
+  height: 100vh;
+  router-outlet + * {
+    flex: 1 0 auto;
+    padding-bottom: 20px;
+    min-height: 600px;
+  }
+  app-product-view {
+    padding-bottom: 60px;
+  }
+}
+
+app-404 {
+  display: flex;
+  align-items: center;
+}
+
 .header-top {
   padding-right: 0;
   padding-bottom: 0;

@@ -30,6 +30,8 @@ import { VideoService } from '@app/home/video/video.service';
 import { CatalogueComponent } from '@app/home/catalogue/catalogue.component';
 import { AtestComponent } from '@app/home/atest/atest.component';
 import { DownloadComponent } from '@app/home/download/download.component';
+import { NotFoundComponent } from '@app/home/404/404.component';
+import { AboutUsComponent } from '@app/home/about-us/about-us.component';
 
 @NgModule({
   imports: [
@@ -56,6 +58,8 @@ import { DownloadComponent } from '@app/home/download/download.component';
     CatalogueComponent,
     AtestComponent,
     DownloadComponent,
+    NotFoundComponent,
+    AboutUsComponent,
     HomeComponent
   ],
   providers: [

@@ -1,23 +1,40 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h1 class="admin-headline container">
-        Preuzmite dokumenta
+      <h1 class="admin-headline container" translate>
+        Download section
       </h1>
     </div>
   </div>
 </div>
 <div class="container">
-    <div class="row justify-content-center" *ngIf="downloadData">
+    <div class="row justify-content-center" *ngIf="catalogueData">
         <div class="col-sm-9">
-            <div class="content-list-item" *ngFor="let download of downloadData">
+            <h3 translate>Catalogues</h3>
+            <div class="content-list-item" *ngFor="let catalogue of catalogueData">
                 <div class="row">
                     <div class="col-10">
-                        <p class="content-list-name">{{download.title}}</p>
-                        <p>{{download.desc}}</p>
+                        <p class="content-list-name">{{catalogue.title}} <small>v{{catalogue.version}}</small></p>
+                        <p>{{catalogue.desc}}</p>
                     </div>
                     <div class="col-2 content-list-links">
-                        <a style="margin-left: 10px; font-size: 24px;"  (click)="goTo(download)"><i class="fas fa-download"></i></a>
+                        <a style="margin-left: 10px; font-size: 24px;"  (click)="goTo(catalogue)"><i class="fas fa-download"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5" *ngIf="atestData">
+        <div class="col-sm-9">
+            <h3 translate>Atests</h3>
+            <div class="content-list-item" *ngFor="let atest of atestData">
+                <div class="row">
+                    <div class="col-10">
+                        <p class="content-list-name">{{atest.title}}</p>
+                        <p>{{atest.desc}}</p>
+                    </div>
+                    <div class="col-2 content-list-links">
+                        <a style="margin-left: 10px; font-size: 24px;"  (click)="goTo(atest)"><i class="fas fa-download"></i></a>
                     </div>
                 </div>
             </div>

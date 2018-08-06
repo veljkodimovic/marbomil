@@ -32,6 +32,9 @@ import { AtestComponent } from '@app/home/atest/atest.component';
 import { DownloadComponent } from '@app/home/download/download.component';
 import { NotFoundComponent } from '@app/home/404/404.component';
 import { AboutUsComponent } from '@app/home/about-us/about-us.component';
+import { LocationComponent } from '@app/home/location/location.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   imports: [
@@ -42,6 +45,7 @@ import { AboutUsComponent } from '@app/home/about-us/about-us.component';
     FlexLayoutModule,
     NgbModule,
     MaterialModule,
+    FormsModule,
     HomeRoutingModule
   ],
   declarations: [
@@ -60,6 +64,7 @@ import { AboutUsComponent } from '@app/home/about-us/about-us.component';
     DownloadComponent,
     NotFoundComponent,
     AboutUsComponent,
+    LocationComponent,
     HomeComponent
   ],
   providers: [

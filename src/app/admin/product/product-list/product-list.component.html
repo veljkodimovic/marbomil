@@ -25,7 +25,7 @@
         <div class="row">
           <div class="col-11 col-sm-4" style="margin-bottom: 10px;">
             <a routerLink="/admin/product/{{product.id}}">
-              <img src="{{'data:image/png;base64,'+product.images[0].imageCrop}}" >
+              <img src="{{product.images[0].imageCropUrl}}" >
             </a>
           </div>
           <div class="col-11 col-sm-7 order-2 order-sm-1">

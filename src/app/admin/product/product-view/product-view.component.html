@@ -69,31 +69,31 @@
           <div class="form-group row">
             <label for="text" class="col-md-2 col-form-label">Opis</label>
             <div class="col-md-10">
-              <textarea type="text" class="form-control" id="text" [(ngModel)]="product.desc" name="desc"></textarea>
+              <textarea type="text" class="form-control" id="text" [(ngModel)]="product.description" name="desc"></textarea>
             </div>
           </div>
           <div class="form-group row">
             <label for="width" class="col-md-2 col-form-label">Širina</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="width" [(ngModel)]="product.widthData" name="widthData">
+              <input type="text" class="form-control" id="width" [(ngModel)]="product.width" name="widthData">
             </div>
           </div>
           <div class="form-group row">
             <label for="height" class="col-md-2 col-form-label">Visina</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="height" [(ngModel)]="product.heightData" name="heightData">
+              <input type="text" class="form-control" id="height" [(ngModel)]="product.height" name="heightData">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="stock" class="col-md-2 col-form-label">Količina</label>
+            <div class="col-md-10">
+              <input type="text" class="form-control" id="stock" [(ngModel)]="product.depth" name="depthData">
             </div>
           </div>
           <div class="form-group row">
             <label for="depth" class="col-md-2 col-form-label">Dubina</label>
             <div class="col-md-10">
               <input type="text" class="form-control" id="depth" [(ngModel)]="product.numberOnSite" name="numberOnSite">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="stock" class="col-md-2 col-form-label">Količina</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="stock" [(ngModel)]="product.depthData" name="depthData">
             </div>
           </div>
 

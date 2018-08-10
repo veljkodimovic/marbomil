@@ -22,7 +22,7 @@ export class CategoryViewComponent implements OnInit {
   cropperSettings: CropperSettings;
   image: any;
   data: any;
-  category: Category = new Category(0, '', '', '', '');
+  category: Category = new Category(0, '', '', '', '', '', '');
   categories: any[] = [];
   isLoading: boolean;
   setImage: boolean = false;
@@ -94,7 +94,7 @@ export class CategoryViewComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.svc.getCategoryById(parseInt(id)).subscribe(data => {
       this.category = data;
-      var image: any = new Image();
+      const image: any = new Image();
       image.src = 'data:image/jpeg;base64,' + this.category.image;
       this.cropper.settings = this.cropperSettings;
       this.cropper.setImage(image);
@@ -108,10 +108,10 @@ export class CategoryViewComponent implements OnInit {
       this.disableSave = true;
       this.blockAll = true;
 
-      var imageString = this.data.image.split('base64,');
+      const imageString = this.data.image.split('base64,');
       if (this.setImage) {
         this.category.imageCrop = imageString[imageString.length - 1];
-        var imageStringOrig = this.originalImg.split('base64,');
+        const imageStringOrig = this.originalImg.split('base64,');
         this.category.image = imageStringOrig[imageStringOrig.length - 1];
       }
       if (this.isEditMode) {
@@ -128,7 +128,7 @@ export class CategoryViewComponent implements OnInit {
           .subscribe((response: any) => {
             this.blockAll = false;
             this.handleResponse(response);
-            var id = +response._body;
+            const id = +response._body;
             this.category.id = id;
 
           });
@@ -148,7 +148,7 @@ export class CategoryViewComponent implements OnInit {
   handleResponse(response: any) {
     this.disableSave = false;
     if (!response.ok) {
-      var body = JSON.parse(response._body)
+      const body = JSON.parse(response._body);
       this.notificationService.error(body.title, body.description,
         {
           timeOut: 5000,

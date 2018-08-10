@@ -53,9 +53,9 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="parentCollection" class="col-md-2 col-form-label">Nad Kolekcija</label>
+            <label for="parentCollectionId" class="col-md-2 col-form-label">Nad Kolekcija</label>
             <div class="col-md-10">
-              <select class="form-control" id="parentCollection" [(ngModel)]="collection.parentId" name="parentId">
+              <select class="form-control" id="parentCollectionId" [(ngModel)]="collection.parentCollectionId" name="parentCollectionId">
                 <option value=""></option>
                 <option  *ngFor="let col of collections;index as i" [ngValue]="col.id" name="col.title" >{{col.title}}</option>
               </select>

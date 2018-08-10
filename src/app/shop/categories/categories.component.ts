@@ -29,7 +29,7 @@ export class CategoriesComponent implements OnInit {
     //   this.collectionData = data;
     //   console.log('111');
     //   console.log(this.collectionData);
-    //   this.collectionData = this.collectionData.filter((x: any) => x.parentId === null);
+    //   this.collectionData = this.collectionData.filter((x: any) => x.parentCollectionId === null);
     // });
 
     this.svc.getAllCategories().subscribe(data => {

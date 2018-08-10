@@ -81,7 +81,7 @@ export class ProductViewComponent implements OnInit {
 
     this.svc.getAllCollections().subscribe((data: any) => {
       this.collections = data;
-      this.collectionsParents = this.collections.filter(x => x.parentId === null);
+      this.collectionsParents = this.collections.filter(x => x.parentCollectionId === null);
     });
 
     this.svc.getAllCategories().subscribe((data: any) => {
@@ -103,7 +103,7 @@ export class ProductViewComponent implements OnInit {
 
       }
       var image2: any = new Image();
-      image2.src = 'data:image/jpeg;base64,' + this.product.productDrawing;
+      image2.src = 'data:image/jpeg;base64,' + this.product.drawingImage;
       this.cropper2.settings = this.cropperSettings;
       this.cropper2.setImage(image2);
 
@@ -250,7 +250,7 @@ export class ProductViewComponent implements OnInit {
       // }
       var imageString2 = this.data2.image.split('base64,');
       if (this.setImage) {
-        this.product.productDrawing = imageString2[imageString2.length - 1];
+        this.product.drawingImage = imageString2[imageString2.length - 1];
         //  var imageStringOrig = this.originalImg.split('base64,');
         //this.collection.image = imageStringOrig[imageStringOrig.length - 1];
       }
@@ -326,7 +326,7 @@ export class ProductViewComponent implements OnInit {
 
   getCollectionsById(id: number) {
     if (this.collections.length > 0 && id > 0) {
-      return this.collections.filter((x: any) => x.parentId === id);
+      return this.collections.filter((x: any) => x.parentCollectionId === id);
     } else {
       return [];
     }

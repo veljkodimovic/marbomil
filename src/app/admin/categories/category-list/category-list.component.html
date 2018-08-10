@@ -24,12 +24,11 @@
         <div class="row">
           <div class="col-4">
             <a  (click)="goTo(category)">
-              <img src="{{'data:image/png;base64,'+category.imageCrop}}" alt="">
+              <img src="{{category.imageCropUrl}}" alt="">
             </a>
           </div>
           <div class="col-7">
             <p><a class="admin-list-name"  (click)="goTo(category)">{{category.title}}</a></p>
-            <p *ngIf="category.parentId >0"><strong>Nad kategorija: </strong><a>{{getCategoryName(category.parentId)}}</a> <br></p>
           </div>
           <div class="col-1 admin-list-links">
             <a  (click)="goTo(category)"><i class="fas fa-pencil-alt"></i></a>

@@ -2,36 +2,43 @@ export class Product {
   id: number;
   title: string;
   code: string;
+  description: string;
   price: number;
-  desc: string;
   discount: number;
   discountDate: string;
   collectionId: number;
   categoryId: number;
-  widthData: number;
-  heightData: number;
+  width: number;
+  height: number;
+  depth: number;
   numberOnSite: number;
-  depthData: number;
+  drawingImage: string;
+  drawingImageUrl: string;
+  drawingImageExtension: string;
   images: any[];
   newImages: any[];
   updatedImages: any[];
   deletedImages: any[];
-  productDrawing: string;
 
-  constructor(id: number, title: string, code: string, desc: string, price: number, discount: number, discountDate: string, collectionId: number, categoryId: number, widthData: number, heightData: number, numberOnSite: number, depthData: number, images: any[], productDrawing: string) {
+  constructor(id: number, title: string, code: string, description: string, price: number, discount: number,
+    discountDate: string, collectionId: number, categoryId: number, width: number, height: number,
+    numberOnSite: number, depth: number, images: any[], drawingImage: string, drawingImageUrl: string,
+    drawingImageExtension: string) {
     this.id = id;
-    this.desc = desc;
+    this.title = title;
     this.code = code;
     this.price = price;
-    this.desc = desc;
+    this.description = description;
     this.discount = discount;
     this.discountDate = discountDate;
     this.collectionId = collectionId;
-    this.widthData = widthData;
-    this.heightData = heightData;
+    this.width = width;
+    this.height = height;
     this.numberOnSite = numberOnSite;
-    this.depthData = depthData;
+    this.depth = depth;
     this.images = images;
-    this.productDrawing = productDrawing;
+    this.drawingImage = drawingImage;
+    this.drawingImageUrl = drawingImageUrl;
+    this.drawingImageExtension = drawingImageExtension;
   }
 }

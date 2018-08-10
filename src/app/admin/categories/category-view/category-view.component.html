@@ -51,15 +51,6 @@
               <input type="text" class="form-control" id="name" [(ngModel)]="category.title" name="title">
             </div>
           </div>
-          <div class="form-group row">
-            <label for="parentCategory" class="col-md-2 col-form-label">Nad Kategorija</label>
-            <div class="col-md-10">
-              <select class="form-control" id="parentCategory" [(ngModel)]="category.parentId" name="parentId">
-                <option value=""></option>
-                <option  *ngFor="let col of categories;index as i" [ngValue]="col.id" name="col.title" >{{col.title}}</option>
-              </select>
-            </div>
-          </div>
           <div class="row">
             <div class="col-sm-10 offset-md-2">
               <button type="submit" class="btn btn-primary" (click)="saveOnClick()"><i class="fas fa-save"></i> Sačuvaj</button>

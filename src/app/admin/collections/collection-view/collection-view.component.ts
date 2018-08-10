@@ -152,8 +152,8 @@ export class CollectionViewComponent implements OnInit {
 
       this.disableSave = true;
       this.blockAll = true;
-      if (this.collection.id == this.collection.parentId) {
-        this.collection.parentId = null;
+      if (this.collection.id == this.collection.parentCollectionId) {
+        this.collection.parentCollectionId = null;
         this.notificationService.warn('Wrong parent data', 'You can not add this collection to parent collection!',
           {
             timeOut: 3000,

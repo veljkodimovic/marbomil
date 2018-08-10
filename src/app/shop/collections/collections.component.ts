@@ -42,7 +42,7 @@ export class CollectionsComponent implements OnInit {
 
   getCollectionsById(id: number) {
     if (this.collectionData.length > 0 && id > 0) {
-      return this.collectionData.filter((x: any) => x.parentId === id);
+      return this.collectionData.filter((x: any) => x.parentCollectionId === id);
     } else {
       return [];
     }
@@ -50,7 +50,7 @@ export class CollectionsComponent implements OnInit {
 
   getCollectionsByCatId(id: number) {
     if (this.collectionData.length > 0 && id > 0) {
-      return this.collectionData.filter((x: any) => x.categoryId === id && x.parentId === null);
+      return this.collectionData.filter((x: any) => x.categoryId === id && x.parentCollectionId === null);
     } else {
       return [];
     }

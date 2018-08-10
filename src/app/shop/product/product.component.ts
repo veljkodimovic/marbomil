@@ -33,7 +33,7 @@ export class ProductComponent implements OnInit {
     this.svc.getAllCollections().subscribe(data => {
       this.collectionData = data;
       const activeCollection = this.collectionData.find((x: any) => x.id === this.activeCollectionId);
-      this.collectionParentData = this.collectionData.filter((x: any) => x.parentId === null && x.categoryId === activeCollection.categoryId);
+      this.collectionParentData = this.collectionData.filter((x: any) => x.parentCollectionId === null && x.categoryId === activeCollection.categoryId);
       this.collectionParentData.reverse();
     });
 
@@ -44,7 +44,7 @@ export class ProductComponent implements OnInit {
 
   getCollectionsById(id: number) {
     if (this.collectionData.length > 0 && id > 0) {
-      let collectionsDataTemp: any[] = this.collectionData.filter((x: any) => x.parentId === id);
+      let collectionsDataTemp: any[] = this.collectionData.filter((x: any) => x.parentCollectionId === id);
       return collectionsDataTemp.sort();
     } else {
       return [];

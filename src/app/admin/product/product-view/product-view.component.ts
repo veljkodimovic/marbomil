@@ -29,7 +29,7 @@ export class ProductViewComponent implements OnInit {
   image: any;
   data: any;
   data2: any;
-  product: Product = new Product(0, "", "", "", 0, 0, "", 0, 0, 0, 0, 0, 0, [], "");
+  product: Product = new Product(0, '', '', '', 0, 0, '', 0, 0, 0, 0, 0, 0, [], '', '', '');
   link: any;
   isLoading: boolean;
   setImage: boolean = false;

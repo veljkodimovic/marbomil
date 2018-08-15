@@ -31,7 +31,7 @@ export class CollectionViewComponent implements OnInit {
   isLoading: boolean;
   cropperSettings: CropperSettings;
   isEditMode: boolean = false;
-  collection: Collection = new Collection(0, '', '', '', '', null, null);
+  collection: Collection = new Collection(0, '', '', '', '', '', '', null, null);
   collections: Collection[] = [];
   categories: any[] = [];
   products: any[];

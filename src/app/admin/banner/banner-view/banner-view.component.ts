@@ -21,7 +21,7 @@ export class BannerViewComponent implements OnInit {
   cropperSettings: CropperSettings;
   image: any;
   data: any;
-  banner: Banner = new Banner(0, '', '', '', '', '');
+  banner: Banner = new Banner(0, '', '', '', '', '', '.jpg');
   isLoading: boolean;
   setImage: boolean = false;
   originalImg: string = '';

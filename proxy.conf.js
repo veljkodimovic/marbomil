@@ -10,9 +10,8 @@ const HttpsProxyAgent = require('https-proxy-agent');
  */
 const proxyConfig = [
   {
-    context: '/api',
-    pathRewrite: { '^/api': '' },
-    target: 'http://localhost:3000',
+    context: '/',
+    target: 'http://RSM0014:8889',
     changeOrigin: true,
     secure: false
   }

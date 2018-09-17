@@ -9,7 +9,7 @@ import 'rxjs/add/operator/catch';
 const routes = {
   collection: () => `/collection/`,
   category: () => `/category/`,
-  products: () => `/products/`
+  products: () => `/product/`
 };
 
 @Injectable()

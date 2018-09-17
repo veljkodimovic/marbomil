@@ -29,7 +29,7 @@ export class ProductViewComponent implements OnInit {
   image: any;
   data: any;
   data2: any;
-  product: Product = new Product(0, '', '', '', 0, 0, '', 0, 0, 0, 0, 0, 0, [], '', '', '');
+  product: Product = new Product(0, '', '', '', 0, 0, '', 0, 0, 0, 0, 0, 0, [], '', '', '.jpg');
   link: any;
   isLoading: boolean;
   setImage: boolean = false;
@@ -232,7 +232,12 @@ export class ProductViewComponent implements OnInit {
       for (let value of this.images) {
         var imageString = value.imageCrop.split('base64,');
         var imageStringOrig = this.images[value.index].image.split('base64,')
-        this.product.images.push({ id: 0, index: value.index, imageCrop: imageString[imageString.length - 1], image: imageStringOrig[imageStringOrig.length - 1] });
+        this.product.images.push({ 
+                                    id: 0, index: value.index, 
+                                    imageCrop: imageString[imageString.length - 1],
+                                    image: imageStringOrig[imageStringOrig.length - 1],
+                                    imageExtension: '.jpg'
+                                  });
       }
       // } else {
       //   //Images

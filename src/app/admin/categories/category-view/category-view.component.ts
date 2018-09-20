@@ -30,6 +30,7 @@ export class CategoryViewComponent implements OnInit {
   isEditMode: boolean = true;
   disableSave: boolean = false;
   blockAll: boolean = false;
+  fileType: string;
 
   constructor(private svc: CategoryService,
               private renderer: Renderer,
@@ -50,7 +51,7 @@ export class CategoryViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.router.url.indexOf('new') != -1) {
+    if (this.router.url.indexOf('new') !== -1) {
       this.isEditMode = false;
     } else {
       this.isEditMode = true;
@@ -64,10 +65,12 @@ export class CategoryViewComponent implements OnInit {
   }
 
   fileChangeListener($event: any) {
-    var image: any = new Image();
-    var file: File = $event.target.files[0];
-    var myReader: FileReader = new FileReader();
-    var that = this;
+    const image: any = new Image();
+    const file: File = $event.target.files[0];
+    this.fileType = file.name;
+    this.fileType = this.fileType.slice(-4);
+    const myReader: FileReader = new FileReader();
+    const that = this;
     myReader.onloadend = function(loadEvent: any) {
       image.src = loadEvent.target.result;
       that.originalImg = image.src;
@@ -79,7 +82,7 @@ export class CategoryViewComponent implements OnInit {
   }
 
   uploadImage() {
-    let event = new MouseEvent('click', { bubbles: true });
+    const event = new MouseEvent('click', { bubbles: true });
     this.renderer.invokeElementMethod(
       this.fileInput.nativeElement, 'dispatchEvent', [event]);
   }
@@ -102,7 +105,6 @@ export class CategoryViewComponent implements OnInit {
   }
 
   saveOnClick() {
-    console.log(this.data);
     if (this.data.image) {
 
       this.disableSave = true;
@@ -113,6 +115,7 @@ export class CategoryViewComponent implements OnInit {
         this.category.imageCrop = imageString[imageString.length - 1];
         const imageStringOrig = this.originalImg.split('base64,');
         this.category.image = imageStringOrig[imageStringOrig.length - 1];
+        this.category.imageExtension = this.fileType;
       }
       if (this.isEditMode) {
         this.svc.updateCategory(this.category)

@@ -47,6 +47,7 @@ export class CollectionViewComponent implements OnInit {
   disableSave: boolean = false;
   minDate: string;
   blockAll: boolean = false;
+  fileType: string;
   constructor(private svc: CollectionService,
     private router: Router,
     private renderer: Renderer,
@@ -88,7 +89,7 @@ export class CollectionViewComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.svc.getCollectionById(parseInt(id)).subscribe((data: any) => {
       this.collection = data;
-      var image: any = new Image();
+      const image: any = new Image();
       image.src = 'data:image/jpeg;base64,' + this.collection.image;
       this.cropper.settings = this.cropperSettings;
       this.cropper.setImage(image);
@@ -96,10 +97,12 @@ export class CollectionViewComponent implements OnInit {
   }
 
   fileChangeListener($event: any) {
-    var image: any = new Image();
-    var file: File = $event.target.files[0];
-    var myReader: FileReader = new FileReader();
-    var that = this;
+    const image: any = new Image();
+    const file: File = $event.target.files[0];
+    this.fileType = file.name;
+    this.fileType = this.fileType.slice(-4);
+    const myReader: FileReader = new FileReader();
+    const that = this;
     myReader.onloadend = function(loadEvent: any) {
       image.src = loadEvent.target.result;
       that.originalImg = image.src;
@@ -111,7 +114,7 @@ export class CollectionViewComponent implements OnInit {
   }
 
   uploadImage() {
-    let event = new MouseEvent('click', { bubbles: true });
+    const event = new MouseEvent('click', { bubbles: true });
     this.renderer.invokeElementMethod(
       this.fileInput.nativeElement, 'dispatchEvent', [event]);
   }
@@ -124,7 +127,7 @@ export class CollectionViewComponent implements OnInit {
   handleResponse(response: any) {
     this.disableSave = false;
     if (!response.ok) {
-      var body = JSON.parse(response._body)
+      const body = JSON.parse(response._body)
       this.notificationService.error(body.title, body.description,
         {
           timeOut: 5000,
@@ -133,8 +136,7 @@ export class CollectionViewComponent implements OnInit {
           clickToClose: false,
           maxLength: 100
         });
-    }
-    else {
+    } else {
       this.notificationService.success('Success', 'Banner saved successfully.',
         {
           timeOut: 5000,
@@ -152,7 +154,7 @@ export class CollectionViewComponent implements OnInit {
 
       this.disableSave = true;
       this.blockAll = true;
-      if (this.collection.id == this.collection.parentCollectionId) {
+      if (this.collection.id === this.collection.parentCollectionId) {
         this.collection.parentCollectionId = null;
         this.notificationService.warn('Wrong parent data', 'You can not add this collection to parent collection!',
           {
@@ -165,11 +167,12 @@ export class CollectionViewComponent implements OnInit {
         return;
       }
 
-      var imageString = this.data.image.split('base64,');
+      const imageString = this.data.image.split('base64,');
       if (this.setImage) {
         this.collection.imageCrop = imageString[imageString.length - 1];
-        var imageStringOrig = this.originalImg.split('base64,');
+        const imageStringOrig = this.originalImg.split('base64,');
         this.collection.image = imageStringOrig[imageStringOrig.length - 1];
+        this.collection.imageExtension = this.fileType;
       }
       if (this.isEditMode) {
 

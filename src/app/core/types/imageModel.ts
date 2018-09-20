@@ -3,6 +3,7 @@ export class ImageModel {
   index: number;
   image: string;
   imageCrop: string;
+  imageExtension: string;
 
   isNew: boolean;
   isDirty: boolean;

@@ -50,6 +50,8 @@ export class ProductViewComponent implements OnInit {
   activeImageIndexNew: number = -1;
   activeImageIndexUpdated: number = -1;
   nestoImage: any;
+  fileType: string;
+  fileType2: string;
   constructor(private svc: ProductService, private renderer: Renderer,
     private notificationService: NotificationsService,
     private router: Router,
@@ -71,8 +73,7 @@ export class ProductViewComponent implements OnInit {
   ngOnInit() {
     if (this.router.url.indexOf('new') != -1) {
       this.isEditMode = false;
-    }
-    else {
+    } else {
       this.isEditMode = true;
       this.getProductDetails();
     }
@@ -166,19 +167,22 @@ export class ProductViewComponent implements OnInit {
 
 
   fileChangeListener($event: any) {
-    var image: any = new Image();
-    var file: File = $event.target.files[0];
-    var myReader: FileReader = new FileReader();
-    var that = this;
+    const image: any = new Image();
+    const file: File = $event.target.files[0];
+    this.fileType = file.name;
+    this.fileType = this.fileType.slice(-4);
+    const myReader: FileReader = new FileReader();
+    const that = this;
 
     myReader.onloadend = function(loadEvent: any) {
 
       image.src = loadEvent.target.result;
 
       that.cropper.setImage(image);
-      var imageModel = new ImageModel();
+      const imageModel = new ImageModel();
       imageModel.image = loadEvent.target.result;
       imageModel.index = that.images.length;
+      imageModel.imageExtension = that.fileType;
       that.images.push(imageModel);
       that.productImagesBases.push(loadEvent.target.result);
 
@@ -192,10 +196,10 @@ export class ProductViewComponent implements OnInit {
   }
 
   fileChangeListener2($event: any) {
-    var image: any = new Image();
-    var file: File = $event.target.files[0];
-    var myReader: FileReader = new FileReader();
-    var that = this;
+    const image: any = new Image();
+    const file: File = $event.target.files[0];
+    const myReader: FileReader = new FileReader();
+    const that = this;
     myReader.onloadend = function(loadEvent: any) {
       image.src = loadEvent.target.result;
       that.originalImg = image.src;
@@ -207,7 +211,7 @@ export class ProductViewComponent implements OnInit {
   }
 
   cropped(event: any) {
-    var image = this.images.find(x => x.index == this.activeImageIndex);
+    const image = this.images.find(x => x.index == this.activeImageIndex);
     if (image) {
       image.imageCrop = this.data.image;
       if (image.id > 0) {
@@ -226,18 +230,18 @@ export class ProductViewComponent implements OnInit {
     if (this.images.length > 0) {
       this.disableSave = true;
       this.blockAll = true;
-      var index = 0;
-      var indexFile = 0;
+      let index = 0;
+      let indexFile = 0;
       // if (!this.isEditMode) {
       for (let value of this.images) {
-        var imageString = value.imageCrop.split('base64,');
-        var imageStringOrig = this.images[value.index].image.split('base64,')
-        this.product.images.push({ 
-                                    id: 0, index: value.index, 
-                                    imageCrop: imageString[imageString.length - 1],
-                                    image: imageStringOrig[imageStringOrig.length - 1],
-                                    imageExtension: '.jpg'
-                                  });
+        const imageString = value.imageCrop.split('base64,');
+        const imageStringOrig = this.images[value.index].image.split('base64,')
+        this.product.images.push({
+          id: 0, index: value.index,
+          imageCrop: imageString[imageString.length - 1],
+          image: imageStringOrig[imageStringOrig.length - 1],
+          imageExtension: value.imageExtension
+        });
       }
       // } else {
       //   //Images
@@ -253,9 +257,10 @@ export class ProductViewComponent implements OnInit {
       //   }
       //   this.product.deletedImages = this.deletedImages;
       // }
-      var imageString2 = this.data2.image.split('base64,');
+      const imageString2 = this.data2.image.split('base64,');
       if (this.setImage) {
         this.product.drawingImage = imageString2[imageString2.length - 1];
+        this.product.drawingImageExtension = this.fileType2;
         //  var imageStringOrig = this.originalImg.split('base64,');
         //this.collection.image = imageStringOrig[imageStringOrig.length - 1];
       }
@@ -296,7 +301,7 @@ export class ProductViewComponent implements OnInit {
     if (!response.ok) {
 
       console.log(response);
-      var body = JSON.parse(response._body)
+      const body = JSON.parse(response._body);
       this.notificationService.error(body.title, body.description,
         {
           timeOut: 5000,

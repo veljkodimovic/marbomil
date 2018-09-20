@@ -28,6 +28,7 @@ export class BannerViewComponent implements OnInit {
   isEditMode: boolean = true;
   disableSave: boolean = false;
   blockAll: boolean = false;
+  fileType: string;
 
   constructor(private svc: BannerService,
     private renderer: Renderer,
@@ -60,6 +61,8 @@ export class BannerViewComponent implements OnInit {
   fileChangeListener($event: any) {
     const image: any = new Image();
     const file: File = $event.target.files[0];
+    this.fileType = file.name;
+    this.fileType = this.fileType.slice(-4);
     const myReader: FileReader = new FileReader();
     const that = this;
     myReader.onloadend = function(loadEvent: any) {
@@ -116,6 +119,7 @@ export class BannerViewComponent implements OnInit {
         this.banner.imageCrop = imageString[imageString.length - 1];
         const imageStringOrig = this.originalImg.split('base64,');
         this.banner.image = imageStringOrig[imageStringOrig.length - 1];
+        this.banner.imageExtension = this.fileType;
       }
       if (this.isEditMode) {
 

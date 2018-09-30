@@ -22,7 +22,7 @@
     <div class="col-sm-6 col-md-4" *ngFor="let video of videoData">
       <div class="admin-list-item">
         <a (click)="goTo(video)">
-          <img src="{{'data:image/png;base64,'+video.imageCrop}}" alt="">
+          <img src="{{video.imageCropUrl}}" alt="">
         </a>
         <div class="row admin-list-video">
           <div class="col-9">

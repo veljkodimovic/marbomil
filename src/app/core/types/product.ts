@@ -40,5 +40,6 @@ export class Product {
     this.drawingImage = drawingImage;
     this.drawingImageUrl = drawingImageUrl;
     this.drawingImageExtension = drawingImageExtension;
+    this.categoryId = categoryId;
   }
 }

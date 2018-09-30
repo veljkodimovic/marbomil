@@ -22,7 +22,7 @@ export class VideoViewComponent implements OnInit {
   cropperSettings: CropperSettings;
   image: any;
   data: any;
-  video: Video = new Video(0, '', '', '', '', '');
+  video: Video = new Video(0, '', '', '', '', '', '', '');
   videoUrl: any;
   link: any;
   isLoading: boolean;
@@ -31,6 +31,7 @@ export class VideoViewComponent implements OnInit {
   isEditMode: boolean = true;
   disableSave: boolean = false;
   blockAll: boolean = false;
+  fileType: string;
 
   constructor(private svc: VideoService,
               private renderer: Renderer,
@@ -63,10 +64,12 @@ export class VideoViewComponent implements OnInit {
   }
 
   fileChangeListener($event: any) {
-    var image: any = new Image();
-    var file: File = $event.target.files[0];
-    var myReader: FileReader = new FileReader();
-    var that = this;
+    const image: any = new Image();
+    const file: File = $event.target.files[0];
+    this.fileType = file.name;
+    this.fileType = this.fileType.slice(-4);
+    const myReader: FileReader = new FileReader();
+    const that = this;
     myReader.onloadend = function(loadEvent: any) {
       image.src = loadEvent.target.result;
       that.originalImg = image.src;
@@ -78,7 +81,7 @@ export class VideoViewComponent implements OnInit {
   }
 
   uploadImage() {
-    let event = new MouseEvent('click', { bubbles: true });
+    const event = new MouseEvent('click', { bubbles: true });
     this.renderer.invokeElementMethod(
       this.fileInput.nativeElement, 'dispatchEvent', [event]);
   }
@@ -93,8 +96,8 @@ export class VideoViewComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.svc.getVideoById(parseInt(id)).subscribe(data => {
       this.video = data;
-      var image: any = new Image();
-      image.src = 'data:image/jpeg;base64,' + this.video.image;
+      const image: any = new Image();
+      image.src = this.video.imageUrl;
       this.cropper.settings = this.cropperSettings;
       this.cropper.setImage(image);
       this.videoUrl = 'https://www.youtube.com/embed/' + this.video.url;
@@ -108,11 +111,12 @@ export class VideoViewComponent implements OnInit {
       this.disableSave = true;
       this.blockAll = true;
 
-      var imageString = this.data.image.split('base64,');
+      const imageString = this.data.image.split('base64,');
       if (this.setImage) {
         this.video.imageCrop = imageString[imageString.length - 1];
-        var imageStringOrig = this.originalImg.split('base64,');
+        const imageStringOrig = this.originalImg.split('base64,');
         this.video.image = imageStringOrig[imageStringOrig.length - 1];
+        this.video.imageExtension = this.fileType;
       }
 
       if (this.isEditMode) {

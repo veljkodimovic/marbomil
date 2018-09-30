@@ -8,7 +8,7 @@ import 'rxjs/add/operator/catch';
 
 const routes = {
   service: () => `/service/`,
-  banners: () => `/banners/`
+  banners: () => `/banner/`
 };
 
 @Injectable()

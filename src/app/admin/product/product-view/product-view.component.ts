@@ -261,6 +261,7 @@ export class ProductViewComponent implements OnInit {
       if (this.setImage) {
         this.product.drawingImage = imageString2[imageString2.length - 1];
         this.product.drawingImageExtension = this.fileType2;
+        console.log(this.fileType2);
         //  var imageStringOrig = this.originalImg.split('base64,');
         //this.collection.image = imageStringOrig[imageStringOrig.length - 1];
       }

@@ -30,8 +30,14 @@ export class BannerService {
   }
 
   getBannerById(id: number): Observable<any> {
-
     return this.http.get(routes.banners() + id)
+      .map((res: Response) => res.json())
+      .map(body => body)
+      .catch((err) => this.persistenceService.handleError(err));
+  }
+
+  getBannerEditById(id: number): Observable<any> {
+    return this.http.get(routes.banners() + 'edit/' + id)
       .map((res: Response) => res.json())
       .map(body => body)
       .catch((err) => this.persistenceService.handleError(err));

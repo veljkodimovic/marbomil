@@ -6,6 +6,7 @@ import { Banner } from '@app/core/types/banner';
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 import { NotificationsService } from 'angular2-notifications';
 import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-banner-view',
@@ -19,9 +20,10 @@ export class BannerViewComponent implements OnInit {
   @ViewChild(DeleteModalComponent)
   private modal: DeleteModalComponent;
   cropperSettings: CropperSettings;
+  apiUrl = environment.serverUrl;
   image: any;
   data: any;
-  banner: Banner = new Banner(0, '', '', '', '', '', '.jpg');
+  banner: Banner = new Banner(0, '', '', '', '', '', '', '.jpg');
   isLoading: boolean;
   setImage: boolean = false;
   originalImg: string = '';
@@ -99,8 +101,10 @@ export class BannerViewComponent implements OnInit {
 
   getBannerDetails(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.svc.getBannerById(parseInt(id)).subscribe(data => {
+    const that = this;
+    this.svc.getBannerEditById(parseInt(id)).subscribe(data => {
       this.banner = data;
+      that.data.image = 'data:image/jpeg;base64,' + this.banner.image;
       const image: any = new Image();
       image.src = 'data:image/jpeg;base64,' + this.banner.image;
       this.cropper.settings = this.cropperSettings;

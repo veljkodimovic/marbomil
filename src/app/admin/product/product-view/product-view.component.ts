@@ -94,17 +94,17 @@ export class ProductViewComponent implements OnInit {
 
   getProductDetails(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.svc.getProductById(parseInt(id)).subscribe(data => {
+    const that = this;
+    this.svc.getProductEditById(parseInt(id)).subscribe(data => {
       this.product = data;
-      for (let value of this.product.images) {
+      for (const value of this.product.images) {
         value.imageCrop = 'data:image/jpeg;base64,' + value.imageCrop;
         value.image = 'data:image/jpeg;base64,' + value.image;
         this.images.push(value);
-        console.log(this.images);
-
       }
-      var image2: any = new Image();
-      image2.src = 'data:image/jpeg;base64,' + this.product.drawingImage;
+      that.data2.image = 'data:image/jpeg;base64,' + this.product.drawingImage;
+      const image2: any = new Image();
+      image2.src = that.data2.image;
       this.cropper2.settings = this.cropperSettings;
       this.cropper2.setImage(image2);
 
@@ -112,26 +112,26 @@ export class ProductViewComponent implements OnInit {
   }
 
   uploadImage() {
-    let event = new MouseEvent('click', { bubbles: true });
+    const event = new MouseEvent('click', { bubbles: true });
     this.renderer.invokeElementMethod(
       this.fileInput.nativeElement, 'dispatchEvent', [event]);
   }
 
   removeImage() {
 
-    this.fileInput.nativeElement.value = "";
+    this.fileInput.nativeElement.value = '';
 
     this.productImagesBases.splice(this.activeImageIndex, 1);
     this.productImages.splice(this.activeImageIndex, 1);
     this.cropper.reset();
-    var image = this.images.find(x => x.index == this.activeImageIndex);
+    const image = this.images.find(x => x.index === this.activeImageIndex);
     if (image && image.id > 0) {
       image.isDeleted = true;
       this.deletedImages.push(image.id);
     }
     this.images.splice(this.activeImageIndex, 1);
-    var index = 0;
-    for (let image of this.images) {
+    let index = 0;
+    for (const image of this.images) {
       image.index = index;
       image.isDirty = true;
       index++;
@@ -139,16 +139,15 @@ export class ProductViewComponent implements OnInit {
 
 
     if (this.images.length > 0) {
-      this.setActiveImage(this.images.find(x => x.index == 0));
+      this.setActiveImage(this.images.find(x => x.index === 0));
     }
   }
 
   setActiveImage(imageModel: any) {
     this.activeImageIndex = imageModel.index;
-    var image: any = new Image();
-    image.src = this.images.find(x => x.index == imageModel.index).image;
+    const image: any = new Image();
+    image.src = this.images.find(x => x.index === imageModel.index).image;
     this.cropper.setImage(image);
-
   }
 
   calculateKBFromBytes(bytes: number): number {
@@ -198,6 +197,8 @@ export class ProductViewComponent implements OnInit {
   fileChangeListener2($event: any) {
     const image: any = new Image();
     const file: File = $event.target.files[0];
+    this.fileType2 = file.name;
+    this.fileType2 = this.fileType2.slice(-4);
     const myReader: FileReader = new FileReader();
     const that = this;
     myReader.onloadend = function(loadEvent: any) {
@@ -224,16 +225,13 @@ export class ProductViewComponent implements OnInit {
   saveOnClick() {
 
     this.product.images = [];
-    this.product.newImages = [];
-    this.product.updatedImages = [];
-    this.product.deletedImages = [];
     if (this.images.length > 0) {
       this.disableSave = true;
       this.blockAll = true;
-      let index = 0;
-      let indexFile = 0;
+      // let index = 0;
+      // let indexFile = 0;
       // if (!this.isEditMode) {
-      for (let value of this.images) {
+      for (const value of this.images) {
         const imageString = value.imageCrop.split('base64,');
         const imageStringOrig = this.images[value.index].image.split('base64,')
         this.product.images.push({
@@ -243,30 +241,24 @@ export class ProductViewComponent implements OnInit {
           imageExtension: value.imageExtension
         });
       }
-      // } else {
-      //   //Images
-      //   for (let value of this.images.filter(x => x.isNew)) {
-      //     var imageString = value.imageCrop.split('base64,');
-      //     var imageStringOrig = this.images[value.index].image.split('base64,')
-      //     this.product.newImages.push({ id: 0, index: value.index, imageCrop: imageString[imageString.length - 1], image: imageStringOrig[imageStringOrig.length - 1] });
-      //   }
-      //   for (let value of this.images.filter(x => x.isDirty && !x.isNew && !x.isDeleted)) {
-      //     var imageString = value.imageCrop.split('base64,');
-      //     var imageStringOrig = this.images[value.index].image.split('base64,')
-      //     this.product.updatedImages.push({ id: value.id, index: value.index, imageCrop: imageString[imageString.length - 1], image: imageStringOrig[imageStringOrig.length - 1] });
-      //   }
-      //   this.product.deletedImages = this.deletedImages;
-      // }
+
       const imageString2 = this.data2.image.split('base64,');
       if (this.setImage) {
         this.product.drawingImage = imageString2[imageString2.length - 1];
         this.product.drawingImageExtension = this.fileType2;
-        console.log(this.fileType2);
         //  var imageStringOrig = this.originalImg.split('base64,');
-        //this.collection.image = imageStringOrig[imageStringOrig.length - 1];
+        // this.collection.image = imageStringOrig[imageStringOrig.length - 1];
       }
 
       if (this.isEditMode) {
+        if (!this.setImage) {
+          this.product.drawingImage = null;
+          for (const productImage of this.product.images) {
+            productImage.image = null;
+            productImage.imageCrop = null;
+            productImage.imageExtension = '.jpg';
+          }
+        }
         this.svc.updateProduct(this.product)
           .finally(() => { this.isLoading = false; })
           .subscribe((response: any) => {
@@ -274,8 +266,7 @@ export class ProductViewComponent implements OnInit {
             //this.handleResponse(response);
             this.router.navigate(['/admin/product']);
           });
-      }
-      else {
+      } else {
         this.svc.createProduct(this.product)
           .finally(() => { this.isLoading = false; })
           .subscribe((response: any) => {

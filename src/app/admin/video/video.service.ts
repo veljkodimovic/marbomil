@@ -38,6 +38,14 @@ export class VideoService {
       .catch((err) => this.persistenceService.handleError(err));
   }
 
+  getVideoEditById(id: number): Observable<any> {
+
+    return this.http.get(routes.video() + 'edit/' + id)
+      .map((res: Response) => res.json())
+      .map(body => body)
+      .catch((err) => this.persistenceService.handleError(err));
+  }
+
   createVideo(body: Video): Observable<any> {
     // let bodyString = JSON.stringify(body);
 

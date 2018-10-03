@@ -95,8 +95,10 @@ export class CategoryViewComponent implements OnInit {
 
   getCategoryDetails(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.svc.getCategoryById(parseInt(id)).subscribe(data => {
+    const that = this;
+    this.svc.getCategoryEditById(parseInt(id)).subscribe(data => {
       this.category = data;
+      that.data.image = 'data:image/jpeg;base64,' + this.category.image;
       const image: any = new Image();
       image.src = 'data:image/jpeg;base64,' + this.category.image;
       this.cropper.settings = this.cropperSettings;

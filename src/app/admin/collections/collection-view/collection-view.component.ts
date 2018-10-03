@@ -87,8 +87,10 @@ export class CollectionViewComponent implements OnInit {
 
   getCollectionDetails(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.svc.getCollectionById(parseInt(id)).subscribe((data: any) => {
+    const that = this;
+    this.svc.getCollectionEditById(parseInt(id)).subscribe((data: any) => {
       this.collection = data;
+      that.data.image = 'data:image/jpeg;base64,' + this.collection.image;
       const image: any = new Image();
       image.src = 'data:image/jpeg;base64,' + this.collection.image;
       this.cropper.settings = this.cropperSettings;

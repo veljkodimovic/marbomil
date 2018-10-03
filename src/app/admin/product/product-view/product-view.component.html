@@ -135,8 +135,11 @@
             <label class="control-label" translate>Sve Slike Proizvoda</label>
             <div class="images-row">
               <a [ngClass]="{active: i==activeImageIndex}" *ngFor="let productImage of images;index as i">
-             <img style="width:180px; height:120px" id="image"  [src]="productImage.imageCrop" (click)="setActiveImage(productImage)">
-           </a>
+                <img *ngIf="!isEditMode; else editImage" style="width:180px; height:120px" id="image"  [src]="productImage.imageCrop" (click)="setActiveImage(productImage)">
+                <ng-template #editImage>
+                  <img style="width:180px; height:120px" id="image"  [src]="productImage.imageCropUrl" (click)="setActiveImage(productImage)">
+                </ng-template>
+              </a>
             </div>
             <div class="image-buttons" style="margin-top: 20px;">
               <button class="btn btn-primary" translate (click)="uploadImage()">Dodaj Sliku</button>

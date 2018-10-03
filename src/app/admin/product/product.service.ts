@@ -53,6 +53,14 @@ export class ProductService {
       .catch((err) => this.persistenceService.handleError(err));
   }
 
+  getProductEditById(id: number): Observable<any> {
+
+    return this.http.get(routes.products() + 'edit/' + id)
+      .map((res: Response) => res.json())
+      .map(body => body)
+      .catch((err) => this.persistenceService.handleError(err));
+  }
+
   createProduct(body: Product): Observable<any> {
     //let bodyString = JSON.stringify(body);
 
@@ -64,7 +72,7 @@ export class ProductService {
   updateProduct(body: Product): Observable<any> {
     //let bodyString = JSON.stringify(body);
 
-    return this.http.put(routes.products() + body.id, body)
+    return this.http.put(routes.products(), body)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }

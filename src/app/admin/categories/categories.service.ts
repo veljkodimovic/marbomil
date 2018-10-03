@@ -38,6 +38,14 @@ export class CategoryService {
       .catch((err) => this.persistenceService.handleError(err));
   }
 
+  getCategoryEditById(id: number): Observable<any> {
+
+    return this.http.get(routes.category() + 'edit/' + id)
+      .map((res: Response) => res.json())
+      .map(body => body)
+      .catch((err) => this.persistenceService.handleError(err));
+  }
+
   createCategory(body: Category): Observable<any> {
     // let bodyString = JSON.stringify(body);
 
@@ -49,7 +57,7 @@ export class CategoryService {
   updateCategory(body: Category): Observable<any> {
     // let bodyString = JSON.stringify(body);
 
-    return this.http.put(routes.category() + body.id, body)
+    return this.http.put(routes.category(), body)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }

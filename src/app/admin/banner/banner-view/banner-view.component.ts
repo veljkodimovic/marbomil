@@ -106,9 +106,11 @@ export class BannerViewComponent implements OnInit {
       this.banner = data;
       that.data.image = 'data:image/jpeg;base64,' + this.banner.image;
       const image: any = new Image();
+      const imageCrop: any = new Image();
       image.src = 'data:image/jpeg;base64,' + this.banner.image;
+      imageCrop.src = 'data:image/jpeg;base64,' + this.banner.imageCrop;
       this.cropper.settings = this.cropperSettings;
-      this.cropper.setImage(image);
+      this.cropper.setImage(imageCrop);
     });
   }
 
@@ -126,7 +128,10 @@ export class BannerViewComponent implements OnInit {
         this.banner.imageExtension = this.fileType;
       }
       if (this.isEditMode) {
-
+        if (!this.setImage) {
+          this.banner.image = null;
+          this.banner.imageCrop = null;
+        }
         this.svc.updateBanner(this.banner)
           .finally(() => { this.isLoading = false; this.router.navigate(['/admin/banners']); })
           .subscribe((response: any) => {

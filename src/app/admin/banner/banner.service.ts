@@ -54,7 +54,7 @@ export class BannerService {
   updateBanner(body: Banner): Observable<any> {
     // let bodyString = JSON.stringify(body);
 
-    return this.http.put(routes.banners() + body.id, body)
+    return this.http.put(routes.banners(), body)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }

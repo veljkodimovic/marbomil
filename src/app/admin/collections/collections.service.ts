@@ -49,6 +49,14 @@ export class CollectionService {
       .catch((err) => this.persistenceService.handleError(err));
   }
 
+  getCollectionEditById(id: number): Observable<any> {
+
+    return this.http.get(routes.collection() + 'edit/' + id)
+      .map((res: Response) => res.json())
+      .map(body => body)
+      .catch((err) => this.persistenceService.handleError(err));
+  }
+
   createCollection(body: Collection): Observable<any> {
     //let bodyString = JSON.stringify(body);
 
@@ -60,7 +68,7 @@ export class CollectionService {
   updateCollection(body: Collection): Observable<any> {
     //let bodyString = JSON.stringify(body);
 
-    return this.http.put(routes.collection() + body.id, body)
+    return this.http.put(routes.collection(), body)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }

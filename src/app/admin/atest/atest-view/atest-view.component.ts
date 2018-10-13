@@ -76,9 +76,9 @@ export class AtestViewComponent implements OnInit {
   onFileChange(event: any) {
     const that = this;
     console.log(that);
-    if(event.target.files.length > 0) {
+    if (event.target.files.length > 0) {
       const file = event.target.files[0];
-      console.log(file);
+      console.log(event);
       that.atest.file = file;
       console.log(that);
       // this.atest.file.setValue(file);

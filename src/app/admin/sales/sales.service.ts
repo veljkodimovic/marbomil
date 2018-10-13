@@ -49,7 +49,7 @@ export class SalesService {
   updateSales(body: Sales): Observable<any> {
     // let bodyString = JSON.stringify(body);
 
-    return this.http.put(routes.sales() + body.id, body)
+    return this.http.put(routes.sales(), body)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }

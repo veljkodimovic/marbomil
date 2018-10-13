@@ -94,12 +94,16 @@ export class VideoViewComponent implements OnInit {
 
   getVideoDetails(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.svc.getVideoById(parseInt(id)).subscribe(data => {
+    const that = this;
+    this.svc.getVideoEditById(parseInt(id)).subscribe(data => {
       this.video = data;
+      that.data.image = 'data:image/jpeg;base64,' + this.video.image;
       const image: any = new Image();
-      image.src = this.video.imageUrl;
+      const imageCrop: any = new Image();
+      image.src = 'data:image/jpeg;base64,' + this.video.image;
+      imageCrop.src = 'data:image/jpeg;base64,' + this.video.imageCrop;
       this.cropper.settings = this.cropperSettings;
-      this.cropper.setImage(image);
+      this.cropper.setImage(imageCrop);
       this.videoUrl = 'https://www.youtube.com/embed/' + this.video.url;
       this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.videoUrl);
     });

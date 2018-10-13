@@ -10,6 +10,8 @@ import { Collection } from '../../../core/types/collection';
 import { Category } from '../../../core/types/category';
 import { ImageModel } from '../../../core/types/imageModel';
 import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal';
+import { ImageCropperModule } from 'ngx-image-cropper';
+
 
 @Component({
   selector: 'app-product-view',
@@ -33,6 +35,7 @@ export class ProductViewComponent implements OnInit {
   link: any;
   isLoading: boolean;
   setImage: boolean = false;
+  setImageDrawing: boolean = false;
   originalImg: string = '';
   isEditMode: boolean = true;
   disableSave: boolean = false;
@@ -78,8 +81,6 @@ export class ProductViewComponent implements OnInit {
       this.getProductDetails();
     }
 
-
-
     this.svc.getAllCollections().subscribe((data: any) => {
       this.collections = data;
       this.collectionsParents = this.collections.filter(x => x.parentCollectionId === null);
@@ -97,17 +98,24 @@ export class ProductViewComponent implements OnInit {
     const that = this;
     this.svc.getProductEditById(parseInt(id)).subscribe(data => {
       this.product = data;
+      console.log(this.product);
+      let firstImage = true;
+      console.log('Slikeee', this.product.images);
       for (const value of this.product.images) {
-        value.imageCrop = 'data:image/jpeg;base64,' + value.imageCrop;
-        value.image = 'data:image/jpeg;base64,' + value.image;
+        if (firstImage) {
+          that.data.image = value.imageUrl;
+          firstImage = false;
+        }
+        value.imageCrop = value.imageCropUrl;
         this.images.push(value);
       }
       that.data2.image = 'data:image/jpeg;base64,' + this.product.drawingImage;
+      console.log(that.data,that.data2);
       const image2: any = new Image();
       image2.src = that.data2.image;
       this.cropper2.settings = this.cropperSettings;
       this.cropper2.setImage(image2);
-
+      console.log('this.images = ', this.images);
     });
   }
 
@@ -137,7 +145,6 @@ export class ProductViewComponent implements OnInit {
       index++;
     }
 
-
     if (this.images.length > 0) {
       this.setActiveImage(this.images.find(x => x.index === 0));
     }
@@ -146,8 +153,18 @@ export class ProductViewComponent implements OnInit {
   setActiveImage(imageModel: any) {
     this.activeImageIndex = imageModel.index;
     const image: any = new Image();
-    image.src = this.images.find(x => x.index === imageModel.index).image;
-    this.cropper.setImage(image);
+    if (this.isEditMode) {
+      this.svc.getProductImageByID(imageModel.id).subscribe(data => {
+        const activeImage = this.images.find(x => x.index === data.index);
+        image.src = 'data:image/jpeg;base64,' + data.image;
+        activeImage.image = image.src;
+        activeImage.imageExtension = data.imageExtension;
+        this.cropper.setImage(image);
+      });
+    } else {
+      image.src = this.images.find(x => x.index === imageModel.index).image;
+      this.cropper.setImage(image);
+    }
   }
 
   calculateKBFromBytes(bytes: number): number {
@@ -166,6 +183,7 @@ export class ProductViewComponent implements OnInit {
 
 
   fileChangeListener($event: any) {
+    console.log('change');
     const image: any = new Image();
     const file: File = $event.target.files[0];
     this.fileType = file.name;
@@ -189,6 +207,7 @@ export class ProductViewComponent implements OnInit {
         imageModel.isNew = true;
       }
       that.setActiveImage(imageModel);
+      that.setImage = true;
 
     };
     myReader.readAsDataURL(file);
@@ -205,7 +224,7 @@ export class ProductViewComponent implements OnInit {
       image.src = loadEvent.target.result;
       that.originalImg = image.src;
       that.cropper2.setImage(image);
-      that.setImage = true;
+      that.setImageDrawing = true;
     };
 
     myReader.readAsDataURL(file);
@@ -230,16 +249,17 @@ export class ProductViewComponent implements OnInit {
       this.blockAll = true;
       // let index = 0;
       // let indexFile = 0;
-      // if (!this.isEditMode) {
-      for (const value of this.images) {
-        const imageString = value.imageCrop.split('base64,');
-        const imageStringOrig = this.images[value.index].image.split('base64,')
-        this.product.images.push({
-          id: 0, index: value.index,
-          imageCrop: imageString[imageString.length - 1],
-          image: imageStringOrig[imageStringOrig.length - 1],
-          imageExtension: value.imageExtension
-        });
+      if (!this.isEditMode) {
+        for (const value of this.images) {
+          const imageString = value.imageCrop.split('base64,');
+          const imageStringOrig = this.images[value.index].image.split('base64,');
+          this.product.images.push({
+            id: 0, index: value.index,
+            imageCrop: imageString[imageString.length - 1],
+            image: imageStringOrig[imageStringOrig.length - 1],
+            imageExtension: value.imageExtension
+          });
+        }
       }
 
       const imageString2 = this.data2.image.split('base64,');
@@ -251,14 +271,29 @@ export class ProductViewComponent implements OnInit {
       }
 
       if (this.isEditMode) {
-        if (!this.setImage) {
-          this.product.drawingImage = null;
-          for (const productImage of this.product.images) {
-            productImage.image = null;
-            productImage.imageCrop = null;
-            productImage.imageExtension = '.jpg';
+        console.log(this.product);
+        console.log(this.images);
+        for (const value of this.images) {
+          if (value.image) {
+            const imageString = value.image.split('base64,');
+            const imageStringCropp = value.imageCrop.split('base64,');
+            this.product.images.push({
+              id: value.id,
+              index: value.index,
+              imageCrop: imageStringCropp[imageStringCropp.length - 1],
+              image: imageString[imageString.length - 1],
+              imageExtension: value.imageExtension,
+              productId: value.productId
+            });
+          } else {
+            this.product.images.push({
+              id: value.id,
+              index: value.index,
+              productId: value.productId
+            });
           }
         }
+        console.log('Lidllll', this.product);
         this.svc.updateProduct(this.product)
           .finally(() => { this.isLoading = false; })
           .subscribe((response: any) => {

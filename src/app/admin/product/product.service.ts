@@ -61,6 +61,13 @@ export class ProductService {
       .catch((err) => this.persistenceService.handleError(err));
   }
 
+  getProductImageByID(id: number): Observable<any> {
+    return this.http.get(routes.products() + 'edit/image/' + id)
+    .map((res: Response) => res.json())
+    .map(body => body)
+    .catch((err) => this.persistenceService.handleError(err));
+  }
+
   createProduct(body: Product): Observable<any> {
     //let bodyString = JSON.stringify(body);
 

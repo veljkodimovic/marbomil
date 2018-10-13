@@ -22,7 +22,6 @@ export class VideoService {
 
   // Videos region
   getAllVideos(): Observable<any[]> {
-    console.log(routes.video());
     return this.http.get(routes.video())
       .map((res: Response) => res.json())
       .map(body =>
@@ -57,7 +56,7 @@ export class VideoService {
   updateVideo(body: Video): Observable<any> {
     // let bodyString = JSON.stringify(body);
 
-    return this.http.put(routes.video() + body.id, body)
+    return this.http.put(routes.video(), body)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }

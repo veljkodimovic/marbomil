@@ -97,6 +97,7 @@
             </div>
           </div>
 
+          
         </div>
       </div>
       <div class="col-md-12">
@@ -116,8 +117,8 @@
             <div *ngIf="!data.image" id="preview" class="initial-image image-collections preview"></div>
             <div id="preview" class=" image-collections preview">
               <span class="result rounded">
-          <img *ngIf="data.image"  class="preview-size" style="max-height: 240px;" [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
-        </span>
+                <img *ngIf="data.image"  class="preview-size" style="max-height: 240px;" [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+              </span>
             </div>
           </div>
           <div class="col-sm-4 col-to-8">
@@ -135,10 +136,7 @@
             <label class="control-label" translate>Sve Slike Proizvoda</label>
             <div class="images-row">
               <a [ngClass]="{active: i==activeImageIndex}" *ngFor="let productImage of images;index as i">
-                <img *ngIf="!isEditMode; else editImage" style="width:180px; height:120px" id="image"  [src]="productImage.imageCrop" (click)="setActiveImage(productImage)">
-                <ng-template #editImage>
-                  <img style="width:180px; height:120px" id="image"  [src]="productImage.imageCropUrl" (click)="setActiveImage(productImage)">
-                </ng-template>
+                <img style="width:180px; height:120px" id="image"  [src]="productImage.imageCrop" (click)="setActiveImage(productImage)">
               </a>
             </div>
             <div class="image-buttons" style="margin-top: 20px;">

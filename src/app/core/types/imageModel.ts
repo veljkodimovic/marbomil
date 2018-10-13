@@ -8,4 +8,5 @@ export class ImageModel {
   isNew: boolean;
   isDirty: boolean;
   isDeleted: boolean;
+  productId: number;
 }

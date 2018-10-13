@@ -48,7 +48,7 @@ export class CatalogueService {
   updateCatalogue(body: Catalogue): Observable<any> {
     // let bodyString = JSON.stringify(body);
 
-    return this.http.put(routes.catalogue() + body.id, body)
+    return this.http.put(routes.catalogue(), body)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }

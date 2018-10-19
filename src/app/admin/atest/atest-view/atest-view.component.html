@@ -32,13 +32,13 @@
           <div class="form-group row">
             <label for="text" class="col-md-2 col-form-label">Tekst</label>
             <div class="col-md-10">
-              <textarea type="text" class="form-control" id="text" [(ngModel)]="atest.desc" name="desc"></textarea>
+              <textarea type="text" class="form-control" id="text" [(ngModel)]="atest.description" name="description"></textarea>
             </div>
           </div>
           <div class="form-group row">
             <label for="file" class="col-md-2 col-form-label">File</label>
             <div class="col-md-10">
-              <input type="file" class="form-control-file" id="file" (change)="onFileChange($event)" [(ngModel)]="atest.file" name="file">
+              <input #file type="file" class="form-control-file" id="file" (change)="onFileChange($event)"  name="file">
             </div>
           </div>
           <div class="row">

@@ -16,12 +16,13 @@ export class AtestViewComponent implements OnInit {
   @ViewChild(DeleteModalComponent)
   private modal: DeleteModalComponent;
   data: any;
-  atest: Atest = new Atest(0, '', '', '');
+  atest: Atest = new Atest(0, '', '', '', '');
   link: any;
   isLoading: boolean;
   isEditMode: boolean = true;
   disableSave: boolean = false;
   blockAll: boolean = false;
+  @ViewChild('file') file: ElementRef;
 
   constructor(private svc: AtestService,
               private renderer: Renderer,
@@ -53,7 +54,6 @@ export class AtestViewComponent implements OnInit {
     this.blockAll = true;
 
     if (this.isEditMode) {
-
       this.svc.updateAtest(this.atest)
         .finally(() => { this.isLoading = false; this.router.navigate(['/admin/atest']); })
         .subscribe((response: any) => {
@@ -73,22 +73,44 @@ export class AtestViewComponent implements OnInit {
     }
   }
 
-  onFileChange(event: any) {
+  calculateKBFromBytes(bytes: number): number {
+    return Math.round(bytes / 1024);
+  }
+
+  onFileChange($event: any) {
+    const re = /(?:\.([^.]+))?$/;
+
+    const file: File = $event.target.files[0];
+    const myReader: FileReader = new FileReader();
     const that = this;
-    console.log(that);
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      console.log(event);
-      that.atest.file = file;
-      console.log(that);
-      // this.atest.file.setValue(file);
-    }
+
+    myReader.onloadend = function (loadEvent: any) {
+      const sizeKb = that.calculateKBFromBytes(+loadEvent.loaded);
+      if (sizeKb > 1024) {
+        that.file.nativeElement.value = '';
+        that.notificationService.error('File size', 'Maximum file size should be 1MB.',
+          {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: false,
+            clickToClose: false,
+            maxLength: 100
+          });
+      } else {
+        that.atest.fileExtension =  '.' + re.exec(file.name)[1];
+        that.atest.file = loadEvent.target.result;
+        that.atest.file = that.atest.file.replace('data:application/pdf;base64,', '');
+
+      }
+
+    };
+    myReader.readAsDataURL(file);
   }
 
   handleResponse(response: any) {
     this.disableSave = false;
     if (!response.ok) {
-      const body = JSON.parse(response._body)
+      const body = JSON.parse(response._body);
       this.notificationService.error(body.title, body.description,
         {
           timeOut: 5000,

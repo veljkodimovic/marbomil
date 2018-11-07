@@ -1,6 +1,7 @@
 import { Component, OnInit, Renderer } from '@angular/core';
 import { Category } from '@app/core/types/category';
 import { Collection } from '@app/core/types/collection';
+import { PersistenceService } from '@app/core/persistence.service';
 import { finalize } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '@app/shop/categories/categories.service';
@@ -16,10 +17,13 @@ export class CategoryViewComponent implements OnInit {
   categoryData: Category[];
   collectionData: any = [];
   activeCategoryId: any;
+  private apiUrl: string;
 
   constructor(private svc: CategoryService, private renderer: Renderer,
+    private persistenceService: PersistenceService,
     private router: Router,
     private route: ActivatedRoute) {
+      this.apiUrl = persistenceService.apiUrl;
     this.activeCategoryId = parseInt(this.route.snapshot.paramMap.get('id'));
   }
 

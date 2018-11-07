@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Category } from '@app/core/types/category';
 import { Collection } from '@app/core/types/collection';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PersistenceService } from '@app/core/persistence.service';
 import { CollectionService } from '@app/shop/collections/collections.service';
 import { finalize } from 'rxjs/operators';
 
@@ -18,11 +19,14 @@ export class CollectionsComponent implements OnInit {
   collectionData: any = [];
   activeCollectionId: number;
   activeCategoryId: any;
+  private apiUrl: string;
 
   constructor(private svc: CollectionService,
     private router: Router,
+    private persistenceService: PersistenceService,
     private route: ActivatedRoute
   ) {
+    this.apiUrl = persistenceService.apiUrl;
     this.route.queryParams.subscribe(params => {
       this.activeCollectionId = parseInt(params['id']);
     });

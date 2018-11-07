@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Collection } from '@app/core/types/collection';
 import { Product } from '@app/core/types/product';
+import { PersistenceService } from '@app/core/persistence.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '@app/shop/product/product.service';
 
@@ -17,11 +18,14 @@ export class ProductComponent implements OnInit {
   collectionParentData: any[] = [];
   productData: any = [];
   activeCollectionId: number;
+  private apiUrl: string;
 
   constructor(private svc: ProductService,
+    private persistenceService: PersistenceService,
     private router: Router,
     private route: ActivatedRoute
   ) {
+    this.apiUrl = persistenceService.apiUrl;
     this.route.queryParams.subscribe(params => {
       this.activeCollectionId = parseInt(params['id']);
     });

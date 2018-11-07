@@ -1,6 +1,7 @@
 import {Component, OnInit, Input, ViewChild} from '@angular/core';
 import { CategoryService } from '@app/admin/categories/categories.service';
 import { Category } from '@app/core/types/category';
+import { PersistenceService } from '@app/core/persistence.service';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
@@ -14,15 +15,19 @@ import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 export class CategoryListComponent implements OnInit {
   @ViewChild(DeleteModalComponent)
   private modal: DeleteModalComponent;
+  private apiUrl: string;
   categoryData: Category[];
   categoryAllData: any = [];
 
   activeCategory: Category;
 
   constructor(private svc: CategoryService,
+    private persistenceService: PersistenceService,
     private router: Router,
     private modalService: NgbModal
-  ) { }
+  ) {
+    this.apiUrl = persistenceService.apiUrl;
+  }
 
   ngOnInit() {
     this.svc.getAllCategories().subscribe(data => {

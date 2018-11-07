@@ -1,5 +1,6 @@
 import { NgModule, Component, Renderer, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
+import { PersistenceService } from '@app/core/persistence.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { Product } from '@app/core/types/product';
@@ -19,10 +20,13 @@ export class ProductViewComponent implements OnInit {
   productCategory: Category;
   productCollection: Collection;
   productCollectionMain: Collection;
+  private apiUrl: string;
 
   constructor(private svc: ProductService, private renderer: Renderer,
+    private persistenceService: PersistenceService,
     private router: Router,
     private route: ActivatedRoute) {
+      this.apiUrl = persistenceService.apiUrl;
   }
 
   ngOnInit() {

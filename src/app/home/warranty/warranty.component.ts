@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Banner} from '@app/core/types/banner';
+import { PersistenceService } from '@app/core/persistence.service';
 import {BannerService} from '@app/admin/banner/banner.service';
 
 @Component({
@@ -10,8 +11,12 @@ import {BannerService} from '@app/admin/banner/banner.service';
 export class WarrantyComponent implements OnInit {
 
   banner: Banner;
+  private apiUrl: string;
 
-  constructor(private svc: BannerService) { }
+  constructor(private svc: BannerService,
+    private persistenceService: PersistenceService) {
+      this.apiUrl = persistenceService.apiUrl;
+    }
 
   ngOnInit() {
     this.svc.getBannerById(3).subscribe(data => {

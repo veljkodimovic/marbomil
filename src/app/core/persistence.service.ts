@@ -3,6 +3,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import  { AuthenticationService } from '../core/authentication/authentication.service';
 import { Router } from '@angular/router';
+import { environment } from '@env/environment';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -10,6 +11,8 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class PersistenceService {
   constructor(private http: Http, private authenticationService: AuthenticationService,   private router: Router) { }
+
+  apiUrl = environment.serverUrl;
 
  handleError(err: Response | any): Observable<any> {
 

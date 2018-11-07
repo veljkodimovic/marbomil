@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { CarouselService } from './carusel.service';
+import { PersistenceService } from '@app/core/persistence.service';
 
 @Component({
   selector: 'home-carousel',
@@ -9,10 +10,14 @@ import { CarouselService } from './carusel.service';
 })
 export class CarouselComponent implements OnInit {
 
+  private apiUrl: string;
   isLoading: boolean;
   slides: any = [];
 
-  constructor(private carouselService: CarouselService) { }
+  constructor(private carouselService: CarouselService,
+    private persistenceService: PersistenceService) {
+      this.apiUrl = persistenceService.apiUrl;
+    }
 
   ngOnInit() {
     this.isLoading = true;

@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Service} from '@app/core/types/service';
 import {Banner} from '@app/core/types/banner';
+import { PersistenceService } from '@app/core/persistence.service';
 import {ServiceService} from '@app/home/service/service.service';
 import {BannerService} from '@app/admin/banner/banner.service';
 import { } from '@types/googlemaps';
@@ -17,6 +18,7 @@ export class ServiceComponent implements OnInit {
   serviceMontenegro: Service[] = [];
   serviceRSrpska: Service[] = [];
   banner: Banner;
+  private apiUrl: string;
   @ViewChild('gmapSrb') gmapSrb: ElementRef;
   @ViewChild('gmapMcd') gmapMcd: ElementRef;
   @ViewChild('gmapMne') gmapMne: ElementRef;
@@ -27,7 +29,10 @@ export class ServiceComponent implements OnInit {
   mapBih: google.maps.Map;
 
   constructor(private svc: ServiceService,
-              private svcBanner: BannerService) { }
+    private persistenceService: PersistenceService,
+              private svcBanner: BannerService) {
+                this.apiUrl = persistenceService.apiUrl;
+              }
 
   ngOnInit() {
     const mapProp = {

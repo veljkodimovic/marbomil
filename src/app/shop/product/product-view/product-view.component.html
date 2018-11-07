@@ -21,8 +21,8 @@
 <div *ngIf="product" class="container single-product">
   <div class="row">
     <div class="col-sm-6">
-      <img *ngFor="let productImage of product.images" src="{{productImage.imageCropUrl}}" alt="{{product.title}}">
-      <img src="{{product.drawingImageUrl}}" alt="{{product.title}}">
+      <img *ngFor="let productImage of product.images" src="{{apiUrl}}/{{productImage.imageCropUrl}}" alt="{{product.title}}">
+      <img src="{{apiUrl}}/{{product.drawingImageUrl}}" alt="{{product.title}}">
     </div>
     <div class="col-sm-6">
       <h1>{{product.title}}</h1>

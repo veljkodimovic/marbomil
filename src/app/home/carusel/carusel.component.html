@@ -1,6 +1,6 @@
 <ngb-carousel>
   <ng-template ngbSlide *ngFor="let banner of slides">
-    <img class="d-block w-100" src="{{banner.imageCropUrl}}" (click)="goTo(banner)">
+    <img class="d-block w-100" src="{{apiUrl}}/{{banner.imageCropUrl}}" (click)="goTo(banner)">
   </ng-template>
   <ng-template ngbSlide *ngIf="slides.length == 0">
     <img class="d-block w-100" src="../../assets/images/mainBanner.jpg" alt="First slide">

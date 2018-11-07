@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import { VideoService } from '../video.service';
 import { Router } from '@angular/router';
 import { Video } from '@app/core/types/video';
+import { PersistenceService } from '@app/core/persistence.service';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 
@@ -13,13 +14,17 @@ import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 export class VideoListComponent implements OnInit {
   @ViewChild(DeleteModalComponent)
   private modal: DeleteModalComponent;
+  private apiUrl: string;
   videoData: Video[];
 
   activeVideo: Video;
 
   constructor(private svc: VideoService,
+    private persistenceService: PersistenceService,
     private router: Router,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal) {
+      this.apiUrl = persistenceService.apiUrl;
+    }
 
   ngOnInit() {
     this.svc.getAllVideos().subscribe(data => {

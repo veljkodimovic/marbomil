@@ -19,7 +19,7 @@
       <div class="row categories-list">
         <div class="col-sm-4 categories-list-item content-box" *ngFor="let collection of getCollectionsById(activeCategoryId)">
           <a (click)="goToCollection(collection)">
-            <img src="{{collection.imageCropUrl}}" alt="{{collection.title}}">
+            <img src="{{apiUrl}}/{{collection.imageCropUrl}}" alt="{{collection.title}}">
             <div class="content-box-description">
               <h5>{{collection.title}}</h5>
             </div>

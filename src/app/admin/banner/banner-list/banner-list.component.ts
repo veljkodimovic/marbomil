@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { BannerService } from '../banner.service';
 import { Router } from '@angular/router';
 import { Banner } from '@app/core/types/banner';
+import { PersistenceService } from '@app/core/persistence.service';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 
@@ -13,14 +14,18 @@ import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 export class BannerListComponent implements OnInit {
   @ViewChild(DeleteModalComponent)
   private modal: DeleteModalComponent;
+  private apiUrl: string;
   bannerData: Banner[];
 
   activeBanner: Banner;
 
   constructor(private svc: BannerService,
+    private persistenceService: PersistenceService,
     private router: Router,
     private modalService: NgbModal
-  ) { }
+  ) {
+    this.apiUrl = persistenceService.apiUrl;
+  }
 
   ngOnInit() {
     this.svc.getAllBanners().subscribe(data => {

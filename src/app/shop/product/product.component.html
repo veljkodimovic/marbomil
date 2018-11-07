@@ -16,7 +16,7 @@
       <div class="row categories-list">
         <div class="col-sm-4 product-categories-item content-box" *ngFor="let product of getProductsByCollection(activeCollectionId)">
           <a (click)="goToProduct(product)">
-            <img src="{{product.images[0].imageCropUrl}}" alt="{{product.title}}">
+            <img src="{{apiUrl}}/{{product.images[0].imageCropUrl}}" alt="{{product.title}}">
             <div class="content-box-description">
               <h5>{{product.title}}</h5>
             </div>

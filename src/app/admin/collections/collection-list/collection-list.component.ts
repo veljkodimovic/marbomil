@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { CollectionService } from '../collections.service';
 import { Collection } from '@app/core/types/collection';
+import { PersistenceService } from '@app/core/persistence.service';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
@@ -14,14 +15,18 @@ import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 export class CollectionListComponent implements OnInit {
   @ViewChild(DeleteModalComponent)
   private modal: DeleteModalComponent;
+  private apiUrl: string;
   collectionData: any = [];
   categoryData: any = [];
 
   activeCollection: Collection;
 
   constructor(private svc: CollectionService,
+    private persistenceService: PersistenceService,
     private router: Router,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal) {
+      this.apiUrl = persistenceService.apiUrl;
+    }
 
   ngOnInit() {
     this.svc.getAllCollections().subscribe(data => {

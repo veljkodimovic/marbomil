@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Banner } from '@app/core/types/banner';
 import { Video } from '@app/core/types/video';
 import { VideoService } from '@app/home/video/video.service';
+import { PersistenceService } from '@app/core/persistence.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -12,9 +13,13 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class VideoComponent implements OnInit {
 
   banner: Banner;
+  private apiUrl: string;
   videoData: Video[];
   constructor(private svc: VideoService,
-              private sanitizer: DomSanitizer) { }
+    private persistenceService: PersistenceService,
+              private sanitizer: DomSanitizer) {
+                this.apiUrl = persistenceService.apiUrl;
+              }
 
   ngOnInit() {
     this.svc.getBannerById(4).subscribe(data => {

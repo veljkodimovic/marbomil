@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '@app/core/types/category';
+import { PersistenceService } from '@app/core/persistence.service';
 import { Collection } from '@app/core/types/collection';
 import { finalize } from 'rxjs/operators';
 import {Router} from '@angular/router';
@@ -15,10 +16,14 @@ export class CategoriesComponent implements OnInit {
   isLoading: boolean;
   categoryData: Category[];
   collectionData: any = [];
+  private apiUrl: string;
 
   constructor(private svc: CategoryService,
+    private persistenceService: PersistenceService,
               private router: Router
-  ) { }
+  ) {
+    this.apiUrl = persistenceService.apiUrl;
+  }
 
 
   ngOnInit() {

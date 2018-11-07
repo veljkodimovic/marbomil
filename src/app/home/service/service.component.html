@@ -32,6 +32,24 @@
       </div>
     </div>
     <div class="row service-block">
+      <div class="col-sm-3 offset-sm-1" *ngIf="serviceCroatia.length">
+        <h3 class="service-country">Repubika Hrvatska</h3>
+        <div class="service-item" *ngFor="let service of serviceCroatia">
+          <h4 class="service-city">{{service.city}}</h4>
+          <p>
+            {{service.title}} <br>
+            {{service.street}} <br>
+            {{service.postal}} {{service.city}} <br>
+            Tel: <a href="tel:{{service.phone}}">{{service.phone}}</a> <br>
+            Email: <a href="mailto:{{service.email}}">{{service.email}}</a>
+          </p>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <div #gmapCro style="width:100%; height:400px;"></div>
+      </div>
+    </div>
+    <div class="row service-block">
       <div class="col-sm-3 offset-sm-1" *ngIf="serviceMacedonia.length">
         <h3 class="service-country">Makedonija</h3>
         <div class="service-item" *ngFor="let service of serviceMacedonia">

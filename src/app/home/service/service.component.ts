@@ -61,126 +61,136 @@ export class ServiceComponent implements OnInit {
           that.serviceRSrpska.push(service);
         }
       });
+      if (this.serviceSerbia.length) {
+        const boundsSrb = new google.maps.LatLngBounds();
+        this.mapSrb = new google.maps.Map(this.gmapSrb.nativeElement, mapProp);
+        const mapSrb = this.mapSrb;
+        const markers: any = [];
+        this.serviceSerbia.forEach(function (service: Service) {
+          if (parseFloat(service.latitude) > 0 && parseFloat(service.longitude) > 0) {
+            const latLng = {lat: parseFloat(service.latitude), lng: parseFloat(service.longitude)};
+            const marker = new google.maps.Marker({
+              position: latLng,
+              map: mapSrb
+            });
+            boundsSrb.extend(latLng);
+            markers.push(marker);
+          }
+        });
+        if (markers.length) {
+          this.mapSrb.fitBounds(boundsSrb);
+          this.mapSrb.setCenter(boundsSrb.getCenter());
+        } else {
+          this.gmapSrb.nativeElement.remove();
+        }
+      } else {
+        this.gmapSrb.nativeElement.parentNode.parentNode.remove();
+      }
+      if (this.serviceCroatia.length) {
+        const boundsCro = new google.maps.LatLngBounds();
+        this.mapCro = new google.maps.Map(this.gmapCro.nativeElement, mapProp);
+        const mapCro = this.mapCro;
+        const markers: any = [];
+        this.serviceMontenegro.forEach(function (service: Service) {
+          if (parseFloat(service.latitude) > 0 && parseFloat(service.longitude) > 0) {
+            const latLng = {lat: parseFloat(service.latitude), lng: parseFloat(service.longitude)};
+            const marker = new google.maps.Marker({
+              position: latLng,
+              map: mapCro
+            });
+            boundsCro.extend(latLng);
+            markers.push(marker);
+          }
+        });
+        if (markers.length) {
+          this.mapCro.fitBounds(boundsCro);
+          this.mapCro.setCenter(boundsCro.getCenter());
+        } else {
+          this.gmapCro.nativeElement.remove();
+        }
+      } else {
+        this.gmapCro.nativeElement.parentNode.parentNode.remove();
+      }
+      if (this.serviceMacedonia.length) {
+        const boundsMcd = new google.maps.LatLngBounds();
+        this.mapMcd = new google.maps.Map(this.gmapMcd.nativeElement, mapProp);
+        const mapMcd = this.mapMcd;
+        const markers: any = [];
+        this.serviceMacedonia.forEach(function (service: Service) {
+          if (parseFloat(service.latitude) > 0 && parseFloat(service.longitude) > 0) {
+            const latLng = {lat: parseFloat(service.latitude), lng: parseFloat(service.longitude)};
+            const marker = new google.maps.Marker({
+              position: latLng,
+              map: mapMcd
+            });
+            boundsMcd.extend(latLng);
+            markers.push(marker);
+          }
+        });
+        if (markers.length) {
+          this.mapMcd.fitBounds(boundsMcd);
+          this.mapMcd.setCenter(boundsMcd.getCenter());
+        } else {
+          this.gmapMcd.nativeElement.remove();
+        }
+      } else {
+        this.gmapMcd.nativeElement.parentNode.parentNode.remove();
+      }
+      if (this.serviceMontenegro.length) {
+        const boundsMne = new google.maps.LatLngBounds();
+        this.mapMne = new google.maps.Map(this.gmapMne.nativeElement, mapProp);
+        const mapMne = this.mapMne;
+        const markers: any = [];
+        this.serviceMontenegro.forEach(function (service: Service) {
+          if (parseFloat(service.latitude) > 0 && parseFloat(service.longitude) > 0) {
+            const latLng = {lat: parseFloat(service.latitude), lng: parseFloat(service.longitude)};
+            const marker = new google.maps.Marker({
+              position: latLng,
+              map: mapMne
+            });
+            boundsMne.extend(latLng);
+            markers.push(marker);
+          }
+        });
+        if (markers.length) {
+          this.mapMne.fitBounds(boundsMne);
+          this.mapMne.setCenter(boundsMne.getCenter());
+        } else {
+          this.gmapMne.nativeElement.remove();
+        }
+      } else {
+        this.gmapMne.nativeElement.parentNode.parentNode.remove();
+      }
+      if (this.serviceRSrpska.length) {
+        const boundsBih = new google.maps.LatLngBounds();
+        this.mapBih = new google.maps.Map(this.gmapBih.nativeElement, mapProp);
+        const mapBih = this.mapBih;
+        const markers: any = [];
+        this.serviceRSrpska.forEach(function (service: Service) {
+          if (parseFloat(service.latitude) > 0 && parseFloat(service.longitude) > 0) {
+            const latLng = {lat: parseFloat(service.latitude), lng: parseFloat(service.longitude)};
+            const marker = new google.maps.Marker({
+              position: latLng,
+              map: mapBih
+            });
+            boundsBih.extend(latLng);
+            markers.push(marker);
+          }
+        });
+        if (markers.length) {
+          this.mapBih.fitBounds(boundsBih);
+          this.mapBih.setCenter(boundsBih.getCenter());
+        } else {
+          this.gmapBih.nativeElement.remove();
+        }
+      } else {
+        this.gmapBih.nativeElement.parentNode.parentNode.remove();
+      }
+      this.svcBanner.getBannerById(2).subscribe(data => {
+        this.banner = data;
+      });
     });
 
-    if (this.serviceSerbia.length) {
-      const boundsSrb = new google.maps.LatLngBounds();
-      this.mapSrb = new google.maps.Map(this.gmapSrb.nativeElement, mapProp);
-      const mapSrb = this.mapSrb;
-      const markers: any = [];
-      this.serviceSerbia.forEach(function (service: Service) {
-        if (parseFloat(service.latitude) > 0 && parseFloat(service.longitude) > 0) {
-          const latLng = {lat: parseFloat(service.latitude), lng: parseFloat(service.longitude)};
-          const marker = new google.maps.Marker({
-            position: latLng,
-            map: mapSrb
-          });
-          boundsSrb.extend(latLng);
-          markers.push(marker);
-        }
-      });
-      if (markers.length) {
-        this.mapSrb.fitBounds(boundsSrb);
-        this.mapSrb.setCenter(boundsSrb.getCenter());
-      } else {
-        this.gmapSrb.nativeElement.remove();
-      }
-    }
-    if (this.serviceCroatia.length) {
-      const boundsCro = new google.maps.LatLngBounds();
-      this.mapCro = new google.maps.Map(this.gmapCro.nativeElement, mapProp);
-      const mapCro = this.mapCro;
-      const markers: any = [];
-      this.serviceMontenegro.forEach(function (service: Service) {
-        if (parseFloat(service.latitude) > 0 && parseFloat(service.longitude) > 0) {
-          const latLng = {lat: parseFloat(service.latitude), lng: parseFloat(service.longitude)};
-          const marker = new google.maps.Marker({
-            position: latLng,
-            map: mapCro
-          });
-          boundsCro.extend(latLng);
-          markers.push(marker);
-        }
-      });
-      if (markers.length) {
-        this.mapCro.fitBounds(boundsCro);
-        this.mapCro.setCenter(boundsCro.getCenter());
-      } else {
-        this.gmapCro.nativeElement.remove();
-      }
-    }
-    if (this.serviceMacedonia.length) {
-      const boundsMcd = new google.maps.LatLngBounds();
-      this.mapMcd = new google.maps.Map(this.gmapMcd.nativeElement, mapProp);
-      const mapMcd = this.mapMcd;
-      const markers: any = [];
-      this.serviceMacedonia.forEach(function (service: Service) {
-        if (parseFloat(service.latitude) > 0 && parseFloat(service.longitude) > 0) {
-          const latLng = {lat: parseFloat(service.latitude), lng: parseFloat(service.longitude)};
-          const marker = new google.maps.Marker({
-            position: latLng,
-            map: mapMcd
-          });
-          boundsMcd.extend(latLng);
-          markers.push(marker);
-        }
-      });
-      if (markers.length) {
-        this.mapMcd.fitBounds(boundsMcd);
-        this.mapMcd.setCenter(boundsMcd.getCenter());
-      } else {
-        this.gmapMcd.nativeElement.remove();
-      }
-    }
-    if (this.serviceMontenegro.length) {
-      const boundsMne = new google.maps.LatLngBounds();
-      this.mapMne = new google.maps.Map(this.gmapMne.nativeElement, mapProp);
-      const mapMne = this.mapMne;
-      const markers: any = [];
-      this.serviceMontenegro.forEach(function (service: Service) {
-        if (parseFloat(service.latitude) > 0 && parseFloat(service.longitude) > 0) {
-          const latLng = {lat: parseFloat(service.latitude), lng: parseFloat(service.longitude)};
-          const marker = new google.maps.Marker({
-            position: latLng,
-            map: mapMne
-          });
-          boundsMne.extend(latLng);
-          markers.push(marker);
-        }
-      });
-      if (markers.length) {
-        this.mapMne.fitBounds(boundsMne);
-        this.mapMne.setCenter(boundsMne.getCenter());
-      } else {
-        this.gmapMne.nativeElement.remove();
-      }
-    }
-    if (this.serviceRSrpska.length) {
-      const boundsBih = new google.maps.LatLngBounds();
-      this.mapBih = new google.maps.Map(this.gmapBih.nativeElement, mapProp);
-      const mapBih = this.mapBih;
-      const markers: any = [];
-      this.serviceRSrpska.forEach(function (service: Service) {
-        if (parseFloat(service.latitude) > 0 && parseFloat(service.longitude) > 0) {
-          const latLng = {lat: parseFloat(service.latitude), lng: parseFloat(service.longitude)};
-          const marker = new google.maps.Marker({
-            position: latLng,
-            map: mapBih
-          });
-          boundsBih.extend(latLng);
-          markers.push(marker);
-        }
-      });
-      if (markers.length) {
-        this.mapBih.fitBounds(boundsBih);
-        this.mapBih.setCenter(boundsBih.getCenter());
-      } else {
-        this.gmapBih.nativeElement.remove();
-      }
-    }
-    this.svcBanner.getBannerById(2).subscribe(data => {
-      this.banner = data;
-    });
   }
 
 }

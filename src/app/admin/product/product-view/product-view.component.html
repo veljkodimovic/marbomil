@@ -52,9 +52,7 @@
             <label for="parentCollection" class="col-md-2 col-form-label">Kolekcija</label>
             <div class="col-md-10">
               <select class="form-control" id="parentCollection" [(ngModel)]="product.collectionId" name="collectionId">
-                <optgroup *ngFor="let colParent of collectionsParents" label="{{colParent.title}}">
-                  <option  *ngFor="let col of getCollectionsById(colParent.id)" [ngValue]="col.id" name="col.title" >{{col.title}}</option>
-                </optgroup>
+                <option  *ngFor="let col of collections" [ngValue]="col.id" name="col.title" >{{col.title}}</option>
               </select>
             </div>
           </div>

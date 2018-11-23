@@ -30,17 +30,8 @@ export class CategoriesComponent implements OnInit {
     this.isLoading = true;
     const categoryAllData = {};
 
-    // this.svc.getAllCollections().subscribe(data => {
-    //   this.collectionData = data;
-    //   console.log('111');
-    //   console.log(this.collectionData);
-    //   this.collectionData = this.collectionData.filter((x: any) => x.parentCollectionId === null);
-    // });
-
     this.svc.getAllCategories().subscribe(data => {
       this.categoryData = data;
-      console.log('222');
-      console.log(this.categoryData);
     });
   }
 

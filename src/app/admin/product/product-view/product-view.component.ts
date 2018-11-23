@@ -10,6 +10,7 @@ import { Collection } from '../../../core/types/collection';
 import { Category } from '../../../core/types/category';
 import { ImageModel } from '../../../core/types/imageModel';
 import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal';
+import { PersistenceService } from '@app/core/persistence.service';
 import { ImageCropperModule } from 'ngx-image-cropper';
 
 
@@ -28,6 +29,7 @@ export class ProductViewComponent implements OnInit {
   cropperSettings: CropperSettings;
   @ViewChild(DeleteModalComponent)
   private modal: DeleteModalComponent;
+  private apiUrl: string;
   image: any;
   data: any;
   data2: any;
@@ -38,6 +40,7 @@ export class ProductViewComponent implements OnInit {
   setImageDrawing: boolean = false;
   originalImg: string = '';
   isEditMode: boolean = true;
+  isImageEdit: boolean = false;
   disableSave: boolean = false;
   blockAll: boolean = false;
   activeImageIndex: number = -1;
@@ -57,6 +60,7 @@ export class ProductViewComponent implements OnInit {
   fileType2: string;
   constructor(private svc: ProductService, private renderer: Renderer,
     private notificationService: NotificationsService,
+    private persistenceService: PersistenceService,
     private router: Router,
     private route: ActivatedRoute) {
     this.cropperSettings = new CropperSettings();
@@ -71,6 +75,7 @@ export class ProductViewComponent implements OnInit {
     this.cropperSettings.preserveSize = true;
     this.data = {};
     this.data2 = {};
+    this.apiUrl = persistenceService.apiUrl;
   }
 
   ngOnInit() {
@@ -96,26 +101,23 @@ export class ProductViewComponent implements OnInit {
   getProductDetails(): void {
     const id = this.route.snapshot.paramMap.get('id');
     const that = this;
+    this.isImageEdit = true;
     this.svc.getProductEditById(parseInt(id)).subscribe(data => {
       this.product = data;
-      console.log(this.product);
       let firstImage = true;
-      console.log('Slikeee', this.product.images);
       for (const value of this.product.images) {
         if (firstImage) {
           that.data.image = value.imageUrl;
           firstImage = false;
         }
-        value.imageCrop = value.imageCropUrl;
+        value.imageCrop = this.apiUrl + '/' + value.imageCropUrl;
         this.images.push(value);
       }
       that.data2.image = 'data:image/jpeg;base64,' + this.product.drawingImage;
-      console.log(that.data,that.data2);
       const image2: any = new Image();
       image2.src = that.data2.image;
       this.cropper2.settings = this.cropperSettings;
       this.cropper2.setImage(image2);
-      console.log('this.images = ', this.images);
     });
   }
 
@@ -159,6 +161,7 @@ export class ProductViewComponent implements OnInit {
         image.src = 'data:image/jpeg;base64,' + data.image;
         activeImage.image = image.src;
         activeImage.imageExtension = data.imageExtension;
+        this.isImageEdit = false;
         this.cropper.setImage(image);
       });
     } else {
@@ -183,7 +186,6 @@ export class ProductViewComponent implements OnInit {
 
 
   fileChangeListener($event: any) {
-    console.log('change');
     const image: any = new Image();
     const file: File = $event.target.files[0];
     this.fileType = file.name;
@@ -271,8 +273,6 @@ export class ProductViewComponent implements OnInit {
       }
 
       if (this.isEditMode) {
-        console.log(this.product);
-        console.log(this.images);
         for (const value of this.images) {
           if (value.image) {
             const imageString = value.image.split('base64,');
@@ -293,7 +293,6 @@ export class ProductViewComponent implements OnInit {
             });
           }
         }
-        console.log('Lidllll', this.product);
         this.svc.updateProduct(this.product)
           .finally(() => { this.isLoading = false; })
           .subscribe((response: any) => {
@@ -326,8 +325,6 @@ export class ProductViewComponent implements OnInit {
   handleResponse(response: any) {
     this.disableSave = false;
     if (!response.ok) {
-
-      console.log(response);
       const body = JSON.parse(response._body);
       this.notificationService.error(body.title, body.description,
         {

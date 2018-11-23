@@ -111,9 +111,7 @@
           </div>
           <div class="col-sm-4 col-to-8">
             <label class="control-label" translate>Pregled</label>
-
-            <div *ngIf="!data.image" id="preview" class="initial-image image-collections preview"></div>
-            <div id="preview" class=" image-collections preview">
+            <div id="preview" class=" YYY image-collections preview" *ngIf="!isImageEdit">
               <span class="result rounded">
                 <img *ngIf="data.image"  class="preview-size" style="max-height: 240px;" [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
               </span>

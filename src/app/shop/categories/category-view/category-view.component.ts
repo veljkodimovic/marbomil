@@ -34,7 +34,6 @@ export class CategoryViewComponent implements OnInit {
 
     this.svc.getAllCollections().subscribe(data => {
       this.collectionData = data;
-      this.collectionData = this.collectionData.filter((x: any) => x.parentCollectionId === null);
     });
 
     this.svc.getAllCategories().subscribe(data => {

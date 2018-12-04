@@ -110,48 +110,47 @@ export class VideoViewComponent implements OnInit {
   }
 
   saveOnClick() {
-    if (this.data.image) {
+    this.disableSave = true;
+    this.blockAll = true;
 
-      this.disableSave = true;
-      this.blockAll = true;
+    const imageString = this.data.image.split('base64,');
+    if (this.setImage) {
+      this.video.imageCrop = imageString[imageString.length - 1];
+      const imageStringOrig = this.originalImg.split('base64,');
+      this.video.image = imageStringOrig[imageStringOrig.length - 1];
+      this.video.imageExtension = this.fileType;
+    }
 
-      const imageString = this.data.image.split('base64,');
-      if (this.setImage) {
-        this.video.imageCrop = imageString[imageString.length - 1];
-        const imageStringOrig = this.originalImg.split('base64,');
-        this.video.image = imageStringOrig[imageStringOrig.length - 1];
-        this.video.imageExtension = this.fileType;
-      }
+    if (this.isEditMode) {
 
-      if (this.isEditMode) {
-
-        this.svc.updateVideo(this.video)
-          .finally(() => { this.isLoading = false; this.router.navigate(['/admin/video']); })
-          .subscribe((response: any) => {
-            this.blockAll = false;
-            this.handleResponse(response);
-          });
-      }
-      else {
-        this.svc.createVideo(this.video)
-          .finally(() => { this.isLoading = false; this.router.navigate(['/admin/video']); })
-          .subscribe((response: any) => {
-            this.blockAll = false;
-            this.handleResponse(response);
-            var id = +response._body;
-            this.video.id = id;
-          });
-      }
+      this.svc.updateVideo(this.video)
+        .finally(() => { this.isLoading = false; this.router.navigate(['/admin/video']); })
+        .subscribe((response: any) => {
+          this.blockAll = false;
+          this.handleResponse(response);
+        });
     } else {
-      this.notificationService.warn('Missing data', 'You need to add image!',
-        {
-          timeOut: 3000,
-          showProgressBar: true,
-          pauseOnHover: false,
-          clickToClose: false,
-          maxLength: 100
+      this.svc.createVideo(this.video)
+        .finally(() => { this.isLoading = false; this.router.navigate(['/admin/video']); })
+        .subscribe((response: any) => {
+          this.blockAll = false;
+          this.handleResponse(response);
+          var id = +response._body;
+          this.video.id = id;
         });
     }
+    // if (this.data.image) {
+    //
+    // } else {
+    //   this.notificationService.warn('Missing data', 'You need to add image!',
+    //     {
+    //       timeOut: 3000,
+    //       showProgressBar: true,
+    //       pauseOnHover: false,
+    //       clickToClose: false,
+    //       maxLength: 100
+    //     });
+    // }
   }
 
   handleResponse(response: any) {

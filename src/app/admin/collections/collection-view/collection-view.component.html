@@ -28,7 +28,7 @@
             <p class="form-control-static">Minimalna dimenzija slike je <span>900x600px</span>. Za slike većih dimenzija, razmera će biti sačuvana.</p>
           </div>
           <div [hidden]="true">
-            <input #fileInput type="file" id="imgFile" [hidden]="true" required (change)="fileChangeListener($event)">
+            <input #fileInput type="file" id="imgFile" [hidden]="true" (change)="fileChangeListener($event)">
           </div>
           <div class="image-buttons">
             <button class="btn btn-primary" translate (click)="uploadImage()">Dodaj Sliku</button>
@@ -51,15 +51,6 @@
             <div class="col-md-10">
               <input type="text" class="form-control" id="name" [(ngModel)]="collection.title" name="title">
               <input type="text" class="d-none" name="imageExtension" [(ngModel)]="collection.imageExtension" value=".jpg">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="parentCollectionId" class="col-md-2 col-form-label">Nad Kolekcija</label>
-            <div class="col-md-10">
-              <select class="form-control" id="parentCollectionId" [(ngModel)]="collection.parentCollectionId" name="parentCollectionId">
-                <option value=""></option>
-                <option  *ngFor="let col of collections;index as i" [ngValue]="col.id" name="col.title" >{{col.title}}</option>
-              </select>
             </div>
           </div>
           <div class="form-group row">

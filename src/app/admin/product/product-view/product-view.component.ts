@@ -2,7 +2,7 @@ import { NgModule, Component, Input, Output, EventEmitter, Renderer, ElementRef,
 import { ProductService } from '../product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 import { NotificationsService } from 'angular2-notifications';
 import { Product } from '../../../core/types/product';
@@ -11,7 +11,6 @@ import { Category } from '../../../core/types/category';
 import { ImageModel } from '../../../core/types/imageModel';
 import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal';
 import { PersistenceService } from '@app/core/persistence.service';
-import { ImageCropperModule } from 'ngx-image-cropper';
 
 
 @Component({
@@ -79,7 +78,7 @@ export class ProductViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.router.url.indexOf('new') != -1) {
+    if (this.router.url.indexOf('new') !== -1) {
       this.isEditMode = false;
     } else {
       this.isEditMode = true;
@@ -88,7 +87,6 @@ export class ProductViewComponent implements OnInit {
 
     this.svc.getAllCollections().subscribe((data: any) => {
       this.collections = data;
-      this.collectionsParents = this.collections.filter(x => x.parentCollectionId === null);
     });
 
     this.svc.getAllCategories().subscribe((data: any) => {
@@ -141,9 +139,9 @@ export class ProductViewComponent implements OnInit {
     }
     this.images.splice(this.activeImageIndex, 1);
     let index = 0;
-    for (const image of this.images) {
-      image.index = index;
-      image.isDirty = true;
+    for (const imageSingle of this.images) {
+      imageSingle.index = index;
+      imageSingle.isDirty = true;
       index++;
     }
 
@@ -233,7 +231,7 @@ export class ProductViewComponent implements OnInit {
   }
 
   cropped(event: any) {
-    const image = this.images.find(x => x.index == this.activeImageIndex);
+    const image = this.images.find(x => x.index === this.activeImageIndex);
     if (image) {
       image.imageCrop = this.data.image;
       if (image.id > 0) {
@@ -246,7 +244,6 @@ export class ProductViewComponent implements OnInit {
   saveOnClick() {
 
     this.product.images = [];
-    if (this.images.length > 0) {
       this.disableSave = true;
       this.blockAll = true;
       // let index = 0;
@@ -297,7 +294,7 @@ export class ProductViewComponent implements OnInit {
           .finally(() => { this.isLoading = false; })
           .subscribe((response: any) => {
             this.blockAll = false;
-            //this.handleResponse(response);
+            // this.handleResponse(response);
             this.router.navigate(['/admin/product']);
           });
       } else {
@@ -305,21 +302,22 @@ export class ProductViewComponent implements OnInit {
           .finally(() => { this.isLoading = false; })
           .subscribe((response: any) => {
             this.blockAll = false;
-            //this.handleResponse(response);
+            // this.handleResponse(response);
             this.router.navigate(['/admin/product']);
           });
       }
-
-    } else {
-      this.notificationService.warn('Missing data', 'You need to add at least one image!',
-        {
-          timeOut: 3000,
-          showProgressBar: true,
-          pauseOnHover: false,
-          clickToClose: false,
-          maxLength: 100
-        });
-    }
+    // if (this.images.length > 0) {
+    //
+    // } else {
+    //   this.notificationService.warn('Missing data', 'You need to add at least one image!',
+    //     {
+    //       timeOut: 3000,
+    //       showProgressBar: true,
+    //       pauseOnHover: false,
+    //       clickToClose: false,
+    //       maxLength: 100
+    //     });
+    // }
   }
 
   handleResponse(response: any) {
@@ -356,14 +354,6 @@ export class ProductViewComponent implements OnInit {
   removeImage2() {
     this.data2 = {};
     this.cropper2.reset();
-  }
-
-  getCollectionsById(id: number) {
-    if (this.collections.length > 0 && id > 0) {
-      return this.collections.filter((x: any) => x.parentCollectionId === id);
-    } else {
-      return [];
-    }
   }
 
 

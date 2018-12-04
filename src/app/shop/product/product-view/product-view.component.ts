@@ -40,9 +40,6 @@ export class ProductViewComponent implements OnInit {
       });
       this.svc.getCollectionById(this.product.collectionId).subscribe(data => {
         this.productCollectionMain = data;
-        this.svc.getCollectionById(this.productCollectionMain.parentCollectionId).subscribe(data => {
-          this.productCollection = data;
-        });
       });
     });
 

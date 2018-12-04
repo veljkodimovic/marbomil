@@ -44,17 +44,9 @@ export class CollectionsComponent implements OnInit {
     });
   }
 
-  getCollectionsById(id: number) {
-    if (this.collectionData.length > 0 && id > 0) {
-      return this.collectionData.filter((x: any) => x.parentCollectionId === id);
-    } else {
-      return [];
-    }
-  }
-
   getCollectionsByCatId(id: number) {
     if (this.collectionData.length > 0 && id > 0) {
-      return this.collectionData.filter((x: any) => x.categoryId === id && x.parentCollectionId === null);
+      return this.collectionData.filter((x: any) => x.categoryId === id);
     } else {
       return [];
     }

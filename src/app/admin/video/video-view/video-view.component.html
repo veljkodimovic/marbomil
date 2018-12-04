@@ -27,7 +27,7 @@
             <p class="form-control-static">Minimalna dimenzija slike je <span>600x400px</span>. Za veće rezolucije, razmera će biti sačuvana.</p>
           </div>
           <div [hidden]="true" class="file-upload">
-            <input #fileInput id="custom-input" [hidden]="true" required type="file" (change)="fileChangeListener($event)">
+            <input #fileInput id="custom-input" [hidden]="true" type="file" (change)="fileChangeListener($event)">
           </div>
           <div class="image-buttons">
             <div>

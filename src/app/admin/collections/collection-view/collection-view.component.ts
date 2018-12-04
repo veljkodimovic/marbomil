@@ -31,7 +31,7 @@ export class CollectionViewComponent implements OnInit {
   isLoading: boolean;
   cropperSettings: CropperSettings;
   isEditMode: boolean = false;
-  collection: Collection = new Collection(0, '', '', '', '', '', '.jpg', null, null);
+  collection: Collection = new Collection(0, '', '', '', '', '', '.jpg', null);
   collections: Collection[] = [];
   categories: any[] = [];
   products: any[];
@@ -67,7 +67,7 @@ export class CollectionViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.router.url.indexOf('new') != -1) {
+    if (this.router.url.indexOf('new') !== -1) {
       this.isEditMode = false;
     } else {
       this.isEditMode = true;
@@ -129,7 +129,7 @@ export class CollectionViewComponent implements OnInit {
   handleResponse(response: any) {
     this.disableSave = false;
     if (!response.ok) {
-      const body = JSON.parse(response._body)
+      const body = JSON.parse(response._body);
       this.notificationService.error(body.title, body.description,
         {
           timeOut: 5000,
@@ -152,60 +152,47 @@ export class CollectionViewComponent implements OnInit {
   }
 
   saveOnClick() {
-    if (this.data.image) {
+    this.disableSave = true;
+    this.blockAll = true;
 
-      this.disableSave = true;
-      this.blockAll = true;
-      if (this.collection.id === this.collection.parentCollectionId) {
-        this.collection.parentCollectionId = null;
-        this.notificationService.warn('Wrong parent data', 'You can not add this collection to parent collection!',
-          {
-            timeOut: 3000,
-            showProgressBar: true,
-            pauseOnHover: false,
-            clickToClose: false,
-            maxLength: 100
-          });
-        return;
-      }
+    const imageString = this.data.image.split('base64,');
+    if (this.setImage) {
+      this.collection.imageCrop = imageString[imageString.length - 1];
+      const imageStringOrig = this.originalImg.split('base64,');
+      this.collection.image = imageStringOrig[imageStringOrig.length - 1];
+      this.collection.imageExtension = this.fileType;
+    }
+    if (this.isEditMode) {
 
-      const imageString = this.data.image.split('base64,');
-      if (this.setImage) {
-        this.collection.imageCrop = imageString[imageString.length - 1];
-        const imageStringOrig = this.originalImg.split('base64,');
-        this.collection.image = imageStringOrig[imageStringOrig.length - 1];
-        this.collection.imageExtension = this.fileType;
-      }
-      if (this.isEditMode) {
-
-        this.svc.updateCollection(this.collection)
-          .finally(() => { this.isLoading = false; this.router.navigate(['/admin/collection']); })
-          .subscribe((response: any) => {
-            this.blockAll = false;
-            this.handleResponse(response);
-          });
-      }
-      else {
-        this.svc.createCollection(this.collection)
-          .finally(() => { this.isLoading = false; this.router.navigate(['/admin/collection']); })
-          .subscribe((response: any) => {
-            this.blockAll = false;
-            this.handleResponse(response);
-            var id = +response._body;
-            this.collection.id = id;
-
-          });
-      }
+      this.svc.updateCollection(this.collection)
+        .finally(() => { this.isLoading = false; this.router.navigate(['/admin/collection']); })
+        .subscribe((response: any) => {
+          this.blockAll = false;
+          this.handleResponse(response);
+        });
     } else {
-      this.notificationService.warn('Missing data', 'You need to add image!',
-        {
-          timeOut: 3000,
-          showProgressBar: true,
-          pauseOnHover: false,
-          clickToClose: false,
-          maxLength: 100
+      this.svc.createCollection(this.collection)
+        .finally(() => { this.isLoading = false; this.router.navigate(['/admin/collection']); })
+        .subscribe((response: any) => {
+          this.blockAll = false;
+          this.handleResponse(response);
+          const id = +response._body;
+          this.collection.id = id;
+
         });
     }
+    // if (this.data.image) {
+    //
+    // } else {
+    //   this.notificationService.warn('Missing data', 'You need to add image!',
+    //     {
+    //       timeOut: 3000,
+    //       showProgressBar: true,
+    //       pauseOnHover: false,
+    //       clickToClose: false,
+    //       maxLength: 100
+    //     });
+    // }
   }
 
   openModal() {

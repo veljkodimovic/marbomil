@@ -115,50 +115,50 @@ export class BannerViewComponent implements OnInit {
   }
 
   saveOnClick() {
-    if (this.data.image) {
+    this.disableSave = true;
+    this.blockAll = true;
 
-      this.disableSave = true;
-      this.blockAll = true;
-
-      const imageString = this.data.image.split('base64,');
-      if (this.setImage) {
-        this.banner.imageCrop = imageString[imageString.length - 1];
-        const imageStringOrig = this.originalImg.split('base64,');
-        this.banner.image = imageStringOrig[imageStringOrig.length - 1];
-        this.banner.imageExtension = this.fileType;
+    const imageString = this.data.image.split('base64,');
+    if (this.setImage) {
+      this.banner.imageCrop = imageString[imageString.length - 1];
+      const imageStringOrig = this.originalImg.split('base64,');
+      this.banner.image = imageStringOrig[imageStringOrig.length - 1];
+      this.banner.imageExtension = this.fileType;
+    }
+    if (this.isEditMode) {
+      if (!this.setImage) {
+        this.banner.image = null;
+        this.banner.imageCrop = null;
       }
-      if (this.isEditMode) {
-        if (!this.setImage) {
-          this.banner.image = null;
-          this.banner.imageCrop = null;
-        }
-        this.svc.updateBanner(this.banner)
-          .finally(() => { this.isLoading = false; this.router.navigate(['/admin/banners']); })
-          .subscribe((response: any) => {
-            this.blockAll = false;
-            this.handleResponse(response);
-          });
-      } else {
-        this.svc.createBanner(this.banner)
-          .finally(() => { this.isLoading = false; this.router.navigate(['/admin/banners']); })
-          .subscribe((response: any) => {
-            this.blockAll = false;
-            this.handleResponse(response);
-            const id = +response._body;
-            this.banner.id = id;
-
-          });
-      }
+      this.svc.updateBanner(this.banner)
+        .finally(() => { this.isLoading = false; this.router.navigate(['/admin/banners']); })
+        .subscribe((response: any) => {
+          this.blockAll = false;
+          this.handleResponse(response);
+        });
     } else {
-      this.notificationService.warn('Missing data', 'You need to add image!',
-        {
-          timeOut: 3000,
-          showProgressBar: true,
-          pauseOnHover: false,
-          clickToClose: false,
-          maxLength: 100
+      this.svc.createBanner(this.banner)
+        .finally(() => { this.isLoading = false; this.router.navigate(['/admin/banners']); })
+        .subscribe((response: any) => {
+          this.blockAll = false;
+          this.handleResponse(response);
+          const id = +response._body;
+          this.banner.id = id;
+
         });
     }
+    // if (this.data.image) {
+    //
+    // } else {
+    //   this.notificationService.warn('Missing data', 'You need to add image!',
+    //     {
+    //       timeOut: 3000,
+    //       showProgressBar: true,
+    //       pauseOnHover: false,
+    //       clickToClose: false,
+    //       maxLength: 100
+    //     });
+    // }
   }
 
   handleResponse(response: any) {

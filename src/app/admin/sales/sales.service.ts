@@ -22,7 +22,6 @@ export class SalesService {
 
   // Sales region
   getAllSales(): Observable<any[]> {
-    console.log(routes.sales());
     return this.http.get(routes.sales())
       .map((res: Response) => res.json())
       .map(body =>

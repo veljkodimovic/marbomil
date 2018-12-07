@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Collection } from '@app/core/types/collection';
+import { Category } from '@app/core/types/category';
 import { Product } from '@app/core/types/product';
 import { PersistenceService } from '@app/core/persistence.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,9 +16,11 @@ export class ProductComponent implements OnInit {
 
   isLoading: boolean;
   collectionData: any = [];
-  collectionParentData: any[] = [];
+  collectionsAll: any = [];
+  categoryData: Category[];
   productData: any = [];
   activeCollectionId: number;
+  activeCategoryId: any;
   private apiUrl: string;
 
   constructor(private svc: ProductService,
@@ -28,15 +31,28 @@ export class ProductComponent implements OnInit {
     this.apiUrl = persistenceService.apiUrl;
     this.route.queryParams.subscribe(params => {
       this.activeCollectionId = parseInt(params['id']);
+      this.activeCategoryId = parseInt(params['categoryId']);
     });
   }
 
   ngOnInit() {
     this.isLoading = true;
 
-    this.svc.getAllCollections().subscribe(data => {
-      this.collectionData = data;
-      const activeCollection = this.collectionData.find((x: any) => x.id === this.activeCollectionId);
+    if (this.activeCollectionId) {
+      this.svc.getAllCollections().subscribe(data => {
+        this.collectionData = data;
+        this.collectionsAll = data;
+        const activeCollection = this.collectionData.find((x: any) => x.id === this.activeCollectionId);
+        this.activeCategoryId = activeCollection.categoryId;
+      });
+    } else {
+      this.svc.getAllCollections().subscribe(data => {
+        this.collectionsAll = data;
+      });
+    }
+
+    this.svc.getAllCategories().subscribe(data => {
+      this.categoryData = data;
     });
 
     this.svc.getProducts().subscribe(data => {
@@ -44,19 +60,34 @@ export class ProductComponent implements OnInit {
     });
   }
 
-
+  getCollectionsById(id: number) {
+    if (this.collectionsAll.length > 0 && id > 0) {
+      return this.collectionsAll.filter((x: any) => x.categoryId === id);
+    }
+    return [];
+  }
 
   getCollectionById(id: number) {
-    if (this.collectionData.length > 0 && id > 0) {
-      return this.collectionData.find((x: any) => x.categoryId === id);
+    if (this.collectionsAll.length > 0 && id > 0) {
+      return this.collectionsAll.find((x: any) => x.categoryId === id);
     }
   }
 
-  getProductsByCollection(id: number) {
-    if (this.productData.length > 0 && id > 0) {
-      return this.productData.filter((x: any) => x.collectionId === id);
+  getProductsByParent() {
+    if (this.activeCollectionId) {
+      if (this.productData.length > 0) {
+        return this.productData.filter((x: any) => x.collectionId === this.activeCollectionId);
+      } else {
+        return [];
+      }
+    } else if (this.activeCategoryId) {
+      if (this.productData.length > 0) {
+        return this.productData.filter((x: any) => x.categoryId === this.activeCategoryId);
+      } else {
+        return [];
+      }
     } else {
-      return [];
+      return this.productData;
     }
   }
 
@@ -70,6 +101,16 @@ export class ProductComponent implements OnInit {
 
   goToProduct(product: Product) {
     this.router.navigate(['/product/' + product.id]);
+  }
+
+  goToCategory(category: Category) {
+    const categoryCount = this.getCollectionsById(category.id);
+    if (categoryCount.length) {
+      this.router.navigate(['/categories/' + category.id]);
+      this.activeCategoryId = category.id;
+    } else {
+      this.router.navigate(['/products/list'], { queryParams: { categoryId: category.id } });
+    }
   }
 
 }

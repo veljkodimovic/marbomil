@@ -23,7 +23,6 @@ export class ServiceListComponent implements OnInit {
 
   ngOnInit() {
     this.svc.getAllServices().subscribe(data => {
-      console.log(data);
       this.serviceData = data;
     });
   }

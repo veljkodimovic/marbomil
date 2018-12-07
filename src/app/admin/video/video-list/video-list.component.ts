@@ -28,7 +28,6 @@ export class VideoListComponent implements OnInit {
 
   ngOnInit() {
     this.svc.getAllVideos().subscribe(data => {
-      console.log(data);
       this.videoData = data;
     });
   }

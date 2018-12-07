@@ -1,4 +1,4 @@
-import { NgModule, Component, Input, Output, EventEmitter, Renderer, ElementRef, forwardRef, OnInit, ViewChild } from '@angular/core';
+import { NgModule, Component, Renderer, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ProductService } from '../product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -32,7 +32,7 @@ export class ProductViewComponent implements OnInit {
   image: any;
   data: any;
   data2: any;
-  product: Product = new Product(0, '', '', '', 0, 0, '', 0, 0, 0, 0, 0, 0, [], '', '', '.jpg');
+  product: Product = new Product(0, '', '', '', 0, 0, '', null, null, 0, 0, 0, 0, [], '', '', '.jpg');
   link: any;
   isLoading: boolean;
   setImage: boolean = false;
@@ -49,8 +49,9 @@ export class ProductViewComponent implements OnInit {
   productImagesBases: any[] = [];
   cropedOriginalImages: any[] = [];
   collections: Collection[] = [];
-  collectionsParents: Collection[] = [];
+  collectionData: Collection[] = [];
   collectionsRoot: Collection[] = [];
+  collectionDisabled: boolean = true;
   categories: Category[] = [];
   activeImageIndexNew: number = -1;
   activeImageIndexUpdated: number = -1;
@@ -86,7 +87,7 @@ export class ProductViewComponent implements OnInit {
     }
 
     this.svc.getAllCollections().subscribe((data: any) => {
-      this.collections = data;
+      this.collectionData = data;
     });
 
     this.svc.getAllCategories().subscribe((data: any) => {
@@ -96,12 +97,20 @@ export class ProductViewComponent implements OnInit {
 
   }
 
+  updateCollections() {
+    const categoryId = this.product.categoryId;
+    this.collections = this.collectionData;
+    this.collections = this.collections.filter((x: any) => x.categoryId === categoryId);
+    this.collectionDisabled = this.collections.length ? false : true;
+  }
+
   getProductDetails(): void {
     const id = this.route.snapshot.paramMap.get('id');
     const that = this;
     this.isImageEdit = true;
     this.svc.getProductEditById(parseInt(id)).subscribe(data => {
       this.product = data;
+      this.updateCollections();
       let firstImage = true;
       for (const value of this.product.images) {
         if (firstImage) {
@@ -247,26 +256,37 @@ export class ProductViewComponent implements OnInit {
       this.disableSave = true;
       this.blockAll = true;
       // let index = 0;
-      // let indexFile = 0;
+      // let indexFile = 0;if (this.images.length > 0) {
       if (!this.isEditMode) {
-        for (const value of this.images) {
-          const imageString = value.imageCrop.split('base64,');
-          const imageStringOrig = this.images[value.index].image.split('base64,');
+        if (this.images.length > 0) {
+          for (const value of this.images) {
+            const imageString = value.imageCrop.split('base64,');
+            const imageStringOrig = this.images[value.index].image.split('base64,');
+            this.product.images.push({
+              id: 0, index: value.index,
+              imageCrop: imageString[imageString.length - 1],
+              image: imageStringOrig[imageStringOrig.length - 1],
+              imageExtension: value.imageExtension
+            });
+          }
+        } else {
           this.product.images.push({
-            id: 0, index: value.index,
-            imageCrop: imageString[imageString.length - 1],
-            image: imageStringOrig[imageStringOrig.length - 1],
-            imageExtension: value.imageExtension
-          });
+            id: 0, index: 0,
+            image: this.persistenceService.placeholderImage,
+            imageCrop: this.persistenceService.placeholderImage,
+            imageExtension: this.persistenceService.placeholderExtension
+          })
         }
       }
 
-      const imageString2 = this.data2.image.split('base64,');
-      if (this.setImage) {
-        this.product.drawingImage = imageString2[imageString2.length - 1];
-        this.product.drawingImageExtension = this.fileType2;
-        //  var imageStringOrig = this.originalImg.split('base64,');
-        // this.collection.image = imageStringOrig[imageStringOrig.length - 1];
+      if (this.data2.image) {
+        const imageString2 = this.data2.image.split('base64,');
+        if (this.setImage) {
+          this.product.drawingImage = imageString2[imageString2.length - 1];
+          this.product.drawingImageExtension = this.fileType2;
+          //  var imageStringOrig = this.originalImg.split('base64,');
+          // this.collection.image = imageStringOrig[imageStringOrig.length - 1];
+        }
       }
 
       if (this.isEditMode) {
@@ -294,16 +314,16 @@ export class ProductViewComponent implements OnInit {
           .finally(() => { this.isLoading = false; })
           .subscribe((response: any) => {
             this.blockAll = false;
-            // this.handleResponse(response);
-            this.router.navigate(['/admin/product']);
+            this.handleResponse(response);
+            // this.router.navigate(['/admin/product']);
           });
       } else {
         this.svc.createProduct(this.product)
           .finally(() => { this.isLoading = false; })
           .subscribe((response: any) => {
             this.blockAll = false;
-            // this.handleResponse(response);
-            this.router.navigate(['/admin/product']);
+            this.handleResponse(response);
+            // this.router.navigate(['/admin/product']);
           });
       }
     // if (this.images.length > 0) {
@@ -324,7 +344,21 @@ export class ProductViewComponent implements OnInit {
     this.disableSave = false;
     if (!response.ok) {
       const body = JSON.parse(response._body);
-      this.notificationService.error(body.title, body.description,
+      if (body.title) {
+        this.notificationService.error(body.title, body.description,
+          {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: false,
+            clickToClose: false,
+            maxLength: 100
+          });
+      } else {
+        let description = '';
+        for (const errorDescription of body) {
+          description += errorDescription + '<br>';
+        }
+        this.notificationService.warn('Greška pri snimanju', description,
         {
           timeOut: 5000,
           showProgressBar: true,
@@ -332,8 +366,9 @@ export class ProductViewComponent implements OnInit {
           clickToClose: false,
           maxLength: 100
         });
+      }
     } else {
-      this.notificationService.success('Success', 'Offer saved successfully.',
+      this.notificationService.success('Success', 'Product saved successfully.',
         {
           timeOut: 5000,
           showProgressBar: true,
@@ -341,8 +376,11 @@ export class ProductViewComponent implements OnInit {
           clickToClose: false,
           maxLength: 100
         });
+        setTimeout(() => {
+          this.router.navigate(['/admin/product']);
+        }, 5000);
+        this.isEditMode = true;
     }
-    this.isEditMode = true;
   }
 
   uploadImage2() {

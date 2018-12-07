@@ -19,6 +19,7 @@ export class ProductService {
 
   activeProduct: Product;
   headers: Headers;
+  collectionData: any = [];
 
   constructor(private http: Http,
     private persistenceService: PersistenceService) { }

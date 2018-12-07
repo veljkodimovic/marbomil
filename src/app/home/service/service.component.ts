@@ -51,9 +51,9 @@ export class ServiceComponent implements OnInit {
       this.servicesAll.forEach(function (service: Service) {
         if (service.country === 'Srbija') {
           that.serviceSerbia.push(service);
-        } else if (service.country === 'Republika Hrvatska') {
+        } else if (service.country === 'Hrvatska') {
           that.serviceCroatia.push(service);
-        } else if (service.country === 'Makedonije') {
+        } else if (service.country === 'Makedonija') {
           that.serviceMacedonia.push(service);
         } else if (service.country === 'Crna Gora') {
           that.serviceMontenegro.push(service);

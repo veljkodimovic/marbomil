@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Banner } from '@app/core/types/banner';
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 import { NotificationsService } from 'angular2-notifications';
+import { PersistenceService } from '@app/core/persistence.service';
 import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 import { environment } from '@env/environment';
 
@@ -35,6 +36,7 @@ export class BannerViewComponent implements OnInit {
   constructor(private svc: BannerService,
     private renderer: Renderer,
     private notificationService: NotificationsService,
+    private persistenceService: PersistenceService,
     private router: Router,
     private route: ActivatedRoute) {
     this.cropperSettings = new CropperSettings();
@@ -118,12 +120,18 @@ export class BannerViewComponent implements OnInit {
     this.disableSave = true;
     this.blockAll = true;
 
-    const imageString = this.data.image.split('base64,');
-    if (this.setImage) {
-      this.banner.imageCrop = imageString[imageString.length - 1];
-      const imageStringOrig = this.originalImg.split('base64,');
-      this.banner.image = imageStringOrig[imageStringOrig.length - 1];
-      this.banner.imageExtension = this.fileType;
+    if (!this.data.image && !this.isEditMode) {
+      this.banner.image = this.persistenceService.placeholderImage;
+      this.banner.imageCrop = this.persistenceService.placeholderImage;
+      this.banner.imageExtension = this.persistenceService.placeholderExtension;
+    } else {
+      const imageString = this.data.image.split('base64,');
+      if (this.setImage) {
+        this.banner.imageCrop = imageString[imageString.length - 1];
+        const imageStringOrig = this.originalImg.split('base64,');
+        this.banner.image = imageStringOrig[imageStringOrig.length - 1];
+        this.banner.imageExtension = this.fileType;
+      }
     }
     if (this.isEditMode) {
       if (!this.setImage) {
@@ -131,41 +139,42 @@ export class BannerViewComponent implements OnInit {
         this.banner.imageCrop = null;
       }
       this.svc.updateBanner(this.banner)
-        .finally(() => { this.isLoading = false; this.router.navigate(['/admin/banners']); })
+        .finally(() => { this.isLoading = false; })
         .subscribe((response: any) => {
           this.blockAll = false;
           this.handleResponse(response);
         });
     } else {
       this.svc.createBanner(this.banner)
-        .finally(() => { this.isLoading = false; this.router.navigate(['/admin/banners']); })
+        .finally(() => { this.isLoading = false;  })
         .subscribe((response: any) => {
           this.blockAll = false;
           this.handleResponse(response);
           const id = +response._body;
           this.banner.id = id;
-
         });
     }
-    // if (this.data.image) {
-    //
-    // } else {
-    //   this.notificationService.warn('Missing data', 'You need to add image!',
-    //     {
-    //       timeOut: 3000,
-    //       showProgressBar: true,
-    //       pauseOnHover: false,
-    //       clickToClose: false,
-    //       maxLength: 100
-    //     });
-    // }
   }
 
   handleResponse(response: any) {
     this.disableSave = false;
     if (!response.ok) {
       const body = JSON.parse(response._body);
-      this.notificationService.error(body.title, body.description,
+      if (body.title) {
+        this.notificationService.error(body.title, body.description,
+          {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: false,
+            clickToClose: false,
+            maxLength: 100
+          });
+      } else {
+        let description = '';
+        for (const errorDescription of body) {
+          description += errorDescription + '<br>';
+        }
+        this.notificationService.warn('Greška pri snimanju', description,
         {
           timeOut: 5000,
           showProgressBar: true,
@@ -173,6 +182,7 @@ export class BannerViewComponent implements OnInit {
           clickToClose: false,
           maxLength: 100
         });
+      }
     } else {
       this.notificationService.success('Success', 'Banner saved successfully.',
         {
@@ -182,6 +192,9 @@ export class BannerViewComponent implements OnInit {
           clickToClose: false,
           maxLength: 100
         });
+      setTimeout(() => {
+        this.router.navigate(['/admin/banners']);
+      }, 5000);
       this.isEditMode = true;
     }
   }

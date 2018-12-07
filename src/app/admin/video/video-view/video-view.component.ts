@@ -7,6 +7,7 @@ import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 import { NotificationsService } from 'angular2-notifications';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
+import { PersistenceService } from '@app/core/persistence.service';
 
 @Component({
   selector: 'app-video-view',
@@ -36,6 +37,7 @@ export class VideoViewComponent implements OnInit {
   constructor(private svc: VideoService,
               private renderer: Renderer,
               private notificationService: NotificationsService,
+              private persistenceService: PersistenceService,
               private router: Router,
               private route: ActivatedRoute,
               private sanitizer: DomSanitizer) {
@@ -55,8 +57,7 @@ export class VideoViewComponent implements OnInit {
   ngOnInit() {
     if (this.router.url.indexOf('new') != -1) {
       this.isEditMode = false;
-    }
-    else {
+    } else {
       this.isEditMode = true;
       this.getVideoDetails();
     }
@@ -91,6 +92,10 @@ export class VideoViewComponent implements OnInit {
     this.cropper.reset();
   }
 
+  updateEmbededVideo() {
+    this.videoUrl = 'https://www.youtube.com/embed/' + this.video.url;
+    this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.videoUrl);
+  }
 
   getVideoDetails(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -113,51 +118,59 @@ export class VideoViewComponent implements OnInit {
     this.disableSave = true;
     this.blockAll = true;
 
-    const imageString = this.data.image.split('base64,');
-    if (this.setImage) {
-      this.video.imageCrop = imageString[imageString.length - 1];
-      const imageStringOrig = this.originalImg.split('base64,');
-      this.video.image = imageStringOrig[imageStringOrig.length - 1];
-      this.video.imageExtension = this.fileType;
+    if (!this.data.image && !this.isEditMode) {
+      this.video.image = this.persistenceService.placeholderImage;
+      this.video.imageCrop = this.persistenceService.placeholderImage;
+      this.video.imageExtension = this.persistenceService.placeholderExtension;
+    } else {
+      const imageString = this.data.image.split('base64,');
+      if (this.setImage) {
+        this.video.imageCrop = imageString[imageString.length - 1];
+        const imageStringOrig = this.originalImg.split('base64,');
+        this.video.image = imageStringOrig[imageStringOrig.length - 1];
+        this.video.imageExtension = this.fileType;
+      }
     }
 
     if (this.isEditMode) {
 
       this.svc.updateVideo(this.video)
-        .finally(() => { this.isLoading = false; this.router.navigate(['/admin/video']); })
+        .finally(() => { this.isLoading = false; })
         .subscribe((response: any) => {
           this.blockAll = false;
           this.handleResponse(response);
         });
     } else {
       this.svc.createVideo(this.video)
-        .finally(() => { this.isLoading = false; this.router.navigate(['/admin/video']); })
+        .finally(() => { this.isLoading = false; })
         .subscribe((response: any) => {
           this.blockAll = false;
           this.handleResponse(response);
-          var id = +response._body;
+          const id = +response._body;
           this.video.id = id;
         });
     }
-    // if (this.data.image) {
-    //
-    // } else {
-    //   this.notificationService.warn('Missing data', 'You need to add image!',
-    //     {
-    //       timeOut: 3000,
-    //       showProgressBar: true,
-    //       pauseOnHover: false,
-    //       clickToClose: false,
-    //       maxLength: 100
-    //     });
-    // }
   }
 
   handleResponse(response: any) {
     this.disableSave = false;
     if (!response.ok) {
-      var body = JSON.parse(response._body)
-      this.notificationService.error(body.title, body.description,
+      const body = JSON.parse(response._body)
+      if (body.title) {
+        this.notificationService.error(body.title, body.description,
+          {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: false,
+            clickToClose: false,
+            maxLength: 100
+          });
+      } else {
+        let description = '';
+        for (const errorDescription of body) {
+          description += errorDescription + '<br>';
+        }
+        this.notificationService.warn('Greška pri snimanju', description,
         {
           timeOut: 5000,
           showProgressBar: true,
@@ -165,6 +178,7 @@ export class VideoViewComponent implements OnInit {
           clickToClose: false,
           maxLength: 100
         });
+      }
     } else {
       this.notificationService.success('Success', 'Video saved successfully.',
         {
@@ -174,6 +188,9 @@ export class VideoViewComponent implements OnInit {
           clickToClose: false,
           maxLength: 100
         });
+      setTimeout(() => {
+        this.router.navigate(['/admin/video']);
+      }, 5000);
       this.isEditMode = true;
     }
   }

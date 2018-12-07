@@ -56,17 +56,15 @@ export class CatalogueViewComponent implements OnInit {
     this.blockAll = true;
 
     if (this.isEditMode) {
-
       this.svc.updateCatalogue(this.catalogue)
-        .finally(() => { this.isLoading = false; this.router.navigate(['/admin/catalogue']); })
+        .finally(() => { this.isLoading = false; })
         .subscribe((response: any) => {
           this.blockAll = false;
           this.handleResponse(response);
         });
-    }
-    else {
+    } else {
       this.svc.createCatalogue(this.catalogue)
-        .finally(() => { this.isLoading = false; this.router.navigate(['/admin/catalogue']); })
+        .finally(() => { this.isLoading = false; })
         .subscribe((response: any) => {
           this.blockAll = false;
           this.handleResponse(response);
@@ -79,12 +77,9 @@ export class CatalogueViewComponent implements OnInit {
 
   onFileChange(event: any) {
     var that = this;
-    console.log(that);
     if(event.target.files.length > 0) {
       let file = event.target.files[0];
-      console.log(file);
       that.catalogue.file = file;
-      console.log(that);
       // this.catalogue.file.setValue(file);
     }
   }
@@ -92,8 +87,22 @@ export class CatalogueViewComponent implements OnInit {
   handleResponse(response: any) {
     this.disableSave = false;
     if (!response.ok) {
-      var body = JSON.parse(response._body);
-      this.notificationService.error(body.title, body.description,
+      const body = JSON.parse(response._body);
+      if (body.title) {
+        this.notificationService.error(body.title, body.description,
+          {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: false,
+            clickToClose: false,
+            maxLength: 100
+          });
+      } else {
+        let description = '';
+        for (const errorDescription of body) {
+          description += errorDescription + '<br>';
+        }
+        this.notificationService.warn('Greška pri snimanju', description,
         {
           timeOut: 5000,
           showProgressBar: true,
@@ -101,6 +110,7 @@ export class CatalogueViewComponent implements OnInit {
           clickToClose: false,
           maxLength: 100
         });
+      }
     }
     else {
       this.notificationService.success('Success', 'Catalogue saved successfully.',
@@ -111,6 +121,9 @@ export class CatalogueViewComponent implements OnInit {
           clickToClose: false,
           maxLength: 100
         });
+      setTimeout(() => {
+        this.router.navigate(['/admin/catalogue']);
+      }, 5000);
       this.isEditMode = true;
     }
   }

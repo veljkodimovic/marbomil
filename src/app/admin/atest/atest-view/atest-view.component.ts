@@ -55,14 +55,14 @@ export class AtestViewComponent implements OnInit {
 
     if (this.isEditMode) {
       this.svc.updateAtest(this.atest)
-        .finally(() => { this.isLoading = false; this.router.navigate(['/admin/atest']); })
+        .finally(() => { this.isLoading = false; })
         .subscribe((response: any) => {
           this.blockAll = false;
           this.handleResponse(response);
         });
     } else {
       this.svc.createAtest(this.atest)
-        .finally(() => { this.isLoading = false; this.router.navigate(['/admin/atest']); })
+        .finally(() => { this.isLoading = false; })
         .subscribe((response: any) => {
           this.blockAll = false;
           this.handleResponse(response);
@@ -111,7 +111,21 @@ export class AtestViewComponent implements OnInit {
     this.disableSave = false;
     if (!response.ok) {
       const body = JSON.parse(response._body);
-      this.notificationService.error(body.title, body.description,
+      if (body.title) {
+        this.notificationService.error(body.title, body.description,
+          {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: false,
+            clickToClose: false,
+            maxLength: 100
+          });
+      } else {
+        let description = '';
+        for (const errorDescription of body) {
+          description += errorDescription + '<br>';
+        }
+        this.notificationService.warn('Greška pri snimanju', description,
         {
           timeOut: 5000,
           showProgressBar: true,
@@ -119,6 +133,7 @@ export class AtestViewComponent implements OnInit {
           clickToClose: false,
           maxLength: 100
         });
+      }
     } else {
       this.notificationService.success('Success', 'Atest saved successfully.',
         {
@@ -129,6 +144,9 @@ export class AtestViewComponent implements OnInit {
           maxLength: 100
         });
       this.isEditMode = true;
+      setTimeout(() => {
+        this.router.navigate(['/admin/category']);
+      }, 5000);
     }
   }
 

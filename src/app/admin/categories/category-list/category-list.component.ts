@@ -31,7 +31,6 @@ export class CategoryListComponent implements OnInit {
 
   ngOnInit() {
     this.svc.getAllCategories().subscribe(data => {
-      console.log(data);
       this.categoryData = data;
       this.categoryAllData = data;
     });

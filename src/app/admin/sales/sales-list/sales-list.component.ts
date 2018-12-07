@@ -23,7 +23,6 @@ export class SalesListComponent implements OnInit {
 
   ngOnInit() {
     this.svc.getAllSales().subscribe(data => {
-      console.log(data);
       this.salesData = data;
     });
   }

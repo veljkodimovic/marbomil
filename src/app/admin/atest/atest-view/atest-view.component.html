@@ -13,20 +13,24 @@
       </h1>
     </div>
   </div>
-  <form action="">
+  <form name="form" (ngSubmit)="f.form.valid && saveOnClick()" #f="ngForm" novalidate>
     <simple-notifications></simple-notifications>
     <div class="row">
       <div class="col-md-5">
-        <div class="dropzone-wrapp">
+        <div style="width: 100%; height: 20px;"></div>
+        <!-- <div class="dropzone-wrapp">
           <span>Drop files here</span>
-        </div>
+        </div> -->
       </div>
       <div class="col-md-6 offset-md-1">
         <div class="" *ngIf="atest">
           <div class="form-group row">
             <label for="name" class="col-md-2 col-form-label">Naziv</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="name" [(ngModel)]="atest.title" name="title">
+              <input type="text" class="form-control" id="name" [(ngModel)]="atest.title" name="name" #name="ngModel" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required maxlength="100">
+              <div *ngIf="f.submitted && name.invalid" class="invalid-feedback">
+                  <div *ngIf="name.errors.required">Ovo polje je obavezno</div>
+              </div>
             </div>
           </div>
           <div class="form-group row">
@@ -43,7 +47,7 @@
           </div>
           <div class="row">
             <div class="col-sm-10 offset-md-2">
-              <button type="submit" class="btn btn-primary" (click)="saveOnClick()"><i class="fas fa-save"></i> Sačuvaj</button>
+              <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Sačuvaj</button>
               <a routerLink="/admin/atest" class="btn btn-secondary"><i class="fas fa-ban"></i> Otkaži</a>
               <a class="btn btn-danger" *ngIf="isEditMode" (click)="openModal()"><i class="fas fa-trash"></i> Izbriši</a>
             </div>

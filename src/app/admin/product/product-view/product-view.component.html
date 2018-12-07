@@ -13,7 +13,7 @@
       </h1>
     </div>
   </div>
-  <form action="">
+  <form name="form" (ngSubmit)="f.form.valid && saveOnClick()" #f="ngForm" novalidate>
     <simple-notifications></simple-notifications>
     <div class="row">
       <div class="col-md-12 ">
@@ -21,13 +21,19 @@
           <div class="form-group row">
             <label for="name" class="col-md-2 col-form-label">Naziv</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="name" [(ngModel)]="product.title" name="title">
+              <input type="text" class="form-control" id="name" [(ngModel)]="product.title" name="name" #name="ngModel" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required maxlength="100">
+              <div *ngIf="f.submitted && name.invalid" class="invalid-feedback">
+                  <div *ngIf="name.errors.required">Ovo polje je obavezno</div>
+              </div>
             </div>
           </div>
           <div class="form-group row">
             <label for="pid" class="col-md-2 col-form-label">Šifra</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="pid" [(ngModel)]="product.code" name="code">
+              <input type="text" class="form-control" id="pid" [(ngModel)]="product.code" name="pid" #pid="ngModel" [ngClass]="{ 'is-invalid': f.submitted && pid.invalid }" required>
+              <div *ngIf="f.submitted && pid.invalid" class="invalid-feedback">
+                  <div *ngIf="pid.errors.required">Ovo polje je obavezno</div>
+              </div>
             </div>
           </div>
           <div class="form-group row">
@@ -49,18 +55,21 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="parentCollection" class="col-md-2 col-form-label">Kolekcija</label>
+            <label for="category" class="col-md-2 col-form-label">Kategorija</label>
             <div class="col-md-10">
-              <select class="form-control" id="parentCollection" [(ngModel)]="product.collectionId" name="collectionId">
-                <option  *ngFor="let col of collections" [ngValue]="col.id" name="col.title" >{{col.title}}</option>
+              <select class="form-control" id="category" [(ngModel)]="product.categoryId" name="category" (change)="updateCollections()" #category="ngModel" [ngClass]="{ 'is-invalid': f.submitted && category.invalid }" required>
+                <option  *ngFor="let cat of categories;index as i" [ngValue]="cat.id" name="cat.title" >{{cat.title}}</option>
               </select>
+              <div *ngIf="f.submitted && category.invalid" class="invalid-feedback">
+                  Ovo polje je obavezno
+              </div>
             </div>
           </div>
           <div class="form-group row">
-            <label for="category" class="col-md-2 col-form-label">Kategorija</label>
+            <label for="parentCollection" class="col-md-2 col-form-label">Kolekcija</label>
             <div class="col-md-10">
-              <select class="form-control" id="category" [(ngModel)]="product.categoryId" name="categoryId">
-                  <option  *ngFor="let cat of categories;index as i" [ngValue]="cat.id" name="cat.title" >{{cat.title}}</option>
+              <select class="form-control" id="parentCollection" [(ngModel)]="product.collectionId" name="collectionId" [disabled]="collectionDisabled">
+                <option  *ngFor="let col of collections" [ngValue]="col.id" name="col.title" >{{col.title}}</option>
               </select>
             </div>
           </div>
@@ -180,7 +189,7 @@
       <div class="col-md-6" style="padding-top:40px; padding-bottom:20px;">
         <div class="row">
           <div class="col-sm-10 ">
-            <button type="submit" class="btn btn-primary" (click)="saveOnClick()"><i class="fas fa-save"></i> Sačuvaj</button>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Sačuvaj</button>
             <a routerLink="/admin/product" class="btn btn-secondary"><i class="fas fa-ban"></i> Otkaži</a>
             <a class="btn btn-danger" (click)="openModal()" *ngIf="isEditMode"><i class="fas fa-trash"></i> Izbriši</a>
           </div>

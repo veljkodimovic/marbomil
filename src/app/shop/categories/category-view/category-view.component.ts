@@ -16,6 +16,7 @@ export class CategoryViewComponent implements OnInit {
   isLoading: boolean;
   categoryData: Category[];
   collectionData: any = [];
+  collectionAll: any = [];
   activeCategoryId: any;
   private apiUrl: string;
 
@@ -34,6 +35,7 @@ export class CategoryViewComponent implements OnInit {
 
     this.svc.getAllCollections().subscribe(data => {
       this.collectionData = data;
+      this.collectionAll = data;
     });
 
     this.svc.getAllCategories().subscribe(data => {
@@ -42,8 +44,8 @@ export class CategoryViewComponent implements OnInit {
   }
 
   getCollectionsById(id: number) {
-    if (this.collectionData.length > 0 && id > 0) {
-      return this.collectionData.filter((x: any) => x.categoryId === id);
+    if (this.collectionAll.length > 0 && id > 0) {
+      return this.collectionAll.filter((x: any) => x.categoryId === id);
     }
     return [];
   }
@@ -53,12 +55,21 @@ export class CategoryViewComponent implements OnInit {
   }
 
   goToCategory(category: Category) {
-    this.router.navigate(['/categories/' + category.id]);
-    this.activeCategoryId = category.id;
+    const categoryCount = this.getCollectionsById(category.id);
+    if (categoryCount.length) {
+      this.router.navigate(['/categories/' + category.id]);
+      this.activeCategoryId = category.id;
+    } else {
+      this.router.navigate(['/products/list'], { queryParams: { categoryId: category.id } });
+    }
   }
 
   goToCategoryHome() {
     this.router.navigate(['/categories']);
+  }
+
+  goToProduct(collection: Collection) {
+    this.router.navigate(['/products/list'], { queryParams: { id: collection.id } });
   }
 
 }

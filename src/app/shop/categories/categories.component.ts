@@ -33,6 +33,9 @@ export class CategoriesComponent implements OnInit {
     this.svc.getAllCategories().subscribe(data => {
       this.categoryData = data;
     });
+    this.svc.getAllCollections().subscribe(data => {
+      this.collectionData = data;
+    });
   }
 
   getCollectionsById(id: number) {
@@ -42,7 +45,12 @@ export class CategoriesComponent implements OnInit {
   }
 
   goTo(category: Category) {
-    this.router.navigate(['/categories/' + category.id]);
+    const categoryCount = this.getCollectionsById(category.id);
+    if (categoryCount.length) {
+      this.router.navigate(['/categories/' + category.id]);
+    } else {
+      this.router.navigate(['/products/list'], { queryParams: { categoryId: category.id } });
+    }
   }
 
 }

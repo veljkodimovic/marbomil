@@ -26,7 +26,6 @@ export class VideoComponent implements OnInit {
       this.banner = data;
     });
     this.svc.getAllVideos().subscribe(data => {
-      console.log(data);
       this.videoData = data;
       const sanitizer = this.sanitizer;
       this.videoData.forEach(function (video: Video) {

@@ -13,7 +13,7 @@
       </h1>
     </div>
   </div>
-  <form action="">
+  <form name="form" (ngSubmit)="f.form.valid && saveOnClick()" #f="ngForm" novalidate>
     <simple-notifications></simple-notifications>
     <div class="row">
       <div class="col-md-5">
@@ -24,7 +24,10 @@
           <div class="form-group row">
             <label for="title" class="col-md-2 col-form-label">Naziv</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="title" name="title" [(ngModel)]="sales.title">
+              <input type="text" class="form-control" id="title" [(ngModel)]="sales.title" name="name" #name="ngModel" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required maxlength="100">
+              <div *ngIf="f.submitted && name.invalid" class="invalid-feedback">
+                  <div *ngIf="name.errors.required">Ovo polje je obavezno</div>
+              </div>
             </div>
           </div>
           <div class="form-group row">
@@ -54,7 +57,14 @@
           <div class="form-group row">
             <label for="country" class="col-md-2 col-form-label">Drzava</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="country" name="country" [(ngModel)]="sales.country">
+                <select class="form-control" id="country" name="country" [(ngModel)]="sales.country">
+                    <option value=""></option>
+                    <option value="Srbija">Srbija</option>
+                    <option value="Hrvatska">Hrvatska</option>
+                    <option value="Makedonija">Makedonija</option>
+                    <option value="Crna Gora">Crna Gora</option>
+                    <option value="Republika Srpska">Republika Srpska</option>
+                  </select>
             </div>
           </div>
           <div class="form-group row">
@@ -89,7 +99,7 @@
           </div>
           <div class="row">
             <div class="col-sm-10 offset-md-2">
-              <button type="submit" class="btn btn-primary" (click)="saveOnClick()"><i class="fas fa-save"></i> Sačuvaj</button>
+              <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Sačuvaj</button>
               <a routerLink="/admin/sales" class="btn btn-secondary"><i class="fas fa-ban"></i> Otkaži</a>
               <a class="btn btn-danger" *ngIf="isEditMode" (click)="openModal()"><i class="fas fa-trash"></i> Izbriši</a>
             </div>

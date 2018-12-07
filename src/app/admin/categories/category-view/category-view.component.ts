@@ -6,6 +6,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { Category } from '@app/core/types/category';
 import { CategoryService } from '@app/admin/categories/categories.service';
 import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
+import { PersistenceService } from '@app/core/persistence.service';
 
 @Component({
   selector: 'app-category-view',
@@ -35,6 +36,7 @@ export class CategoryViewComponent implements OnInit {
   constructor(private svc: CategoryService,
               private renderer: Renderer,
               private notificationService: NotificationsService,
+              private persistenceService: PersistenceService,
               private router: Router,
               private route: ActivatedRoute) {
     this.cropperSettings = new CropperSettings();
@@ -110,24 +112,29 @@ export class CategoryViewComponent implements OnInit {
     this.disableSave = true;
     this.blockAll = true;
 
-    const imageString = this.data.image.split('base64,');
-    if (this.setImage) {
-      this.category.imageCrop = imageString[imageString.length - 1];
-      const imageStringOrig = this.originalImg.split('base64,');
-      this.category.image = imageStringOrig[imageStringOrig.length - 1];
-      this.category.imageExtension = this.fileType;
+    if (!this.data.image && !this.isEditMode) {
+      this.category.image = this.persistenceService.placeholderImage;
+      this.category.imageCrop = this.persistenceService.placeholderImage;
+      this.category.imageExtension = this.persistenceService.placeholderExtension;
+    } else {
+      const imageString = this.data.image.split('base64,');
+      if (this.setImage) {
+        this.category.imageCrop = imageString[imageString.length - 1];
+        const imageStringOrig = this.originalImg.split('base64,');
+        this.category.image = imageStringOrig[imageStringOrig.length - 1];
+        this.category.imageExtension = this.fileType;
+      }
     }
     if (this.isEditMode) {
       this.svc.updateCategory(this.category)
-        .finally(() => { this.isLoading = false; this.router.navigate(['/admin/category']); })
+        .finally(() => { this.isLoading = false; })
         .subscribe((response: any) => {
           this.blockAll = false;
           this.handleResponse(response);
         });
-    }
-    else {
+    } else {
       this.svc.createCategory(this.category)
-        .finally(() => { this.isLoading = false; this.router.navigate(['/admin/category']); })
+        .finally(() => { this.isLoading = false; })
         .subscribe((response: any) => {
           this.blockAll = false;
           this.handleResponse(response);
@@ -136,25 +143,27 @@ export class CategoryViewComponent implements OnInit {
 
         });
     }
-    // if (this.data.image) {
-    //
-    // } else {
-    //   this.notificationService.warn('Missing data', 'You need to add image!',
-    //     {
-    //       timeOut: 3000,
-    //       showProgressBar: true,
-    //       pauseOnHover: false,
-    //       clickToClose: false,
-    //       maxLength: 100
-    //     });
-    // }
   }
 
   handleResponse(response: any) {
     this.disableSave = false;
     if (!response.ok) {
       const body = JSON.parse(response._body);
-      this.notificationService.error(body.title, body.description,
+      if (body.title) {
+        this.notificationService.error(body.title, body.description,
+          {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: false,
+            clickToClose: false,
+            maxLength: 100
+          });
+      } else {
+        let description = '';
+        for (const errorDescription of body) {
+          description += errorDescription + '<br>';
+        }
+        this.notificationService.warn('Greška pri snimanju', description,
         {
           timeOut: 5000,
           showProgressBar: true,
@@ -162,6 +171,7 @@ export class CategoryViewComponent implements OnInit {
           clickToClose: false,
           maxLength: 100
         });
+      }
     } else {
       this.notificationService.success('Success', 'Category saved successfully.',
         {
@@ -171,6 +181,9 @@ export class CategoryViewComponent implements OnInit {
           clickToClose: false,
           maxLength: 100
         });
+      setTimeout(() => {
+        this.router.navigate(['/admin/category']);
+      }, 5000);
       this.isEditMode = true;
     }
   }

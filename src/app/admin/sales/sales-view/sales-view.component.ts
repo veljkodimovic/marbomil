@@ -1,5 +1,6 @@
 import { NgModule, Component, Input, Output, Directive, EventEmitter, Renderer, ElementRef, forwardRef, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { SalesService } from '@app/admin/sales/sales.service';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { Sales } from '@app/core/types/sales';

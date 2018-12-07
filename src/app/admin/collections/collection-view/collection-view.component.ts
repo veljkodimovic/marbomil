@@ -181,12 +181,12 @@ export class CollectionViewComponent implements OnInit {
       this.collection.imageExtension = this.persistenceService.placeholderExtension;
     } else {
       const imageString = this.data.image.split('base64,');
-    }
-    if (this.setImage) {
-      this.collection.imageCrop = imageString[imageString.length - 1];
-      const imageStringOrig = this.originalImg.split('base64,');
-      this.collection.image = imageStringOrig[imageStringOrig.length - 1];
-      this.collection.imageExtension = this.fileType;
+      if (this.setImage) {
+        this.collection.imageCrop = imageString[imageString.length - 1];
+        const imageStringOrig = this.originalImg.split('base64,');
+        this.collection.image = imageStringOrig[imageStringOrig.length - 1];
+        this.collection.imageExtension = this.fileType;
+      }
     }
     if (this.isEditMode) {
 

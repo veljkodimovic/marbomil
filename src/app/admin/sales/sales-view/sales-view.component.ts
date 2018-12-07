@@ -117,9 +117,9 @@ export class SalesViewComponent implements OnInit {
         });
       }
     } else {
-      this.notificationService.success('Success', 'Sales saved successfully.',
+      this.notificationService.success('Success', 'Prodajno mesto je uspešno sačuvano.',
         {
-          timeOut: 5000,
+          timeOut: 1000,
           showProgressBar: true,
           pauseOnHover: false,
           clickToClose: false,
@@ -128,7 +128,20 @@ export class SalesViewComponent implements OnInit {
       this.isEditMode = true;
       setTimeout(() => {
         this.router.navigate(['/admin/sales']);
-      }, 5000);
+      }, 1000);
+    }
+  }
+
+  scrollTop(f: NgForm) {
+    if (!f.form.valid) {
+      const scrollToTop = window.setInterval(() => {
+        const pos = window.pageYOffset;
+        if (pos > 0) {
+          window.scrollTo(0, pos - 20); // how far to scroll on each step
+        } else {
+          window.clearInterval(scrollToTop);
+        }
+      }, 16);
     }
   }
 

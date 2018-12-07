@@ -180,9 +180,9 @@ export class VideoViewComponent implements OnInit {
         });
       }
     } else {
-      this.notificationService.success('Success', 'Video saved successfully.',
+      this.notificationService.success('Success', 'Video je uspešno sačuvan.',
         {
-          timeOut: 5000,
+          timeOut: 1000,
           showProgressBar: true,
           pauseOnHover: false,
           clickToClose: false,
@@ -190,7 +190,7 @@ export class VideoViewComponent implements OnInit {
         });
       setTimeout(() => {
         this.router.navigate(['/admin/video']);
-      }, 5000);
+      }, 1000);
       this.isEditMode = true;
     }
   }

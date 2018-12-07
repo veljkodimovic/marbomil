@@ -2,7 +2,7 @@ import { NgModule, Component, Renderer, ElementRef, OnInit, ViewChild } from '@a
 import { ProductService } from '../product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 import { NotificationsService } from 'angular2-notifications';
 import { Product } from '../../../core/types/product';
@@ -368,9 +368,9 @@ export class ProductViewComponent implements OnInit {
         });
       }
     } else {
-      this.notificationService.success('Success', 'Product saved successfully.',
+      this.notificationService.success('Success', 'Proizvod je uspešno sačuvan.',
         {
-          timeOut: 5000,
+          timeOut: 1000,
           showProgressBar: true,
           pauseOnHover: false,
           clickToClose: false,
@@ -378,8 +378,21 @@ export class ProductViewComponent implements OnInit {
         });
         setTimeout(() => {
           this.router.navigate(['/admin/product']);
-        }, 5000);
+        }, 1000);
         this.isEditMode = true;
+    }
+  }
+
+  scrollTop(f: NgForm) {
+    if (!f.form.valid) {
+      const scrollToTop = window.setInterval(() => {
+        const pos = window.pageYOffset;
+        if (pos > 0) {
+          window.scrollTo(0, pos - 20); // how far to scroll on each step
+        } else {
+          window.clearInterval(scrollToTop);
+        }
+      }, 16);
     }
   }
 

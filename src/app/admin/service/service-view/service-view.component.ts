@@ -120,9 +120,9 @@ export class ServiceViewComponent implements OnInit {
         });
       }
     } else {
-      this.notificationService.success('Success', 'Service saved successfully.',
+      this.notificationService.success('Success', 'Servisna lokacija je uspešno sačuvana.',
         {
-          timeOut: 5000,
+          timeOut: 1000,
           showProgressBar: true,
           pauseOnHover: false,
           clickToClose: false,
@@ -130,8 +130,21 @@ export class ServiceViewComponent implements OnInit {
         });
       setTimeout(() => {
         this.router.navigate(['/admin/service']);
-      }, 5000);
+      }, 1000);
       this.isEditMode = true;
+    }
+  }
+
+  scrollTop(f: NgForm) {
+    if (!f.form.valid) {
+      const scrollToTop = window.setInterval(() => {
+        const pos = window.pageYOffset;
+        if (pos > 0) {
+          window.scrollTo(0, pos - 20); // how far to scroll on each step
+        } else {
+          window.clearInterval(scrollToTop);
+        }
+      }, 16);
     }
   }
 

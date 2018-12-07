@@ -31,8 +31,8 @@
             <input #fileInput type="file" id="imgFile" [hidden]="true" (change)="fileChangeListener($event)">
           </div>
           <div class="image-buttons">
-            <button class="btn btn-primary" translate (click)="uploadImage()">Dodaj Sliku</button>
-            <button class="btn btn-danger" translate (click)="removeImage()">Obriši Sliku</button>
+            <span class="btn btn-primary" translate (click)="uploadImage()">Dodaj Sliku</span>
+            <span class="btn btn-danger" translate (click)="removeImage()">Obriši Sliku</span>
           </div>
         </div>
         <div class="form-group margin-top-30">

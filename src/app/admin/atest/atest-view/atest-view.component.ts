@@ -135,9 +135,9 @@ export class AtestViewComponent implements OnInit {
         });
       }
     } else {
-      this.notificationService.success('Success', 'Atest saved successfully.',
+      this.notificationService.success('Success', 'Atest je uspešno sačuvan.',
         {
-          timeOut: 5000,
+          timeOut: 1000,
           showProgressBar: true,
           pauseOnHover: false,
           clickToClose: false,
@@ -145,10 +145,14 @@ export class AtestViewComponent implements OnInit {
         });
       this.isEditMode = true;
       setTimeout(() => {
-        this.router.navigate(['/admin/category']);
-      }, 5000);
+        this.router.navigate(['/admin/atest']);
+      }, 1000);
     }
   }
+
+  uploadImage() {
+    console.log('Formaaa');
+    }
 
   openModal() {
     this.modal.openModal();

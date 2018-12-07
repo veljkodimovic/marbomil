@@ -113,9 +113,9 @@ export class CatalogueViewComponent implements OnInit {
       }
     }
     else {
-      this.notificationService.success('Success', 'Catalogue saved successfully.',
+      this.notificationService.success('Success', 'Katalog je uspešno sačuvan',
         {
-          timeOut: 5000,
+          timeOut: 1000,
           showProgressBar: true,
           pauseOnHover: false,
           clickToClose: false,
@@ -123,7 +123,7 @@ export class CatalogueViewComponent implements OnInit {
         });
       setTimeout(() => {
         this.router.navigate(['/admin/catalogue']);
-      }, 5000);
+      }, 1000);
       this.isEditMode = true;
     }
   }

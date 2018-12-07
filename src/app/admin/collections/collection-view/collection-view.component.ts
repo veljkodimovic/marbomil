@@ -156,9 +156,9 @@ export class CollectionViewComponent implements OnInit {
         });
       }
     } else {
-      this.notificationService.success('Success', 'Banner saved successfully.',
+      this.notificationService.success('Success', 'Kolekcija je uspešno sačuvana.',
         {
-          timeOut: 5000,
+          timeOut: 1000,
           showProgressBar: true,
           pauseOnHover: false,
           clickToClose: false,
@@ -167,7 +167,7 @@ export class CollectionViewComponent implements OnInit {
       this.isEditMode = true;
       setTimeout(() => {
         this.router.navigate(['/admin/collection']);
-      }, 5000);
+      }, 1000);
     }
   }
 

@@ -79,6 +79,7 @@ export class BannerViewComponent implements OnInit {
     myReader.readAsDataURL(file);
   }
 
+
   uploadImage() {
     const event = new MouseEvent('click', { bubbles: true });
     this.renderer.invokeElementMethod(
@@ -184,9 +185,9 @@ export class BannerViewComponent implements OnInit {
         });
       }
     } else {
-      this.notificationService.success('Success', 'Banner saved successfully.',
+      this.notificationService.success('Success', 'Baner je uspešno sačuvan.',
         {
-          timeOut: 5000,
+          timeOut: 1000,
           showProgressBar: true,
           pauseOnHover: false,
           clickToClose: false,
@@ -194,7 +195,7 @@ export class BannerViewComponent implements OnInit {
         });
       setTimeout(() => {
         this.router.navigate(['/admin/banners']);
-      }, 5000);
+      }, 1000);
       this.isEditMode = true;
     }
   }

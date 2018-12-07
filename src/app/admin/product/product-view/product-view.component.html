@@ -145,8 +145,8 @@
               </a>
             </div>
             <div class="image-buttons" style="margin-top: 20px;">
-              <button class="btn btn-primary" translate (click)="uploadImage()">Dodaj Sliku</button>
-              <button class="btn btn-danger" translate (click)="removeImage()">Obriši Sliku</button>
+              <span class="btn btn-primary" translate (click)="uploadImage()">Dodaj Sliku</span>
+              <span class="btn btn-danger" translate (click)="removeImage()">Obriši Sliku</span>
             </div>
           </div>
 
@@ -166,8 +166,8 @@
             </div>
             <br>
             <div class="image-buttons">
-              <button class="btn btn-primary" translate (click)="uploadImage2()">Dodaj Crtež</button>
-              <button class="btn btn-danger" translate (click)="removeImage2()">Obriši Crtež</button>
+              <span class="btn btn-primary" translate (click)="uploadImage2()">Dodaj Crtež</span>
+              <span class="btn btn-danger" translate (click)="removeImage2()">Obriši Crtež</span>
             </div>
           </div>
           <div class="col-sm-4 col-to-8">
@@ -189,7 +189,7 @@
       <div class="col-md-6" style="padding-top:40px; padding-bottom:20px;">
         <div class="row">
           <div class="col-sm-10 ">
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Sačuvaj</button>
+            <button type="submit" class="btn btn-primary" (click)="scrollTop(f)"><i class="fas fa-save"></i> Sačuvaj</button>
             <a routerLink="/admin/product" class="btn btn-secondary"><i class="fas fa-ban"></i> Otkaži</a>
             <a class="btn btn-danger" (click)="openModal()" *ngIf="isEditMode"><i class="fas fa-trash"></i> Izbriši</a>
           </div>

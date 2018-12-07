@@ -173,9 +173,9 @@ export class CategoryViewComponent implements OnInit {
         });
       }
     } else {
-      this.notificationService.success('Success', 'Category saved successfully.',
+      this.notificationService.success('Success', 'Kategorija je uspešno sačuvana.',
         {
-          timeOut: 5000,
+          timeOut: 1000,
           showProgressBar: true,
           pauseOnHover: false,
           clickToClose: false,
@@ -183,7 +183,7 @@ export class CategoryViewComponent implements OnInit {
         });
       setTimeout(() => {
         this.router.navigate(['/admin/category']);
-      }, 5000);
+      }, 1000);
       this.isEditMode = true;
     }
   }

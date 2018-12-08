@@ -111,8 +111,10 @@ export class CategoryViewComponent implements OnInit {
   saveOnClick() {
     this.disableSave = true;
     this.blockAll = true;
+    let noChanges = true;
 
-    if (!this.data.image && !this.isEditMode) {
+    if (!this.data.image) {
+      noChanges = false;
       this.category.image = this.persistenceService.placeholderImage;
       this.category.imageCrop = this.persistenceService.placeholderImage;
       this.category.imageExtension = this.persistenceService.placeholderExtension;
@@ -126,6 +128,10 @@ export class CategoryViewComponent implements OnInit {
       }
     }
     if (this.isEditMode) {
+      if (!this.setImage && noChanges) {
+        this.category.image = null;
+        this.category.imageCrop = null;
+      }
       this.svc.updateCategory(this.category)
         .finally(() => { this.isLoading = false; })
         .subscribe((response: any) => {
@@ -140,7 +146,6 @@ export class CategoryViewComponent implements OnInit {
           this.handleResponse(response);
           const id = +response._body;
           this.category.id = id;
-
         });
     }
   }

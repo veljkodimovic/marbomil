@@ -16,7 +16,7 @@ export class AtestViewComponent implements OnInit {
   @ViewChild(DeleteModalComponent)
   private modal: DeleteModalComponent;
   data: any;
-  atest: Atest = new Atest(0, '', '', '', '');
+  atest: Atest = new Atest(0, '', '', '', '', '');
   link: any;
   isLoading: boolean;
   isEditMode: boolean = true;
@@ -33,7 +33,7 @@ export class AtestViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.router.url.indexOf('new') != -1) {
+    if (this.router.url.indexOf('new') !== -1) {
       this.isEditMode = false;
     } else {
       this.isEditMode = true;
@@ -54,6 +54,11 @@ export class AtestViewComponent implements OnInit {
     this.blockAll = true;
 
     if (this.isEditMode) {
+      delete this.atest.fileUrl;
+      if (!this.atest.file) {
+        this.atest.file = '';
+        this.atest.fileExtension = '';
+      }
       this.svc.updateAtest(this.atest)
         .finally(() => { this.isLoading = false; })
         .subscribe((response: any) => {
@@ -100,9 +105,15 @@ export class AtestViewComponent implements OnInit {
         that.atest.fileExtension =  '.' + re.exec(file.name)[1];
         that.atest.file = loadEvent.target.result;
         that.atest.file = that.atest.file.replace('data:application/pdf;base64,', '');
-
+        that.notificationService.success('Fajl je učitan', 'Izabrani fajl je uspešno učitan',
+        {
+          timeOut: 2000,
+          showProgressBar: true,
+          pauseOnHover: false,
+          clickToClose: false,
+          maxLength: 100
+        });
       }
-
     };
     myReader.readAsDataURL(file);
   }

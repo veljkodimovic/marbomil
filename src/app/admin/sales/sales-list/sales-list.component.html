@@ -25,7 +25,12 @@
           <div class="col-10">
             <p><a class="admin-list-name" (click)="goTo(sales)">{{sales.title}}</a></p>
             <div class="row admin-list-contact">
-              <p class="col-sm-6">{{sales.street}}, {{sales.postal}} {{sales.city}}, {{sales.region}}, {{sales.country}}</p>
+              <p class="col-sm-6">
+                <span *ngIf="sales.street">{{sales.street}}</span>
+                <span *ngIf="sales.postal">, {{sales.postal}} {{sales.city}}</span>
+                <span *ngIf="sales.region">, {{sales.region}}</span>
+                <span *ngIf="sales.country">, {{sales.country}}</span>
+              </p>
               <p class="col-sm-6">
                 <span *ngIf="sales.phone"><i class="fas fa-phone"></i> <a href="tel:{{sales.phone}}"></a>{{sales.phone}}<br></span>
                 <span *ngIf="sales.email"><i class="fas fa-envelope"></i> <a href="mailto:{{sales.email}}">{{sales.email}}</a> <br></span>

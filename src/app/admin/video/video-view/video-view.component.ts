@@ -117,8 +117,10 @@ export class VideoViewComponent implements OnInit {
   saveOnClick() {
     this.disableSave = true;
     this.blockAll = true;
+    let noChanges = true;
 
-    if (!this.data.image && !this.isEditMode) {
+    if (!this.data.image) {
+      noChanges = false;
       this.video.image = this.persistenceService.placeholderImage;
       this.video.imageCrop = this.persistenceService.placeholderImage;
       this.video.imageExtension = this.persistenceService.placeholderExtension;
@@ -133,7 +135,10 @@ export class VideoViewComponent implements OnInit {
     }
 
     if (this.isEditMode) {
-
+      if (!this.setImage && noChanges) {
+        this.video.image = null;
+        this.video.imageCrop = null;
+      }
       this.svc.updateVideo(this.video)
         .finally(() => { this.isLoading = false; })
         .subscribe((response: any) => {

@@ -18,12 +18,13 @@ export class CatalogueViewComponent implements OnInit {
   @ViewChild(DeleteModalComponent)
   private modal: DeleteModalComponent;
   data: any;
-  catalogue: Catalogue = new Catalogue(0, '', '', '', '');
+  catalogue: Catalogue = new Catalogue(0, '', '', '', '', '', '');
   link: any;
   isLoading: boolean;
   isEditMode: boolean = true;
   disableSave: boolean = false;
   blockAll: boolean = false;
+  @ViewChild('file') file: ElementRef;
 
   constructor(private svc: CatalogueService,
               private renderer: Renderer,
@@ -56,6 +57,11 @@ export class CatalogueViewComponent implements OnInit {
     this.blockAll = true;
 
     if (this.isEditMode) {
+      delete this.catalogue.fileUrl;
+      if (!this.catalogue.file) {
+        this.catalogue.file = '';
+        this.catalogue.fileExtension = '';
+      }
       this.svc.updateCatalogue(this.catalogue)
         .finally(() => { this.isLoading = false; })
         .subscribe((response: any) => {
@@ -75,13 +81,44 @@ export class CatalogueViewComponent implements OnInit {
     }
   }
 
-  onFileChange(event: any) {
-    var that = this;
-    if(event.target.files.length > 0) {
-      let file = event.target.files[0];
-      that.catalogue.file = file;
-      // this.catalogue.file.setValue(file);
-    }
+  calculateKBFromBytes(bytes: number): number {
+    return Math.round(bytes / 1024);
+  }
+
+  onFileChange($event: any) {
+    const re = /(?:\.([^.]+))?$/;
+
+    const file: File = $event.target.files[0];
+    const myReader: FileReader = new FileReader();
+    const that = this;
+
+    myReader.onloadend = function (loadEvent: any) {
+      const sizeKb = that.calculateKBFromBytes(+loadEvent.loaded);
+      if (sizeKb > 1024) {
+        that.file.nativeElement.value = '';
+        that.notificationService.error('File size', 'Maximum file size should be 1MB.',
+          {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: false,
+            clickToClose: false,
+            maxLength: 100
+          });
+      } else {
+        that.catalogue.fileExtension =  '.' + re.exec(file.name)[1];
+        that.catalogue.file = loadEvent.target.result;
+        that.catalogue.file = that.catalogue.file.replace('data:application/pdf;base64,', '');
+        that.notificationService.success('Fajl je učitan', 'Izabrani fajl je uspešno učitan',
+        {
+          timeOut: 2000,
+          showProgressBar: true,
+          pauseOnHover: false,
+          clickToClose: false,
+          maxLength: 100
+        });
+      }
+    };
+    myReader.readAsDataURL(file);
   }
 
   handleResponse(response: any) {

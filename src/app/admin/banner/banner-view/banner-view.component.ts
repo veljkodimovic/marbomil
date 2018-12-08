@@ -120,8 +120,10 @@ export class BannerViewComponent implements OnInit {
   saveOnClick() {
     this.disableSave = true;
     this.blockAll = true;
+    let noChanges = true;
 
-    if (!this.data.image && !this.isEditMode) {
+    if (!this.data.image) {
+      noChanges = false;
       this.banner.image = this.persistenceService.placeholderImage;
       this.banner.imageCrop = this.persistenceService.placeholderImage;
       this.banner.imageExtension = this.persistenceService.placeholderExtension;
@@ -135,7 +137,7 @@ export class BannerViewComponent implements OnInit {
       }
     }
     if (this.isEditMode) {
-      if (!this.setImage) {
+      if (!this.setImage && noChanges) {
         this.banner.image = null;
         this.banner.imageCrop = null;
       }

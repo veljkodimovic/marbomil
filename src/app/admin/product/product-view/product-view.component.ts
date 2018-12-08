@@ -120,11 +120,13 @@ export class ProductViewComponent implements OnInit {
         value.imageCrop = this.apiUrl + '/' + value.imageCropUrl;
         this.images.push(value);
       }
-      that.data2.image = 'data:image/jpeg;base64,' + this.product.drawingImage;
-      const image2: any = new Image();
-      image2.src = that.data2.image;
-      this.cropper2.settings = this.cropperSettings;
-      this.cropper2.setImage(image2);
+      if (this.product.drawingImage.length > 50) {
+        that.data2.image = 'data:image/jpeg;base64,' + this.product.drawingImage;
+        const image2: any = new Image();
+        image2.src = that.data2.image;
+        this.cropper2.settings = this.cropperSettings;
+        this.cropper2.setImage(image2);
+      }
     });
   }
 
@@ -235,7 +237,6 @@ export class ProductViewComponent implements OnInit {
       that.cropper2.setImage(image);
       that.setImageDrawing = true;
     };
-
     myReader.readAsDataURL(file);
   }
 
@@ -253,10 +254,8 @@ export class ProductViewComponent implements OnInit {
   saveOnClick() {
 
     this.product.images = [];
-      this.disableSave = true;
-      this.blockAll = true;
-      // let index = 0;
-      // let indexFile = 0;if (this.images.length > 0) {
+    this.disableSave = true;
+    this.blockAll = true;
       if (!this.isEditMode) {
         if (this.images.length > 0) {
           for (const value of this.images) {
@@ -275,13 +274,13 @@ export class ProductViewComponent implements OnInit {
             image: this.persistenceService.placeholderImage,
             imageCrop: this.persistenceService.placeholderImage,
             imageExtension: this.persistenceService.placeholderExtension
-          })
+          });
         }
       }
 
       if (this.data2.image) {
         const imageString2 = this.data2.image.split('base64,');
-        if (this.setImage) {
+        if (this.setImageDrawing) {
           this.product.drawingImage = imageString2[imageString2.length - 1];
           this.product.drawingImageExtension = this.fileType2;
           //  var imageStringOrig = this.originalImg.split('base64,');
@@ -310,6 +309,14 @@ export class ProductViewComponent implements OnInit {
             });
           }
         }
+        if (this.product.images.length === 0) {
+          this.product.images.push({
+            id: 0, index: 0,
+            image: this.persistenceService.placeholderImage,
+            imageCrop: this.persistenceService.placeholderImage,
+            imageExtension: this.persistenceService.placeholderExtension
+          })
+        }
         this.svc.updateProduct(this.product)
           .finally(() => { this.isLoading = false; })
           .subscribe((response: any) => {
@@ -326,18 +333,6 @@ export class ProductViewComponent implements OnInit {
             // this.router.navigate(['/admin/product']);
           });
       }
-    // if (this.images.length > 0) {
-    //
-    // } else {
-    //   this.notificationService.warn('Missing data', 'You need to add at least one image!',
-    //     {
-    //       timeOut: 3000,
-    //       showProgressBar: true,
-    //       pauseOnHover: false,
-    //       clickToClose: false,
-    //       maxLength: 100
-    //     });
-    // }
   }
 
   handleResponse(response: any) {
@@ -405,6 +400,8 @@ export class ProductViewComponent implements OnInit {
   removeImage2() {
     this.data2 = {};
     this.cropper2.reset();
+    this.product.drawingImage = null;
+    this.product.drawingImageExtension = '';
   }
 
 

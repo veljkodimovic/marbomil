@@ -30,7 +30,6 @@ export class AtestService {
   }
 
   getAtestById(id: number): Observable<any> {
-
     return this.http.get(routes.atest() + id)
       .map((res: Response) => res.json())
       .map(body => body)
@@ -38,17 +37,13 @@ export class AtestService {
   }
 
   createAtest(body: Atest): Observable<any> {
-    // let bodyString = JSON.stringify(body);
-
     return this.http.post(routes.atest(), body)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
   updateAtest(body: Atest): Observable<any> {
-    // let bodyString = JSON.stringify(body);
-
-    return this.http.put(routes.atest() + body.id, body)
+    return this.http.put(routes.atest(), body)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }

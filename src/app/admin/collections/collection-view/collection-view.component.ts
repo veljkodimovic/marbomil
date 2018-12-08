@@ -174,8 +174,10 @@ export class CollectionViewComponent implements OnInit {
   saveOnClick() {
     this.disableSave = true;
     this.blockAll = true;
+    let noChanges = true;
 
-    if (!this.data.image && !this.isEditMode) {
+    if (!this.data.image) {
+      noChanges = false;
       this.collection.image = this.persistenceService.placeholderImage;
       this.collection.imageCrop = this.persistenceService.placeholderImage;
       this.collection.imageExtension = this.persistenceService.placeholderExtension;
@@ -189,7 +191,10 @@ export class CollectionViewComponent implements OnInit {
       }
     }
     if (this.isEditMode) {
-
+      if (!this.setImage && noChanges) {
+        this.collection.image = null;
+        this.collection.imageCrop = null;
+      }
       this.svc.updateCollection(this.collection)
         .finally(() => { this.isLoading = false; })
         .subscribe((response: any) => {

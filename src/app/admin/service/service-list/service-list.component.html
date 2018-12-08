@@ -25,7 +25,12 @@
           <div class="col-10">
             <p><a class="admin-list-name" (click)="goTo(service)">{{service.title}}</a></p>
             <div class="row admin-list-contact">
-              <p class="col-sm-6">{{service.street}}, {{service.postal}} {{service.city}}, {{service.region}}, {{service.country}}</p>
+              <p class="col-sm-6">
+                <span *ngIf="service.street">{{service.street}}</span>
+                <span *ngIf="service.postal">, {{service.postal}} {{service.city}}</span>
+                <span *ngIf="service.region">, {{service.region}}</span>
+                <span *ngIf="service.country">, {{service.country}}</span>
+              </p>
               <p class="col-sm-6">
                 <span *ngIf="service.phone"><i class="fas fa-phone"></i> <a href="tel:{{service.phone}}"></a>{{service.phone}}<br></span>
                 <span *ngIf="service.email"><i class="fas fa-envelope"></i> <a href="mailto:{{service.email}}">{{service.email}}</a> <br></span>

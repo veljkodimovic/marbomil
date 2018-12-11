@@ -17,6 +17,10 @@
     <simple-notifications></simple-notifications>
     <div class="row">
       <div class="col-md-5">
+        <div class="" *ngIf="video.url">
+          <h5>Pregled Videa</h5>
+          <iframe width="560"  height="315" [src]="videoUrl" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
         <div class="form-group position-fix">
           <h5 class="control-label" translate>Slika</h5>
           <div class="initial-image banner-image">
@@ -36,9 +40,13 @@
             <span class="btn btn-danger" translate (click)="removeImage()">Izbriši Sliku</span>
           </div>
         </div>
-        <div class="" >
-          <h5>Pregled</h5>
-          <iframe width="560" *ngIf="video.url" height="315" [src]="videoUrl" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div class="form-group margin-top-30" *ngIf="data.image">
+          <h5 class="control-label" translate>Pregled Slike</h5>
+          <div class="image-preview">
+              <span class="result rounded">
+                <img style="width: 100%; height: auto;" [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+              </span>
+          </div>
         </div>
       </div>
       <div class="col-md-6 offset-md-1">
@@ -55,7 +63,7 @@
           <div class="form-group row">
             <label for="videoLink" class="col-md-2 col-form-label">Link</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="videoLink" [(ngModel)]="video.url" name="url" (change)="updateEmbededVideo()">
+              <input type="text" class="form-control" id="videoLink" [(ngModel)]="video.url" name="url" (focusout)="updateEmbededVideo()">
             </div>
           </div>
           <div class="row">

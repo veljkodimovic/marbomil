@@ -11,6 +11,21 @@ const routes = {
   category: () => `/category/`
 };
 
+const credentialsKey = 'credentials';
+const storageLocal = JSON.parse(localStorage.getItem(credentialsKey));
+const storageSession = JSON.parse(sessionStorage.getItem(credentialsKey));
+let accessToken = '';
+if (storageSession) {
+  accessToken = storageSession.accessToken;
+} else if (storageLocal) {
+  accessToken = storageLocal.accessToken;
+}
+const headers = new Headers({
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer ' + accessToken
+});
+const options = new RequestOptions({ headers: headers });
+
 @Injectable()
 export class CategoryService {
 
@@ -40,7 +55,7 @@ export class CategoryService {
 
   getCategoryEditById(id: number): Observable<any> {
 
-    return this.http.get(routes.category() + 'edit/' + id)
+    return this.http.get(routes.category() + 'edit/' + id, options)
       .map((res: Response) => res.json())
       .map(body => body)
       .catch((err) => this.persistenceService.handleError(err));
@@ -49,7 +64,7 @@ export class CategoryService {
   createCategory(body: Category): Observable<any> {
     // let bodyString = JSON.stringify(body);
 
-    return this.http.post(routes.category(), body)
+    return this.http.post(routes.category(), body, options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
@@ -57,14 +72,14 @@ export class CategoryService {
   updateCategory(body: Category): Observable<any> {
     // let bodyString = JSON.stringify(body);
 
-    return this.http.put(routes.category(), body)
+    return this.http.put(routes.category(), body, options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
   deleteCategory(id: number): Observable<any> {
 
-    return this.http.delete(routes.category() + id)
+    return this.http.delete(routes.category() + id, options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }

@@ -11,6 +11,21 @@ const routes = {
   catalogue: () => `/catalogue/`
 };
 
+const credentialsKey = 'credentials';
+const storageLocal = JSON.parse(localStorage.getItem(credentialsKey));
+const storageSession = JSON.parse(sessionStorage.getItem(credentialsKey));
+let accessToken = '';
+if (storageSession) {
+  accessToken = storageSession.accessToken;
+} else if (storageLocal) {
+  accessToken = storageLocal.accessToken;
+}
+const headers = new Headers({
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer ' + accessToken
+});
+const options = new RequestOptions({ headers: headers });
+
 @Injectable()
 export class CatalogueService {
 
@@ -31,7 +46,7 @@ export class CatalogueService {
 
   getCatalogueById(id: number): Observable<any> {
 
-    return this.http.get(routes.catalogue() + id)
+    return this.http.get(routes.catalogue() + id, options)
       .map((res: Response) => res.json())
       .map(body => body)
       .catch((err) => this.persistenceService.handleError(err));
@@ -40,7 +55,7 @@ export class CatalogueService {
   createCatalogue(body: Catalogue): Observable<any> {
     // let bodyString = JSON.stringify(body);
 
-    return this.http.post(routes.catalogue(), body)
+    return this.http.post(routes.catalogue(), body, options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
@@ -48,14 +63,14 @@ export class CatalogueService {
   updateCatalogue(body: Catalogue): Observable<any> {
     // let bodyString = JSON.stringify(body);
 
-    return this.http.put(routes.catalogue(), body)
+    return this.http.put(routes.catalogue(), body, options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
   deleteCatalogue(id: number): Observable<any> {
 
-    return this.http.delete(routes.catalogue() + id)
+    return this.http.delete(routes.catalogue() + id, options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }

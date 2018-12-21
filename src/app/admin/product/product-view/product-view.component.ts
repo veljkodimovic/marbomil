@@ -32,7 +32,7 @@ export class ProductViewComponent implements OnInit {
   image: any;
   data: any;
   data2: any;
-  product: Product = new Product(0, '', '', '', 0, 0, '', null, null, 0, 0, 0, 0, [], '', '', '.jpg');
+  product: Product = new Product(0, '', '', '', 0, 0, 0, '', null, null, 0, 0, 0, 0, [], '', '', '.jpg');
   link: any;
   isLoading: boolean;
   setImage: boolean = false;
@@ -254,6 +254,7 @@ export class ProductViewComponent implements OnInit {
   saveOnClick() {
 
     this.product.images = [];
+    this.product.orderNumber = this.product.orderNumber;
     this.disableSave = true;
     this.blockAll = true;
       if (!this.isEditMode) {

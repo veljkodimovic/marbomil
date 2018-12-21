@@ -43,8 +43,9 @@
             <span>E-mail:</span> <a href="mailto:info@marbomil.co.rs">info@marbomil.co.rs</a>
           </li>
         </ul>
-        <form class="footer-newsletter form-inline">
-          <input class="form-control" type="search" placeholder="Marbomil prijava na vesti" aria-label="Search">
+        <form class="footer-newsletter form-inline" (ngSubmit)="registerNewsletter()">
+          <simple-notifications></simple-notifications>
+          <input class="form-control" type="search" name="newsletterEmail" id="newsletterEmail" [(ngModel)]="newsletterEmail" placeholder="Marbomil prijava na vesti" aria-label="Search">
           <button class="footer-newsletter-submit" type="submit" translate>Subscribe</button>
         </form>
       </div>

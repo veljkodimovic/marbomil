@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 
@@ -19,30 +19,41 @@ export class LoginComponent implements OnInit {
   error: string;
   loginForm: FormGroup;
   isLoading = false;
+  returnUrl: string;
 
   constructor(private router: Router,
+              private route: ActivatedRoute,
               private formBuilder: FormBuilder,
               private i18nService: I18nService,
               private authenticationService: AuthenticationService) {
     this.createForm();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.authenticationService.logout();
+
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  }
 
   login() {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
     this.isLoading = true;
     this.authenticationService.login(this.loginForm.value)
-      .pipe(finalize(() => {
-        this.loginForm.markAsPristine();
-        this.isLoading = false;
-      }))
-      .subscribe(credentials => {
-        log.debug(`${credentials.username} successfully logged in`);
-        this.router.navigate(['/'], { replaceUrl: true });
-      }, error => {
-        log.debug(`Login error: ${error}`);
-        this.error = error;
-      });
+    .pipe(finalize(() => {
+      this.loginForm.markAsPristine();
+      this.isLoading = false;
+    }))
+    .subscribe((credentials: any) => {
+
+      if (this.authenticationService.isAuthenticated) {
+        log.debug(`${this.loginForm.value.username} successfully logged in`);
+        this.router.navigateByUrl(this.returnUrl.toLowerCase());
+      }
+    }, (error: any) => {
+      log.debug(`Login error: ${error}`);
+      this.error = error;
+    });
   }
 
   setLanguage(language: string) {

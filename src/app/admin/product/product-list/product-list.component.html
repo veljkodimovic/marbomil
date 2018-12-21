@@ -14,13 +14,24 @@
 <div class="container">
   <div class="row justify-content-end mb-4">
     <div class="col-auto">
+      <div class="form-group row">
+        <label for="category" class="col-auto col-form-label">Kategorija</label>
+        <div class="col-auto">
+          <select class="form-control" id="category"  name="category" [(ngModel)]="activeCategoryId" (change)="updateProducts()">
+            <option value="" >Sve Kategorije</option>
+            <option  *ngFor="let cat of categories;index as i" [ngValue]="cat.id" name="cat.title" >{{cat.title}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-auto ml-auto">
       <a class="btn btn-primary" routerLink="/admin/product/new">
         <i class="fas fa-plus"></i> Dodaj novi
       </a>
     </div>
   </div>
-  <div class="row admin-list" *ngIf="productData">
-    <div class="col-lg-6" *ngFor="let product of productData">
+  <div class="row admin-list" *ngIf="products">
+    <div class="col-lg-6" *ngFor="let product of products">
       <div class="admin-list-item">
         <div class="row">
           <div class="col-11 col-sm-4" style="margin-bottom: 10px;">

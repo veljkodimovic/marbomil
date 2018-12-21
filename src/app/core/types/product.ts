@@ -4,6 +4,7 @@ export class Product {
   code: string;
   description: string;
   price: number;
+  orderNumber: number;
   discount: number;
   discountDate: string;
   collectionId: number;
@@ -20,14 +21,15 @@ export class Product {
   updatedImages: any[];
   deletedImages: any[];
 
-  constructor(id: number, title: string, code: string, description: string, price: number, discount: number,
-    discountDate: string, collectionId: number, categoryId: number, width: number, height: number,
+  constructor(id: number, title: string, code: string, description: string, price: number, orderNumber: number,
+    discount: number, discountDate: string, collectionId: number, categoryId: number, width: number, height: number,
     numberOnSite: number, depth: number, images: any[], drawingImage: string, drawingImageUrl: string,
     drawingImageExtension: string) {
     this.id = id;
     this.title = title;
     this.code = code;
     this.price = price;
+    this.orderNumber = orderNumber;
     this.description = description;
     this.discount = discount;
     this.discountDate = discountDate;

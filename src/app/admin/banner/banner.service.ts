@@ -11,6 +11,21 @@ const routes = {
   banners: () => `/banner/`
 };
 
+const credentialsKey = 'credentials';
+const storageLocal = JSON.parse(localStorage.getItem(credentialsKey));
+const storageSession = JSON.parse(sessionStorage.getItem(credentialsKey));
+let accessToken = '';
+if (storageSession) {
+  accessToken = storageSession.accessToken;
+} else if (storageLocal) {
+  accessToken = storageLocal.accessToken;
+}
+const headers = new Headers({
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer ' + accessToken
+});
+const options = new RequestOptions({ headers: headers });
+
 @Injectable()
 export class BannerService {
 
@@ -37,7 +52,7 @@ export class BannerService {
   }
 
   getBannerEditById(id: number): Observable<any> {
-    return this.http.get(routes.banners() + 'edit/' + id)
+    return this.http.get(routes.banners() + 'edit/' + id, options)
       .map((res: Response) => res.json())
       .map(body => body)
       .catch((err) => this.persistenceService.handleError(err));
@@ -46,7 +61,7 @@ export class BannerService {
   createBanner(body: Banner): Observable<any> {
     // let bodyString = JSON.stringify(body);
 
-    return this.http.post(routes.banners(), body)
+    return this.http.post(routes.banners(), body, options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
@@ -54,14 +69,14 @@ export class BannerService {
   updateBanner(body: Banner): Observable<any> {
     // let bodyString = JSON.stringify(body);
 
-    return this.http.put(routes.banners(), body)
+    return this.http.put(routes.banners(), body, options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
   deleteBanner(id: number): Observable<any> {
 
-    return this.http.delete(routes.banners() + id)
+    return this.http.delete(routes.banners() + id, options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }

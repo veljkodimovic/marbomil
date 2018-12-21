@@ -11,6 +11,21 @@ const routes = {
   video: () => `/video/`
 };
 
+const credentialsKey = 'credentials';
+const storageLocal = JSON.parse(localStorage.getItem(credentialsKey));
+const storageSession = JSON.parse(sessionStorage.getItem(credentialsKey));
+let accessToken = '';
+if (storageSession) {
+  accessToken = storageSession.accessToken;
+} else if (storageLocal) {
+  accessToken = storageLocal.accessToken;
+}
+const headers = new Headers({
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer ' + accessToken
+});
+const options = new RequestOptions({ headers: headers });
+
 @Injectable()
 export class VideoService {
 
@@ -39,7 +54,7 @@ export class VideoService {
 
   getVideoEditById(id: number): Observable<any> {
 
-    return this.http.get(routes.video() + 'edit/' + id)
+    return this.http.get(routes.video() + 'edit/' + id, options)
       .map((res: Response) => res.json())
       .map(body => body)
       .catch((err) => this.persistenceService.handleError(err));
@@ -48,7 +63,7 @@ export class VideoService {
   createVideo(body: Video): Observable<any> {
     // let bodyString = JSON.stringify(body);
 
-    return this.http.post(routes.video(), body)
+    return this.http.post(routes.video(), body, options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
@@ -56,14 +71,14 @@ export class VideoService {
   updateVideo(body: Video): Observable<any> {
     // let bodyString = JSON.stringify(body);
 
-    return this.http.put(routes.video(), body)
+    return this.http.put(routes.video(), body, options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
   deleteVideo(id: number): Observable<any> {
 
-    return this.http.delete(routes.video() + id)
+    return this.http.delete(routes.video() + id, options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }

@@ -21,7 +21,6 @@ export class BannerViewComponent implements OnInit {
   @ViewChild(DeleteModalComponent)
   private modal: DeleteModalComponent;
   cropperSettings: CropperSettings;
-  apiUrl = environment.serverUrl;
   image: any;
   data: any;
   banner: Banner = new Banner(0, '', '', '', '', '', '', '.jpg');

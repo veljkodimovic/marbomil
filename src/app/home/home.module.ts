@@ -15,6 +15,8 @@ import { PromoComponent } from './promo/promo.component';
 import { SectionsComponent } from './sections/sections.component';
 import { ShopLogoComponent } from './shop-logo/shop-logo.component';
 
+import { SimpleNotificationsModule } from 'angular2-notifications';
+
 import { CarouselService } from './carusel/carusel.service';
 import { EquipmentService } from './equipment/equipment.service';
 import { SectionsService } from './sections/sections.service';
@@ -25,6 +27,7 @@ import { WarrantyService } from '@app/home/warranty/warranty.service';
 import { QualityComponent } from '@app/home/quality/quality.component';
 import { QualityService } from '@app/home/quality/quality.service';
 import { ContactComponent } from '@app/home/contact/contact.component';
+import { ContactService } from '@app/home/contact/contact.service';
 import { VideoComponent } from '@app/home/video/video.component';
 import { VideoService } from '@app/home/video/video.service';
 import { CatalogueComponent } from '@app/home/catalogue/catalogue.component';
@@ -45,6 +48,7 @@ import { FormsModule } from '@angular/forms';
     FlexLayoutModule,
     NgbModule,
     MaterialModule,
+    SimpleNotificationsModule.forRoot(),
     FormsModule,
     HomeRoutingModule
   ],
@@ -70,6 +74,7 @@ import { FormsModule } from '@angular/forms';
   providers: [
     ServiceService,
     CarouselService,
+    ContactService,
     SectionsService,
     EquipmentService,
     WarrantyService,

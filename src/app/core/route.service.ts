@@ -18,10 +18,26 @@ export class Route {
       path: '',
       component: ShellComponent,
       children: routes,
+      // Reuse ShellComponent instance when navigating between child views
+      data: { reuse: true }
+    }];
+  }
+  static withShellLogin(routes: Routes): Routes {
+    return [{
+      path: '',
+      component: ShellComponent,
+      children: routes,
+    }];
+  }
+  static withShellAdmin(routes: Routes): Routes {
+    return [{
+      path: '',
+      component: ShellComponent,
+      children: routes,
       canActivate: [AuthenticationGuard],
       // Reuse ShellComponent instance when navigating between child views
       data: { reuse: true }
-}];
+    }];
   }
 
 }

@@ -11,6 +11,21 @@ const routes = {
   sales: () => `/sales/`
 };
 
+const credentialsKey = 'credentials';
+const storageLocal = JSON.parse(localStorage.getItem(credentialsKey));
+const storageSession = JSON.parse(sessionStorage.getItem(credentialsKey));
+let accessToken = '';
+if (storageSession) {
+  accessToken = storageSession.accessToken;
+} else if (storageLocal) {
+  accessToken = storageLocal.accessToken;
+}
+const headers = new Headers({
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer ' + accessToken
+});
+const options = new RequestOptions({ headers: headers });
+
 @Injectable()
 export class SalesService {
 
@@ -31,7 +46,7 @@ export class SalesService {
 
   getSalesById(id: number): Observable<any> {
 
-    return this.http.get(routes.sales() + id)
+    return this.http.get(routes.sales() + id, options)
       .map((res: Response) => res.json())
       .map(body => body)
       .catch((err) => this.persistenceService.handleError(err));
@@ -40,7 +55,7 @@ export class SalesService {
   createSales(body: Sales): Observable<any> {
     // let bodyString = JSON.stringify(body);
 
-    return this.http.post(routes.sales(), body)
+    return this.http.post(routes.sales(), body, options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
@@ -48,14 +63,14 @@ export class SalesService {
   updateSales(body: Sales): Observable<any> {
     // let bodyString = JSON.stringify(body);
 
-    return this.http.put(routes.sales(), body)
+    return this.http.put(routes.sales(), body, options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
   deleteSales(id: number): Observable<any> {
 
-    return this.http.delete(routes.sales() + id)
+    return this.http.delete(routes.sales() + id, options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }

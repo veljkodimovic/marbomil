@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 
 export interface Credentials {
   // Customize received credentials here
   username: string;
   token: string;
+  accessToken: string;
+  issued: number;
+  expires: string;
+  expiresInSeconds: number;
+  isValid: boolean;
+  errorMessage: string;
 }
 
 export interface LoginContext {
@@ -14,7 +21,21 @@ export interface LoginContext {
   remember?: boolean;
 }
 
+export interface TokenData {
+  accessToken: string;
+  issued: number;
+  expires: string;
+  expiresInSeconds: number;
+  isValid: boolean;
+  errorMessage: string;
+}
+
 const credentialsKey = 'credentials';
+const sessionKey = 'sessionTimes';
+const usernameKey = 'username';
+const routes = {
+  login: () => `/login/`
+};
 
 /**
  * Provides a base for authentication workflow.
@@ -24,8 +45,9 @@ const credentialsKey = 'credentials';
 export class AuthenticationService {
 
   private _credentials: Credentials | null;
+  private _tokenData: TokenData | null;
 
-  constructor() {
+  constructor(private http: Http) {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
     if (savedCredentials) {
       this._credentials = JSON.parse(savedCredentials);
@@ -41,10 +63,26 @@ export class AuthenticationService {
     // Replace by proper authentication call
     const data = {
       username: context.username,
-      token: '123456'
+      token: context.password
     };
-    this.setCredentials(data, context.remember);
-    return of(data);
+
+    const body = {"username": context.username, "password": context.password};
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
+
+    return this.http.post(routes.login(), body, options)
+      .map((res: Response) => res.json())
+      .map((body: any) => {
+        const token = body;
+        if (token) {
+          this.setCredentials(token, true);
+          this._tokenData = token;
+          console.log(this._tokenData);
+          const storage = localStorage;
+          storage.setItem(usernameKey, JSON.stringify({ username: context.username }));
+        }
+        return token;
+      });
   }
 
   /**
@@ -62,7 +100,9 @@ export class AuthenticationService {
    * @return {boolean} True if the user is authenticated.
    */
   isAuthenticated(): boolean {
-    return !!this.credentials;
+    const timeNow = localStorage.getItem(sessionKey) ? new Date() : null;
+    const sessionEnd = localStorage.getItem(sessionKey) ? new Date(JSON.parse(localStorage.getItem(sessionKey)).end) : null;
+    return sessionStorage.getItem(credentialsKey) && timeNow && sessionEnd && sessionEnd > timeNow || localStorage.getItem(credentialsKey) && sessionEnd > timeNow ? true : false;
   }
 
   /**
@@ -71,6 +111,13 @@ export class AuthenticationService {
    */
   get credentials(): Credentials | null {
     return this._credentials;
+  }
+
+  private setSessionsTimes(expiresInSeconds: number) {
+    const start = new Date();
+    const end = new Date();
+    end.setMinutes(start.getMinutes() + expiresInSeconds / 60); // % 60 to get minutes
+    localStorage.setItem(sessionKey, JSON.stringify({ start: start, end: end }));
   }
 
   /**
@@ -86,7 +133,12 @@ export class AuthenticationService {
     if (credentials) {
       const storage = remember ? localStorage : sessionStorage;
       storage.setItem(credentialsKey, JSON.stringify(credentials));
+      this.setSessionsTimes(this._credentials.expiresInSeconds);
     } else {
+      sessionStorage.removeItem(credentialsKey);
+      localStorage.removeItem(credentialsKey);
+
+      this._tokenData = null;
       sessionStorage.removeItem(credentialsKey);
       localStorage.removeItem(credentialsKey);
     }

@@ -5,10 +5,13 @@ import { HttpModule, Http, XHRBackend, ConnectionBackend, RequestOptions } from 
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { SimpleNotificationsModule } from 'angular2-notifications';
+
 import { MaterialModule } from '@app/material.module';
 import { ShellComponent } from './shell/shell.component';
 import { HeaderComponent } from './shell/header/header.component';
 import { FooterComponent } from './shell/footer/footer.component';
+import { FooterService } from './shell/footer/footer.service';
 import { RouteReusableStrategy } from './route-reusable-strategy';
 import { AuthenticationService } from './authentication/authentication.service';
 import { AuthenticationGuard } from './authentication/authentication.guard';
@@ -16,6 +19,7 @@ import { I18nService } from './i18n.service';
 import { HttpService } from './http/http.service';
 import { HttpCacheService } from './http/http-cache.service';
 import { PersistenceService } from './persistence.service';
+import { FormsModule } from '@angular/forms';
 
 export function createHttpService(backend: ConnectionBackend,
   defaultOptions: RequestOptions,
@@ -28,8 +32,10 @@ export function createHttpService(backend: ConnectionBackend,
     CommonModule,
     HttpModule,
     TranslateModule,
+    SimpleNotificationsModule.forRoot(),
     NgbModule,
     MaterialModule,
+    FormsModule,
     RouterModule
   ],
   declarations: [
@@ -41,6 +47,7 @@ export function createHttpService(backend: ConnectionBackend,
     AuthenticationService,
     AuthenticationGuard,
     PersistenceService,
+    FooterService,
     I18nService,
     HttpCacheService,
     {

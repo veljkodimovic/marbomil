@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate } from '@angular/router';
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 import { Logger } from '../logger.service';
-import { AuthenticationService } from './authentication.service';
+import { AuthenticationService,  } from './authentication.service';
 
 const log = new Logger('AuthenticationGuard');
 
@@ -12,14 +12,13 @@ export class AuthenticationGuard implements CanActivate {
   constructor(private router: Router,
               private authenticationService: AuthenticationService) { }
 
-  canActivate(): boolean {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (this.authenticationService.isAuthenticated()) {
       return true;
+    } else {
+      this.router.navigate(['login'], { queryParams: { returnUrl: state.url }, replaceUrl: true});
+      return false;
     }
-
-    log.debug('Not authenticated, redirecting...');
-    this.router.navigate(['/login'], { replaceUrl: true });
-    return false;
   }
 
 }

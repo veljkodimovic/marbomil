@@ -43,6 +43,12 @@
             </div>
           </div>
           <div class="form-group row">
+            <label for="orderNumber" class="col-md-2 col-form-label">Pozicija broj</label>
+            <div class="col-md-10">
+              <input type="text" class="form-control" id="orderNumber" [(ngModel)]="product.orderNumber" name="orderNumber">
+            </div>
+          </div>
+          <div class="form-group row">
             <label for="discount" class="col-md-2 col-form-label">Popust</label>
             <div class="col-md-10">
               <input type="text" class="form-control" id="discount" [(ngModel)]="product.discount" name="discount">

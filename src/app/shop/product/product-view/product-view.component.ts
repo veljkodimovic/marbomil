@@ -20,7 +20,7 @@ export class ProductViewComponent implements OnInit {
   productCategory: Category;
   productCollection: Collection;
   productCollectionMain: Collection;
-  private apiUrl: string;
+  apiUrl: string;
 
   constructor(private svc: ProductService, private renderer: Renderer,
     private persistenceService: PersistenceService,

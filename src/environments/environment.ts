@@ -7,7 +7,7 @@ export const environment = {
   production: false,
   version: '(dev)',
   serverUrl: 'http://RSM0014:8889',
-  defaultLanguage: 'en-US',
+  defaultLanguage: 'sr-Latn',
   supportedLanguages: [
     'en-US',
     'sr-Latn',

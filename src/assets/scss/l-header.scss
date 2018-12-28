@@ -27,6 +27,9 @@ app-404 {
   .nav-link {
     padding: 0 5px;
     font-size: 12px;
+    &.active {
+      color: $primary;
+    }
   }
 }
 .header-bottom {

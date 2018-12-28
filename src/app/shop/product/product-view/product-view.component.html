@@ -22,25 +22,25 @@
   <div class="row">
     <div class="col-sm-6">
       <img *ngFor="let productImage of product.images" src="{{apiUrl}}/{{productImage.imageCropUrl}}" alt="{{product.title}}">
-      <img src="{{apiUrl}}/{{product.drawingImageUrl}}" alt="{{product.title}}">
     </div>
     <div class="col-sm-6">
       <h1>{{product.title}}</h1>
       <div class="single-product-data">
         <p><span>Šifra:</span> {{product.code}}</p>
-        <p><span>Dimenzije proizvoda (ŠxVxD):</span> {{product.width}}x{{product.height}}x{{product.depth}}</p>
-        <p class="single-product-price">
-          {{product.price * ((100 - product.discount)/100) | number : '1.2-2'}} <span class="single-product-price-currency">RSD</span>
-          <span *ngIf="product.discount > 0" class="single-product-price-old">{{product.price | number : '1.2-2'}}  <span class="single-product-price-currency">RSD</span></span>
-        </p>
+        <!--<p><span>Dimenzije proizvoda (ŠxVxD):</span> {{product.width}}x{{product.height}}x{{product.depth}}</p>-->
+        <!--<p class="single-product-price">-->
+          <!--{{product.price * ((100 - product.discount)/100) | number : '1.2-2'}} <span class="single-product-price-currency">RSD</span>-->
+          <!--<span *ngIf="product.discount > 0" class="single-product-price-old">{{product.price | number : '1.2-2'}}  <span class="single-product-price-currency">RSD</span></span>-->
+        <!--</p>-->
       </div>
       <p class="single-product-description">
         {{product.description}}
       </p>
-      <p class="single-product-price-info">
-        Cene su iskazane u dinarima sa uključenim PDV-om. Ne možemo Vam garantovati da su sve fotografije potpuno verne, a cene ažurne, iako će Marbomil nastojati da ove informacije budu tačne.
-      </p>
-      <a href="#" class="add-to-cart btn btn-primary btn-lg">Dodaj u korpu</a>
+      <img src="{{apiUrl}}/{{product.drawingImageUrl}}" alt="{{product.title}}">
+      <!--<p class="single-product-price-info">-->
+        <!--Cene su iskazane u dinarima sa uključenim PDV-om. Ne možemo Vam garantovati da su sve fotografije potpuno verne, a cene ažurne, iako će Marbomil nastojati da ove informacije budu tačne.-->
+      <!--</p>-->
+      <a href="#" class="add-to-cart btn btn-primary btn-lg">Prijava za web shop</a>
     </div>
   </div>
 </div>

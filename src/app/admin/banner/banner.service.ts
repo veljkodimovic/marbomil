@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Banner } from '../../core/types/banner';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpHeaders, HttpClient  } from '@angular/common/http';
 import { PersistenceService } from '../../core/persistence.service';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -20,18 +20,19 @@ if (storageSession) {
 } else if (storageLocal) {
   accessToken = storageLocal.accessToken;
 }
-const headers = new Headers({
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer ' + accessToken
-});
-const options = new RequestOptions({ headers: headers });
+const options = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    'Authorization': 'Bearer ' + accessToken
+  })
+};
 
 @Injectable()
 export class BannerService {
 
   activeBanner: Banner;
-  headers: Headers;
-  constructor(private http: Http, private persistenceService: PersistenceService) {
+  headers: HttpHeaders;
+  constructor(private http: HttpClient, private persistenceService: PersistenceService) {
 
   }
 

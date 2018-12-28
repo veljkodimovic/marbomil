@@ -5,9 +5,11 @@ export const environment = {
   production: true,
   version: env.npm_package_version,
   serverUrl: 'http://192.168.1.112:8889',
-  defaultLanguage: 'en-US',
+  defaultLanguage: 'sr-Latn',
   supportedLanguages: [
     'en-US',
-    'fr-FR'
+    'sr-Latn',
+    'rus',
+    'alb'
   ]
 };

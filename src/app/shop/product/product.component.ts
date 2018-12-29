@@ -58,7 +58,9 @@ export class ProductComponent implements OnInit {
     this.svc.getProducts().subscribe(data => {
       this.productData = data;
       this.productData.sort(function(a: any, b: any) {
-        return a.orderNumber - b.orderNumber;
+        const i = a.orderNumber > 0 ? a.orderNumber : 9999999;
+        const j = b.orderNumber > 0 ? b.orderNumber : 9999999;
+        return i - j;
       });
     });
   }

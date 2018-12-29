@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import {HttpClient} from '@angular/common/http';
 
 export interface Credentials {
   // Customize received credentials here
@@ -43,10 +44,12 @@ const routes = {
  */
 @Injectable()
 export class AuthenticationService {
-
+  
   private _credentials: Credentials | null;
   private _tokenData: TokenData | null;
-
+  apiOptions: any;
+  activeStorage = sessionStorage;
+  
   constructor(private http: Http) {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
     if (savedCredentials) {

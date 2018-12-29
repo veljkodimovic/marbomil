@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
 
   @Input() sidenav: MatSidenav;
   menuHidden = true;
+  activeLanguage = '';
 
   constructor(private router: Router,
     private titleService: Title,
@@ -22,7 +23,7 @@ export class HeaderComponent implements OnInit {
     private i18nService: I18nService) { }
 
   ngOnInit() {
-    console.log(this.i18nService.supportedLanguages);
+    this.activeLanguage = this.i18nService.language;
   }
 
   toggleMenu() {
@@ -30,6 +31,7 @@ export class HeaderComponent implements OnInit {
   }
 
   setLanguage(language: string) {
+    this.activeLanguage = language;
     this.i18nService.language = language;
   }
 

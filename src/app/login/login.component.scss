@@ -1,2 +1,9 @@
 @import "src/theme/theme-variables";
 @import "~bootstrap/scss/mixins/_breakpoints";
+
+.login-error {
+  color: $red;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 300;
+}

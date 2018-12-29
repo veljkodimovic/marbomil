@@ -55,3 +55,17 @@
     margin-bottom: 40px;
   }
 }
+
+.single-product-image {
+  width: 100%;
+  height: auto;
+}
+
+.single-product-thumbnails {
+  margin-top: 10px;
+  img {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+  }
+}

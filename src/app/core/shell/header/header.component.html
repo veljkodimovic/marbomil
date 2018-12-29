@@ -2,16 +2,16 @@
   <div class="row">
     <nav class="header-top col navbar navbar-expand">
       <div class="navbar-nav  ml-auto">
-        <a class="nav-item nav-link text-uppercase" (click)="setLanguage('sr-Latn')" routerLinkActive="active">
+        <a class="nav-item nav-link text-uppercase" (click)="setLanguage('sr-Latn')" [ngClass]="activeLanguage == 'sr-Latn' ? 'active' : ''">
           <span translate>Ser</span>
         </a>
-        <a class="nav-item nav-link text-uppercase" (click)="setLanguage('en-US')" routerLinkActive="active">
+        <a class="nav-item nav-link text-uppercase" (click)="setLanguage('en-US')" [ngClass]="activeLanguage == 'en-US' ? 'active' : ''">
           <span translate>Eng</span>
         </a>
-        <a class="nav-item nav-link text-uppercase" (click)="setLanguage('rus')" routerLinkActive="active">
+        <a class="nav-item nav-link text-uppercase" (click)="setLanguage('rus')" [ngClass]="activeLanguage == 'rus' ? 'active' : ''">
           <span translate>Rus</span>
         </a>
-        <a class="nav-item nav-link text-uppercase" (click)="setLanguage('alb')" routerLinkActive="active">
+        <a class="nav-item nav-link text-uppercase" (click)="setLanguage('alb')" [ngClass]="activeLanguage == 'alb' ? 'active' : ''">
           <span translate>Alb</span>
         </a>
       </div>

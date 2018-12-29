@@ -20,7 +20,8 @@ export class ProductViewComponent implements OnInit {
   productCategory: Category;
   productCollection: Collection;
   productCollectionMain: Collection;
-  private apiUrl: string;
+  apiUrl: string;
+  activeImage: string;
 
   constructor(private svc: ProductService, private renderer: Renderer,
     private persistenceService: PersistenceService,
@@ -34,12 +35,20 @@ export class ProductViewComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.svc.getProductById(parseInt(id)).subscribe(data => {
       this.product = data;
-
-      this.svc.getCategoryById(this.product.categoryId).subscribe(data => {
-        this.productCategory = data;
+      const that = this;
+      const images = this.product.images;
+      this.activeImage = this.apiUrl + '/' + images[0].imageUrl;
+      images.forEach(function (image: any) {
+        const imageUrl = that.apiUrl + '/' + image.imageUrl;
+        console.log(imageUrl);
       });
-      this.svc.getCollectionById(this.product.collectionId).subscribe(data => {
-        this.productCollectionMain = data;
+
+
+      this.svc.getCategoryById(this.product.categoryId).subscribe(dataCat => {
+        this.productCategory = dataCat;
+      });
+      this.svc.getCollectionById(this.product.collectionId).subscribe(dataColl => {
+        this.productCollectionMain = dataColl;
       });
     });
 
@@ -60,5 +69,8 @@ export class ProductViewComponent implements OnInit {
     this.router.navigate(['/products/list'], { queryParams: { id: collection.id } });
   }
 
+  setActive(productImage: any) {
+    this.activeImage = this.apiUrl + '/' + productImage.imageUrl;
+  }
 
 }

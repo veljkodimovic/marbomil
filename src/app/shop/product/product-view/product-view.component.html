@@ -32,7 +32,7 @@
       <h1>{{product.title}}</h1>
       <div class="single-product-data">
         <p><span>Šifra:</span> {{product.code}}</p>
-        <p><span>Dimenzije proizvoda:</span> {{product.dimension}}</p>
+        <p *ngIf="product.dimension"><span>Dimenzije proizvoda:</span> {{product.dimension}}</p>
         <!--<p><span>Dimenzije proizvoda (ŠxVxD):</span> {{product.width}}x{{product.height}}x{{product.depth}}</p>-->
         <!--<p class="single-product-price">-->
           <!--{{product.price * ((100 - product.discount)/100) | number : '1.2-2'}} <span class="single-product-price-currency">RSD</span>-->

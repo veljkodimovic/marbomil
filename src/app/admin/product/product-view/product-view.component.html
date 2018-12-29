@@ -48,18 +48,18 @@
               <input type="text" class="form-control" id="orderNumber" [(ngModel)]="product.orderNumber" name="orderNumber">
             </div>
           </div>
-          <div class="form-group row">
+          <!-- <div class="form-group row">
             <label for="discount" class="col-md-2 col-form-label">Popust</label>
             <div class="col-md-10">
               <input type="text" class="form-control" id="discount" [(ngModel)]="product.discount" name="discount">
             </div>
-          </div>
-          <div class="form-group row">
+          </div> -->
+          <!-- <div class="form-group row">
             <label for="discountdate" class="col-md-2 col-form-label">Popust do</label>
             <div class="col-md-10">
               <input type="date" class="form-control" id="discountdate" [(ngModel)]="product.discountDate" name="discountDate">
             </div>
-          </div>
+          </div> -->
           <div class="form-group row">
             <label for="category" class="col-md-2 col-form-label">Kategorija</label>
             <div class="col-md-10">
@@ -86,6 +86,12 @@
             </div>
           </div>
           <div class="form-group row">
+              <label for="dimension" class="col-md-2 col-form-label">Dimenzije</label>
+              <div class="col-md-10">
+                <input type="text" class="form-control" id="dimension" [(ngModel)]="product.dimension" name="dimension">
+              </div>
+            </div>
+          <!-- <div class="form-group row">
             <label for="width" class="col-md-2 col-form-label">Širina</label>
             <div class="col-md-10">
               <input type="text" class="form-control" id="width" [(ngModel)]="product.width" name="widthData">
@@ -98,13 +104,13 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="stock" class="col-md-2 col-form-label">Količina</label>
+            <label for="stock" class="col-md-2 col-form-label">Dubina</label>
             <div class="col-md-10">
               <input type="text" class="form-control" id="stock" [(ngModel)]="product.depth" name="depthData">
             </div>
-          </div>
+          </div> -->
           <div class="form-group row">
-            <label for="depth" class="col-md-2 col-form-label">Dubina</label>
+            <label for="depth" class="col-md-2 col-form-label">Količina</label>
             <div class="col-md-10">
               <input type="text" class="form-control" id="depth" [(ngModel)]="product.numberOnSite" name="numberOnSite">
             </div>
@@ -187,7 +193,7 @@
           <div class="col-sm-4 col-to-8">
             <div class="image-note inline">
               <label class="control-label" translate>Napomena:</label>
-              <p class="form-control-static">Minimalna dimenzija slike je <span>900x600px</span>. Za slike većih dimenzija, razmera će biti sačuvana.</p>
+              <p class="form-control-static">Minimalna dimenzija slike je <span>450x600px</span>. Za slike većih dimenzija, razmera će biti sačuvana.</p>
             </div>
           </div>
         </div>

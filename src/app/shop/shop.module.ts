@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { GalleryModule } from '@ngx-gallery/core';
 
 import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
@@ -27,7 +26,6 @@ import { ProductService } from '@app/shop/product/product.service';
     FlexLayoutModule,
     NgbModule,
     MaterialModule,
-    GalleryModule,
     ShopRoutingModule
   ],
   declarations: [

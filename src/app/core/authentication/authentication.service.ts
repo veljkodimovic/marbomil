@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
-import { PersistenceService } from '../../core/persistence.service';
 import {HttpClient} from '@angular/common/http';
 
 export interface Credentials {
@@ -45,11 +44,13 @@ const routes = {
  */
 @Injectable()
 export class AuthenticationService {
-
+  
   private _credentials: Credentials | null;
   private _tokenData: TokenData | null;
-
-  constructor(private http: Http, private persistenceService: PersistenceService) {
+  apiOptions: any;
+  activeStorage = sessionStorage;
+  
+  constructor(private http: Http) {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
     if (savedCredentials) {
       this._credentials = JSON.parse(savedCredentials);
@@ -136,7 +137,6 @@ export class AuthenticationService {
       const storage = remember ? localStorage : sessionStorage;
       storage.setItem(credentialsKey, JSON.stringify(credentials));
       this.setSessionsTimes(this._credentials.expiresInSeconds);
-      this.persistenceService.setApiHeader(storage);
     } else {
       sessionStorage.removeItem(credentialsKey);
       localStorage.removeItem(credentialsKey);

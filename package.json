@@ -16,7 +16,7 @@
     "generate": "ng generate"
   },
   "dependencies": {
-    "@angular/animations": "^5.2.0",
+    "@angular/animations": "^5.2.11",
     "@angular/cdk": "^5.2.5",
     "@angular/common": "^5.2.0",
     "@angular/compiler": "^5.2.0",
@@ -31,6 +31,7 @@
     "@auth0/angular-jwt": "^2.1.0",
     "@fortawesome/fontawesome-free-webfonts": "^1.0.5",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0",
+    "@ngx-gallery/core": "^4.0.1",
     "@ngx-translate/core": "^9.0.1",
     "@types/googlemaps": "^3.30.10",
     "angular-2-local-storage": "^2.0.0",

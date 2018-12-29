@@ -19,9 +19,13 @@ export class ProductService {
   activeProduct: Product;
   headers: Headers;
   collectionData: any = [];
+  options: any;
 
   constructor(private http: Http,
-    private persistenceService: PersistenceService) { }
+    private persistenceService: PersistenceService) {
+      this.options = this.persistenceService.getApiHeader();
+     }
+
 
   getProducts(): Observable<any> {
     return this.http.get(routes.products())
@@ -54,14 +58,14 @@ export class ProductService {
   }
 
   getProductEditById(id: number): Observable<any> {
-    return this.http.get(routes.products() + 'edit/' + id, this.persistenceService.apiOptions)
+    return this.http.get(routes.products() + 'edit/' + id, this.options)
       .map((res: Response) => res.json())
       .map(body => body)
       .catch((err) => this.persistenceService.handleError(err));
   }
 
   getProductImageByID(id: number): Observable<any> {
-    return this.http.get(routes.products() + 'edit/image/' + id, this.persistenceService.apiOptions)
+    return this.http.get(routes.products() + 'edit/image/' + id, this.options)
     .map((res: Response) => res.json())
     .map(body => body)
     .catch((err) => this.persistenceService.handleError(err));
@@ -70,7 +74,7 @@ export class ProductService {
   createProduct(body: Product): Observable<any> {
     //let bodyString = JSON.stringify(body);
 
-    return this.http.post(routes.products(), body, this.persistenceService.apiOptions)
+    return this.http.post(routes.products(), body, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
@@ -78,14 +82,14 @@ export class ProductService {
   updateProduct(body: Product): Observable<any> {
     //let bodyString = JSON.stringify(body);
 
-    return this.http.put(routes.products(), body, this.persistenceService.apiOptions)
+    return this.http.put(routes.products(), body, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
   deleteProduct(id: number): Observable<any> {
 
-    return this.http.delete(routes.products() + id, this.persistenceService.apiOptions)
+    return this.http.delete(routes.products() + id, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }

@@ -168,7 +168,7 @@
           <div class="col-sm-4 col-to-12">
             <label class="control-label" translate>Slika</label> <span class="mandatory">*</span>
             <div class="initial-image image-collections">
-              <img-cropper #cropper2 [image]="data2" [settings]="cropperSettings"></img-cropper>
+              <img-cropper #cropper2 [image]="data2" [settings]="cropperSettings2"></img-cropper>
             </div>
             <br>
             <div class="image-buttons">
@@ -180,7 +180,7 @@
             <label class="control-label" translate>Pregled</label>
             <div class="image-preview preview-collections">
               <span class="result rounded" *ngIf="data2.image">
-                <img class="cropper-size" style="height:240px; width:360px" [src]="data2.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+                <img class="cropper-size" [src]="data2.image" [width]="cropperSettings2.croppedWidth" [height]="cropperSettings2.croppedHeight">
               </span>
             </div>
           </div>

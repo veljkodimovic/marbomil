@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Product } from '@app/core/types/product';
 import { Collection } from '@app/core/types/collection';
 import { Category } from '@app/core/types/category';
+import { GalleryItem, ImageItem } from '@ngx-gallery/core';
 
 @Component({
   selector: 'app-product-view',
@@ -21,6 +22,7 @@ export class ProductViewComponent implements OnInit {
   productCollection: Collection;
   productCollectionMain: Collection;
   apiUrl: string;
+  productImages: GalleryItem[];
 
   constructor(private svc: ProductService, private renderer: Renderer,
     private persistenceService: PersistenceService,
@@ -34,12 +36,21 @@ export class ProductViewComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.svc.getProductById(parseInt(id)).subscribe(data => {
       this.product = data;
-
-      this.svc.getCategoryById(this.product.categoryId).subscribe(data => {
-        this.productCategory = data;
+      const images = this.product.images;
+      images.forEach(function (image: any) {
+        const imageUrl = this.apiUrl + image;
+        console.log(imageUrl);
+        const galleryImage = new ImageItem({ src: imageUrl, thumb: imageUrl });
+        this.productImages.push(galleryImage);
       });
-      this.svc.getCollectionById(this.product.collectionId).subscribe(data => {
-        this.productCollectionMain = data;
+
+      console.log(this.productImages);
+
+      this.svc.getCategoryById(this.product.categoryId).subscribe(dataCat => {
+        this.productCategory = dataCat;
+      });
+      this.svc.getCollectionById(this.product.collectionId).subscribe(dataColl => {
+        this.productCollectionMain = dataColl;
       });
     });
 

@@ -26,6 +26,7 @@ export class ProductViewComponent implements OnInit {
   @ViewChild('cropper2', undefined)
   cropper2: ImageCropperComponent;
   cropperSettings: CropperSettings;
+  cropperSettings2: CropperSettings;
   @ViewChild(DeleteModalComponent)
   private modal: DeleteModalComponent;
   private apiUrl: string;
@@ -72,7 +73,17 @@ export class ProductViewComponent implements OnInit {
     this.cropperSettings.canvasHeight = 240;
     this.cropperSettings.noFileInput = true;
     this.cropperSettings.keepAspect = true;
-    this.cropperSettings.preserveSize = true;
+    // this.cropperSettings.preserveSize = true;
+
+    this.cropperSettings2 = new CropperSettings();
+    this.cropperSettings2.noFileInput = true;
+    this.cropperSettings2.width = 300;
+    this.cropperSettings2.height = 400;
+    this.cropperSettings2.croppedWidth = 300;
+    this.cropperSettings2.croppedHeight = 400;
+    this.cropperSettings2.canvasWidth = 300;
+    this.cropperSettings2.canvasHeight = 400;
+
     this.data = {};
     this.data2 = {};
     this.apiUrl = persistenceService.apiUrl;
@@ -124,7 +135,7 @@ export class ProductViewComponent implements OnInit {
         that.data2.image = 'data:image/jpeg;base64,' + this.product.drawingImage;
         const image2: any = new Image();
         image2.src = that.data2.image;
-        this.cropper2.settings = this.cropperSettings;
+        this.cropper2.settings = this.cropperSettings2;
         this.cropper2.setImage(image2);
       }
     });

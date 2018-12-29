@@ -11,29 +11,15 @@ const routes = {
   banners: () => `/banner/`
 };
 
-const credentialsKey = 'credentials';
-const storageLocal = JSON.parse(localStorage.getItem(credentialsKey));
-const storageSession = JSON.parse(sessionStorage.getItem(credentialsKey));
-let accessToken = '';
-if (storageSession) {
-  accessToken = storageSession.accessToken;
-} else if (storageLocal) {
-  accessToken = storageLocal.accessToken;
-}
-const options = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    'Authorization': 'Bearer ' + accessToken
-  })
-};
 
 @Injectable()
 export class BannerService {
 
   activeBanner: Banner;
-  headers: HttpHeaders;
-  constructor(private http: HttpClient, private persistenceService: PersistenceService) {
-
+  headers: Headers;
+  options: any;
+  constructor(private http: Http, private persistenceService: PersistenceService) {
+    this.options = this.persistenceService.getApiHeader();
   }
 
   // Banners region
@@ -53,7 +39,7 @@ export class BannerService {
   }
 
   getBannerEditById(id: number): Observable<any> {
-    return this.http.get(routes.banners() + 'edit/' + id, options)
+    return this.http.get(routes.banners() + 'edit/' + id, this.options)
       .map((res: Response) => res.json())
       .map(body => body)
       .catch((err) => this.persistenceService.handleError(err));
@@ -62,7 +48,7 @@ export class BannerService {
   createBanner(body: Banner): Observable<any> {
     // let bodyString = JSON.stringify(body);
 
-    return this.http.post(routes.banners(), body, options)
+    return this.http.post(routes.banners(), body, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
@@ -70,14 +56,14 @@ export class BannerService {
   updateBanner(body: Banner): Observable<any> {
     // let bodyString = JSON.stringify(body);
 
-    return this.http.put(routes.banners(), body, options)
+    return this.http.put(routes.banners(), body, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
   deleteBanner(id: number): Observable<any> {
 
-    return this.http.delete(routes.banners() + id, options)
+    return this.http.delete(routes.banners() + id, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }

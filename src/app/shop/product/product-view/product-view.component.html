@@ -21,6 +21,7 @@
 <div *ngIf="product" class="container single-product">
   <div class="row">
     <div class="col-sm-6">
+        <!-- <gallery [items]="productImages"></gallery> -->
       <img *ngFor="let productImage of product.images" src="{{apiUrl}}/{{productImage.imageCropUrl}}" alt="{{product.title}}">
     </div>
     <div class="col-sm-6">

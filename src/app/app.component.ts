@@ -21,7 +21,16 @@ export class AppComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private titleService: Title,
     private translateService: TranslateService,
-    private i18nService: I18nService) { }
+    private i18nService: I18nService) {
+      // redirection on home route
+    router.events.subscribe((val: any) => {
+      if (val && val.url && val.url === '/') {
+        setTimeout(() => {
+          this.router.navigate(['/home'], { replaceUrl: true});
+        });
+      }
+    });
+    }
 
   ngOnInit() {
     // Setup logger
@@ -57,7 +66,7 @@ export class AppComponent implements OnInit {
         }
       });
 
-    //this.router.navigate(['home']);
+    // this.router.navigate(['home']);
   }
 
 }

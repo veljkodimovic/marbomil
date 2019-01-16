@@ -15,8 +15,19 @@
   "Video materials": "Video materijali",
   "About Us": "O nama",
   "Contact": "Kontakt",
+  "Sedište:": "Sedište:",
+  "Telefon:": "Telefon:",
   "Homepage": "Naslovna strana",
   "Subscribe": "Prijava",
+  "Marbomil prijava na vesti": "Marbomil prijava na vesti",
   "Page not found": "Tražena stranica nije pronađena",
-  "Return to Homepage": "Povratak na početnu stranicu"
+  "Download Section": "Download sekcija",
+  "Return to Homepage": "Povratak na početnu stranicu",
+  "25 Years in Business.": "25 godina sa Vama.",
+
+  "homepage.description": "Marbomil je jedna od vodećih robnih marki slavina i druge opreme za kupatilo u regionu. <br> Naši proizvodi su atestirani i bezbedni za upotrebu. Podležu dugotrajnim garancijama <br> i rigoroznoj kontroli kvaliteta. <br> Kvalitet proizvoda garantovan je dvadesetpetogodišnjim iskustvom <br> u proizvodnji vodovodnih armatura. <br> Marmobil slavine i druge proizvode možete kupiti u više storina <br> maloprodajnih objekata u Srbiji, Hrvatskoj, Makedoniji i Crnoj Godi.",
+  "homepage.box.products": "U okviru kompanije nalazi se i maloprodajni centar. Marbomil proizvode možete kupovati kod lokalnih distributera, ili poručivati pouzećem.",
+  "homepage.box.catalogue": "Nudimo pogodnosti za opremanje vodovodnih prodavnica i salona i posebne uslove za građevinske projekte.",
+  "homepage.box.atests": "Svi naši proizvodi poseduju Ateste koje mozete pogledati u ovoj sekciji",
+  "homepage.box.video": "U ovoj sekciji mozete pogledati kako rade nasi proizvodi."
 }

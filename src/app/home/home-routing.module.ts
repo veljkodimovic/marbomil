@@ -16,7 +16,7 @@ import { AboutUsComponent } from '@app/home/about-us/about-us.component';
 import { LocationComponent } from '@app/home/location/location.component';
 
 const routes: Routes = Route.withShell([
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+
   { path: 'servis', component: ServiceComponent, data: { title: extract('Servisi') } },
   { path: 'garancija', component: WarrantyComponent, data: { title: extract('Garancija') } },
   { path: 'kvalitet', component: QualityComponent, data: { title: extract('Kvalitet') } },
@@ -28,7 +28,8 @@ const routes: Routes = Route.withShell([
   { path: '404', component: NotFoundComponent, data: { title: extract('404') } },
   { path: 'about-us', component: AboutUsComponent, data: { title: extract('O nama') } },
   { path: 'locations', component: LocationComponent, data: { title: extract('Gde kupiti') } },
-  { path: 'home', component: HomeComponent, data: { title: extract('Home') } }
+  { path: 'home', component: HomeComponent, data: { title: extract('Home') } },
+  { path: '', redirectTo: 'home', pathMatch: 'full' }
 ]);
 
 @NgModule({

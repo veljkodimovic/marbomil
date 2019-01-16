@@ -3,6 +3,7 @@
   "About": "About",
   "Hello world !": "Hello world !",
   "Home": "Home",
+  "Homepage": "Home",
   "Logged in as": "Logged in as",
   "Login": "Login",
   "Logout": "Logout",
@@ -14,7 +15,7 @@
   "Remember me": "Remember me",
   "Version": "Version",
   "Products": "Products",
-  "Servis": "Servis",
+  "Servis": "Service",
   "Guarantee": "Guarantee",
   "Where To Buy": "Where To Buy",
   "Quality": "Quality",
@@ -26,6 +27,13 @@
   "Download Atests": "Download Atests",
   "Catalogues": "Catalogues",
   "Atests": "Atests",
-  "About Us": "About Us"
+  "About Us": "About Us",
+  "Download Section": "Download Section",
+  "Contact": "Contact",
+  "Subscribe": "Subscribe",
+  "Marbomil prijava na vesti": "Marbomil Newsletter Subscription",
+  "Sedište:": "Address:",
+  "Telefon:": "Phone:",
+  "Marbomil kontakt informacije": "Marbomil contact informations"
 
 }

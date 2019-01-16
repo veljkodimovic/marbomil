@@ -1,5 +1,5 @@
 footer {
-  padding: 40px 0 60px;
+  padding: 30px 0;
   background: $primary;
   color: $white !important;
   text-transform: uppercase !important;
@@ -43,18 +43,19 @@ footer {
   margin-top: 40px;
   position: relative;
   input.form-control {
-    padding: 15px 100px 15px 25px;
+    padding: 10px 100px 10px 20px;
     border-radius: 10px;
     margin: 0 !important;
     line-height: 1;
     text-transform: uppercase;
     width: 100% !important;
+    font-size: 14px;
   }
   &-submit {
     background: #1465aa;
     color: $white;
-    border-radius: 10px !important;
-    padding: 16px 25px;
+    border-radius: 5px !important;
+    padding: 10px 20px;
     border: none;
     position: absolute;
     top: 0;

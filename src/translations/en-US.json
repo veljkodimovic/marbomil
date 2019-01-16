@@ -24,16 +24,57 @@
   "No Products To Show": "No Products To Show",
   "Download section": "Download section",
   "Download Catalogues": "Download Catalogues",
-  "Download Atests": "Download Atests",
+  "Download Atests": "Download Attests",
   "Catalogues": "Catalogues",
-  "Atests": "Atests",
+  "Atests": "Attests",
   "About Us": "About Us",
   "Download Section": "Download Section",
   "Contact": "Contact",
+
+  "25 Years in Business.": "25 Years in Business.",
+
+  "Video materials": "Video materials",
+
+  "Marbomil contact information": "Marbomil contact information",
+  "Address:": "Address:",
+  "Phone:": "Phone:",
+  "newsletter.subscription": "Marbomil Newsletter Subscription",
   "Subscribe": "Subscribe",
-  "Marbomil prijava na vesti": "Marbomil Newsletter Subscription",
-  "Sedište:": "Address:",
-  "Telefon:": "Phone:",
-  "Marbomil kontakt informacije": "Marbomil contact informations"
+
+  "Bathroom equipment": "Bathroom equipment",
+  "Taps and Valves parts": "Taps and Valves parts",
+  "Taps and Valves": "Taps and Valves",
+
+  "homepage.description": "Marbomil is one of the leading brands of faucets and other bathroom equipment in the region. <br> Our products are certified and safe to use. I am subject to long-term warranty and rigorous quality control. <br> Product quality is guaranteed by twenty-five years of experience in the production of plumbing fittings. <br> Marmobil faucets and other products you can purchase in many parts of retail facilities in Serbia, Croatia, Macedonia and Montenegro.",
+  "homepage.box.products": "Within the company there is a retail center. You can buy Marbomil products from local distributors, or order delivery.",
+  "homepage.box.catalogue": "We offer facilities for equipping water supply shops and lounges and special conditions for construction projects.",
+  "homepage.box.atests": "All our products have the Attests that you can look at in this section",
+  "homepage.box.video": "In this section you can see how our products work.",
+
+  "Idea": "Idea",
+  "Material": "Material",
+  "Casting": "Casting",
+  "Polishing": "Polishing",
+  "Chrome": "Chrome",
+  "Mounting": "Mounting",
+  "Testing": "Testing",
+  "Packaging": "Packaging",
+
+  "quality.idea": "Lorem ipsum dolor",
+  "quality.material": "Lorem ipsum dolor",
+  "quality.casting": "Lorem ipsum dolor",
+  "quality.polishing": "Lorem ipsum dolor",
+  "quality.chrome": "Lorem ipsum dolor",
+  "quality.mounting": "Lorem ipsum dolor",
+  "quality.testing": "Lorem ipsum dolor",
+  "quality.packaking": "Lorem ipsum dolor",
+
+  "Authorized Marmobil Services": "Authorized Marmobil Services",
+  "Marmobil locations": "Marbomil locations",
+  "Serbia": "Serbia",
+  "Croatia": "Croatia",
+  "Republic of Macedonia": "Republic of Macedonia",
+  "Montenegro": "Montenegro",
+  "Republika Srpska": "Republika Srpska"
 
 }

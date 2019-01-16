@@ -9,13 +9,13 @@
   <div class="row">
     <div class="col-sm-12 page-title-icon">
       <img src="../../../assets/images/icons/montaza.png" width="50" alt="">
-      <h1>Ovlašćeni Marmobil servisi</h1>
+      <h1 translate>Authorized Marmobil Services</h1>
     </div>
   </div>
   <div class="container service-list">
     <div class="row service-block">
       <div class="col-sm-3 offset-sm-1" *ngIf="serviceSerbia.length">
-        <h3 class="service-country">Srbija</h3>
+        <h3 class="service-country" translate>Serbia</h3>
         <div class="service-item" *ngFor="let service of serviceSerbia">
           <h4 class="service-city">{{service.city}}</h4>
           <p>
@@ -33,7 +33,7 @@
     </div>
     <div class="row service-block">
       <div class="col-sm-3 offset-sm-1" *ngIf="serviceCroatia.length">
-        <h3 class="service-country">Repubika Hrvatska</h3>
+        <h3 class="service-country" translate>Croatia</h3>
         <div class="service-item" *ngFor="let service of serviceCroatia">
           <h4 class="service-city">{{service.city}}</h4>
           <p>
@@ -51,7 +51,7 @@
     </div>
     <div class="row service-block">
       <div class="col-sm-3 offset-sm-1" *ngIf="serviceMacedonia.length">
-        <h3 class="service-country">Makedonija</h3>
+        <h3 class="service-country" translate>Republic of Macedonia</h3>
         <div class="service-item" *ngFor="let service of serviceMacedonia">
           <h4 class="service-city">{{service.city}}</h4>
           <p>
@@ -69,7 +69,7 @@
     </div>
     <div class="row service-block">
       <div class="col-sm-3 offset-sm-1" *ngIf="serviceMontenegro.length">
-        <h3 class="service-country">Crna Gora</h3>
+        <h3 class="service-country" translate>Montenegro</h3>
         <div class="service-item" *ngFor="let service of serviceMontenegro">
           <h4 class="service-city">{{service.city}}</h4>
           <p>
@@ -87,7 +87,7 @@
     </div>
     <div class="row service-block">
       <div class="col-sm-3 offset-sm-1" *ngIf="serviceRSrpska.length">
-        <h3 class="service-country">Republika Srpska</h3>
+        <h3 class="service-country" translate>Republika Srpska</h3>
         <div class="service-item" *ngFor="let service of serviceRSrpska">
           <h4 class="service-city">{{service.city}}</h4>
           <p>

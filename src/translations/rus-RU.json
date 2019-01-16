@@ -1,3 +1,81 @@
 {
-  
+  "APP_NAME": "Marbomil",
+  "About": "About",
+  "Home": "Home",
+  "Homepage": "Home",
+  "Logged in as": "Logged in as",
+  "Login": "Login",
+  "Logout": "Logout",
+  "Password": "Password",
+  "Password is required": "Password is required",
+  "Username": "Username",
+  "Username is required": "Username is required",
+  "Username or password incorrect.": "Username or password incorrect.",
+  "Remember me": "Remember me",
+  "Version": "Version",
+
+  "Products": "Товары",
+  "Quality": "Качество",
+  "Servis": "Сервис",
+  "Guarantee": "Гарантия",
+  "Where To Buy": "Где купить",
+
+  "All Categories": "All Categories",
+  "No Items To Show": "No Items To Show",
+  "No Products To Show": "No Products To Show",
+  "Download section": "Скачать раздел",
+  "Download Catalogues": "Скачать каталоги",
+  "Download Atests": "Скачать Удостоверять",
+  "Catalogues": "Каталоги",
+  "Atests": "Удостоверять",
+  "About Us": "Насчет нас",
+  "Download Section": "Скачать раздел",
+  "Contact": "Kонтакт",
+
+  "25 Years in Business.": "25 лет в бизнесе.",
+
+  "Video materials": "Видео материалы",
+
+  "Marbomil contact information": "Марбомил контактная информация",
+  "Address:": "Адрес:",
+  "Phone:": "Телефон:",
+  "newsletter.subscription": "Подписка на новостную рассылку Marbomil",
+  "Subscribe": "Подписывайся",
+
+  "Bathroom equipment": "Сантехника",
+  "Taps and Valves parts": "Детали кранов и клапанов",
+  "Taps and Valves": "Метчики и клапаны",
+
+  "homepage.description": "Marbomil является одним из ведущих брендов смесителей и другой сантехники в регионе. <br> Наша продукция сертифицирована и безопасна в использовании. Я подлежу долгосрочной гарантии и строгому контролю качества. <br> Качество продукции гарантируется двадцатипятилетним опытом производства сантехнической арматуры. <br> Смесители Марбомил и другие продукты вы можете приобрести во многих торговых точках Сербии, Хорватии, Македонии и Черногории.",
+  "homepage.box.products": "Внутри компании есть торговый центр. Вы можете купить продукцию Marbomil у местных дистрибьюторов или заказать доставку.",
+  "homepage.box.catalogue": "Мы предлагаем оборудование для оснащения магазинов и залов водоснабжения и специальные условия для строительных проектов.",
+  "homepage.box.atests": "Все наши продукты имеют Удостоверять, которые вы можете посмотреть в этом разделе",
+  "homepage.box.video": "В этом разделе вы можете увидеть, как работают наши продукты.",
+
+  "Idea": "Идея",
+  "Material": "Материал",
+  "Casting": "Кастинг",
+  "Polishing": "Полировка",
+  "Chrome": "Хром",
+  "Mounting": "Монтаж",
+  "Testing": "Тестирование",
+  "Packaging": "Упаковка",
+
+  "quality.idea": "Lorem ipsum dolor",
+  "quality.material": "Lorem ipsum dolor",
+  "quality.casting": "Lorem ipsum dolor",
+  "quality.polishing": "Lorem ipsum dolor",
+  "quality.chrome": "Lorem ipsum dolor",
+  "quality.mounting": "Lorem ipsum dolor",
+  "quality.testing": "Lorem ipsum dolor",
+  "quality.packaking": "Lorem ipsum dolor",
+
+  "Authorized Marmobil Services": "Авторизованные Сервисы Марбомил",
+  "Marmobil locations": "Места в Марбомил",
+  "Serbia": "Сербия",
+  "Croatia": "Хорватия",
+  "Republic of Macedonia": "Республика Македония",
+  "Montenegro": "Черногория",
+  "Republika Srpska": "Республика Сербская"
+
 }

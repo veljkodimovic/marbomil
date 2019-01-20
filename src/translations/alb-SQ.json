@@ -1,3 +1,83 @@
 {
-  
+  "APP_NAME": "Marbomil",
+  "About": "About",
+  "Hello world !": "Hello world !",
+  "Home": "Home",
+  "Homepage": "Home",
+  "Logged in as": "Logged in as",
+  "Login": "Login",
+  "Logout": "Logout",
+  "Password": "Password",
+  "Password is required": "Password is required",
+  "Username": "Username",
+  "Username is required": "Username is required",
+  "Username or password incorrect.": "Username or password incorrect.",
+  "Remember me": "Remember me",
+  "Version": "Version",
+
+  "Products": "Produkte",
+  "Quality": "Cilësi",
+  "Servis": "Shërbim",
+  "Guarantee": "Garanci",
+  "Where To Buy": "Ku te blej",
+
+  "All Categories": "All Categories",
+  "No Items To Show": "No Items To Show",
+  "No Products To Show": "No Products To Show",
+
+  "Download section": "Shkarkoni seksionin",
+  "Download Catalogues": "Shkarko Katalizat",
+  "Download Atests": "Shkarko Vërtetoj",
+  "Catalogues": "Katalogjet",
+  "Atests": "Vërtetoj",
+  "About Us": "Rreth nesh",
+  "Download Section": "Shkarko Seksionin",
+  "Contact": "Кontakt",
+
+  "25 Years in Business.": "25 vjet në biznes.",
+
+  "Video materials": "Materialet video",
+
+  "Marbomil contact information": "Informacion kontaktues Marbomil",
+  "Address:": "Adresë:",
+  "Phone:": "Telefon:",
+  "newsletter.subscription": "Abonimi Abonohu ne Marbomil",
+  "Subscribe": "Pajtohem",
+
+  "Bathroom equipment": "Pajisje banjo",
+  "Taps and Valves parts": "Pjesët e çekanave dhe valvulave",
+  "Taps and Valves": "Çezmat dhe valvulat",
+
+  "homepage.description": "Marbomil është një nga markat kryesore të faucets dhe pajisjeve të tjera banjo në rajon. <br> Produktet tona janë të certifikuara dhe të sigurt për t'u përdorur. Unë jam subjekt i garancionit afatgjatë dhe kontrollit rigoroz të cilësisë. <br> Cilësia e produktit është e garantuar nga njëzet e pesë vjet përvojë në prodhimin e pajisje hidraulike. <br> Rubinet Marmobil dhe produkte të tjera që mund të blini në shumë pjesë të objekteve të shitjes me pakicë në Serbi, Kroaci, Maqedoni dhe Mal të Zi.",
+  "homepage.box.products": "Brenda kompanisë ekziston një qendër tregtare. Ju mund të blini produkte të Marbomil nga shpërndarësit lokalë, ose shpërndarjen e porosive.",
+  "homepage.box.catalogue": "Ne ofrojmë lehtësira për pajisjen e dyqaneve të furnizimit me ujë dhe lounges dhe kushtet e veçanta për projektet e ndërtimit.",
+  "homepage.box.atests": "Të gjitha produktet tona kanë Vërtetoj që ju mund të shikoni në këtë seksion",
+  "homepage.box.video": "Në këtë seksion ju mund të shihni se si funksionojnë produktet tona.",
+
+  "Idea": "Idea",
+  "Material": "Material",
+  "Casting": "Casting",
+  "Polishing": "Polishing",
+  "Chrome": "Chrome",
+  "Mounting": "Mounting",
+  "Testing": "Testing",
+  "Packaging": "Packaging",
+
+  "quality.idea": "Lorem ipsum dolor",
+  "quality.material": "Lorem ipsum dolor",
+  "quality.casting": "Lorem ipsum dolor",
+  "quality.polishing": "Lorem ipsum dolor",
+  "quality.chrome": "Lorem ipsum dolor",
+  "quality.mounting": "Lorem ipsum dolor",
+  "quality.testing": "Lorem ipsum dolor",
+  "quality.packaking": "Lorem ipsum dolor",
+
+  "Authorized Marmobil Services": "Shërbimet Marmobil të Autorizuara",
+  "Marmobil locations": "Vendet e Marbomil",
+  "Serbia": "Serbia",
+  "Croatia": "Kroacia",
+  "Republic of Macedonia": "Republika e Maqedonisë",
+  "Montenegro": "Mali i Zi",
+  "Republika Srpska": "Republika Srpska"
+
 }

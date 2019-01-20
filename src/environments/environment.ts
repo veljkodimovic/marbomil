@@ -6,8 +6,8 @@
 export const environment = {
   production: false,
   version: '(dev)',
-  serverUrl: 'http://localhost:8889',
-  defaultLanguage: 'en-US',
+  serverUrl: 'http://178.222.248.47:8889',
+  defaultLanguage: 'sr-Latn',
   supportedLanguages: [
     'en-US',
     'sr-Latn',

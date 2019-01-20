@@ -105,13 +105,17 @@ app-404 {
   }
 }
 
+ul.navbar-nav.ml-auto {
+  width: 600px;
+}
+
 .breadcrumbs {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-flow: row wrap;
-  width: 795px;
+  width: 784px;
   float: right;
   li {
     padding-left: 15px;
@@ -136,6 +140,9 @@ app-404 {
 }
 
 @include media-breakpoint-only(lg) {
+  ul.navbar-nav.ml-auto {
+    width: auto;
+  }
   .breadcrumbs {
     width: auto;
     float: left;
@@ -154,6 +161,9 @@ app-404 {
 }
 
 @include media-breakpoint-down(md) {
+  ul.navbar-nav.ml-auto {
+    width: auto;
+  }
   .logo {
     width: 150px;
   }

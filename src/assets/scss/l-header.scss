@@ -106,17 +106,16 @@ app-404 {
 }
 
 ul.navbar-nav.ml-auto {
-  width: 600px;
+  //width: 600px;
+  margin-left: 50px !important;
 }
 
 .breadcrumbs {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 0 0 308px;
   display: flex;
   flex-flow: row wrap;
-  width: 784px;
-  float: right;
   li {
     padding-left: 15px;
     &:first-child {
@@ -140,13 +139,17 @@ ul.navbar-nav.ml-auto {
 }
 
 @include media-breakpoint-only(lg) {
+  .logo {
+    width: 200px;
+  }
   ul.navbar-nav.ml-auto {
     width: auto;
+    margin-left: 30px !important;
   }
   .breadcrumbs {
     width: auto;
     float: left;
-    margin-left: 260px;
+    margin-left: 238px;
   }
   .header-bottom {
     .header-search {
@@ -164,12 +167,16 @@ ul.navbar-nav.ml-auto {
   ul.navbar-nav.ml-auto {
     width: auto;
   }
+
+  .header-bottom.navbar {
+    align-items: flex-start;
+  }
+
   .logo {
     width: 150px;
   }
 
   .breadcrumbs {
-    float: left;
-    width: auto;
+    margin: 0;
   }
 }

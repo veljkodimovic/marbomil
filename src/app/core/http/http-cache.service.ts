@@ -18,7 +18,7 @@ export interface HttpCacheEntry {
 @Injectable()
 export class HttpCacheService {
 
-  private cachedData: { [key: string]: HttpCacheEntry | null; } = {};
+  private cachedData:  { [key: string]: HttpCacheEntry | null; } = {};
   private storage: Storage | null = null;
 
   constructor() {
@@ -123,7 +123,7 @@ export class HttpCacheService {
 
   private loadCacheData() {
     const data = this.storage ? this.storage[cachePersistenceKey] : null;
-    this.cachedData = data ? JSON.stringify(data) : {};
+    // this.cachedData = data ? [JSON.stringify(data)] : null;
   }
 
 }

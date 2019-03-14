@@ -23,7 +23,7 @@ export class CollectionService {
       this.options = this.persistenceService.getApiHeader();
   }
 
-  //collection region
+  // collection region
   getAllCollections(): Observable<any[]> {
 
     return this.http.get(routes.collection())
@@ -58,7 +58,7 @@ export class CollectionService {
   }
 
   createCollection(body: Collection): Observable<any> {
-    //let bodyString = JSON.stringify(body);
+    // let bodyString = JSON.stringify(body);
 
     return this.http.post(routes.collection(), body, this.options)
       .map((res: Response) => res)
@@ -66,7 +66,7 @@ export class CollectionService {
   }
 
   updateCollection(body: Collection): Observable<any> {
-    //let bodyString = JSON.stringify(body);
+    // let bodyString = JSON.stringify(body);
 
     return this.http.put(routes.collection(), body, this.options)
       .map((res: Response) => res)
@@ -80,6 +80,6 @@ export class CollectionService {
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
-  //end of collection
+  // end of collection
 
 }

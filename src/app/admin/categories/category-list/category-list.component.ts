@@ -53,7 +53,7 @@ export class CategoryListComponent implements OnInit {
 
   performDelete(event: any) {
     this.svc.deleteCategory(this.activeCategory.id).subscribe(res => {
-      this.svc.getAllCategories().subscribe(data=> {
+      this.svc.getAllCategories().subscribe(data => {
         this.categoryData = data;
       });
     });

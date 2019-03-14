@@ -1,8 +1,8 @@
-import { NgModule, Component, Renderer, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, Renderer, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ProductService } from '../product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { FormsModule, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 import { NotificationsService } from 'angular2-notifications';
 import { Product } from '../../../core/types/product';
@@ -36,14 +36,14 @@ export class ProductViewComponent implements OnInit {
   product: Product = new Product(0, '', '', '', 0, 0, 0, '', null, null, '', 0, 0, 0, 0, [], '', '', '.jpg');
   link: any;
   isLoading: boolean;
-  setImage: boolean = false;
-  setImageDrawing: boolean = false;
-  originalImg: string = '';
-  isEditMode: boolean = true;
-  isImageEdit: boolean = false;
-  disableSave: boolean = false;
-  blockAll: boolean = false;
-  activeImageIndex: number = -1;
+  setImage = false;
+  setImageDrawing = false;
+  originalImg = '';
+  isEditMode = true;
+  isImageEdit = false;
+  disableSave = false;
+  blockAll = false;
+  activeImageIndex = -1;
   images: ImageModel[] = [];
   deletedImages: number[] = [];
   productImages: any[] = [];
@@ -52,10 +52,10 @@ export class ProductViewComponent implements OnInit {
   collections: Collection[] = [];
   collectionData: Collection[] = [];
   collectionsRoot: Collection[] = [];
-  collectionDisabled: boolean = true;
+  collectionDisabled = true;
   categories: Category[] = [];
-  activeImageIndexNew: number = -1;
-  activeImageIndexUpdated: number = -1;
+  activeImageIndexNew = -1;
+  activeImageIndexUpdated = -1;
   nestoImage: any;
   fileType: string;
   fileType2: string;
@@ -119,7 +119,7 @@ export class ProductViewComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     const that = this;
     this.isImageEdit = true;
-    this.svc.getProductEditById(parseInt(id)).subscribe(data => {
+    this.svc.getProductEditById(Number(id)).subscribe(data => {
       this.product = data;
       this.updateCollections();
       let firstImage = true;
@@ -327,7 +327,7 @@ export class ProductViewComponent implements OnInit {
             image: this.persistenceService.placeholderImage,
             imageCrop: this.persistenceService.placeholderImage,
             imageExtension: this.persistenceService.placeholderExtension
-          })
+          });
         }
         this.svc.updateProduct(this.product)
           .finally(() => { this.isLoading = false; })
@@ -404,7 +404,7 @@ export class ProductViewComponent implements OnInit {
   }
 
   uploadImage2() {
-    let event = new MouseEvent('click', { bubbles: true });
+    const event = new MouseEvent('click', { bubbles: true });
     this.renderer.invokeElementMethod(
       this.fileInput2.nativeElement, 'dispatchEvent', [event]);
   }

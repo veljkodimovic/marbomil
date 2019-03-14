@@ -33,7 +33,7 @@ export class ProductViewComponent implements OnInit {
   ngOnInit() {
 
     const id = this.route.snapshot.paramMap.get('id');
-    this.svc.getProductById(parseInt(id)).subscribe(data => {
+    this.svc.getProductById(Number(id)).subscribe(data => {
       this.product = data;
       const that = this;
       const images = this.product.images;

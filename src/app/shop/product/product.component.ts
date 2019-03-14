@@ -8,7 +8,7 @@ import { ProductService } from '@app/shop/product/product.service';
 
 
 @Component({
-  selector: 'products',
+  selector: 'app-products',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
@@ -30,8 +30,8 @@ export class ProductComponent implements OnInit {
   ) {
     this.apiUrl = persistenceService.apiUrl;
     this.route.queryParams.subscribe(params => {
-      this.activeCollectionId = parseInt(params['id']);
-      this.activeCategoryId = parseInt(params['categoryId']);
+      this.activeCollectionId = Number(params['id']);
+      this.activeCategoryId = Number(params['categoryId']);
     });
   }
 

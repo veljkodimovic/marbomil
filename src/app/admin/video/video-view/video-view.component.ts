@@ -1,4 +1,4 @@
-import { NgModule, Component, Input, Output, EventEmitter, Renderer, ElementRef, forwardRef, OnInit, ViewChild } from '@angular/core';
+import { Component, Renderer, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { VideoService } from '@app/admin/video/video.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 import { PersistenceService } from '@app/core/persistence.service';
+import 'rxjs/add/operator/finally';
 
 @Component({
   selector: 'app-video-view',
@@ -27,20 +28,20 @@ export class VideoViewComponent implements OnInit {
   videoUrl: any;
   link: any;
   isLoading: boolean;
-  setImage: boolean = false;
-  originalImg: string = '';
-  isEditMode: boolean = true;
-  disableSave: boolean = false;
-  blockAll: boolean = false;
+  setImage = false;
+  originalImg = '';
+  isEditMode = true;
+  disableSave = false;
+  blockAll = false;
   fileType: string;
 
   constructor(private svc: VideoService,
-              private renderer: Renderer,
-              private notificationService: NotificationsService,
-              private persistenceService: PersistenceService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private sanitizer: DomSanitizer) {
+    private renderer: Renderer,
+    private notificationService: NotificationsService,
+    private persistenceService: PersistenceService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer) {
     this.cropperSettings = new CropperSettings();
     this.cropperSettings.width = 400;
     this.cropperSettings.height = 300;
@@ -55,7 +56,7 @@ export class VideoViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.router.url.indexOf('new') != -1) {
+    if (this.router.url.indexOf('new') !== -1) {
       this.isEditMode = false;
     } else {
       this.isEditMode = true;
@@ -71,7 +72,7 @@ export class VideoViewComponent implements OnInit {
     this.fileType = this.fileType.slice(-4);
     const myReader: FileReader = new FileReader();
     const that = this;
-    myReader.onloadend = function(loadEvent: any) {
+    myReader.onloadend = function (loadEvent: any) {
       image.src = loadEvent.target.result;
       that.originalImg = image.src;
       that.cropper.setImage(image);
@@ -100,7 +101,7 @@ export class VideoViewComponent implements OnInit {
   getVideoDetails(): void {
     const id = this.route.snapshot.paramMap.get('id');
     const that = this;
-    this.svc.getVideoEditById(parseInt(id)).subscribe(data => {
+    this.svc.getVideoEditById(Number(id)).subscribe(data => {
       this.video = data;
       that.data.image = 'data:image/jpeg;base64,' + this.video.image;
       const image: any = new Image();
@@ -160,7 +161,7 @@ export class VideoViewComponent implements OnInit {
   handleResponse(response: any) {
     this.disableSave = false;
     if (!response.ok) {
-      const body = JSON.parse(response._body)
+      const body = JSON.parse(response._body);
       if (body.title) {
         this.notificationService.error(body.title, body.description,
           {
@@ -176,13 +177,13 @@ export class VideoViewComponent implements OnInit {
           description += errorDescription + '<br>';
         }
         this.notificationService.warn('Greška pri snimanju', description,
-        {
-          timeOut: 5000,
-          showProgressBar: true,
-          pauseOnHover: false,
-          clickToClose: false,
-          maxLength: 100
-        });
+          {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: false,
+            clickToClose: false,
+            maxLength: 100
+          });
       }
     } else {
       this.notificationService.success('Success', 'Video je uspešno sačuvan.',

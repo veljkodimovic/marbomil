@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Product } from '../../core/types/product';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 import { PersistenceService } from '../../core/persistence.service';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -34,7 +33,7 @@ export class ProductService {
       .catch(err => this.persistenceService.handleError(err));
   }
 
-  //collection region
+  // collection region
   getAllCollections(): Observable<any> {
 
     return this.http.get(routes.collection())
@@ -72,7 +71,7 @@ export class ProductService {
   }
 
   createProduct(body: Product): Observable<any> {
-    //let bodyString = JSON.stringify(body);
+    // let bodyString = JSON.stringify(body);
 
     return this.http.post(routes.products(), body, this.options)
       .map((res: Response) => res)
@@ -80,7 +79,7 @@ export class ProductService {
   }
 
   updateProduct(body: Product): Observable<any> {
-    //let bodyString = JSON.stringify(body);
+    // let bodyString = JSON.stringify(body);
 
     return this.http.put(routes.products(), body, this.options)
       .map((res: Response) => res)

@@ -1,9 +1,10 @@
+/// <reference types="@types/googlemaps" />
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Service } from '@app/core/types/service';
 import { Sales } from '@app/core/types/sales';
 import { SalesService } from '@app/admin/sales/sales.service';
 import { ServiceService } from '@app/home/service/service.service';
-import { } from '@types/googlemaps';
+// import { } from '@types/googlemaps';
 
 @Component({
   selector: 'app-home-location',
@@ -31,8 +32,8 @@ export class LocationComponent implements OnInit {
       this.mapSales = new google.maps.Map(this.gmapSales.nativeElement, mapProp);
       const mapSales = this.mapSales;
       const markers: any = [];
-      this.salesData.forEach(function (sales) {
-        const latLng = {lat: parseFloat(sales.latitude), lng: parseFloat(sales.longitude)};
+      this.salesData.forEach(sales => {
+        const latLng = { lat: parseFloat(sales.latitude), lng: parseFloat(sales.longitude) };
         const content = `<h3>${sales.title}</h3>
                         <p>${sales.street} <br>
                             ${sales.postal} ${sales.city} <br>
@@ -47,7 +48,7 @@ export class LocationComponent implements OnInit {
         const infowindow = new google.maps.InfoWindow();
         boundsSrb.extend(latLng);
         markers.push(marker);
-        google.maps.event.addListener(marker, 'click', function() {
+        google.maps.event.addListener(marker, 'click', function () {
           infowindow.setContent(content);
           infowindow.open(mapSales, this);
         });

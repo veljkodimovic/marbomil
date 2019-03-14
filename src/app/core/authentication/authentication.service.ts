@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 export interface Credentials {
   // Customize received credentials here
@@ -44,12 +44,12 @@ const routes = {
  */
 @Injectable()
 export class AuthenticationService {
-  
+
   private _credentials: Credentials | null;
   private _tokenData: TokenData | null;
   apiOptions: any;
   activeStorage = sessionStorage;
-  
+
   constructor(private http: Http) {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
     if (savedCredentials) {
@@ -69,12 +69,13 @@ export class AuthenticationService {
       token: context.password
     };
 
-    const body = {"username": context.username, "password": context.password};
+    const body = { 'username': context.username, 'password': context.password };
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
 
     return this.http.post(routes.login(), body, options)
       .map((res: Response) => res.json())
+      // tslint:disable-next-line:no-shadowed-variable
       .map((body: any) => {
         const token = body;
         if (token) {
@@ -104,7 +105,9 @@ export class AuthenticationService {
    */
   isAuthenticated(): boolean {
     const timeNow = localStorage.getItem(sessionKey) ? new Date() : null;
+    // tslint:disable-next-line:max-line-length
     const sessionEnd = localStorage.getItem(sessionKey) ? new Date(JSON.parse(localStorage.getItem(sessionKey)).end) : null;
+    // tslint:disable-next-line:max-line-length
     return sessionStorage.getItem(credentialsKey) && timeNow && sessionEnd && sessionEnd > timeNow || localStorage.getItem(credentialsKey) && sessionEnd > timeNow ? true : false;
   }
 

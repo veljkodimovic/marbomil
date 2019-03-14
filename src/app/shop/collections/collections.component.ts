@@ -8,7 +8,7 @@ import { finalize } from 'rxjs/operators';
 
 
 @Component({
-  selector: 'collections',
+  selector: 'app-collections',
   templateUrl: './collections.component.html',
   styleUrls: ['./collections.component.scss']
 })
@@ -28,7 +28,7 @@ export class CollectionsComponent implements OnInit {
   ) {
     this.apiUrl = persistenceService.apiUrl;
     this.route.queryParams.subscribe(params => {
-      this.activeCollectionId = parseInt(params['id']);
+      this.activeCollectionId = Number(params['id']);
     });
   }
 

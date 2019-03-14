@@ -3,11 +3,12 @@ export class Catalogue {
   title: string;
   desc: string;
   version: string;
-  file: string|any;
+  file: string | any;
   fileUrl: string;
   fileExtension: string;
 
-  constructor(id: number, title: string, desc: string, version: string, file: string|any, fileUrl: string, fileExtension: string) {
+  constructor(id: number, title: string, desc: string,
+    version: string, file: string | any, fileUrl: string, fileExtension: string) {
     this.id = id;
     this.title = title;
     this.desc = desc;

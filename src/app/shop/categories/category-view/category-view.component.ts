@@ -25,7 +25,7 @@ export class CategoryViewComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute) {
       this.apiUrl = persistenceService.apiUrl;
-    this.activeCategoryId = parseInt(this.route.snapshot.paramMap.get('id'));
+    this.activeCategoryId = Number(this.route.snapshot.paramMap.get('id'));
   }
 
 

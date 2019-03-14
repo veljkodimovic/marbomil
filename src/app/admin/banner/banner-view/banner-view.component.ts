@@ -1,4 +1,4 @@
-import { NgModule, Component, Input, Output, EventEmitter, Renderer, ElementRef, forwardRef, OnInit, ViewChild } from '@angular/core';
+import { Component, Renderer, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BannerService } from '../banner.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -25,11 +25,11 @@ export class BannerViewComponent implements OnInit {
   data: any;
   banner: Banner = new Banner(0, '', '', '', '', '', '', '.jpg');
   isLoading: boolean;
-  setImage: boolean = false;
-  originalImg: string = '';
-  isEditMode: boolean = true;
-  disableSave: boolean = false;
-  blockAll: boolean = false;
+  setImage = false;
+  originalImg = '';
+  isEditMode = true;
+  disableSave = false;
+  blockAll = false;
   fileType: string;
 
   constructor(private svc: BannerService,
@@ -52,7 +52,7 @@ export class BannerViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.router.url.indexOf('new') != -1) {
+    if (this.router.url.indexOf('new') !== -1) {
       this.isEditMode = false;
     } else {
       this.isEditMode = true;
@@ -104,7 +104,7 @@ export class BannerViewComponent implements OnInit {
   getBannerDetails(): void {
     const id = this.route.snapshot.paramMap.get('id');
     const that = this;
-    this.svc.getBannerEditById(parseInt(id)).subscribe(data => {
+    this.svc.getBannerEditById(Number(id)).subscribe(data => {
       this.banner = data;
       that.data.image = 'data:image/jpeg;base64,' + this.banner.image;
       const image: any = new Image();

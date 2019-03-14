@@ -1,10 +1,11 @@
+/// <reference types="@types/googlemaps" />
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Service} from '@app/core/types/service';
 import {Banner} from '@app/core/types/banner';
 import { PersistenceService } from '@app/core/persistence.service';
 import {ServiceService} from '@app/home/service/service.service';
 import {BannerService} from '@app/admin/banner/banner.service';
-import { } from '@types/googlemaps';
+// import { } from '@types/googlemaps';
 
 @Component({
   selector: 'app-home-service',
@@ -186,6 +187,7 @@ export class ServiceComponent implements OnInit {
       } else {
         this.gmapBih.nativeElement.parentNode.parentNode.remove();
       }
+      // tslint:disable-next-line:no-shadowed-variable
       this.svcBanner.getBannerById(2).subscribe(data => {
         this.banner = data;
       });

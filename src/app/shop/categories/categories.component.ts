@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
 import { CategoryService } from '@app/shop/categories/categories.service';
 
 @Component({
-  selector: 'categories',
+  selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })

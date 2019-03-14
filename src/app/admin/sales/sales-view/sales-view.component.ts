@@ -1,4 +1,5 @@
-import { NgModule, Component, Input, Output, Directive, EventEmitter, Renderer, ElementRef, forwardRef, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+/// <reference types="@types/googlemaps" />
+import { Component, Renderer, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { SalesService } from '@app/admin/sales/sales.service';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -7,7 +8,7 @@ import { Sales } from '@app/core/types/sales';
 import { NotificationsService } from 'angular2-notifications';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
-import { } from '@types/googlemaps';
+// import { } from '@types/googlemaps';
 
 @Component({
   selector: 'app-sales-view',
@@ -23,9 +24,9 @@ export class SalesViewComponent implements OnInit {
   salesUrl: any;
   link: any;
   isLoading: boolean;
-  isEditMode: boolean = true;
-  disableSave: boolean = false;
-  blockAll: boolean = false;
+  isEditMode = true;
+  disableSave = false;
+  blockAll = false;
   @ViewChild('gmap')
   gmapElement: ElementRef;
   map: google.maps.Map;
@@ -40,7 +41,7 @@ export class SalesViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.router.url.indexOf('new') != -1) {
+    if (this.router.url.indexOf('new') !== -1) {
       this.isEditMode = false;
     } else {
       this.isEditMode = true;
@@ -50,7 +51,7 @@ export class SalesViewComponent implements OnInit {
 
   getSalesDetails(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.svc.getSalesById(parseInt(id)).subscribe(data => {
+    this.svc.getSalesById(Number(id)).subscribe(data => {
       this.sales = data;
       const uluru = {lat: parseFloat(this.sales.latitude), lng: parseFloat(this.sales.longitude)};
       const mapProp = {

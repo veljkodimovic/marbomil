@@ -1,4 +1,4 @@
-import { NgModule, Component, Input, Output, EventEmitter, Renderer, ElementRef, forwardRef, OnInit, ViewChild } from '@angular/core';
+import { Component, Renderer, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Catalogue } from '@app/core/types/catalogue';
 import { CatalogueService } from '@app/admin/catalogue/catalogue.service';
 import { ActivatedRoute } from '@angular/router';
@@ -21,9 +21,9 @@ export class CatalogueViewComponent implements OnInit {
   catalogue: Catalogue = new Catalogue(0, '', '', '', '', '', '');
   link: any;
   isLoading: boolean;
-  isEditMode: boolean = true;
-  disableSave: boolean = false;
-  blockAll: boolean = false;
+  isEditMode = true;
+  disableSave = false;
+  blockAll = false;
   @ViewChild('file') file: ElementRef;
 
   constructor(private svc: CatalogueService,
@@ -36,7 +36,7 @@ export class CatalogueViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.router.url.indexOf('new') != -1) {
+    if (this.router.url.indexOf('new') !== -1) {
       this.isEditMode = false;
     } else {
       this.isEditMode = true;
@@ -47,7 +47,7 @@ export class CatalogueViewComponent implements OnInit {
 
   getCatalogueDetails(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.svc.getCatalogueById(parseInt(id)).subscribe(data => {
+    this.svc.getCatalogueById(Number(id)).subscribe(data => {
       this.catalogue = data;
     });
   }
@@ -74,7 +74,7 @@ export class CatalogueViewComponent implements OnInit {
         .subscribe((response: any) => {
           this.blockAll = false;
           this.handleResponse(response);
-          var id = +response._body;
+          const id = +response._body;
           this.catalogue.id = id;
 
         });
@@ -148,8 +148,7 @@ export class CatalogueViewComponent implements OnInit {
           maxLength: 100
         });
       }
-    }
-    else {
+    } else {
       this.notificationService.success('Success', 'Katalog je uspešno sačuvan',
         {
           timeOut: 1000,
@@ -176,37 +175,37 @@ export class CatalogueViewComponent implements OnInit {
   }
 
   // At the drag drop area
-  // (drop)="onDropFile($event)"
+  // (drop)='onDropFile($event)'
   onDropFile(event: DragEvent) {
     event.preventDefault();
     this.uploadFile(event.dataTransfer.files);
   }
 
   // At the drag drop area
-  // (dragover)="onDragOverFile($event)"
+  // (dragover)='onDragOverFile($event)'
   onDragOverFile(event: any) {
     event.stopPropagation();
     event.preventDefault();
   }
 
   // At the file input element
-  // (change)="selectFile($event)"
+  // (change)='selectFile($event)'
   selectFile(event: any) {
     this.uploadFile(event.target.files);
   }
 
   uploadFile(files: FileList) {
-    if (files.length == 0) {
-      console.log("No file selected!");
-      return
+    if (files.length === 0) {
+      console.log('No file selected!');
+      return;
 
     }
     const file: File = files[0];
 
-    this.upload.uploadFile("/assets/files/", file)
+    this.upload.uploadFile('/assets/files/', file)
       .subscribe(
         event => {
-          if (event.type == HttpEventType.UploadProgress) {
+          if (event.type === HttpEventType.UploadProgress) {
             const percentDone = Math.round(100 * event.loaded / event.total);
             console.log(`File is ${percentDone}% loaded.`);
           } else if (event instanceof HttpResponse) {
@@ -214,11 +213,11 @@ export class CatalogueViewComponent implements OnInit {
           }
         },
         (err) => {
-          console.log("Upload Error:", err);
+          console.log('Upload Error:', err);
         }, () => {
-          console.log("Upload done");
+          console.log('Upload done');
         }
-      )
+      );
   }
 
 }

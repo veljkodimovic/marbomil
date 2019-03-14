@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AtestService } from '../atest.service';
 import { Router } from '@angular/router';
 import { Atest } from '@app/core/types/atest';
@@ -44,7 +44,7 @@ export class AtestListComponent implements OnInit {
 
   performDelete(event: any) {
     this.svc.deleteAtest(this.activeAtest.id).subscribe(res => {
-      this.svc.getAllAtests().subscribe(data=> {
+      this.svc.getAllAtests().subscribe(data => {
         this.atestData = data;
       });
     });

@@ -1,7 +1,7 @@
-import { Component, NgModule, Renderer, Input, Output, EventEmitter, ElementRef, forwardRef, OnInit, ViewChild } from '@angular/core';
+import { Component, Renderer, ElementRef, forwardRef, OnInit, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CollectionService } from '../collections.service';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 import { NotificationsService } from 'angular2-notifications';
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -22,32 +22,32 @@ export class CollectionViewComponent implements OnInit {
   private modal: DeleteModalComponent;
   @ViewChild('cropper', undefined)
   cropper: ImageCropperComponent;
-  collectionId: number = 0;
+  collectionId = 0;
   image: any;
   data: any;
   logoData: any;
   datePicker: any;
-  hideLogoText: boolean = false;
+  hideLogoText = false;
   private sub: any;
   isLoading: boolean;
   cropperSettings: CropperSettings;
-  isEditMode: boolean = false;
+  isEditMode = false;
   collection: Collection = new Collection(0, '', '', '', '', '', '.jpg', null);
   collections: Collection[] = [];
   categories: any[] = [];
   products: any[];
-  setImage: boolean = false;
-  setImageLogo: boolean = false;
-  modalState: boolean = false;
-  originalImg: string = "";
+  setImage = false;
+  setImageLogo = false;
+  modalState = false;
+  originalImg = '';
   appType: string;
   difCount: number;
   diffs: number[] = [];
-  difNumber: number = 4;
-  productsCount: number = 0;
-  disableSave: boolean = false;
+  difNumber = 4;
+  productsCount = 0;
+  disableSave = false;
   minDate: string;
-  blockAll: boolean = false;
+  blockAll = false;
   fileType: string;
   constructor(private svc: CollectionService,
     private router: Router,
@@ -90,7 +90,7 @@ export class CollectionViewComponent implements OnInit {
   getCollectionDetails(): void {
     const id = this.route.snapshot.paramMap.get('id');
     const that = this;
-    this.svc.getCollectionEditById(parseInt(id)).subscribe((data: any) => {
+    this.svc.getCollectionEditById(Number(id)).subscribe((data: any) => {
       this.collection = data;
       that.data.image = 'data:image/jpeg;base64,' + this.collection.image;
       const image: any = new Image();

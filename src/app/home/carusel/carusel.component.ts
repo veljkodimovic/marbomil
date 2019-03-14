@@ -4,7 +4,7 @@ import { CarouselService } from './carusel.service';
 import { PersistenceService } from '@app/core/persistence.service';
 
 @Component({
-  selector: 'home-carousel',
+  selector: 'app-home-carousel',
   templateUrl: './carusel.component.html',
   styleUrls: ['./carusel.component.scss']
 })
@@ -21,7 +21,7 @@ export class CarouselComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
-    this.carouselService.getAllBanners().subscribe(value => { this.slides = value });
+    this.carouselService.getAllBanners().subscribe(value => { this.slides = value; });
   }
 
 }

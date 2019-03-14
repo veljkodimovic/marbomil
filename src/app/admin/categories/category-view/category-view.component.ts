@@ -1,4 +1,4 @@
-import { NgModule, Component, Input, Output, EventEmitter, Renderer, ElementRef, forwardRef, OnInit, ViewChild } from '@angular/core';
+import { Component, Renderer, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
@@ -26,11 +26,11 @@ export class CategoryViewComponent implements OnInit {
   category: Category = new Category(0, '', '', '', '', '', '.jpg');
   categories: any[] = [];
   isLoading: boolean;
-  setImage: boolean = false;
-  originalImg: string = '';
-  isEditMode: boolean = true;
-  disableSave: boolean = false;
-  blockAll: boolean = false;
+  setImage = false;
+  originalImg = '';
+  isEditMode = true;
+  disableSave = false;
+  blockAll = false;
   fileType: string;
 
   constructor(private svc: CategoryService,
@@ -98,7 +98,7 @@ export class CategoryViewComponent implements OnInit {
   getCategoryDetails(): void {
     const id = this.route.snapshot.paramMap.get('id');
     const that = this;
-    this.svc.getCategoryEditById(parseInt(id)).subscribe(data => {
+    this.svc.getCategoryEditById(Number(id)).subscribe(data => {
       this.category = data;
       that.data.image = 'data:image/jpeg;base64,' + this.category.image;
       const image: any = new Image();

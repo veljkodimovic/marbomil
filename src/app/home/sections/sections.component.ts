@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 
 @Component({
-  selector: 'home-sections',
+  selector: 'app-home-sections',
   templateUrl: './sections.component.html',
   styleUrls: ['./sections.component.scss']
 })

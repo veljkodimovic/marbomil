@@ -1,4 +1,4 @@
-import { NgModule, Component, Input, Output, EventEmitter, Renderer, ElementRef, forwardRef, OnInit, ViewChild } from '@angular/core';
+import { Component, Renderer, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AtestService } from '../atest.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -19,9 +19,9 @@ export class AtestViewComponent implements OnInit {
   atest: Atest = new Atest(0, '', '', '', '', '');
   link: any;
   isLoading: boolean;
-  isEditMode: boolean = true;
-  disableSave: boolean = false;
-  blockAll: boolean = false;
+  isEditMode = true;
+  disableSave = false;
+  blockAll = false;
   @ViewChild('file') file: ElementRef;
 
   constructor(private svc: AtestService,
@@ -44,7 +44,7 @@ export class AtestViewComponent implements OnInit {
 
   getAtestDetails(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.svc.getAtestById(parseInt(id)).subscribe(data => {
+    this.svc.getAtestById(Number(id)).subscribe(data => {
       this.atest = data;
     });
   }

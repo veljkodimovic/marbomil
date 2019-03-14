@@ -1,4 +1,5 @@
-import { NgModule, Component, Input, Output, EventEmitter, Renderer, ElementRef, forwardRef, OnInit, ViewChild } from '@angular/core';
+/// <reference types="@types/googlemaps" />
+import { Component, Renderer, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ServiceService } from '@app/admin/service/service.service';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -7,7 +8,7 @@ import { Service } from '@app/core/types/service';
 import { NotificationsService } from 'angular2-notifications';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
-import { } from '@types/googlemaps';
+// import { } from '@types/googlemaps';
 
 @Component({
   selector: 'app-service-view',
@@ -23,9 +24,9 @@ export class ServiceViewComponent implements OnInit {
   serviceUrl: any;
   link: any;
   isLoading: boolean;
-  isEditMode: boolean = true;
-  disableSave: boolean = false;
-  blockAll: boolean = false;
+  isEditMode = true;
+  disableSave = false;
+  blockAll = false;
   @ViewChild('gmap')
   gmapElement: ElementRef;
   map: google.maps.Map;
@@ -40,7 +41,7 @@ export class ServiceViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.router.url.indexOf('new') != -1) {
+    if (this.router.url.indexOf('new') !== -1) {
       this.isEditMode = false;
     } else {
       this.isEditMode = true;
@@ -51,7 +52,7 @@ export class ServiceViewComponent implements OnInit {
 
   getServiceDetails(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.svc.getServiceById(parseInt(id)).subscribe(data => {
+    this.svc.getServiceById(Number(id)).subscribe(data => {
       this.service = data;
       if (this.service.latitude.length && this.service.longitude.length) {
         const uluru = {lat: parseFloat(this.service.latitude), lng: parseFloat(this.service.longitude)};
@@ -96,7 +97,7 @@ export class ServiceViewComponent implements OnInit {
   handleResponse(response: any) {
     this.disableSave = false;
     if (!response.ok) {
-      const body = JSON.parse(response._body)
+      const body = JSON.parse(response._body);
       if (body.title) {
         this.notificationService.error(body.title, body.description,
           {

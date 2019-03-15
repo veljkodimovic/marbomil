@@ -14,6 +14,14 @@
         <a class="nav-item nav-link text-uppercase" (click)="setLanguage('alb')" [ngClass]="activeLanguage == 'alb' ? 'active' : ''">
           <span translate>Alb</span>
         </a>
+        <div ngbDropdown placement="bottom-right" class="d-inline-block user-name">          
+          <a *ngIf="isAuth()" class="nav-item nav-link text-uppercase" id="loggedUser" ngbDropdownToggle><i class="fas fa-user"></i> {{username}}</a>
+          <a *ngIf="!isAuth()" class="nav-item nav-link text-uppercase" id="login" [routerLink]="['/login']"  translate><i class="fas fa-sign-in-alt"></i> Login</a>
+          <div *ngIf="isAuth()" ngbDropdownMenu aria-labelledby="loggedUser" class="dropdown-menu">
+            <a class="dropdown-item nav-link text-uppercase" (click)="logout()" ngbDropdownItem translate>Logout <i class="fas fa-sign-out-alt"></i></a>
+          </div>
+        </div>
+        <a *ngIf="isAuth()" class="nav-item nav-link text-uppercase" id="shopping-cart" [routerLink]="['/shopping-cart']"><span class="badge badge-danger count-badge">4</span> <i class="fas fa-shopping-cart"></i></a>
       </div>
     </nav>
     <div class="w-100"></div>

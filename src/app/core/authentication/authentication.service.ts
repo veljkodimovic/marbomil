@@ -32,7 +32,7 @@ export interface TokenData {
 }
 
 const credentialsKey = 'credentials';
-const sessionKey = 'sessionTimes';
+// const sessionKey = 'sessionTimes';
 const usernameKey = 'username';
 const routes = {
   login: () => `/login/`
@@ -81,9 +81,8 @@ export class AuthenticationService {
         if (token) {
           this.setCredentials(token, true);
           this._tokenData = token;
-          console.log(this._tokenData);
           const storage = localStorage;
-          storage.setItem(usernameKey, JSON.stringify({ username: context.username }));
+          storage.setItem(usernameKey, JSON.stringify({ fname: 'System', lname: 'Administrator' }));
         }
         return token;
       });
@@ -104,11 +103,7 @@ export class AuthenticationService {
    * @return {boolean} True if the user is authenticated.
    */
   isAuthenticated(): boolean {
-    const timeNow = localStorage.getItem(sessionKey) ? new Date() : null;
-    // tslint:disable-next-line:max-line-length
-    const sessionEnd = localStorage.getItem(sessionKey) ? new Date(JSON.parse(localStorage.getItem(sessionKey)).end) : null;
-    // tslint:disable-next-line:max-line-length
-    return sessionStorage.getItem(credentialsKey) && timeNow && sessionEnd && sessionEnd > timeNow || localStorage.getItem(credentialsKey) && sessionEnd > timeNow ? true : false;
+    return !!this._credentials;
   }
 
   /**
@@ -117,13 +112,6 @@ export class AuthenticationService {
    */
   get credentials(): Credentials | null {
     return this._credentials;
-  }
-
-  private setSessionsTimes(expiresInSeconds: number) {
-    const start = new Date();
-    const end = new Date();
-    end.setMinutes(start.getMinutes() + expiresInSeconds / 60); // % 60 to get minutes
-    localStorage.setItem(sessionKey, JSON.stringify({ start: start, end: end }));
   }
 
   /**
@@ -139,7 +127,6 @@ export class AuthenticationService {
     if (credentials) {
       const storage = remember ? localStorage : sessionStorage;
       storage.setItem(credentialsKey, JSON.stringify(credentials));
-      this.setSessionsTimes(this._credentials.expiresInSeconds);
     } else {
       sessionStorage.removeItem(credentialsKey);
       localStorage.removeItem(credentialsKey);

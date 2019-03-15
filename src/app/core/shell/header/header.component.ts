@@ -26,6 +26,10 @@ export class HeaderComponent implements OnInit {
     this.activeLanguage = this.i18nService.language;
   }
 
+  isAuth(): boolean {
+    return this.authenticationService.isAuthenticated();
+  }
+
   toggleMenu() {
     this.menuHidden = !this.menuHidden;
   }
@@ -49,8 +53,8 @@ export class HeaderComponent implements OnInit {
   }
 
   get username(): string {
-    const credentials = this.authenticationService.credentials;
-    return credentials ? credentials.username : null;
+    const user = JSON.parse(localStorage.getItem('username'));
+    return user ? `${user.fname} ${user.lname}` : null;
   }
 
   get title(): string {

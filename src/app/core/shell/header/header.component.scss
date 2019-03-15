@@ -11,3 +11,50 @@
 .logo {
   max-width: 250px;
 }
+
+#shopping-cart {
+  margin-left: 30px;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.count-badge { 
+  font-size: 10px;
+  position: absolute;
+  border-radius: 5px;
+  margin-left: 16px;
+  margin-top: -5px;
+}
+
+.user-name { 
+  margin-left: 40px;
+  .dropdown-item {
+    padding: 10px 15px;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: $primary !important;
+    &:hover,
+    &.active {
+      color: $white !important;
+      background: $primary;
+    }
+  }
+  .dropdown-menu {
+    padding: 0;
+    margin: 0;
+    top: 35px;
+    border: none;
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+  }
+  .nav-link {
+    text-align: right;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    border-bottom: 2px solid $white;
+    color: $primary !important;
+    &.active {
+      border-bottom: 2px solid $primary;
+    }
+  }
+}
+

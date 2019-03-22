@@ -50,6 +50,14 @@ import { ProductViewComponent } from './product/product-view/product-view.compon
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { ProductService } from './product/product.service';
 import { UploadService } from '@app/shared/upload/upload.service';
+import { CustomersComponent } from './customers/customers.component';
+import { OrdersComponent } from './orders/orders.component';
+import { CustomerListComponent } from './customers/customer-list/customer-list.component';
+import { CustomerViewComponent } from './customers/customer-view/customer-view.component';
+import { CustomersService } from './customers/customers.service';
+import { OrderListComponent } from './orders/order-list/order-list.component';
+import { OrderViewComponent } from './orders/order-view/order-view.component';
+import { OrdersService } from './orders/orders.service';
 
 @NgModule({
   imports: [
@@ -92,7 +100,13 @@ import { UploadService } from '@app/shared/upload/upload.service';
     SalesViewComponent,
     ProductComponent,
     ProductListComponent,
-    ProductViewComponent
+    ProductViewComponent,
+    CustomersComponent,
+    OrdersComponent,
+    CustomerListComponent,
+    CustomerViewComponent,
+    OrderListComponent,
+    OrderViewComponent
   ],
   providers: [
     BannerService,
@@ -104,6 +118,8 @@ import { UploadService } from '@app/shared/upload/upload.service';
     ServiceService,
     SalesService,
     ProductService,
+    CustomersService,
+    OrdersService,
     UploadService
   ]
 })

@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h1 class="admin-headline container" translate>
+        Orders
+        <a class="admin-headline-link" routerLink="/admin" translate>
+          <i class="fas fa-chevron-left"></i> Back
+        </a>
+      </h1>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row justify-content-end mb-4">
+    <div class="col-auto">
+      <a class="btn btn-primary" routerLink="/admin/order/new" translate>
+        <i class="fas fa-plus"></i> Add new order
+      </a>
+    </div>
+  </div>
+  <div class="row admin-list" *ngIf="ordersData">
+    <div class="col-lg-6" *ngFor="let order of ordersData">
+      <div class="admin-list-item">
+        <div class="row">
+          <div class="col-10">
+            <p><a class="admin-list-name" (click)="goTo(order)">{{order.name}}</a></p>
+            <div class="row admin-list-contact">
+              <p class="col-sm-6">
+                <!-- <span *ngIf="order.street">{{order.street}}</span>
+                <span *ngIf="order.postal">, {{order.postal}} {{order.city}}</span>
+                <span *ngIf="order.region">, {{order.region}}</span>
+                <span *ngIf="order.country">, {{order.country}}</span> -->
+              </p>
+              <p class="col-sm-6">
+                <!-- <span *ngIf="order.phone"><i class="fas fa-phone"></i> <a href="tel:{{order.phone}}"></a>{{order.phone}}<br></span>
+                <span *ngIf="order.email"><i class="fas fa-envelope"></i> <a href="mailto:{{order.email}}">{{order.email}}</a> <br></span>
+                <span *ngIf="order.website"><i class="fas fa-globe"></i> <a href="{{order.website}}">{{order.website}}</a></span> -->
+              </p>
+            </div>
+          </div>
+          <div class="col-2 admin-list-links">
+            <a (click)="goTo(order)"><i class="fas fa-pencil-alt"></i></a>
+            <a (click)="openModal(order)" class="remove-link"><i class="fas fa-trash"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <delete-modal (deleteConfirmed)="performDelete($event)">
+  </delete-modal>
+</div>

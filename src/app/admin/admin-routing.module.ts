@@ -22,6 +22,10 @@ import { SalesViewComponent } from './sales/sales-view/sales-view.component';
 import { SalesComponent } from './sales/sales.component';
 import { ProductViewComponent } from './product/product-view/product-view.component';
 import { ProductComponent } from './product/product.component';
+import { CustomerViewComponent } from './customers/customer-view/customer-view.component';
+import { CustomersComponent } from './customers/customers.component';
+import { OrderViewComponent } from './orders/order-view/order-view.component';
+import { OrdersComponent } from './orders/orders.component';
 
 const routes: Routes = Route.withShellAdmin([
   { path: 'admin/banners', component: BannerComponent, data: { title: extract('Banner') } },
@@ -51,6 +55,12 @@ const routes: Routes = Route.withShellAdmin([
   { path: 'admin/product', component: ProductComponent, data: { title: extract('Product') } },
   { path: 'admin/product/:id', component: ProductViewComponent, data: { title: extract('Product View') } },
   { path: 'admin/product/new', component: ProductViewComponent, data: { title: extract('Product View') } },
+  { path: 'admin/customers', component: CustomersComponent, data: { title: extract('Customers') } },
+  { path: 'admin/customer/:id', component: CustomerViewComponent, data: { title: extract('Customer View') } },
+  { path: 'admin/customer/new', component: CustomerViewComponent, data: { title: extract('Customer View') } },
+  { path: 'admin/orders', component: OrdersComponent, data: { title: extract('Orders') } },
+  { path: 'admin/order/:id', component: OrderViewComponent, data: { title: extract('Order View') } },
+  { path: 'admin/order/new', component: OrderViewComponent, data: { title: extract('Order View') } },
   { path: 'admin', component: AdminComponent, data: { title: extract('Admin') } }
 ]);
 

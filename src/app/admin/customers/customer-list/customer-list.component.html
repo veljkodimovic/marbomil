@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h1 class="admin-headline container" translate>
+        Customers
+        <a class="admin-headline-link" routerLink="/admin" translate>
+          <i class="fas fa-chevron-left"></i> Back
+        </a>
+      </h1>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row justify-content-end mb-4">
+    <div class="col-auto">
+      <a class="btn btn-primary" routerLink="/admin/customer/new" translate>
+        <i class="fas fa-plus"></i> Add new customer
+      </a>
+    </div>
+  </div>
+  <div class="row admin-list" *ngIf="customersData">
+    <div class="col-lg-6" *ngFor="let customer of customersData">
+      <div class="admin-list-item">
+        <div class="row">
+          <div class="col-10">
+            <p><a class="admin-list-name" (click)="goTo(customer)">{{customer.name}}</a></p>
+            <div class="row admin-list-contact">
+              <p class="col-sm-6">
+                <!-- <span *ngIf="customer.street">{{customer.street}}</span>
+                <span *ngIf="customer.postal">, {{customer.postal}} {{customer.city}}</span>
+                <span *ngIf="customer.region">, {{customer.region}}</span>
+                <span *ngIf="customer.country">, {{customer.country}}</span> -->
+              </p>
+              <p class="col-sm-6">
+                <!-- <span *ngIf="customer.phone"><i class="fas fa-phone"></i> <a href="tel:{{customer.phone}}"></a>{{customer.phone}}<br></span>
+                <span *ngIf="customer.email"><i class="fas fa-envelope"></i> <a href="mailto:{{customer.email}}">{{customer.email}}</a> <br></span>
+                <span *ngIf="customer.website"><i class="fas fa-globe"></i> <a href="{{customer.website}}">{{customer.website}}</a></span> -->
+              </p>
+            </div>
+          </div>
+          <div class="col-2 admin-list-links">
+            <a (click)="goTo(customer)"><i class="fas fa-pencil-alt"></i></a>
+            <a (click)="openModal(customer)" class="remove-link"><i class="fas fa-trash"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <delete-modal (deleteConfirmed)="performDelete($event)">
+  </delete-modal>
+</div>

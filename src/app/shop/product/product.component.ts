@@ -5,6 +5,7 @@ import { Product } from '@app/core/types/product';
 import { PersistenceService } from '@app/core/persistence.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '@app/shop/product/product.service';
+import { AuthenticationService } from '@app/core';
 
 
 @Component({
@@ -22,13 +23,17 @@ export class ProductComponent implements OnInit {
   activeCollectionId: number;
   activeCategoryId: any;
   private apiUrl: string;
+  private isAuth: boolean;
+  counts: number[] = [];
 
   constructor(private svc: ProductService,
     private persistenceService: PersistenceService,
+    private authService: AuthenticationService,
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.apiUrl = persistenceService.apiUrl;
+    this.isAuth = this.authService.isAuthenticated();
+    this.apiUrl = this.persistenceService.apiUrl;
     this.route.queryParams.subscribe(params => {
       this.activeCollectionId = Number(params['id']);
       this.activeCategoryId = Number(params['categoryId']);
@@ -57,7 +62,10 @@ export class ProductComponent implements OnInit {
 
     this.svc.getProducts().subscribe(data => {
       this.productData = data;
-      this.productData.sort(function(a: any, b: any) {
+      this.productData.forEach((product: any) => {
+        product.count = 1;
+      });
+      this.productData.sort(function (a: any, b: any) {
         const i = a.orderNumber > 0 ? a.orderNumber : 9999999;
         const j = b.orderNumber > 0 ? b.orderNumber : 9999999;
         return i - j;
@@ -118,4 +126,7 @@ export class ProductComponent implements OnInit {
     }
   }
 
+  addToCart(product: any) {
+    this.svc.addToCart(product);
+  }
 }

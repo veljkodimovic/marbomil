@@ -15,10 +15,21 @@
     <div class="col-sm-9">
       <div class="row categories-list">
         <div class="col-sm-4 product-categories-item content-box" *ngFor="let product of getProductsByParent()">
-          <a (click)="goToProduct(product)">
-            <img src="{{apiUrl}}/{{product.images[0].imageCropUrl}}" alt="{{product.title}}">
-            <div class="content-box-description">
-              <h5>{{product.title}}</h5>
+          <a>
+            <img src="{{apiUrl}}/{{product.images[0].imageCropUrl}}" alt="{{product.title}}" (click)="goToProduct(product)">
+            <div class="content-box-description" (click)="goToProduct(product)">
+              <h5 class="" [ngClass]="{ 'product-title' : isAuth }">{{product.title}}</h5>
+              <h4 [hidden]="!isAuth" class="text-center small-price">{{product.price}}.00 <label class="unit">RSD</label></h4>
+              <h3 [hidden]="!isAuth" class="text-center big-price"><b>{{product.price}}.00 <label class="unit">RSD</label></b></h3>
+            </div>
+            <div class="row cart-box">
+                {{counts[i]}}
+              <div class="col-md-4">
+                  <input type="number" class="form-control" id="count" [(ngModel)]="product.count" name="count" #count="ngModel">
+              </div>
+              <div class="col-md-8">
+                  <button class="btn btn-sm btn-default" (click)="addToCart(product)" translate><i class="fas fa-shopping-cart"></i></button>
+              </div>              
             </div>
           </a>
         </div>

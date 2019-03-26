@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { FormsModule } from '@angular/forms';
 import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
@@ -27,6 +27,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     FlexLayoutModule,
     NgbModule,
     MaterialModule,
+    FormsModule,
     ShopRoutingModule
   ],
   declarations: [

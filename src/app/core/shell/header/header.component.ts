@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   @Input() sidenav: MatSidenav;
   menuHidden = true;
   activeLanguage = '';
+  cartCount = JSON.parse(sessionStorage.getItem('my-cart')).orders.length;
 
   constructor(private router: Router,
     private titleService: Title,

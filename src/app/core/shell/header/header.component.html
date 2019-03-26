@@ -21,7 +21,7 @@
             <a class="dropdown-item nav-link text-uppercase" (click)="logout()" ngbDropdownItem translate>Logout <i class="fas fa-sign-out-alt"></i></a>
           </div>
         </div>
-        <a *ngIf="isAuth()" class="nav-item nav-link text-uppercase" id="shopping-cart" [routerLink]="['/shopping-cart']"><span class="badge badge-danger count-badge">4</span> <i class="fas fa-shopping-cart"></i></a>
+        <a *ngIf="isAuth()" class="nav-item nav-link text-uppercase" id="shopping-cart" [routerLink]="['/shopping-cart']"><span class="badge badge-danger count-badge">{{cartCount}}</span> <i class="fas fa-shopping-cart"></i></a>
       </div>
     </nav>
     <div class="w-100"></div>

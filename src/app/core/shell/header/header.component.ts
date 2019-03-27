@@ -5,6 +5,7 @@ import { MatSidenav } from '@angular/material';
 
 import { AuthenticationService } from '../../authentication/authentication.service';
 import { I18nService } from '../../i18n.service';
+import { HeaderService } from './header.service';
 
 @Component({
   selector: 'app-header',
@@ -16,12 +17,18 @@ export class HeaderComponent implements OnInit {
   @Input() sidenav: MatSidenav;
   menuHidden = true;
   activeLanguage = '';
-  cartCount = JSON.parse(sessionStorage.getItem('my-cart')).orders.length;
+  myCart = JSON.parse(sessionStorage.getItem('my-cart'));
+  cartCount = this.myCart ? this.myCart.orders.length : 0;
 
   constructor(private router: Router,
     private titleService: Title,
     private authenticationService: AuthenticationService,
-    private i18nService: I18nService) { }
+    private i18nService: I18nService,
+    private headerService: HeaderService) {
+    this.headerService.shoppingCartItemsCount.subscribe((item: number) => {
+      this.cartCount = item;
+    });
+  }
 
   ngOnInit() {
     this.activeLanguage = this.i18nService.language;

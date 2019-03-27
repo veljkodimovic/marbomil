@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { NotificationsService } from 'angular2-notifications';
 import { TranslateService } from '@ngx-translate/core';
+import { HeaderService } from '@app/core/shell/header/header.service';
 
 const routes = {
   collection: () => `/collection/`,
@@ -20,7 +21,11 @@ export class ProductService {
   headers: Headers;
   success: any = this.translate.get('Success');
   added: any = this.translate.get('Product successfully added to cart');
-  constructor(private http: Http, private persistenceService: PersistenceService, private notifications: NotificationsService, private translate: TranslateService) {
+  constructor(private http: Http,
+    private persistenceService: PersistenceService,
+    private notifications: NotificationsService,
+    private translate: TranslateService,
+    private headerService: HeaderService) {
 
   }
 
@@ -80,6 +85,7 @@ export class ProductService {
     // tslint:disable-next-line:max-line-length
     myCart ? myCart.orders.push({ id: product.id, count: product.count }) : myCart = { orders: [{ id: product.id, count: product.count }] };
     sessionStorage.setItem('my-cart', JSON.stringify(myCart));
+    this.headerService.shoppingCartItemsCount.emit(myCart.orders.length);
     this.notifications.success(this.success.value, this.added.value,
       {
         timeOut: 1000,

@@ -4,9 +4,7 @@ import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import { HttpModule, Http, XHRBackend, ConnectionBackend, RequestOptions } from '@angular/http';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { SimpleNotificationsModule } from 'angular2-notifications';
-
 import { MaterialModule } from '@app/material.module';
 import { ShellComponent } from './shell/shell.component';
 import { HeaderComponent } from './shell/header/header.component';
@@ -19,6 +17,7 @@ import { I18nService } from './i18n.service';
 import { HttpService } from './http/http.service';
 import { HttpCacheService } from './http/http-cache.service';
 import { PersistenceService } from './persistence.service';
+import { HeaderService } from '@app/core/shell/header/header.service';
 import { FormsModule } from '@angular/forms';
 
 export function createHttpService(backend: ConnectionBackend,
@@ -50,6 +49,7 @@ export function createHttpService(backend: ConnectionBackend,
     FooterService,
     I18nService,
     HttpCacheService,
+    HeaderService,
     {
       provide: Http,
       deps: [XHRBackend, RequestOptions, HttpCacheService],

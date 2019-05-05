@@ -11,6 +11,7 @@ import { Category } from '../../../core/types/category';
 import { ImageModel } from '../../../core/types/imageModel';
 import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal';
 import { PersistenceService } from '@app/core/persistence.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 
 @Component({
@@ -59,6 +60,14 @@ export class ProductViewComponent implements OnInit {
   nestoImage: any;
   fileType: string;
   fileType2: string;
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '10rem',
+    minHeight: '5rem',
+    placeholder: '',
+    translate: 'no'
+  };
   constructor(private svc: ProductService, private renderer: Renderer,
     private notificationService: NotificationsService,
     private persistenceService: PersistenceService,

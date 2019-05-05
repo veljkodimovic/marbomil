@@ -50,6 +50,7 @@ import { ProductViewComponent } from './product/product-view/product-view.compon
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { ProductService } from './product/product.service';
 import { UploadService } from '@app/shared/upload/upload.service';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   imports: [
@@ -61,6 +62,7 @@ import { UploadService } from '@app/shared/upload/upload.service';
     SimpleNotificationsModule.forRoot(),
     ImageCropperModule,
     FormsModule,
+    AngularEditorModule,
     AdminRoutingModule
   ],
   declarations: [

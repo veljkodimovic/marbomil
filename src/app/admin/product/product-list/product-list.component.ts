@@ -60,16 +60,7 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.svc.getProducts().subscribe(data => {
-      this.productData = data;
-      this.productData.sort(function (a: any, b: any) {
-        const i = a.orderNumber > 0 ? a.orderNumber : 9999999;
-        const j = b.orderNumber > 0 ? b.orderNumber : 9999999;
-        return i - j;
-      });
-      this.products = this.productData;
-      this.devideProductsByCollection();
-    });
+    this.getProductData();
     this.svc.getAllCategories().subscribe((data: any) => {
       this.categories = data;
     });
@@ -78,12 +69,27 @@ export class ProductListComponent implements OnInit {
     });
   }
 
+  getProductData() {
+    this.svc.getProducts().subscribe(data => {
+      this.productData = data;
+      this.productData.sort(function (a: any, b: any) {
+        const i = a.orderNumber > 0 ? a.orderNumber : 9999999;
+        const j = b.orderNumber > 0 ? b.orderNumber : 9999999;
+        return i - j;
+      });
+      this.products = this.productData;
+      this.updateProducts();
+    });
+  }
+
   getCollectionNameById(collectionId: number): string {
-    return this.collections.find((c: Collection) => c.id === collectionId).title;
+    // tslint:disable-next-line:max-line-length
+    return this.collections.find((c: Collection) => c.id === collectionId) ? this.collections.find((c: Collection) => c.id === collectionId).title : 'Unknown Collection';
   }
 
   getCategoryNameById(categoryId: number): string {
-    return this.categories.find((c: Collection) => c.id === categoryId).title;
+    // tslint:disable-next-line:max-line-length
+    return this.categories.find((c: Collection) => c.id === categoryId) ? this.categories.find((c: Collection) => c.id === categoryId).title : 'Unknown Category';
   }
 
   devideProductsByCollection() {
@@ -121,9 +127,7 @@ export class ProductListComponent implements OnInit {
 
   performDelete(event: any) {
     this.svc.deleteProduct(this.activeProduct.id).subscribe(res => {
-      this.svc.getProducts().subscribe(data => {
-        this.productData = data;
-      });
+      this.getProductData();
     });
   }
 

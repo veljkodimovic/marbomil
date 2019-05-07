@@ -17,9 +17,10 @@
       <div class="form-group row">
         <label for="category" class="col-auto col-form-label">Kategorija</label>
         <div class="col-auto">
-          <select class="form-control" id="category"  name="category" [(ngModel)]="activeCategoryId" (change)="updateProducts()">
-            <option value="" >Sve Kategorije</option>
-            <option  *ngFor="let cat of categories;index as i" [ngValue]="cat.id" name="cat.title" >{{cat.title}}</option>
+          <select class="form-control" id="category" name="category" [(ngModel)]="activeCategoryId"
+            (change)="updateProducts()">
+            <option value="">Sve Kategorije</option>
+            <option *ngFor="let cat of categories;index as i" [ngValue]="cat.id" name="cat.title">{{cat.title}}</option>
           </select>
         </div>
       </div>
@@ -30,27 +31,35 @@
       </a>
     </div>
   </div>
-  <div class="row admin-list" *ngIf="products">
-    <div class="col-lg-6" *ngFor="let product of products">
-      <div class="admin-list-item">
-        <div class="row">
-          <div class="col-11 col-sm-4" style="margin-bottom: 10px;">
-            <a routerLink="/admin/product/{{product.id}}">
-              <img src="{{apiUrl}}/{{product.images[0].imageCropUrl}}" >
-            </a>
-          </div>
-          <div class="col-11 col-sm-7 order-2 order-sm-1">
-            <p><a class="admin-list-name" routerLink="/admin/product/{{product.id}}">{{product.title}}</a></p>
-            <p class="price">{{product.price * ((100 - product.discount)/100) | number : '1.2-2'}} RSD<span *ngIf="product.discount > 0" class="price-old">{{product.price | number : '1.2-2'}}  RSD</span></p>
-          </div>
-          <div class="col-1 admin-list-links order-1 order-sm-2">
-            <a routerLink="/admin/product/{{product.id}}"><i class="fas fa-pencil-alt"></i></a>
-            <a (click)="openModal(product)" class="remove-link"><i class="fas fa-trash"></i></a>
+  <div *ngFor="let category of categoryViews">
+    <div *ngFor="let collection of category.collectionViews">
+      <h3 class="category-collection-title">{{category.title}} > {{collection.title}}</h3>
+      <div class="row admin-list" *ngIf="collection.products">
+        <div class="col-lg-6" *ngFor="let product of collection.products">
+          <div class="admin-list-item">
+            <div class="row">
+              <div class="col-11 col-sm-4" style="margin-bottom: 10px;">
+                <a routerLink="/admin/product/{{product.id}}">
+                  <img src="{{apiUrl}}/{{product.images[0].imageCropUrl}}">
+                </a>
+              </div>
+              <div class="col-11 col-sm-7 order-2 order-sm-1">
+                <p><a class="admin-list-name" routerLink="/admin/product/{{product.id}}">{{product.title}}</a></p>
+                <p class="price">{{product.price * ((100 - product.discount)/100) | number : '1.2-2'}} RSD<span
+                    *ngIf="product.discount > 0" class="price-old">{{product.price | number : '1.2-2'}} RSD</span></p>
+              </div>
+              <div class="col-1 admin-list-links order-1 order-sm-2">
+                <a routerLink="/admin/product/{{product.id}}"><i class="fas fa-pencil-alt"></i></a>
+                <a (click)="openModal(product)" class="remove-link"><i class="fas fa-trash"></i></a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
   </div>
+
   <delete-modal (deleteConfirmed)="performDelete($event)">
   </delete-modal>
 </div>

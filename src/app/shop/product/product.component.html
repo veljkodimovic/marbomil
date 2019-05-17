@@ -6,7 +6,7 @@
           <a (click)="goToCategory(category)" class="sidenav-title" [ngClass]="{active: category.id==activeCategoryId && !activeCollectionId}">{{category.title}}</a>
           <ul class="sidenav-list" *ngIf="category.id == activeCategoryId">
             <li class="sidenav-item" *ngFor="let collection of getCollectionsById(category.id)">
-              <a class="sidenav-link" [ngClass]="{active: collection.id==activeCollectionId}" (click)="goToProducts(collection)">{{collection.title}}</a>
+              <a class="sidenav-link" [ngClass]="{active: collection.id==activeCollectionId}" (click)="goToProducts(collection, category.id)">{{collection.title}}</a>
             </li>
           </ul>
         </div>

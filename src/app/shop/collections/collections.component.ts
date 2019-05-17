@@ -76,9 +76,9 @@ export class CollectionsComponent implements OnInit {
     this.router.navigate(['/categories/' + category.id]);
   }
 
-  goToProduct(collection: Collection) {
-    this.router.navigate(['/products/list'], { queryParams: { id: collection.id } });
-  }
+  // goToProduct(collection: Collection) {
+  //   this.router.navigate(['/products/list'], { queryParams: { id: collection.id } });
+  // }
 
   goToCategoryHome() {
     this.router.navigate(['/categories']);

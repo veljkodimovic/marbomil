@@ -12,7 +12,7 @@
           <a (click)="goTo(productCollection)">{{productCollection.title}}</a><i class="fas fa-chevron-right"></i>
         </li>
         <li *ngIf="productCollectionMain">
-          <a (click)="goToProducts(productCollectionMain)">{{productCollectionMain.title}} </a>
+          <a (click)="goToProducts(productCollectionMain, productCategory.id)">{{productCollectionMain.title}} </a>
         </li>
       </ul>
     </div>

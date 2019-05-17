@@ -100,8 +100,8 @@ export class ProductComponent implements OnInit {
     this.router.navigate(['/collections'], { queryParams: { id: collection.id } });
   }
 
-  goToProducts(collection: Collection) {
-    this.router.navigate(['/products/list'], { queryParams: { id: collection.id } });
+  goToProducts(collection: Collection, categoryId: number) {
+    this.router.navigate(['/products/list'], { queryParams: { id: collection.id, categoryId: categoryId } });
   }
 
   goToProduct(product: Product) {

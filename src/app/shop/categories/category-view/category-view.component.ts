@@ -68,8 +68,8 @@ export class CategoryViewComponent implements OnInit {
     this.router.navigate(['/categories']);
   }
 
-  goToProduct(collection: Collection) {
-    this.router.navigate(['/products/list'], { queryParams: { id: collection.id } });
+  goToProduct(collection: Collection, categoryId: number) {
+    this.router.navigate(['/products/list'], { queryParams: { id: collection.id, categoryId: categoryId } });
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ProductService } from '../product.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Product } from '../../../core/types/product';
 import { Category } from '../../../core/types/category';
 import { PersistenceService } from '@app/core/persistence.service';
@@ -48,43 +48,53 @@ export class ProductListComponent implements OnInit {
   categories: Category[] = [];
   activeCategory: Category;
   activeCategoryId: number;
+  allCollections: Collection[];
   collections: Collection[];
   categoryViews: CategoryView[] = [];
   collectionViews: CollectionView[] = [];
+  activeCollectionId: number;
   constructor(private svc: ProductService,
     private collectionsService: CollectionService,
     private persistenceService: PersistenceService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.apiUrl = persistenceService.apiUrl;
   }
 
   ngOnInit() {
     this.getProductData();
-    this.svc.getAllCategories().subscribe((data: any) => {
-      this.categories = data;
-    });
-    this.collectionsService.getAllCollections().subscribe((data: Collection[]) => {
-      this.collections = data;
-    });
   }
 
   getProductData() {
     this.svc.getProducts().subscribe(data => {
-      this.productData = data;
-      this.productData.sort(function (a: any, b: any) {
-        const i = a.orderNumber > 0 ? a.orderNumber : 9999999;
-        const j = b.orderNumber > 0 ? b.orderNumber : 9999999;
-        return i - j;
+
+
+      this.svc.getAllCategories().subscribe((cat: any) => {
+        this.categories = cat;
+        this.collectionsService.getAllCollections().subscribe((collData: Collection[]) => {
+          this.allCollections = collData;
+          this.route.queryParams.subscribe(params => {
+            this.activeCollectionId = Number(params['collectionId']);
+            this.activeCategoryId = Number(params['categoryId']);
+            this.productData = data;
+            this.productData.sort(function (a: any, b: any) {
+              const i = a.orderNumber > 0 ? a.orderNumber : 9999999;
+              const j = b.orderNumber > 0 ? b.orderNumber : 9999999;
+              return i - j;
+            });
+            this.products = this.productData;
+            this.updateProducts();
+          });
+        });
       });
-      this.products = this.productData;
-      this.updateProducts();
+      // this.updateProducts();
     });
   }
 
   getCollectionNameById(collectionId: number): string {
     // tslint:disable-next-line:max-line-length
-    return this.collections.find((c: Collection) => c.id === collectionId) ? this.collections.find((c: Collection) => c.id === collectionId).title : 'Unknown Collection';
+    return this.allCollections.find((c: Collection) => c.id === collectionId) ? this.allCollections.find((c: Collection) => c.id === collectionId).title : 'Unknown Collection';
   }
 
   getCategoryNameById(categoryId: number): string {
@@ -93,7 +103,7 @@ export class ProductListComponent implements OnInit {
   }
 
   devideProductsByCollection() {
-  this.categoryViews = [];
+    this.categoryViews = [];
     this.products.forEach((p: Product) => {
       const tmpCat: CategoryView = this.categoryViews.find(cw => cw.id === p.categoryId);
       if (!tmpCat) {
@@ -131,11 +141,19 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  updateProducts() {
+  updateProducts(categorySelect?: boolean) {
+    if (categorySelect) {
+      this.activeCollectionId = null;
+    }
     const categoryId = this.activeCategoryId;
+    const collectionId = this.activeCollectionId;
     this.products = this.productData;
+    this.collections = this.allCollections.filter((c: Collection) => c.categoryId === this.activeCategoryId);
     if (categoryId > 0) {
       this.products = this.products.filter((x: any) => x.categoryId === categoryId);
+      if (collectionId > 0) {
+        this.products = this.products.filter((p: Product) => p.collectionId === this.activeCollectionId);
+      }
     }
     this.devideProductsByCollection();
   }

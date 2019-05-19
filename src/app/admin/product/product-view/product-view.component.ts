@@ -393,7 +393,8 @@ export class ProductViewComponent implements OnInit {
           maxLength: 100
         });
         setTimeout(() => {
-          this.router.navigate(['/admin/product']);
+          // tslint:disable-next-line:max-line-length
+          this.router.navigate(['/admin/product'], { queryParams: { categoryId: this.product.categoryId, collectionId: this.product.collectionId }});
         }, 1000);
         this.isEditMode = true;
     }

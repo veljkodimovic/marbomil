@@ -68,8 +68,6 @@ export class ProductListComponent implements OnInit {
 
   getProductData() {
     this.svc.getProducts().subscribe(data => {
-
-
       this.svc.getAllCategories().subscribe((cat: any) => {
         this.categories = cat;
         this.collectionsService.getAllCollections().subscribe((collData: Collection[]) => {
@@ -88,7 +86,6 @@ export class ProductListComponent implements OnInit {
           });
         });
       });
-      // this.updateProducts();
     });
   }
 

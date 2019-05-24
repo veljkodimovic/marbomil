@@ -12,7 +12,7 @@
           <a (click)="goTo(productCollection)">{{productCollection.title}}</a><i class="fas fa-chevron-right"></i>
         </li>
         <li *ngIf="productCollectionMain">
-          <a (click)="goToProducts(productCollectionMain)">{{productCollectionMain.title}} </a>
+          <a (click)="goToProducts(productCollectionMain, productCategory.id)">{{productCollectionMain.title}} </a>
         </li>
       </ul>
     </div>
@@ -27,6 +27,7 @@
           <img (click)="setActive(productImage)" src="{{apiUrl}}/{{productImage.imageCropUrl}}" alt="{{product.title}}">
         </div>
       </div>
+      <img src="{{apiUrl}}/{{product.drawingImageUrl}}" alt="{{product.title}}">
     </div>
     <div class="col-sm-6 offset-sm-1">
       <h1>{{product.title}}</h1>
@@ -39,10 +40,9 @@
           <!--<span *ngIf="product.discount > 0" class="single-product-price-old">{{product.price | number : '1.2-2'}}  <span class="single-product-price-currency">RSD</span></span>-->
         <!--</p>-->
       </div>
-      <p class="single-product-description">
-        {{product.description}}
+      <p class="single-product-description" [innerHtml]="product.description">
+        <!-- {{product.description}} -->
       </p>
-      <img src="{{apiUrl}}/{{product.drawingImageUrl}}" alt="{{product.title}}">
       <!--<p class="single-product-price-info">-->
         <!--Cene su iskazane u dinarima sa uključenim PDV-om. Ne možemo Vam garantovati da su sve fotografije potpuno verne, a cene ažurne, iako će Marbomil nastojati da ove informacije budu tačne.-->
       <!--</p>-->

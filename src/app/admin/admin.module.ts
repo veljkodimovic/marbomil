@@ -50,6 +50,7 @@ import { ProductViewComponent } from './product/product-view/product-view.compon
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { ProductService } from './product/product.service';
 import { UploadService } from '@app/shared/upload/upload.service';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 import { CustomersComponent } from './customers/customers.component';
 import { OrdersComponent } from './orders/orders.component';
 import { CustomerListComponent } from './customers/customer-list/customer-list.component';
@@ -69,6 +70,7 @@ import { OrdersService } from './orders/orders.service';
     SimpleNotificationsModule.forRoot(),
     ImageCropperModule,
     FormsModule,
+    AngularEditorModule,
     AdminRoutingModule
   ],
   declarations: [

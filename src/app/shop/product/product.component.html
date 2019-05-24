@@ -1,3 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <ul class="breadcrumbs">
+        <li>
+          <a routerLink="/categories">Proizvodi</a><i class="fas fa-chevron-right"></i>
+        </li>
+        <li *ngIf="activeCategory">
+          <a routerLink="/categories/{{activeCategory.id}}">{{activeCategory.title}}</a><i class="fas fa-chevron-right"></i>
+        </li>
+        <!-- <li *ngIf="productCollection">
+          <a (click)="goTo(productCollection)">{{productCollection.title}}</a><i class="fas fa-chevron-right"></i>
+        </li>
+        <li *ngIf="productCollectionMain">
+          <a (click)="goToProducts(productCollectionMain, productCategory.id)">{{productCollectionMain.title}} </a>
+        </li> -->
+      </ul>
+    </div>
+  </div>
+</div>
 <div class="container" style="padding-top: 80px;">
   <div class="row">
     <div class="col-sm-3">
@@ -6,7 +26,7 @@
           <a (click)="goToCategory(category)" class="sidenav-title" [ngClass]="{active: category.id==activeCategoryId && !activeCollectionId}">{{category.title}}</a>
           <ul class="sidenav-list" *ngIf="category.id == activeCategoryId">
             <li class="sidenav-item" *ngFor="let collection of getCollectionsById(category.id)">
-              <a class="sidenav-link" [ngClass]="{active: collection.id==activeCollectionId}" (click)="goToProducts(collection)">{{collection.title}}</a>
+              <a class="sidenav-link" [ngClass]="{active: collection.id==activeCollectionId}" (click)="goToProducts(collection, category.id)">{{collection.title}}</a>
             </li>
           </ul>
         </div>

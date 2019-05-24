@@ -1,12 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <ul class="breadcrumbs">
+        <li>
+          <a routerLink="/categories">Proizvodi</a><i class="fas fa-chevron-right"></i>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
 <div class="container" style="padding-top: 80px;">
   <div class="row">
     <div class="col-sm-3">
       <div class="sidenav">
         <div *ngFor="let category of categoryData">
-          <a (click)="goToCategory(category)" [ngClass]="{active: category.id==activeCategoryId}" class="sidenav-title">{{category.title}}</a>
-          <ul class="sidenav-list" *ngIf="category.id == activeCategoryId">
+          <a (click)="goToCategory(category)" [ngClass]="{active: category.id === activeCategoryId}" class="sidenav-title">{{category.title}}</a>
+          <ul class="sidenav-list" *ngIf="category.id === activeCategoryId">
             <li class="sidenav-item" *ngFor="let collection of getCollectionsById(category.id)">
-              <a class="sidenav-link" (click)="goToProduct(collection)">{{collection.title}}</a>
+              <a class="sidenav-link" (click)="goToProduct(collection, category.id)">{{collection.title}}</a>
             </li>
           </ul>
         </div>
@@ -15,7 +26,7 @@
     <div class="col-sm-9">
       <div class="row categories-list">
         <div class="col-sm-4 categories-list-item content-box" *ngFor="let collection of getCollectionsById(activeCategoryId)">
-          <a (click)="goToProduct(collection)">
+          <a (click)="goToProduct(collection, activeCategoryId)">
             <img src="{{apiUrl}}/{{collection.imageCropUrl}}" alt="{{collection.title}}">
             <div class="content-box-description">
               <h5>{{collection.title}}</h5>

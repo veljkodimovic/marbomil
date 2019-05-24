@@ -31,6 +31,7 @@
     "@angular/router": "^7.2.8",
     "@auth0/angular-jwt": "^2.1.0",
     "@fortawesome/fontawesome-free-webfonts": "^1.0.5",
+    "@kolkov/angular-editor": "^0.13.1",
     "@ng-bootstrap/ng-bootstrap": "^4.1.0",
     "@ngx-translate/core": "^9.0.1",
     "@types/googlemaps": "^3.30.18",

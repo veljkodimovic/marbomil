@@ -25,6 +25,7 @@ export class ProductComponent implements OnInit {
   private apiUrl: string;
   private isAuth: boolean;
   counts: number[] = [];
+  activeCategory: Category;
 
   constructor(private svc: ProductService,
     private persistenceService: PersistenceService,
@@ -58,6 +59,7 @@ export class ProductComponent implements OnInit {
 
     this.svc.getAllCategories().subscribe(data => {
       this.categoryData = data;
+      this.activeCategory = this.categoryData.find(c => c.id === this.activeCategoryId);
     });
 
     this.svc.getProducts().subscribe(data => {
@@ -108,8 +110,8 @@ export class ProductComponent implements OnInit {
     this.router.navigate(['/collections'], { queryParams: { id: collection.id } });
   }
 
-  goToProducts(collection: Collection) {
-    this.router.navigate(['/products/list'], { queryParams: { id: collection.id } });
+  goToProducts(collection: Collection, categoryId: number) {
+    this.router.navigate(['/products/list'], { queryParams: { id: collection.id, categoryId: categoryId } });
   }
 
   goToProduct(product: Product) {
@@ -121,6 +123,7 @@ export class ProductComponent implements OnInit {
     if (categoryCount.length) {
       this.router.navigate(['/categories/' + category.id]);
       this.activeCategoryId = category.id;
+      this.activeCategory = this.categoryData.find(c => c.id === this.activeCategoryId);
     } else {
       this.router.navigate(['/products/list'], { queryParams: { categoryId: category.id } });
     }

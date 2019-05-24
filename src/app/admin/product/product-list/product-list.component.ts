@@ -1,11 +1,37 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ProductService } from '../product.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Product } from '../../../core/types/product';
 import { Category } from '../../../core/types/category';
 import { PersistenceService } from '@app/core/persistence.service';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal';
+import { CollectionService } from '../../collections/collections.service';
+import { Collection } from '@app/core/types/collection';
+
+class CollectionView {
+  id: number;
+  title: string;
+  products: Product[];
+
+  constructor(id: number, title: string) {
+    this.id = id;
+    this.title = title;
+    this.products = [];
+  }
+}
+
+class CategoryView {
+  id: number;
+  title: string;
+  collectionViews: CollectionView[];
+
+  constructor(id: number, title: string) {
+    this.id = id;
+    this.title = title;
+    this.collectionViews = [];
+  }
+}
 
 @Component({
   selector: 'app-product-list',
@@ -22,25 +48,82 @@ export class ProductListComponent implements OnInit {
   categories: Category[] = [];
   activeCategory: Category;
   activeCategoryId: number;
+  allCollections: Collection[];
+  collections: Collection[];
+  categoryViews: CategoryView[] = [];
+  collectionViews: CollectionView[] = [];
+  activeCollectionId: number;
   constructor(private svc: ProductService,
+    private collectionsService: CollectionService,
     private persistenceService: PersistenceService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.apiUrl = persistenceService.apiUrl;
   }
 
   ngOnInit() {
+    this.getProductData();
+  }
+
+  getProductData() {
     this.svc.getProducts().subscribe(data => {
-      this.productData = data;
-      this.productData.sort(function(a: any, b: any) {
-        const i = a.orderNumber > 0 ? a.orderNumber : 9999999;
-        const j = b.orderNumber > 0 ? b.orderNumber : 9999999;
-        return i - j;
+      this.svc.getAllCategories().subscribe((cat: any) => {
+        this.categories = cat;
+        this.collectionsService.getAllCollections().subscribe((collData: Collection[]) => {
+          this.allCollections = collData;
+          this.route.queryParams.subscribe(params => {
+            this.activeCollectionId = Number(params['collectionId']);
+            this.activeCategoryId = Number(params['categoryId']);
+            this.productData = data;
+            this.productData.sort(function (a: any, b: any) {
+              const i = a.orderNumber > 0 ? a.orderNumber : 9999999;
+              const j = b.orderNumber > 0 ? b.orderNumber : 9999999;
+              return i - j;
+            });
+            this.products = this.productData;
+            this.updateProducts();
+          });
+        });
       });
-      this.products = this.productData;
     });
-    this.svc.getAllCategories().subscribe((data: any) => {
-      this.categories = data;
+  }
+
+  getCollectionNameById(collectionId: number): string {
+    // tslint:disable-next-line:max-line-length
+    return this.allCollections.find((c: Collection) => c.id === collectionId) ? this.allCollections.find((c: Collection) => c.id === collectionId).title : 'Unknown Collection';
+  }
+
+  getCategoryNameById(categoryId: number): string {
+    // tslint:disable-next-line:max-line-length
+    return this.categories.find((c: Collection) => c.id === categoryId) ? this.categories.find((c: Collection) => c.id === categoryId).title : 'Unknown Category';
+  }
+
+  devideProductsByCollection() {
+    this.categoryViews = [];
+    this.products.forEach((p: Product) => {
+      const tmpCat: CategoryView = this.categoryViews.find(cw => cw.id === p.categoryId);
+      if (!tmpCat) {
+        this.categoryViews.push(new CategoryView(p.categoryId, this.getCategoryNameById(p.categoryId)));
+      }
+    });
+    this.categoryViews.forEach(cw => {
+      const categoryProducts = this.products.filter((p: Product) => p.categoryId === cw.id);
+      categoryProducts.forEach((cp: Product) => {
+        const tmpColl: CollectionView = cw.collectionViews.find(colw => colw.id === cp.collectionId);
+        if (!tmpColl) {
+          cw.collectionViews.push(new CollectionView(cp.collectionId, this.getCollectionNameById(cp.collectionId)));
+        }
+      });
+    });
+    this.products.forEach((p: Product) => {
+      this.categoryViews.forEach(cw => {
+        cw.collectionViews.forEach(colw => {
+          if (colw.id === p.collectionId) {
+            colw.products.push(p);
+          }
+        });
+      });
     });
   }
 
@@ -51,19 +134,25 @@ export class ProductListComponent implements OnInit {
 
   performDelete(event: any) {
     this.svc.deleteProduct(this.activeProduct.id).subscribe(res => {
-      this.svc.getProducts().subscribe(data => {
-        this.productData = data;
-      });
+      this.getProductData();
     });
   }
 
-  updateProducts() {
+  updateProducts(categorySelect?: boolean) {
+    if (categorySelect) {
+      this.activeCollectionId = null;
+    }
     const categoryId = this.activeCategoryId;
-    console.log(categoryId);
+    const collectionId = this.activeCollectionId;
     this.products = this.productData;
+    this.collections = this.allCollections.filter((c: Collection) => c.categoryId === this.activeCategoryId);
     if (categoryId > 0) {
       this.products = this.products.filter((x: any) => x.categoryId === categoryId);
+      if (collectionId > 0) {
+        this.products = this.products.filter((p: Product) => p.collectionId === this.activeCollectionId);
+      }
     }
+    this.devideProductsByCollection();
   }
 
 }

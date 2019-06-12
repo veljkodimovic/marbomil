@@ -1,3 +1,28 @@
-<p>
-  shopping-cart works!
+<!-- <p *ngFor="let item of cart">
+  {{item.title}}, {{item.price}}, {{item.count}}, {{item.price*item.count}}
 </p>
+<p>{{totalPrice(cart)}}</p> -->
+<div class="row header">
+  <div class="col-3"></div>
+  <div class="col-5">Product</div>
+  <div class="col-1">Price</div>
+  <div class="col-1">Count</div>
+  <div class="col-1">Total price</div>
+  <div class="col-1"></div>
+</div>
+<div class="row header" *ngFor="let item of cart">
+  <div class="col-3"><img src="{{apiUrl}}/{{item.images[0].imageCropUrl}}" alt="{{item.title}}"></div>
+  <div class="col-5">{{item.title}}</div>
+  <div class="col-1">{{item.price}}</div>
+  <div class="col-1">{{item.count}}</div>
+  <div class="col-1">{{item.price * item.count}}</div>
+  <div class="col-1"><a class="remove-link" (click)="removeFromCart(item)"><i class="fas fa-trash"></i></a></div>
+</div>
+<div class="row">
+  <div class="col-10"></div>
+  <div class="col-2">Total price</div>
+</div>
+<div class="row">
+  <div class="col-10"></div>
+  <div class="col-2">{{totalPrice(cart)}}</div>
+</div>

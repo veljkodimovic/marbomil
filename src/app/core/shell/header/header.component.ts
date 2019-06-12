@@ -6,6 +6,7 @@ import { MatSidenav } from '@angular/material';
 import { AuthenticationService } from '../../authentication/authentication.service';
 import { I18nService } from '../../i18n.service';
 import { HeaderService } from './header.service';
+import { Product } from '@app/core/types/product';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +19,7 @@ export class HeaderComponent implements OnInit {
   menuHidden = true;
   activeLanguage = '';
   myCart = JSON.parse(sessionStorage.getItem('my-cart'));
-  cartCount = this.myCart ? this.myCart.orders.length : 0;
+  cartCount = this.myCart ? this.getCartCount(this.myCart.orders) : 0;
 
   constructor(private router: Router,
     private titleService: Title,
@@ -26,7 +27,7 @@ export class HeaderComponent implements OnInit {
     private i18nService: I18nService,
     private headerService: HeaderService) {
     this.headerService.shoppingCartItemsCount.subscribe((item: number) => {
-      this.cartCount = item;
+      this.cartCount += item;
     });
   }
 
@@ -50,6 +51,12 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.authenticationService.logout()
       .subscribe(() => this.router.navigate(['/login'], { replaceUrl: true }));
+  }
+
+  getCartCount(orders: Product[]): number {
+    let cartCount = 0;
+    orders.forEach((o: Product) => cartCount += o.count);
+    return cartCount;
   }
 
   get currentLanguage(): string {

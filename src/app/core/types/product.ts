@@ -21,6 +21,7 @@ export class Product {
   newImages: any[];
   updatedImages: any[];
   deletedImages: any[];
+  count?: number;
 
   constructor(id: number, title: string, code: string, description: string, price: number, orderNumber: number,
     discount: number, discountDate: string, collectionId: number, categoryId: number, dimension: string, width: number,

@@ -8,6 +8,7 @@ import 'rxjs/add/operator/catch';
 import { NotificationsService } from 'angular2-notifications';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from '@app/core/shell/header/header.service';
+import { Product } from '@app/core/types/product';
 
 const routes = {
   collection: () => `/collection/`,
@@ -80,12 +81,21 @@ export class ProductService {
       .catch((err) => this.persistenceService.handleError(err));
   }
 
-  addToCart(product: any): void {
+  addToCart(product: Product): void {
     let myCart = JSON.parse(sessionStorage.getItem('my-cart'));
     // tslint:disable-next-line:max-line-length
-    myCart ? myCart.orders.push({ id: product.id, count: product.count }) : myCart = { orders: [{ id: product.id, count: product.count }] };
+    if (myCart) {
+      const item: Product = myCart.orders.find((p: Product) => p.id === product.id);
+      item ? myCart.orders.find((p: Product) => p.id === product.id).count += product.count : myCart.orders.push(product);
+    } else {
+      myCart = { orders: [product] };
+    }
+
+
+
+    // myCart ? myCart.orders.push(product) : myCart = { orders: [product] };
     sessionStorage.setItem('my-cart', JSON.stringify(myCart));
-    this.headerService.shoppingCartItemsCount.emit(myCart.orders.length);
+    this.headerService.shoppingCartItemsCount.emit(product.count);
     this.notifications.success(this.success.value, this.added.value,
       {
         timeOut: 1000,

@@ -17,6 +17,7 @@ import { ProductComponent } from '@app/shop/product/product.component';
 import { ProductViewComponent } from '@app/shop/product/product-view/product-view.component';
 import { ProductService } from '@app/shop/product/product.service';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ShoppingConfirmedComponent } from './shopping-confirmed/shopping-confirmed.component';
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     CollectionsComponent,
     ProductComponent,
     ProductViewComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    ShoppingConfirmedComponent
   ],
   providers: [
     CategoryService,

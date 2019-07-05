@@ -27,7 +27,12 @@ export class HeaderComponent implements OnInit {
     private i18nService: I18nService,
     private headerService: HeaderService) {
     this.headerService.shoppingCartItemsCount.subscribe((item: number) => {
-      this.cartCount += item;
+      if (item) {
+        this.cartCount += item;
+      } else {
+        this.myCart = JSON.parse(sessionStorage.getItem('my-cart'));
+        this.cartCount = this.myCart ? this.getCartCount(this.myCart.orders) : 0;
+      }
     });
   }
 

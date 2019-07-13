@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{27103861-C751-485B-AEF6-DB0AD85CBF37}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Marbomil.Repository</RootNamespace>
+    <AssemblyName>Marbomil.Repository</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MarbomilDbContext.cs" />
+    <Compile Include="Migrations\201807081922120_InitialCreate.cs" />
+    <Compile Include="Migrations\201807081922120_InitialCreate.Designer.cs">
+      <DependentUpon>201807081922120_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807102216085_Collection_Nullable_Properties.cs" />
+    <Compile Include="Migrations\201807102216085_Collection_Nullable_Properties.Designer.cs">
+      <DependentUpon>201807102216085_Collection_Nullable_Properties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807110826521_Video_ColumnName_Fix.cs" />
+    <Compile Include="Migrations\201807110826521_Video_ColumnName_Fix.Designer.cs">
+      <DependentUpon>201807110826521_Video_ColumnName_Fix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807111628119_Collection_Foreing_Keys.cs" />
+    <Compile Include="Migrations\201807111628119_Collection_Foreing_Keys.Designer.cs">
+      <DependentUpon>201807111628119_Collection_Foreing_Keys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807111638006_Product_Foreign_Keys_Properties_Updates.cs" />
+    <Compile Include="Migrations\201807111638006_Product_Foreign_Keys_Properties_Updates.Designer.cs">
+      <DependentUpon>201807111638006_Product_Foreign_Keys_Properties_Updates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807111641124_Product_DiscountDate_Null.cs" />
+    <Compile Include="Migrations\201807111641124_Product_DiscountDate_Null.Designer.cs">
+      <DependentUpon>201807111641124_Product_DiscountDate_Null.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812020124421_Remove_ParentCollectionId_Set_StringLength.cs" />
+    <Compile Include="Migrations\201812020124421_Remove_ParentCollectionId_Set_StringLength.Designer.cs">
+      <DependentUpon>201812020124421_Remove_ParentCollectionId_Set_StringLength.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812022031453_Product_OrderNumber.cs" />
+    <Compile Include="Migrations\201812022031453_Product_OrderNumber.Designer.cs">
+      <DependentUpon>201812022031453_Product_OrderNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812071057437_Product_CollectionId_Nullable.cs" />
+    <Compile Include="Migrations\201812071057437_Product_CollectionId_Nullable.Designer.cs">
+      <DependentUpon>201812071057437_Product_CollectionId_Nullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812282239252_Product_Dimension_Remove_Height_Weight_Deep.cs" />
+    <Compile Include="Migrations\201812282239252_Product_Dimension_Remove_Height_Weight_Deep.Designer.cs">
+      <DependentUpon>201812282239252_Product_Dimension_Remove_Height_Weight_Deep.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812282359593_Product_OrderNumber_Nullable.cs" />
+    <Compile Include="Migrations\201812282359593_Product_OrderNumber_Nullable.Designer.cs">
+      <DependentUpon>201812282359593_Product_OrderNumber_Nullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906231614314_AspNetIdentity_Tables.cs" />
+    <Compile Include="Migrations\201906231614314_AspNetIdentity_Tables.Designer.cs">
+      <DependentUpon>201906231614314_AspNetIdentity_Tables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906231621572_User_Additional_fields.cs" />
+    <Compile Include="Migrations\201906231621572_User_Additional_fields.Designer.cs">
+      <DependentUpon>201906231621572_User_Additional_fields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907071927013_RefreshToken.cs" />
+    <Compile Include="Migrations\201907071927013_RefreshToken.Designer.cs">
+      <DependentUpon>201907071927013_RefreshToken.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907081748281_Buyer_User_Properties.cs" />
+    <Compile Include="Migrations\201907081748281_Buyer_User_Properties.Designer.cs">
+      <DependentUpon>201907081748281_Buyer_User_Properties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907081836357_Order_OrderItem.cs" />
+    <Compile Include="Migrations\201907081836357_Order_OrderItem.Designer.cs">
+      <DependentUpon>201907081836357_Order_OrderItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907081918262_OrderItem_Quantity.cs" />
+    <Compile Include="Migrations\201907081918262_OrderItem_Quantity.Designer.cs">
+      <DependentUpon>201907081918262_OrderItem_Quantity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository.cs" />
+    <Compile Include="Stores\ApplicationRoleStore.cs" />
+    <Compile Include="Stores\ApplicationUserStore.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Marbomil.Infrastructure\Marbomil.Infrastructure.csproj">
+      <Project>{6A346D66-18B4-4931-834D-956E1BA4F305}</Project>
+      <Name>Marbomil.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201807081922120_InitialCreate.resx">
+      <DependentUpon>201807081922120_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807102216085_Collection_Nullable_Properties.resx">
+      <DependentUpon>201807102216085_Collection_Nullable_Properties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807110826521_Video_ColumnName_Fix.resx">
+      <DependentUpon>201807110826521_Video_ColumnName_Fix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807111628119_Collection_Foreing_Keys.resx">
+      <DependentUpon>201807111628119_Collection_Foreing_Keys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807111638006_Product_Foreign_Keys_Properties_Updates.resx">
+      <DependentUpon>201807111638006_Product_Foreign_Keys_Properties_Updates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807111641124_Product_DiscountDate_Null.resx">
+      <DependentUpon>201807111641124_Product_DiscountDate_Null.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812020124421_Remove_ParentCollectionId_Set_StringLength.resx">
+      <DependentUpon>201812020124421_Remove_ParentCollectionId_Set_StringLength.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812022031453_Product_OrderNumber.resx">
+      <DependentUpon>201812022031453_Product_OrderNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812071057437_Product_CollectionId_Nullable.resx">
+      <DependentUpon>201812071057437_Product_CollectionId_Nullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812282239252_Product_Dimension_Remove_Height_Weight_Deep.resx">
+      <DependentUpon>201812282239252_Product_Dimension_Remove_Height_Weight_Deep.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812282359593_Product_OrderNumber_Nullable.resx">
+      <DependentUpon>201812282359593_Product_OrderNumber_Nullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906231614314_AspNetIdentity_Tables.resx">
+      <DependentUpon>201906231614314_AspNetIdentity_Tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906231621572_User_Additional_fields.resx">
+      <DependentUpon>201906231621572_User_Additional_fields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907071927013_RefreshToken.resx">
+      <DependentUpon>201907071927013_RefreshToken.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907081748281_Buyer_User_Properties.resx">
+      <DependentUpon>201907081748281_Buyer_User_Properties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907081836357_Order_OrderItem.resx">
+      <DependentUpon>201907081836357_Order_OrderItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907081918262_OrderItem_Quantity.resx">
+      <DependentUpon>201907081918262_OrderItem_Quantity.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

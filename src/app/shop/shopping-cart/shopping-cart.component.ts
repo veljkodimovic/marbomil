@@ -19,7 +19,7 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit() {
     this.apiUrl = this.persistenceService.apiUrl;
-    this.cart = JSON.parse(sessionStorage.getItem('my-cart')).orders;
+    this.cart = JSON.parse(sessionStorage.getItem('my-cart')) ? JSON.parse(sessionStorage.getItem('my-cart')).orders : null;
   }
 
   changeCountOfItem() {

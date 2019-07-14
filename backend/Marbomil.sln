@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2002
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marbomil.Repository", "Marbomil.Repository\Marbomil.Repository.csproj", "{27103861-C751-485B-AEF6-DB0AD85CBF37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marbomil.Infrastructure", "Marbomil.Infrastructure\Marbomil.Infrastructure.csproj", "{6A346D66-18B4-4931-834D-956E1BA4F305}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marbomil.Services", "Marbomil.Services\Marbomil.Services.csproj", "{333BCD15-1AF8-4A70-BE26-953749D19953}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marbomil.Factory", "Marbomil.Factory\Marbomil.Factory.csproj", "{2AB78C0B-4E89-44BF-BD5D-1D3FA71DF64D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marbomil.Api", "Marbomil.Api\Marbomil.Api.csproj", "{430F5A61-6D91-48D9-8C9F-6CED0C76A779}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{AE415681-BB9C-4206-8CB6-4E038603F376}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marbomil.Domain.Security", "Marbomil.Domain.Security\Marbomil.Domain.Security.csproj", "{FE8B1130-4E54-4614-A771-715A4A53289C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{27103861-C751-485B-AEF6-DB0AD85CBF37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27103861-C751-485B-AEF6-DB0AD85CBF37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27103861-C751-485B-AEF6-DB0AD85CBF37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27103861-C751-485B-AEF6-DB0AD85CBF37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A346D66-18B4-4931-834D-956E1BA4F305}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A346D66-18B4-4931-834D-956E1BA4F305}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A346D66-18B4-4931-834D-956E1BA4F305}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A346D66-18B4-4931-834D-956E1BA4F305}.Release|Any CPU.Build.0 = Release|Any CPU
+		{333BCD15-1AF8-4A70-BE26-953749D19953}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{333BCD15-1AF8-4A70-BE26-953749D19953}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{333BCD15-1AF8-4A70-BE26-953749D19953}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{333BCD15-1AF8-4A70-BE26-953749D19953}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AB78C0B-4E89-44BF-BD5D-1D3FA71DF64D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AB78C0B-4E89-44BF-BD5D-1D3FA71DF64D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AB78C0B-4E89-44BF-BD5D-1D3FA71DF64D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AB78C0B-4E89-44BF-BD5D-1D3FA71DF64D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{430F5A61-6D91-48D9-8C9F-6CED0C76A779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{430F5A61-6D91-48D9-8C9F-6CED0C76A779}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{430F5A61-6D91-48D9-8C9F-6CED0C76A779}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{430F5A61-6D91-48D9-8C9F-6CED0C76A779}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE8B1130-4E54-4614-A771-715A4A53289C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE8B1130-4E54-4614-A771-715A4A53289C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE8B1130-4E54-4614-A771-715A4A53289C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE8B1130-4E54-4614-A771-715A4A53289C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FE8B1130-4E54-4614-A771-715A4A53289C} = {AE415681-BB9C-4206-8CB6-4E038603F376}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B3B0BB6F-6CC9-4F5F-AFF7-FC92A4964D8A}
+	EndGlobalSection
+EndGlobal

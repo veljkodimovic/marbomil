@@ -23,7 +23,7 @@
       <div class="admin-list-item">
         <div class="row">
           <div class="col-10">
-            <p><a class="admin-list-name" (click)="goTo(order)">{{order.name}}</a></p>
+            <p><a class="admin-list-name" (click)="goTo(order)">{{'Order No.' | translate}} {{order.id}}</a></p>
             <div class="row admin-list-contact">
               <p class="col-sm-6">
                 <!-- <span *ngIf="order.street">{{order.street}}</span>

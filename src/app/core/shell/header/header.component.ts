@@ -64,6 +64,10 @@ export class HeaderComponent implements OnInit {
     return cartCount;
   }
 
+  goToMyOrders() {
+    this.router.navigate(['my-orders']);
+  }
+
   get currentLanguage(): string {
     return this.i18nService.language;
   }

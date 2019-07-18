@@ -1,0 +1,15 @@
+@import "../../../theme/theme-variables.scss";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
+.section-title {
+    padding: 25px 10px 10px 10px;
+    border-bottom: 1px solid $black;
+}
+
+.site-content-color {
+    background: $teal;
+}
+
+.administration-color {
+    background: $orange-light;
+}

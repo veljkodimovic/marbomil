@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
+import { PersistenceService } from '../persistence.service';
 
 export interface Credentials {
   // Customize received credentials here
@@ -32,10 +33,10 @@ export interface TokenData {
 }
 
 const credentialsKey = 'credentials';
-// const sessionKey = 'sessionTimes';
-const usernameKey = 'username';
+
 const routes = {
-  login: () => `/login/`
+  login: () => `/login/`,
+  userContext: () => `/users/context`
 };
 
 /**
@@ -50,7 +51,7 @@ export class AuthenticationService {
   apiOptions: any;
   activeStorage = sessionStorage;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private persistenceService:  PersistenceService) {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
     if (savedCredentials) {
       this._credentials = JSON.parse(savedCredentials);
@@ -81,8 +82,6 @@ export class AuthenticationService {
         if (token) {
           this.setCredentials(token, true);
           this._tokenData = token;
-          const storage = localStorage;
-          storage.setItem(usernameKey, JSON.stringify({ fname: 'System', lname: 'Administrator' }));
         }
         return token;
       });
@@ -135,6 +134,10 @@ export class AuthenticationService {
       sessionStorage.removeItem(credentialsKey);
       localStorage.removeItem(credentialsKey);
     }
+  }
+
+  getUserContext(): Observable<any> {
+    return this.http.get(routes.userContext(), this.persistenceService.getApiHeader()).map((res: Response) => res.json());
   }
 
 }

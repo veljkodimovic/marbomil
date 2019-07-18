@@ -16,92 +16,156 @@
   <form name="form" (ngSubmit)="f.form.valid && saveOnClick()" #f="ngForm" novalidate>
     <simple-notifications></simple-notifications>
     <div class="row">
-      <div class="col-md-5">
-        <!-- <div #gmap style="width:100%; height:400px;"></div> -->
-      </div>
-      <div class="col-md-6 offset-md-1">
+      <div class="col-md-12">
         <div class="" *ngIf="customer">
           <div class="form-group row">
-            <label for="title" class="col-md-2 col-form-label" translate>Name</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="title" [(ngModel)]="customer.name" name="name" #name="ngModel" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required maxlength="100">
-              <div *ngIf="f.submitted && name.invalid" class="invalid-feedback">
-                  <div *ngIf="name.errors.required" translate>This field is required</div>
+            <label for="title" class="col-md-4 col-form-label" translate>Company Name</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="title" [(ngModel)]="customer.companyName" name="companyName"
+                #companyName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && companyName.invalid }" required
+                maxlength="100">
+              <div *ngIf="f.submitted && companyName.invalid" class="invalid-feedback">
+                <div *ngIf="companyName.errors.required" translate>This field is required</div>
               </div>
             </div>
           </div>
-          <!-- <div class="form-group row">
-            <label for="street" class="col-md-2 col-form-label">Adresa</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="street" name="street" [(ngModel)]="customer.street">
+          <div class="form-group row">
+            <label for="title" class="col-md-4 col-form-label" translate>Username</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="title" [(ngModel)]="customer.username" name="username"
+                #username="ngModel" [ngClass]="{ 'is-invalid': f.submitted && username.invalid }" required
+                maxlength="100">
+              <div *ngIf="f.submitted && username.invalid" class="invalid-feedback">
+                <div *ngIf="username.errors.required" translate>This field is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="!isEditMode">
+            <label for="title" class="col-md-4 col-form-label" translate>Password</label>
+            <div class="col-md-8">
+              <input type="password" class="form-control" id="title" [(ngModel)]="customer.password" name="password"
+                #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required
+                maxlength="100">
+              <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+                <div *ngIf="password.errors.required" translate>This field is required</div>
+              </div>
             </div>
           </div>
           <div class="form-group row">
-            <label for="city" class="col-md-2 col-form-label">Grad</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="city" name="city" [(ngModel)]="customer.city">
+            <label for="title" class="col-md-4 col-form-label" translate>Email</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="title" [(ngModel)]="customer.email" name="email"
+                #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required maxlength="100">
+              <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                <div *ngIf="email.errors.required" translate>This field is required</div>
+              </div>
             </div>
           </div>
           <div class="form-group row">
-            <label for="postal" class="col-md-2 col-form-label">Poštanski broj</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="postal" name="postal" [(ngModel)]="customer.postal">
+            <label for="title" class="col-md-4 col-form-label" translate>Account Number</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="title" [(ngModel)]="customer.accountNumber"
+                name="accountNumber" #accountNumber="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && accountNumber.invalid }" required maxlength="100">
+              <div *ngIf="f.submitted && accountNumber.invalid" class="invalid-feedback">
+                <div *ngIf="accountNumber.errors.required" translate>This field is required</div>
+              </div>
             </div>
           </div>
           <div class="form-group row">
-            <label for="region" class="col-md-2 col-form-label">Opština</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="region" name="region" [(ngModel)]="customer.region">
+            <label for="title" class="col-md-4 col-form-label" translate>Company Registration Number</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="title" [(ngModel)]="customer.companyRegistrationNumber"
+                name="companyRegistrationNumber" #companyRegistrationNumber="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && companyRegistrationNumber.invalid }" required maxlength="100">
+              <div *ngIf="f.submitted && companyRegistrationNumber.invalid" class="invalid-feedback">
+                <div *ngIf="companyRegistrationNumber.errors.required" translate>This field is required</div>
+              </div>
             </div>
           </div>
           <div class="form-group row">
-            <label for="country" class="col-md-2 col-form-label">Drzava</label>
-            <div class="col-md-10">
-              <select class="form-control" id="country" name="country" [(ngModel)]="customer.country">
-                <option value=""></option>
-                <option value="Srbija">Srbija</option>
-                <option value="Hrvatska">Hrvatska</option>
-                <option value="Makedonija">Makedonija</option>
-                <option value="Crna Gora">Crna Gora</option>
-                <option value="Republika Srpska">Republika Srpska</option>
-              </select>
+            <label for="title" class="col-md-4 col-form-label" translate>Company Tax Identification Number</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="title" [(ngModel)]="customer.companyTaxIdentificationNumber"
+                name="companyTaxIdentificationNumber" #companyTaxIdentificationNumber="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && companyTaxIdentificationNumber.invalid }" required
+                maxlength="100">
+              <div *ngIf="f.submitted && companyTaxIdentificationNumber.invalid" class="invalid-feedback">
+                <div *ngIf="companyTaxIdentificationNumber.errors.required" translate>This field is required</div>
+              </div>
             </div>
           </div>
           <div class="form-group row">
-            <label for="latitude" class="col-md-2 col-form-label">Latitude</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="latitude" name="latitude" [(ngModel)]="customer.latitude">
+            <label for="title" class="col-md-4 col-form-label" translate>Contact Person</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="title" [(ngModel)]="customer.contactPerson"
+                name="contactPerson" #contactPerson="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && contactPerson.invalid }" required maxlength="100">
+              <div *ngIf="f.submitted && contactPerson.invalid" class="invalid-feedback">
+                <div *ngIf="contactPerson.errors.required" translate>This field is required</div>
+              </div>
             </div>
           </div>
           <div class="form-group row">
-            <label for="longitude" class="col-md-2 col-form-label">Longitude</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="longitude" name="longitude" [(ngModel)]="customer.longitude">
+            <label for="title" class="col-md-4 col-form-label" translate>Address</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="title" [(ngModel)]="customer.address" name="address"
+                #address="ngModel" [ngClass]="{ 'is-invalid': f.submitted && address.invalid }" required
+                maxlength="100">
+              <div *ngIf="f.submitted && address.invalid" class="invalid-feedback">
+                <div *ngIf="address.errors.required" translate>This field is required</div>
+              </div>
             </div>
           </div>
           <div class="form-group row">
-            <label for="phone" class="col-md-2 col-form-label">Telefon</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="customer.phone">
+            <label for="title" class="col-md-4 col-form-label" translate>Contact Phone Number</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="title" [(ngModel)]="customer.contactPhoneNumber"
+                name="contactPhoneNumber" #contactPhoneNumber="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && contactPhoneNumber.invalid }" required maxlength="100">
+              <div *ngIf="f.submitted && contactPhoneNumber.invalid" class="invalid-feedback">
+                <div *ngIf="contactPhoneNumber.errors.required" translate>This field is required</div>
+              </div>
             </div>
           </div>
           <div class="form-group row">
-            <label for="email" class="col-md-2 col-form-label">Email</label>
-            <div class="col-md-10">
-              <input type="email" class="form-control" id="email" name="email" [(ngModel)]="customer.email">
+            <label for="title" class="col-md-4 col-form-label" translate>Discount</label>
+            <div class="col-md-8">
+              <input type="number" class="form-control" id="title" [(ngModel)]="customer.discount" name="discount"
+                #discount="ngModel" [ngClass]="{ 'is-invalid': f.submitted && discount.invalid }" required>
+              <div *ngIf="f.submitted && discount.invalid" class="invalid-feedback">
+                <div *ngIf="discount.errors.required" translate>This field is required</div>
+              </div>
             </div>
           </div>
           <div class="form-group row">
-            <label for="website" class="col-md-2 col-form-label">Website</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="website" name="website" [(ngModel)]="customer.website">
+            <label for="title" class="col-md-4 col-form-label" translate>Website</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="title" [(ngModel)]="customer.website" name="website"
+                #website="ngModel" [ngClass]="{ 'is-invalid': f.submitted && website.invalid }" required
+                maxlength="100">
+              <div *ngIf="f.submitted && website.invalid" class="invalid-feedback">
+                <div *ngIf="website.errors.required" translate>This field is required</div>
+              </div>
             </div>
-          </div> -->
+          </div>
+          <div class="form-group row">
+            <label for="title" class="col-md-4 col-form-label" translate>Is Active</label>
+            <div class="col-md-8">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="isActive" name="isActive" [(ngModel)]="customer.isActive">
+                <label class="form-check-label" for="isActive"></label>
+              </div>
+            </div>
+          </div>
+
           <div class="row">
-            <div class="col-sm-10 offset-md-2">
-              <button type="submit" class="btn btn-primary" (click)="scrollTop(f)" translate><i class="fas fa-save"></i>Save</button>
+            <div class="col-sm-8 offset-md-4">
+              <button type="submit" class="btn btn-primary" (click)="scrollTop(f)" translate><i
+                  class="fas fa-save"></i>Save</button>
               <a routerLink="/admin/customers" class="btn btn-secondary" translate><i class="fas fa-ban"></i>Cancel</a>
-              <a class="btn btn-danger" *ngIf="isEditMode" (click)="openModal()" translate><i class="fas fa-trash"></i>Delete</a>
+              <a class="btn btn-danger" *ngIf="isEditMode" (click)="openModal()" translate><i
+                  class="fas fa-trash"></i>Delete</a>
             </div>
           </div>
         </div>

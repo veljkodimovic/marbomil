@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 const routes = {
-  customers: () => `/customers/`
+  customers: () => `/buyers/`
 };
 
 @Injectable({
@@ -24,26 +24,18 @@ export class CustomersService {
   }
 
   getAllCustomers(): Observable<Customer[]> {
-    // return this.http.get(routes.customers())
-    //   .map((res: Response) => res.json())
-    //   .map((body: Promise<Customer>) =>
-    //     body)
-    //   .catch((err: any) => this.persistenceService.handleError(err));
-    return Observable.of([
-      {id: 1, name: 'Customer 1'},
-      {id: 2, name: 'Customer 2'},
-      {id: 3, name: 'Customer 3'},
-      {id: 4, name: 'Customer 4'}
-    ]);
+    return this.http.get(routes.customers(), this.options)
+      .map((res: Response) => res.json())
+      .map((body: Promise<Customer>) =>
+        body)
+      .catch((err: any) => this.persistenceService.handleError(err));
   }
 
   getCustomerById(id: number): Observable<Customer> {
-    // return this.http.get(routes.customers() + id, this.options)
-    //   .map((res: Response) => res.json())
-    //   .map(body => body)
-    //   .catch((err) => this.persistenceService.handleError(err));
-    return Observable.of(
-      {id: id, name: `Customer ${id}`});
+    return this.http.get(routes.customers() + id, this.options)
+      .map((res: Response) => res.json())
+      .map(body => body)
+      .catch((err) => this.persistenceService.handleError(err));
   }
 
   createCustomer(body: Customer): Observable<any> {

@@ -18,18 +18,14 @@ export class CustomerViewComponent implements OnInit {
 
   @ViewChild(DeleteModalComponent)
   private modal: DeleteModalComponent;
-  // image: any;
   data: any;
-  customer: Customer = new Customer(0, '');
+  customer: Customer = new Customer('', '', '', '', '', '', '', null, '', true, '', '', '');
   serviceUrl: any;
   link: any;
   isLoading: boolean;
   isEditMode = true;
   disableSave = false;
   blockAll = false;
-  // @ViewChild('gmap')
-  // gmapElement: ElementRef;
-  // map: google.maps.Map;
 
   success: any = this.translate.get('Success');
   savingError: any = this.translate.get('Saving error');
@@ -56,19 +52,6 @@ export class CustomerViewComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.customersService.getCustomerById(Number(id)).subscribe((data: Customer) => {
       this.customer = data;
-      // if (this.service.latitude.length && this.service.longitude.length) {
-      //   const uluru = {lat: parseFloat(this.service.latitude), lng: parseFloat(this.service.longitude)};
-      //   const mapProp = {
-      //     center: uluru,
-      //     zoom: 15,
-      //     mapTypeId: google.maps.MapTypeId.ROADMAP
-      //   };
-      //   this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
-      //   const marker = new google.maps.Marker({
-      //     position: uluru,
-      //     map: this.map
-      //   });
-      // }
     });
   }
 

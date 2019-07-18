@@ -9,6 +9,7 @@ import { ProductComponent } from '@app/shop/product/product.component';
 import { ProductViewComponent } from '@app/shop/product/product-view/product-view.component';
 import { ShoppingCartComponent } from '@app/shop/shopping-cart/shopping-cart.component';
 import { ShoppingConfirmedComponent } from '@app/shop/shopping-confirmed/shopping-confirmed.component';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
 
 const routes: Routes = Route.withShell([
   { path: 'products/list', component: ProductComponent, data: { title: extract('Proizvodi') } },
@@ -18,7 +19,8 @@ const routes: Routes = Route.withShell([
   { path: 'collections', component: CollectionsComponent, data: { title: extract('Kolekcije') } },
   { path: 'collections/:id', component: CollectionsComponent, data: { title: extract('Kolekcija Proizvoda') } },
   { path: 'shopping-cart', component: ShoppingCartComponent, data: { title: extract('Moja Korpa') } },
-  { path: 'shopping-confirmed', component: ShoppingConfirmedComponent, data: { title: extract('Uspesna Kupovina') } }
+  { path: 'shopping-confirmed', component: ShoppingConfirmedComponent, data: { title: extract('Uspesna Kupovina') } },
+  { path: 'my-orders', component: MyOrdersComponent, data: { title: extract('Moje Porudžbine') } }
 ]);
 
 @NgModule({

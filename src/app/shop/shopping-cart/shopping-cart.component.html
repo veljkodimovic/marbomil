@@ -20,6 +20,11 @@
       <div class="col-12 text-center"><strong>Total price: </strong>{{totalPrice(cart)}}</div>
     </div>
     <div class="row">
+      <div class="col-12 text-center mb-4">
+          <textarea type="text" class="form-control" id="text" [(ngModel)]="note" name="note" placeholder="{{'Note' | translate}}"></textarea>
+      </div>
+    </div>
+    <div class="row">
         <div class="col-12 text-center">
             <button class="btn btn-primary" (click)="openConfirmModal(confirm)">Finish purchase</button>
         </div>

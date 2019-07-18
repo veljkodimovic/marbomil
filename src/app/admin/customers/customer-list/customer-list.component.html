@@ -23,18 +23,13 @@
       <div class="admin-list-item">
         <div class="row">
           <div class="col-10">
-            <p><a class="admin-list-name" (click)="goTo(customer)">{{customer.name}}</a></p>
+            <p><a class="admin-list-name" (click)="goTo(customer)">{{customer.companyName}}</a></p>
             <div class="row admin-list-contact">
               <p class="col-sm-6">
-                <!-- <span *ngIf="customer.street">{{customer.street}}</span>
-                <span *ngIf="customer.postal">, {{customer.postal}} {{customer.city}}</span>
-                <span *ngIf="customer.region">, {{customer.region}}</span>
-                <span *ngIf="customer.country">, {{customer.country}}</span> -->
-              </p>
-              <p class="col-sm-6">
-                <!-- <span *ngIf="customer.phone"><i class="fas fa-phone"></i> <a href="tel:{{customer.phone}}"></a>{{customer.phone}}<br></span>
-                <span *ngIf="customer.email"><i class="fas fa-envelope"></i> <a href="mailto:{{customer.email}}">{{customer.email}}</a> <br></span>
-                <span *ngIf="customer.website"><i class="fas fa-globe"></i> <a href="{{customer.website}}">{{customer.website}}</a></span> -->
+                <span *ngIf="customer.email"><i class="fas fa-envelope"></i> <a href="mailto:{{customer.email}}"> {{customer.email}}</a> <br></span>
+                <span *ngIf="customer.contactPerson"><i class="fas fa-user"></i> <a> {{customer.contactPerson}}</a> <br></span>
+                <span *ngIf="customer.contactPhoneNumber"><i class="fas fa-phone"></i> <a href="tel:{{customer.contactPhoneNumber}}"></a> {{customer.contactPhoneNumber}}<br></span>
+                <span *ngIf="customer.website"><i class="fas fa-globe"></i> <a href="{{customer.website}}"> {{customer.website}}</a></span>
               </p>
             </div>
           </div>

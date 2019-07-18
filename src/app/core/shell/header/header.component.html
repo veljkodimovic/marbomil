@@ -18,10 +18,12 @@
           <a *ngIf="isAuth()" class="nav-item nav-link text-uppercase" id="loggedUser" ngbDropdownToggle><i class="fas fa-user"></i> {{username}}</a>
           <a *ngIf="!isAuth()" class="nav-item nav-link text-uppercase" id="login" [routerLink]="['/login']"  translate><i class="fas fa-sign-in-alt"></i> Login</a>
           <div *ngIf="isAuth()" ngbDropdownMenu aria-labelledby="loggedUser" class="dropdown-menu">
+            <a class="dropdown-item nav-link text-uppercase" (click)="goToMyOrders()" ngbDropdownItem translate>My Orders <i class="fa fa-list-alt"></i></a>
             <a class="dropdown-item nav-link text-uppercase" (click)="logout()" ngbDropdownItem translate>Logout <i class="fas fa-sign-out-alt"></i></a>
           </div>
         </div>
         <a *ngIf="isAuth()" class="nav-item nav-link text-uppercase" id="shopping-cart" [routerLink]="['/shopping-cart']"><span [hidden]="!cartCount" class="badge badge-danger count-badge">{{cartCount}}</span> <i class="fas fa-shopping-cart"></i></a>
+        <a *ngIf="isAuth()" class="nav-item nav-link text-uppercase" id="shopping-cart" [routerLink]="['/admin']">admin panel</a>
       </div>
     </nav>
     <div class="w-100"></div>

@@ -4,6 +4,20 @@ import { PersistenceService } from '@app/core/persistence.service';
 import { HeaderService } from '@app/core/shell/header/header.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { Order } from '@app/core/types/order';
+import { ShoppingCartService } from './shopping-cart.service';
+
+class Purchase {
+  date: Date;
+  note: string;
+  items: any[];
+
+  constructor(note: string, items: any[]) {
+    this.date = new Date();
+    this.note = note;
+    this.items = items;
+  }
+}
 
 @Component({
   selector: 'app-shopping-cart',
@@ -13,9 +27,10 @@ import { Router } from '@angular/router';
 export class ShoppingCartComponent implements OnInit {
 
   cart: Product[];
+  note: string;
   apiUrl: string;
   modalRef: any;
-  constructor(private persistenceService: PersistenceService, private headerService: HeaderService, private modalService: NgbModal, private router: Router) { }
+  constructor(private persistenceService: PersistenceService, private headerService: HeaderService, private modalService: NgbModal, private router: Router, private shoppingCartService: ShoppingCartService) { }
 
   ngOnInit() {
     this.apiUrl = this.persistenceService.apiUrl;
@@ -50,8 +65,16 @@ export class ShoppingCartComponent implements OnInit {
 
   confirmPurchase() {
     this.modalRef.close();
-    sessionStorage.removeItem('my-cart');
-    this.headerService.shoppingCartItemsCount.emit(null);
-    this.router.navigate(['/shopping-confirmed']);
+    const orders = JSON.parse(sessionStorage.getItem('my-cart')).orders;
+    const purchase = new Purchase('', []);
+    orders.forEach((o: any) => {
+      purchase.items.push({ productId: o.id, quantity: o.count });
+    });
+    purchase.note = this.note;
+    this.shoppingCartService.confirmShopping(purchase).subscribe(() => {
+      sessionStorage.removeItem('my-cart');
+      this.headerService.shoppingCartItemsCount.emit(null);
+      this.router.navigate(['/shopping-confirmed']);
+    });
   }
 }

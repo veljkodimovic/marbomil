@@ -18,6 +18,8 @@ import { ProductViewComponent } from '@app/shop/product/product-view/product-vie
 import { ProductService } from '@app/shop/product/product.service';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ShoppingConfirmedComponent } from './shopping-confirmed/shopping-confirmed.component';
+import { ShoppingCartService } from '@app/shop/shopping-cart/shopping-cart.service';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
 
 @NgModule({
   imports: [
@@ -38,12 +40,14 @@ import { ShoppingConfirmedComponent } from './shopping-confirmed/shopping-confir
     ProductComponent,
     ProductViewComponent,
     ShoppingCartComponent,
-    ShoppingConfirmedComponent
+    ShoppingConfirmedComponent,
+    MyOrdersComponent
   ],
   providers: [
     CategoryService,
     CollectionService,
-    ProductService
+    ProductService,
+    ShoppingCartService
   ]
 })
 export class ShopModule { }

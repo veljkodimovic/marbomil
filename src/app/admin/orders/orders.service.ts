@@ -25,26 +25,18 @@ export class OrdersService {
   }
 
   getAllOrders(): Observable<Order[]> {
-    // return this.http.get(routes.orders())
-    //   .map((res: Response) => res.json())
-    //   .map((body: Promise<Order>) =>
-    //     body)
-    //   .catch((err: any) => this.persistenceService.handleError(err));
-    return Observable.of([
-      {id: 1, name: 'Order 1', items: []},
-      {id: 2, name: 'Order 2', items: []},
-      {id: 3, name: 'Order 3', items: []},
-      {id: 4, name: 'Order 4', items: []}
-    ]);
+    return this.http.get(routes.orders(), this.options)
+      .map((res: Response) => res.json())
+      .map((body: Promise<Order>) =>
+        body)
+      .catch((err: any) => this.persistenceService.handleError(err));
   }
 
   getOrderById(id: number): Observable<Order> {
-    // return this.http.get(routes.orders() + id, this.options)
-    //   .map((res: Response) => res.json())
-    //   .map(body => body)
-    //   .catch((err) => this.persistenceService.handleError(err));
-    return Observable.of(
-      {id: id, name: `Order ${id}`, items: []});
+    return this.http.get(`${routes.orders()}${id}`, this.options)
+      .map((res: Response) => res.json())
+      .map(body => body)
+      .catch((err) => this.persistenceService.handleError(err));
   }
 
   createOrder(body: Order): Observable<any> {

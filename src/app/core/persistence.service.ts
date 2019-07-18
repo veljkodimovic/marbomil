@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
-import { AuthenticationService } from '../core/authentication/authentication.service';
 import { Router } from '@angular/router';
 import { environment } from '@env/environment';
 
@@ -11,7 +10,7 @@ import 'rxjs/add/observable/of';
 
 @Injectable()
 export class PersistenceService {
-  constructor(private http: Http, private authenticationService: AuthenticationService, private router: Router) { }
+  constructor() { }
 
   apiUrl = environment.serverUrl;
   placeholderExtension = '.png';

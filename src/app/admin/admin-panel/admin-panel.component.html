@@ -1,13 +1,6 @@
 <div class="container">
+  <h3 class="section-title" translate> Web shop</h3>
   <div class="row admin-panels">
-    <div class="col-sm-6 col-md-4">
-      <div class="admin-panel">
-        <a [routerLink]="['/admin/banners']">
-          <i class="fas fa-images"></i>
-          <p translate>Banners</p>
-        </a>
-      </div>
-    </div>
     <div class="col-sm-6 col-md-4">
       <div class="admin-panel">
         <a [routerLink]="['/admin/category']">
@@ -32,8 +25,19 @@
         </a>
       </div>
     </div>
+  </div>
+  <h3 class="section-title" translate> Site content</h3>
+  <div class="row admin-panels">
     <div class="col-sm-6 col-md-4">
-      <div class="admin-panel">
+      <div class="admin-panel site-content-color">
+        <a [routerLink]="['/admin/banners']">
+          <i class="fas fa-images"></i>
+          <p translate>Banners</p>
+        </a>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-4">
+      <div class="admin-panel site-content-color">
         <a [routerLink]="['/admin/video']">
           <i class="fas fa-video"></i>
           <p translate>Video material</p>
@@ -41,7 +45,7 @@
       </div>
     </div>
     <div class="col-sm-6 col-md-4">
-      <div class="admin-panel">
+      <div class="admin-panel site-content-color">
         <a [routerLink]="['/admin/atest']">
           <i class="fas fa-certificate"></i>
           <p translate>Attests</p>
@@ -49,7 +53,7 @@
       </div>
     </div>
     <div class="col-sm-6 col-md-4">
-      <div class="admin-panel">
+      <div class="admin-panel site-content-color">
         <a [routerLink]="['/admin/catalogue']">
           <i class="fas fa-book"></i>
           <p translate>Catalog</p>
@@ -57,23 +61,18 @@
       </div>
     </div>
     <div class="col-sm-6 col-md-4">
-      <div class="admin-panel">
+      <div class="admin-panel site-content-color">
         <a [routerLink]="['/admin/service']">
           <i class="fas fa-wrench"></i>
           <p translate>Services</p>
         </a>
       </div>
     </div>
+  </div>
+  <h3 class="section-title" translate> Administration</h3>
+  <div class="row admin-panels">
     <div class="col-sm-6 col-md-4">
-      <div class="admin-panel">
-        <a [routerLink]="['/admin/sales']">
-          <i class="fas fa-users"></i>
-          <p translate>Sellers</p>
-        </a>
-      </div>
-    </div>
-    <div class="col-sm-6 col-md-4">
-      <div class="admin-panel">
+      <div class="admin-panel administration-color">
         <a [routerLink]="['/admin/customers']">
           <i class="fa fa-cart-arrow-down"></i>
           <p translate>Customers</p>
@@ -81,12 +80,20 @@
       </div>
     </div>
     <div class="col-sm-6 col-md-4">
-      <div class="admin-panel">
+      <div class="admin-panel administration-color">
         <a [routerLink]="['/admin/orders']">
           <i class="fa fa-list-alt"></i>
           <p translate>Orders</p>
         </a>
       </div>
     </div>
+    <!-- <div class="col-sm-6 col-md-4">
+      <div class="admin-panel">
+        <a [routerLink]="['/admin/sales']">
+          <i class="fas fa-users"></i>
+          <p translate>Sellers</p>
+        </a>
+      </div>
+    </div> -->
   </div>
 </div>

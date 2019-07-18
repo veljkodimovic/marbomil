@@ -48,6 +48,11 @@ export class LoginComponent implements OnInit {
 
       if (this.authenticationService.isAuthenticated) {
         log.debug(`${this.loginForm.value.username} successfully logged in`);
+        const usernameKey = 'username';
+        this.authenticationService.getUserContext().subscribe((userData: any) => {
+          console.log('user/context', userData);
+          localStorage.setItem(usernameKey, JSON.stringify({ fname: userData.firstName, lname: userData.lastName, role: userData.role }));
+        });
         this.router.navigateByUrl(this.returnUrl.toLowerCase());
       }
     }, (error: any) => {

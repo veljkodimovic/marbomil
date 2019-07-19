@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Product } from '@app/core/types/product';
 import { Collection } from '@app/core/types/collection';
 import { Category } from '@app/core/types/category';
+import { AuthenticationService } from '@app/core';
 
 @Component({
   selector: 'app-product-view',
@@ -22,12 +23,15 @@ export class ProductViewComponent implements OnInit {
   productCollectionMain: Collection;
   apiUrl: string;
   activeImage: string;
+  quantity = 0;
 
-  constructor(private svc: ProductService, private renderer: Renderer,
+  constructor(private svc: ProductService,
     private persistenceService: PersistenceService,
     private router: Router,
+    private authService: AuthenticationService,
+    private productService: ProductService,
     private route: ActivatedRoute) {
-      this.apiUrl = persistenceService.apiUrl;
+    this.apiUrl = this.persistenceService.apiUrl;
   }
 
   ngOnInit() {
@@ -35,6 +39,7 @@ export class ProductViewComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.svc.getProductById(Number(id)).subscribe(data => {
       this.product = data;
+      this.product.count = 1;
       const that = this;
       const images = this.product.images;
       this.activeImage = this.apiUrl + '/' + images[0].imageUrl;
@@ -71,6 +76,14 @@ export class ProductViewComponent implements OnInit {
 
   setActive(productImage: any) {
     this.activeImage = this.apiUrl + '/' + productImage.imageUrl;
+  }
+
+  isAuth() {
+    return this.authService.isAuthenticated();
+  }
+
+  addToCart(product: Product) {
+    this.productService.addToCart(product);
   }
 
 }

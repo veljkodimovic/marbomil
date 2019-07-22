@@ -8,8 +8,6 @@ export const environment = {
   defaultLanguage: 'sr-Latn',
   supportedLanguages: [
     'en-US',
-    'sr-Latn',
-    'rus',
-    'alb'
+    'fr-FR'
   ]
 };

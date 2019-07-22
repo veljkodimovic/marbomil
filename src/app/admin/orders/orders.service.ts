@@ -7,7 +7,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 const routes = {
-  orders: () => `/orders/`
+  orders: () => `/orders/`,
+  getOrdersForLoggedUser: () => `/orders/loggeduser`,
 };
 
 @Injectable({
@@ -25,6 +26,7 @@ export class OrdersService {
   }
 
   getAllOrders(): Observable<Order[]> {
+    this.options = this.persistenceService.getApiHeader();
     return this.http.get(routes.orders(), this.options)
       .map((res: Response) => res.json())
       .map((body: Promise<Order>) =>
@@ -32,7 +34,17 @@ export class OrdersService {
       .catch((err: any) => this.persistenceService.handleError(err));
   }
 
+  getOrdersForLoggedUser() {
+    this.options = this.persistenceService.getApiHeader();
+    return this.http.get(routes.getOrdersForLoggedUser(), this.options)
+      .map((res: Response) => res.json())
+      .map((body: Promise<Order>) =>
+        body)
+      .catch((err: any) => this.persistenceService.handleError(err));
+  }
+
   getOrderById(id: number): Observable<Order> {
+    this.options = this.persistenceService.getApiHeader();
     return this.http.get(`${routes.orders()}${id}`, this.options)
       .map((res: Response) => res.json())
       .map(body => body)
@@ -40,18 +52,21 @@ export class OrdersService {
   }
 
   createOrder(body: Order): Observable<any> {
+    this.options = this.persistenceService.getApiHeader();
     return this.http.post(routes.orders(), body, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
   updateOrder(body: Order): Observable<any> {
+    this.options = this.persistenceService.getApiHeader();
     return this.http.put(routes.orders(), body, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
   deleteOrder(id: number): Observable<any> {
+    this.options = this.persistenceService.getApiHeader();
     return this.http.delete(routes.orders() + id, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));

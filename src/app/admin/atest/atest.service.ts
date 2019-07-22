@@ -38,19 +38,21 @@ export class AtestService {
   }
 
   createAtest(body: Atest): Observable<any> {
+    this.options = this.persistenceService.getApiHeader();
     return this.http.post(routes.atest(), body, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
   updateAtest(body: Atest): Observable<any> {
+    this.options = this.persistenceService.getApiHeader();
     return this.http.put(routes.atest(), body, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
   deleteAtest(id: number): Observable<any> {
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.delete(routes.atest() + id, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));

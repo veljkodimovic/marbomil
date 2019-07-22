@@ -39,7 +39,7 @@ export class VideoService {
   }
 
   getVideoEditById(id: number): Observable<any> {
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.get(routes.video() + 'edit/' + id, this.options)
       .map((res: Response) => res.json())
       .map(body => body)
@@ -48,7 +48,7 @@ export class VideoService {
 
   createVideo(body: Video): Observable<any> {
     // let bodyString = JSON.stringify(body);
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.post(routes.video(), body, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
@@ -56,14 +56,14 @@ export class VideoService {
 
   updateVideo(body: Video): Observable<any> {
     // let bodyString = JSON.stringify(body);
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.put(routes.video(), body, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
   deleteVideo(id: number): Observable<any> {
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.delete(routes.video() + id, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));

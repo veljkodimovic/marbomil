@@ -57,6 +57,7 @@ export class ProductService {
   }
 
   getProductEditById(id: number): Observable<any> {
+    this.options = this.persistenceService.getApiHeader();
     return this.http.get(routes.products() + 'edit/' + id, this.options)
       .map((res: Response) => res.json())
       .map(body => body)
@@ -64,6 +65,7 @@ export class ProductService {
   }
 
   getProductImageByID(id: number): Observable<any> {
+    this.options = this.persistenceService.getApiHeader();
     return this.http.get(routes.products() + 'edit/image/' + id, this.options)
     .map((res: Response) => res.json())
     .map(body => body)
@@ -72,7 +74,7 @@ export class ProductService {
 
   createProduct(body: Product): Observable<any> {
     // let bodyString = JSON.stringify(body);
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.post(routes.products(), body, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
@@ -80,14 +82,14 @@ export class ProductService {
 
   updateProduct(body: Product): Observable<any> {
     // let bodyString = JSON.stringify(body);
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.put(routes.products(), body, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
   deleteProduct(id: number): Observable<any> {
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.delete(routes.products() + id, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));

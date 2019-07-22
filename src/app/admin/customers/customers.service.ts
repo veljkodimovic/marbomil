@@ -24,6 +24,7 @@ export class CustomersService {
   }
 
   getAllCustomers(): Observable<Customer[]> {
+    this.options = this.persistenceService.getApiHeader();
     return this.http.get(routes.customers(), this.options)
       .map((res: Response) => res.json())
       .map((body: Promise<Customer>) =>
@@ -32,6 +33,7 @@ export class CustomersService {
   }
 
   getCustomerById(id: number): Observable<Customer> {
+    this.options = this.persistenceService.getApiHeader();
     return this.http.get(routes.customers() + id, this.options)
       .map((res: Response) => res.json())
       .map(body => body)
@@ -39,18 +41,21 @@ export class CustomersService {
   }
 
   createCustomer(body: Customer): Observable<any> {
+    this.options = this.persistenceService.getApiHeader();
     return this.http.post(routes.customers(), body, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
   updateCustomer(body: Customer): Observable<any> {
+    this.options = this.persistenceService.getApiHeader();
     return this.http.put(routes.customers(), body, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
   deleteCustomer(id: number): Observable<any> {
+    this.options = this.persistenceService.getApiHeader();
     return this.http.delete(routes.customers() + id, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));

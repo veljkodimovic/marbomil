@@ -23,13 +23,20 @@ export class OrderListComponent implements OnInit {
 
   ngOnInit() {
     this.getAllOrders();
+    // this.getOrdersForLoggedUser();
   }
 
   getAllOrders() {
     this.orderService.getAllOrders().subscribe(data => {
-          this.ordersData = data;
+      this.ordersData = data;
     });
   }
+
+  // getOrdersForLoggedUser() {
+  //   this.orderService.getOrdersForLoggedUser().subscribe((orders: any) => {
+  //     console.log('ordersForLoggedUser', orders);
+  //   });
+  // }
 
   goTo(order: Order) {
     this.router.navigate(['/admin/order/' + order.id]);

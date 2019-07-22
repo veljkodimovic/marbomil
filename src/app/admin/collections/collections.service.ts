@@ -50,7 +50,7 @@ export class CollectionService {
   }
 
   getCollectionEditById(id: number): Observable<any> {
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.get(routes.collection() + 'edit/' + id, this.options)
       .map((res: Response) => res.json())
       .map(body => body)
@@ -59,7 +59,7 @@ export class CollectionService {
 
   createCollection(body: Collection): Observable<any> {
     // let bodyString = JSON.stringify(body);
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.post(routes.collection(), body, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
@@ -67,14 +67,14 @@ export class CollectionService {
 
   updateCollection(body: Collection): Observable<any> {
     // let bodyString = JSON.stringify(body);
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.put(routes.collection(), body, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
   deleteCollection(id: number): Observable<any> {
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.delete(routes.collection() + id, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));

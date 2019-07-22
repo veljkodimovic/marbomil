@@ -33,7 +33,7 @@ export class ServiceService {
   }
 
   getServiceById(id: number): Observable<any> {
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.get(routes.service() + id, this.options)
       .map((res: Response) => res.json())
       .map(body => body)
@@ -42,7 +42,7 @@ export class ServiceService {
 
   createService(body: Service): Observable<any> {
     // let bodyString = JSON.stringify(body);
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.post(routes.service(), body, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
@@ -50,14 +50,14 @@ export class ServiceService {
 
   updateService(body: Service): Observable<any> {
     // let bodyString = JSON.stringify(body);
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.put(routes.service(), body, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
   deleteService(id: number): Observable<any> {
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.delete(routes.service() + id, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));

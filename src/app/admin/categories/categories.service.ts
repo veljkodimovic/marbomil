@@ -40,7 +40,7 @@ export class CategoryService {
   }
 
   getCategoryEditById(id: number): Observable<any> {
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.get(routes.category() + 'edit/' + id, this.options)
       .map((res: Response) => res.json())
       .map(body => body)
@@ -49,7 +49,7 @@ export class CategoryService {
 
   createCategory(body: Category): Observable<any> {
     // let bodyString = JSON.stringify(body);
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.post(routes.category(), body, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
@@ -57,14 +57,14 @@ export class CategoryService {
 
   updateCategory(body: Category): Observable<any> {
     // let bodyString = JSON.stringify(body);
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.put(routes.category(), body, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
   deleteCategory(id: number): Observable<any> {
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.delete(routes.category() + id, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));

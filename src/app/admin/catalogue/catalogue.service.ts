@@ -31,7 +31,7 @@ export class CatalogueService {
   }
 
   getCatalogueById(id: number): Observable<any> {
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.get(routes.catalogue() + id, this.options)
       .map((res: Response) => res.json())
       .map(body => body)
@@ -40,7 +40,7 @@ export class CatalogueService {
 
   createCatalogue(body: Catalogue): Observable<any> {
     // let bodyString = JSON.stringify(body);
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.post(routes.catalogue(), body, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
@@ -48,14 +48,14 @@ export class CatalogueService {
 
   updateCatalogue(body: Catalogue): Observable<any> {
     // let bodyString = JSON.stringify(body);
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.put(routes.catalogue(), body, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
   deleteCatalogue(id: number): Observable<any> {
-
+    this.options = this.persistenceService.getApiHeader();
     return this.http.delete(routes.catalogue() + id, this.options)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));

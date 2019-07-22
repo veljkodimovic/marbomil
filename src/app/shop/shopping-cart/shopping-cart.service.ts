@@ -21,6 +21,7 @@ export class ShoppingCartService {
     }
 
     confirmShopping(requestBody: any): Observable<any> {
+        this.options = this.persistenceService.getApiHeader();
         return this.http.post(routes.orders(), requestBody, this.options)
           .map((res: Response) => res)
           .catch((res: Response) => this.persistenceService.handleError(res));

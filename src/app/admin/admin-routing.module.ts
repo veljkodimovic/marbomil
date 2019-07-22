@@ -26,6 +26,7 @@ import { CustomerViewComponent } from './customers/customer-view/customer-view.c
 import { CustomersComponent } from './customers/customers.component';
 import { OrderViewComponent } from './orders/order-view/order-view.component';
 import { OrdersComponent } from './orders/orders.component';
+import { NewsletterComponent } from './newsletter/newsletter.component';
 
 const routes: Routes = Route.withShellAdmin([
   { path: 'admin/banners', component: BannerComponent, data: { title: extract('Banner') } },
@@ -61,6 +62,7 @@ const routes: Routes = Route.withShellAdmin([
   { path: 'admin/orders', component: OrdersComponent, data: { title: extract('Orders') } },
   { path: 'admin/order/:id', component: OrderViewComponent, data: { title: extract('Order View') } },
   { path: 'admin/order/new', component: OrderViewComponent, data: { title: extract('Order View') } },
+  { path: 'admin/newsletter', component: NewsletterComponent, data: { title: extract('Newsletter') } },
   { path: 'admin', component: AdminComponent, data: { title: extract('Admin') } }
 ]);
 

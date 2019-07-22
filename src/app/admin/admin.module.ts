@@ -59,6 +59,8 @@ import { CustomersService } from './customers/customers.service';
 import { OrderListComponent } from './orders/order-list/order-list.component';
 import { OrderViewComponent } from './orders/order-view/order-view.component';
 import { OrdersService } from './orders/orders.service';
+import { NewsletterComponent } from './newsletter/newsletter.component';
+import { NewsletterService } from './newsletter/newsletter.service';
 
 @NgModule({
   imports: [
@@ -108,7 +110,8 @@ import { OrdersService } from './orders/orders.service';
     CustomerListComponent,
     CustomerViewComponent,
     OrderListComponent,
-    OrderViewComponent
+    OrderViewComponent,
+    NewsletterComponent
   ],
   providers: [
     BannerService,
@@ -122,7 +125,8 @@ import { OrdersService } from './orders/orders.service';
     ProductService,
     CustomersService,
     OrdersService,
-    UploadService
+    UploadService,
+    NewsletterService
   ]
 })
 export class AdminModule { }

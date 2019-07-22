@@ -78,7 +78,11 @@ export class HeaderComponent implements OnInit {
 
   get username(): string {
     const user = JSON.parse(localStorage.getItem('username'));
-    return user ? `${user.fname} ${user.lname}` : null;
+    if (user && user.fname && user.lname) {
+      return `${user.fname} ${user.lname}`;
+    } else if (user && user.contactPerson) {
+      return `${user.contactPerson}`;
+    }
   }
 
   get title(): string {

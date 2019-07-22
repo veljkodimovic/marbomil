@@ -3,7 +3,22 @@
 
 .section-title {
     padding: 25px 10px 10px 10px;
-    border-bottom: 1px solid $black;
+    font-weight: bold;
+}
+
+.web-shop-separator {
+    color: $blue;
+    border-bottom: 2px solid $blue;
+}
+
+.site-content-separator { 
+    color: $teal;
+    border-bottom: 2px solid $teal;
+}
+
+.administration-separator { 
+    color: $orange-light;
+    border-bottom: 2px solid $orange-light;
 }
 
 .site-content-color {

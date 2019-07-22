@@ -1,19 +1,24 @@
 <header class="container">
   <div class="row">
     <nav class="header-top col navbar navbar-expand">
+      <div class="navbar-nav mr-auto">
+          <a class="nav-item nav-link text-uppercase" (click)="setLanguage('sr-Latn')" [ngClass]="activeLanguage == 'sr-Latn' ? 'active' : ''">
+              <span translate>Ser</span>
+            </a>
+            <a class="nav-item nav-link text-uppercase" (click)="setLanguage('en-US')" [ngClass]="activeLanguage == 'en-US' ? 'active' : ''">
+              <span translate>Eng</span>
+            </a>
+            <a class="nav-item nav-link text-uppercase" (click)="setLanguage('rus')" [ngClass]="activeLanguage == 'rus' ? 'active' : ''">
+              <span translate>Rus</span>
+            </a>
+            <a class="nav-item nav-link text-uppercase" (click)="setLanguage('alb')" [ngClass]="activeLanguage == 'alb' ? 'active' : ''">
+              <span translate>Alb</span>
+            </a>
+
+      </div>
       <div class="navbar-nav  ml-auto">
-        <a class="nav-item nav-link text-uppercase" (click)="setLanguage('sr-Latn')" [ngClass]="activeLanguage == 'sr-Latn' ? 'active' : ''">
-          <span translate>Ser</span>
-        </a>
-        <a class="nav-item nav-link text-uppercase" (click)="setLanguage('en-US')" [ngClass]="activeLanguage == 'en-US' ? 'active' : ''">
-          <span translate>Eng</span>
-        </a>
-        <a class="nav-item nav-link text-uppercase" (click)="setLanguage('rus')" [ngClass]="activeLanguage == 'rus' ? 'active' : ''">
-          <span translate>Rus</span>
-        </a>
-        <a class="nav-item nav-link text-uppercase" (click)="setLanguage('alb')" [ngClass]="activeLanguage == 'alb' ? 'active' : ''">
-          <span translate>Alb</span>
-        </a>
+        
+        <a *ngIf="isAuth()" class="nav-item nav-link text-uppercase" id="shopping-cart" [routerLink]="['/shopping-cart']"><span [hidden]="!cartCount" class="badge badge-danger count-badge">{{cartCount}}</span> <i class="fas fa-shopping-cart"></i></a>
         <div ngbDropdown placement="bottom-right" class="d-inline-block user-name">          
           <a *ngIf="isAuth()" class="nav-item nav-link text-uppercase" id="loggedUser" ngbDropdownToggle><i class="fas fa-user"></i> {{username}}</a>
           <a *ngIf="!isAuth()" class="nav-item nav-link text-uppercase" id="login" [routerLink]="['/login']"  translate><i class="fas fa-sign-in-alt"></i> Login</a>
@@ -22,7 +27,7 @@
             <a class="dropdown-item nav-link text-uppercase" (click)="logout()" ngbDropdownItem translate>Logout <i class="fas fa-sign-out-alt"></i></a>
           </div>
         </div>
-        <a *ngIf="isAuth()" class="nav-item nav-link text-uppercase" id="shopping-cart" [routerLink]="['/shopping-cart']"><span [hidden]="!cartCount" class="badge badge-danger count-badge">{{cartCount}}</span> <i class="fas fa-shopping-cart"></i></a>
+        
         <a *ngIf="isAuth()" class="nav-item nav-link text-uppercase" id="shopping-cart" [routerLink]="['/admin']">admin panel</a>
       </div>
     </nav>

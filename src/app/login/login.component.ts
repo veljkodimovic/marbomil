@@ -22,10 +22,10 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
 
   constructor(private router: Router,
-              private route: ActivatedRoute,
-              private formBuilder: FormBuilder,
-              private i18nService: I18nService,
-              private authenticationService: AuthenticationService) {
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private i18nService: I18nService,
+    private authenticationService: AuthenticationService) {
     this.createForm();
   }
 
@@ -40,25 +40,32 @@ export class LoginComponent implements OnInit {
 
     this.isLoading = true;
     this.authenticationService.login(this.loginForm.value)
-    .pipe(finalize(() => {
-      this.loginForm.markAsPristine();
-      this.isLoading = false;
-    }))
-    .subscribe((credentials: any) => {
+      .pipe(finalize(() => {
+        this.loginForm.markAsPristine();
+        this.isLoading = false;
+      }))
+      .subscribe((credentials: any) => {
 
-      if (this.authenticationService.isAuthenticated) {
-        log.debug(`${this.loginForm.value.username} successfully logged in`);
-        const usernameKey = 'username';
-        this.authenticationService.getUserContext().subscribe((userData: any) => {
-          console.log('user/context', userData);
-          localStorage.setItem(usernameKey, JSON.stringify({ fname: userData.firstName, lname: userData.lastName, role: userData.role }));
-        });
-        this.router.navigateByUrl(this.returnUrl.toLowerCase());
-      }
-    }, (error: any) => {
-      log.debug(`Login error: ${error}`);
-      this.error = error;
-    });
+        if (this.authenticationService.isAuthenticated) {
+          log.debug(`${this.loginForm.value.username} successfully logged in`);
+          const usernameKey = 'username';
+          this.authenticationService.getUserContext().subscribe((userData: any) => {
+            console.log('user/context', userData);
+            if (userData.firstName && userData.lastName) {
+              localStorage.setItem(usernameKey, JSON.stringify({ fname: userData.firstName, lname: userData.lastName, role: userData.role }));
+            } else if (userData.contactPerson) {
+              localStorage.setItem(usernameKey, JSON.stringify({ contactPerson: userData.contactPerson, role: userData.role }));
+            } else {
+              localStorage.setItem(usernameKey, JSON.stringify({ fname: 'user', lname: 'user', role: userData.role }));
+            }
+
+          });
+          this.router.navigateByUrl(this.returnUrl.toLowerCase());
+        }
+      }, (error: any) => {
+        log.debug(`Login error: ${error}`);
+        this.error = error;
+      });
   }
 
   setLanguage(language: string) {

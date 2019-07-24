@@ -26,15 +26,8 @@
             <p><a class="admin-list-name" (click)="goTo(order)">{{'Order No.' | translate}} {{order.id}}</a></p>
             <div class="row admin-list-contact">
               <p class="col-sm-6">
-                <!-- <span *ngIf="order.street">{{order.street}}</span>
-                <span *ngIf="order.postal">, {{order.postal}} {{order.city}}</span>
-                <span *ngIf="order.region">, {{order.region}}</span>
-                <span *ngIf="order.country">, {{order.country}}</span> -->
-              </p>
-              <p class="col-sm-6">
-                <!-- <span *ngIf="order.phone"><i class="fas fa-phone"></i> <a href="tel:{{order.phone}}"></a>{{order.phone}}<br></span>
-                <span *ngIf="order.email"><i class="fas fa-envelope"></i> <a href="mailto:{{order.email}}">{{order.email}}</a> <br></span>
-                <span *ngIf="order.website"><i class="fas fa-globe"></i> <a href="{{order.website}}">{{order.website}}</a></span> -->
+                  <span *ngIf="order.date"><i class="fas fa-calendar-alt"></i> {{order.date | date:'dd.MM.yyyy'}} <i class="fas fa-clock"></i> {{order.date | date:'HH:mm'}} <br></span>                  
+                  <span><i class="fas fa-money-bill-alt"></i> {{calculatePrice(order) | currency:'RSD ':'symbol'}}<br></span>
               </p>
             </div>
           </div>

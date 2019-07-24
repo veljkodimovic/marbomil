@@ -1,3 +1,47 @@
-<p>
-  my-orders works!
-</p>
+<div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <h1 class="admin-headline container" translate>
+          My Orders
+        </h1>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row admin-list" *ngIf="ordersData">
+      <div class="col-lg-6" *ngFor="let order of ordersData">
+        <div class="admin-list-item">
+          <div class="row">
+            <div class="col-10">
+              <p><a class="admin-list-name" (click)="openDetails(order, content)">{{'Order No.' | translate}} {{order.id}}</a></p>
+              <div class="row admin-list-contact">
+                <p class="col-sm-6">                    
+                    <span *ngIf="order.date"><i class="fas fa-calendar-alt"></i> {{order.date | date:'dd.MM.yyyy'}} <i class="fas fa-clock"></i> {{order.date | date:'HH:mm'}} <br></span>                      
+                  <span><i class="fas fa-money-bill-alt"></i> {{calculatePrice(order) | currency:'RSD ':'symbol'}}<br></span>
+                </p>
+              </div>
+            </div>
+            <div class="col-2 admin-list-links">
+              <a (click)="openDetails(order, content)"><i class="fas fa-eye"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title" translate>Order Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="modal.close('Save click')">Close</button>
+      </div>
+    </ng-template>
+  

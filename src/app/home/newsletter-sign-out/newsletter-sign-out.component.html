@@ -1,0 +1,15 @@
+<div class="container" style="padding-top: 80px;">
+    <div class="col-sm-12 text-center" translate>
+      <div class="alert alert-primary" role="alert" *ngIf="showInfo">
+        Address <strong>{{email}}</strong> is successfully signed out from newsletter subscriptions list.
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="showAlert">
+        Sign out from newsletter subscriptions list failed. Try again by clicking on the link in the email or reload the page.
+      </div>
+      <div class="row">
+        <div class="col-12 text-center">
+          <button class="btn btn-primary" [routerLink]="['/']">Go to home page</button>
+        </div>
+      </div>
+    </div>
+  </div>

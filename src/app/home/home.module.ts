@@ -37,6 +37,8 @@ import { NotFoundComponent } from '@app/home/404/404.component';
 import { AboutUsComponent } from '@app/home/about-us/about-us.component';
 import { LocationComponent } from '@app/home/location/location.component';
 import { FormsModule } from '@angular/forms';
+import { NewsletterSignOutComponent } from './newsletter-sign-out/newsletter-sign-out.component';
+import { NewsletterSignOutService } from './newsletter-sign-out/newsletter-sign-out.service';
 
 
 @NgModule({
@@ -69,7 +71,8 @@ import { FormsModule } from '@angular/forms';
     NotFoundComponent,
     AboutUsComponent,
     LocationComponent,
-    HomeComponent
+    HomeComponent,
+    NewsletterSignOutComponent
   ],
   providers: [
     ServiceService,
@@ -79,7 +82,8 @@ import { FormsModule } from '@angular/forms';
     EquipmentService,
     WarrantyService,
     VideoService,
-    QualityService
+    QualityService,
+    NewsletterSignOutService
   ]
 })
 export class HomeModule { }

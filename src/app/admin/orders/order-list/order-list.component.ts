@@ -23,7 +23,6 @@ export class OrderListComponent implements OnInit {
 
   ngOnInit() {
     this.getAllOrders();
-    // this.getOrdersForLoggedUser();
   }
 
   getAllOrders() {
@@ -32,11 +31,14 @@ export class OrderListComponent implements OnInit {
     });
   }
 
-  // getOrdersForLoggedUser() {
-  //   this.orderService.getOrdersForLoggedUser().subscribe((orders: any) => {
-  //     console.log('ordersForLoggedUser', orders);
-  //   });
-  // }
+  calculatePrice(order: Order) {
+    let price = 0;
+    order.items.forEach(item => {
+      // price += item.priceWithDiscount * item.quantity;
+      price += item.price * item.quantity;
+    });
+    return price;
+  }
 
   goTo(order: Order) {
     this.router.navigate(['/admin/order/' + order.id]);

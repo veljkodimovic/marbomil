@@ -1,3 +1,63 @@
-<p>
-  newsletter works!
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h1 class="admin-headline container" translate>
+        Newsletter subscription list
+        <a class="admin-headline-link" routerLink="/admin" translate>
+          <i class="fas fa-chevron-left"></i> Back
+        </a>
+      </h1>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="form-group row">
+    <div class="col-6 mt-1">
+      <input type="text" class="form-control" id="title" [(ngModel)]="email" name="email" maxlength="100" placeholder="{{'Email' | translate}}">
+    </div>
+    <div class="row justify-content-end mb-4 col-6">
+        <div class="col-auto">
+          <button class="btn btn-primary" (click)="addAddress(email)" [disabled]="!email || !email.length" translate>
+            <i class="fas fa-plus"></i> Add
+          </button>
+        </div>
+      </div>
+  </div>
+  <hr/>
+  <div class="form-group row">
+      <div class="col-md-6 mt-1">
+        <input type="text" class="form-control" id="title" name="email" maxlength="100" placeholder="{{'Search emails' | translate }}" (keyup)="updateFilter($event)">
+      </div>
+    </div>
+
+  <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let email of emails">
+        {{email}}
+        <a (click)="openModal(email)" class="remove-link"><i class="fas fa-trash"></i></a>
+      </li>
+    </ul>
+  
+  <!-- <div class="row admin-list" *ngIf="ordersData">
+      <div class="col-lg-6" *ngFor="let order of ordersData">
+        <div class="admin-list-item">
+          <div class="row">
+            <div class="col-10">
+              <p><a class="admin-list-name" (click)="goTo(order)">{{'Order No.' | translate}} {{order.id}}</a></p>
+              <div class="row admin-list-contact">
+                <p class="col-sm-6">
+                    <span *ngIf="order.date"><i class="fas fa-calendar-alt"></i> {{order.date | date:'dd.MM.yyyy'}} <i class="fas fa-clock"></i> {{order.date | date:'HH:mm'}} <br></span>                  
+                    <span><i class="fas fa-money-bill-alt"></i> {{calculatePrice(order) | currency:'RSD ':'symbol'}}<br></span>
+                </p>
+              </div>
+            </div>
+            <div class="col-2 admin-list-links">
+              <a (click)="goTo(order)"><i class="fas fa-pencil-alt"></i></a>
+              <a (click)="openModal(order)" class="remove-link"><i class="fas fa-trash"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  <delete-modal (deleteConfirmed)="performDelete($event)">
+    </delete-modal>
+</div>

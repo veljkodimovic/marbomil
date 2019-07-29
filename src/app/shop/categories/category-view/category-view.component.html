@@ -13,11 +13,11 @@
   <div class="row">
     <div class="col-sm-3">
       <div class="sidenav">
-        <div *ngFor="let category of categoryData">
+        <div *ngFor="let category of menuData">
           <a (click)="goToCategory(category)" [ngClass]="{active: category.id === activeCategoryId}" class="sidenav-title">{{category.title}}</a>
           <ul class="sidenav-list" *ngIf="category.id === activeCategoryId">
-            <li class="sidenav-item" *ngFor="let collection of getCollectionsById(category.id)">
-              <a class="sidenav-link" (click)="goToProduct(collection, category.id)">{{collection.title}}</a>
+            <li class="sidenav-item" *ngFor="let collection of category.collections">
+              <a class="sidenav-link" (click)="goToProducts(collection, category.id)">{{collection.title}}</a>
             </li>
           </ul>
         </div>
@@ -25,18 +25,47 @@
     </div>
     <div class="col-sm-9">
       <div class="row categories-list">
-        <div class="col-sm-4 categories-list-item content-box" *ngFor="let collection of getCollectionsById(activeCategoryId)">
-          <a (click)="goToProduct(collection, activeCategoryId)">
+        <div class="col-sm-4 categories-list-item content-box" *ngFor="let collection of collections">
+          <a (click)="goToProducts(collection, activeCategoryId)">
             <img src="{{apiUrl}}/{{collection.imageCropUrl}}" alt="{{collection.title}}">
             <div class="content-box-description">
               <h5>{{collection.title}}</h5>
             </div>
           </a>
         </div>
-        <div class="col-sm-4 categories-list-item content-box" *ngIf="getCollectionsById(activeCategoryId).length == 0">
+        <div class="col-sm-4 categories-list-item content-box" *ngIf="!collections.length">
           <a>
             <div class="content-box-description">
               <h5 translate>No Items To Show</h5>
+            </div>
+          </a>
+        </div>
+      </div>
+      <h3 class="category-collection-title">Products Out Of Collections</h3>
+      <div class="row categories-list" *ngIf="products && products.length">
+        <div class="col-sm-4 product-categories-item content-box" *ngFor="let product of products">
+          <a>
+            <img src="{{apiUrl}}/{{product.images[0].imageCropUrl}}" alt="{{product.title}}" (click)="goToProduct(product)">
+            <div class="content-box-description" (click)="goToProduct(product)">
+              <h5 class="" [ngClass]="{ 'product-title' : isAuth }">{{product.title}}</h5>
+              <h4 [hidden]="!isAuth" class="text-center small-price">{{product.price}}.00 <label class="unit">RSD</label></h4>
+              <h3 [hidden]="!isAuth" class="text-center big-price"><b>{{product.price}}.00 <label class="unit">RSD</label></b></h3>
+            </div>
+            <div class="row cart-box">
+                {{counts[i]}}
+              <div class="col-md-4">
+                  <input type="number" class="form-control" id="count" [(ngModel)]="product.count" name="count" #count="ngModel" min="1">
+              </div>
+              <div class="col-md-8">
+                  <button class="btn btn-sm btn-default" (click)="addToCart(product)" translate><i class="fas fa-shopping-cart"></i></button>
+              </div>              
+            </div>
+          </a>
+        </div>
+        <div class="col-sm-4 categories-list-item content-box" *ngIf="!products.length">
+          <a>
+            <div class="content-box-description">
+              <h5 translate>No Products To Show</h5>
             </div>
           </a>
         </div>

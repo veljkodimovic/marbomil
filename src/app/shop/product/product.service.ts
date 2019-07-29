@@ -13,7 +13,8 @@ import { Product } from '@app/core/types/product';
 const routes = {
   collection: () => `/collection/`,
   category: () => `/category/`,
-  products: () => `/product/`
+  products: () => `/product/`,
+  productsbycollection: () => `/product/collection/`
 };
 
 @Injectable()
@@ -104,6 +105,14 @@ export class ProductService {
         clickToClose: false,
         maxLength: 100
       });
+  }
+
+  getProductsByCollectionId(collectionId: number): Observable<Product[]> {
+    return this.http.get(`${routes.productsbycollection()}${collectionId}`)
+      .map((res: Response) => res.json())
+      .map(body =>
+        body)
+      .catch(err => this.persistenceService.handleError(err));
   }
 
 }

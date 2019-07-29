@@ -1,0 +1,55 @@
+@import "src/theme/theme-variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
+.product-title { 
+    min-height: 45px;
+}
+
+.small-price { 
+    font-size: 1.2rem;
+    color: #dadada;
+    .unit { 
+        font-size: 0.7rem;
+    }
+}
+
+.big-price { 
+    .unit { 
+        font-size: 0.7rem;
+        font-weight: normal;
+    }
+}
+
+.cart-box { 
+    padding: 0px 16px 16px 16px;
+
+    input { 
+        text-align: center;
+    }
+    
+    button { 
+        height: 39px;
+        width: 100%;
+    }
+}
+
+@include media-breakpoint-down(md) {
+    .product-title { 
+        min-height: 70px;
+    }
+}
+@include media-breakpoint-down(sm) {
+    .product-title { 
+        min-height: 100px;
+    }
+}
+@include media-breakpoint-down(xs) {
+    .product-title { 
+        min-height: 45px;
+    }
+}
+
+.category-collection-title {
+    padding: 25px 10px 10px 10px;
+    border-bottom: 1px solid #000;
+}

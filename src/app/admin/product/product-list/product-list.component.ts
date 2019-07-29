@@ -1,13 +1,12 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Product } from '../../../core/types/product';
 import { Category } from '../../../core/types/category';
-import { PersistenceService } from '@app/core/persistence.service';
-import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal';
 import { CollectionService } from '../../collections/collections.service';
 import { Collection } from '@app/core/types/collection';
+import { environment } from '@env/environment';
 
 class CollectionView {
   id: number;
@@ -55,11 +54,9 @@ export class ProductListComponent implements OnInit {
   activeCollectionId: number;
   constructor(private svc: ProductService,
     private collectionsService: CollectionService,
-    private persistenceService: PersistenceService,
-    private router: Router,
     private route: ActivatedRoute
   ) {
-    this.apiUrl = persistenceService.apiUrl;
+    this.apiUrl = environment.serverUrl;
   }
 
   ngOnInit() {
@@ -91,7 +88,7 @@ export class ProductListComponent implements OnInit {
 
   getCollectionNameById(collectionId: number): string {
     // tslint:disable-next-line:max-line-length
-    return this.allCollections.find((c: Collection) => c.id === collectionId) ? this.allCollections.find((c: Collection) => c.id === collectionId).title : 'Unknown Collection';
+    return this.allCollections.find((c: Collection) => c.id === collectionId) ? this.allCollections.find((c: Collection) => c.id === collectionId).title : 'Products Out Of Collections';
   }
 
   getCategoryNameById(categoryId: number): string {

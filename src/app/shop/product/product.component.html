@@ -8,12 +8,6 @@
         <li *ngIf="activeCategory">
           <a routerLink="/categories/{{activeCategory.id}}">{{activeCategory.title}}</a><i class="fas fa-chevron-right"></i>
         </li>
-        <!-- <li *ngIf="productCollection">
-          <a (click)="goTo(productCollection)">{{productCollection.title}}</a><i class="fas fa-chevron-right"></i>
-        </li>
-        <li *ngIf="productCollectionMain">
-          <a (click)="goToProducts(productCollectionMain, productCategory.id)">{{productCollectionMain.title}} </a>
-        </li> -->
       </ul>
     </div>
   </div>
@@ -22,11 +16,11 @@
   <div class="row">
     <div class="col-sm-3">
       <div class="sidenav">
-        <div *ngFor="let category of categoryData">
-          <a (click)="goToCategory(category)" class="sidenav-title" [ngClass]="{active: category.id==activeCategoryId && !activeCollectionId}">{{category.title}}</a>
-          <ul class="sidenav-list" *ngIf="category.id == activeCategoryId">
-            <li class="sidenav-item" *ngFor="let collection of getCollectionsById(category.id)">
-              <a class="sidenav-link" [ngClass]="{active: collection.id==activeCollectionId}" (click)="goToProducts(collection, category.id)">{{collection.title}}</a>
+        <div *ngFor="let category of menuData">
+          <a (click)="goToCategory(category)" class="sidenav-title" [ngClass]="{active: category.id === activeCategoryId && !activeCollectionId}">{{category.title}}</a>
+          <ul class="sidenav-list" *ngIf="category.id === activeCategoryId">
+            <li class="sidenav-item" *ngFor="let collection of category.collections">
+              <a class="sidenav-link" [ngClass]="{active: collection.id === activeCollectionId}" (click)="goToProducts(collection, category.id)">{{collection.title}}</a>
             </li>
           </ul>
         </div>
@@ -34,7 +28,7 @@
     </div>
     <div class="col-sm-9">
       <div class="row categories-list">
-        <div class="col-sm-4 product-categories-item content-box" *ngFor="let product of getProductsByParent()">
+        <div class="col-sm-4 product-categories-item content-box" *ngFor="let product of productData">
           <a>
             <img src="{{apiUrl}}/{{product.images[0].imageCropUrl}}" alt="{{product.title}}" (click)="goToProduct(product)">
             <div class="content-box-description" (click)="goToProduct(product)">
@@ -53,7 +47,7 @@
             </div>
           </a>
         </div>
-        <div class="col-sm-4 categories-list-item content-box" *ngIf="getProductsByParent().length == 0">
+        <div class="col-sm-4 categories-list-item content-box" *ngIf="!productData.length">
           <a>
             <div class="content-box-description">
               <h5 translate>No Products To Show</h5>

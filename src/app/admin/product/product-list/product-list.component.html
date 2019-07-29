@@ -47,7 +47,7 @@
     <div *ngFor="let collection of category.collectionViews">
       <h3 class="category-collection-title">{{category.title}} > {{collection.title}}</h3>
       <div class="row admin-list" *ngIf="collection.products">
-        <div class="col-lg-6" *ngFor="let product of collection.products">
+        <div class="col-lg-6" *ngFor="let product of collection.products" [hidden]="product.categoryId !== category.id">
           <div class="admin-list-item">
             <div class="row">
               <div class="col-11 col-sm-4" style="margin-bottom: 10px;">

@@ -1,10 +1,12 @@
-import { Component, OnInit, Renderer } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Category } from '@app/core/types/category';
 import { Collection } from '@app/core/types/collection';
-import { PersistenceService } from '@app/core/persistence.service';
-import { finalize } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '@app/shop/categories/categories.service';
+import { environment } from '@env/environment';
+import { Product } from '@app/core/types/product';
+import { AuthenticationService } from '@app/core';
+import { ProductService } from '@app/shop/product/product.service';
 
 @Component({
   selector: 'app-category-view',
@@ -14,62 +16,68 @@ import { CategoryService } from '@app/shop/categories/categories.service';
 export class CategoryViewComponent implements OnInit {
 
   isLoading: boolean;
-  categoryData: Category[];
-  collectionData: any = [];
-  collectionAll: any = [];
+  apiUrl: string;
+  collections: Collection[] = [];
+  products: Product[] = [];
   activeCategoryId: any;
-  private apiUrl: string;
+  menuData: any[] = [];
+  private isAuth: boolean;
+  counts: number[] = [];
 
-  constructor(private svc: CategoryService, private renderer: Renderer,
-    private persistenceService: PersistenceService,
+  constructor(private svc: CategoryService,
     private router: Router,
-    private route: ActivatedRoute) {
-      this.apiUrl = persistenceService.apiUrl;
-    this.activeCategoryId = Number(this.route.snapshot.paramMap.get('id'));
+    private route: ActivatedRoute, private authService: AuthenticationService,
+    private productsService: ProductService) {
+    this.apiUrl = environment.serverUrl;
+    this.isAuth = this.authService.isAuthenticated();
   }
 
 
   ngOnInit() {
     this.isLoading = true;
-    const categoryAllData = {};
-
-    this.svc.getAllCollections().subscribe(data => {
-      this.collectionData = data;
-      this.collectionAll = data;
-    });
-
-    this.svc.getAllCategories().subscribe(data => {
-      this.categoryData = data;
+    this.activeCategoryId = Number(this.route.snapshot.paramMap.get('id'));
+    this.svc.getMenuStructure().subscribe((menuData: any[]) => {
+      this.menuData = menuData;
+      this.getCollectionsById(this.activeCategoryId);
     });
   }
 
   getCollectionsById(id: number) {
-    if (this.collectionAll.length > 0 && id > 0) {
-      return this.collectionAll.filter((x: any) => x.categoryId === id);
-    }
-    return [];
+    this.svc.getCollectionsByCategoryId(id).subscribe((collections: Collection[]) => {
+      this.collections = collections;
+      this.svc.getProductsNotCollectionAssigned(id).subscribe((products: Product[]) => {
+        this.products = products;
+        this.products.forEach((product: any) => {
+          product.count = 1;
+        });
+      });
+    });
   }
 
   goToCollection(collection: Collection) {
     this.router.navigate(['/collections'], { queryParams: { id: collection.id } });
   }
 
-  goToCategory(category: Category) {
-    const categoryCount = this.getCollectionsById(category.id);
-    if (categoryCount.length) {
+  goToCategory(category: any) {
       this.router.navigate(['/categories/' + category.id]);
       this.activeCategoryId = category.id;
-    } else {
-      this.router.navigate(['/products/list'], { queryParams: { categoryId: category.id } });
-    }
+      this.getCollectionsById(category.id);
   }
 
   goToCategoryHome() {
     this.router.navigate(['/categories']);
   }
 
-  goToProduct(collection: Collection, categoryId: number) {
+  goToProducts(collection: Collection, categoryId: number) {
     this.router.navigate(['/products/list'], { queryParams: { id: collection.id, categoryId: categoryId } });
+  }
+
+  goToProduct(product: Product) {
+    this.router.navigate([`/product/${product.id}`]);
+  }
+
+  addToCart(product: any) {
+    this.productsService.addToCart(product);
   }
 
 }

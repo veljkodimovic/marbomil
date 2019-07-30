@@ -93,6 +93,8 @@
   "Edit existing order": "Izmena postojeće porudžbine",
   "Create new order": "Kreiranje nove porudžbine",
   "Successfull saved order": "Nova porudžbina je uspešno dodata.",
-  "Product successfully added to cart": "Proizvod je uspešno dodat u korpu"
+  "Product successfully added to cart": "Proizvod je uspešno dodat u korpu",
+  "Search results for": "Rezultati pretrage za",
+  "No search results for": "Nema rezultata pretrage za"
   
 }

@@ -102,7 +102,9 @@
   "Add new order": "Add new order",
   "Edit existing order": "Edit existing order",
   "Create new order": "Create new order",
-  "Successfull saved order": "Order Successfully saved."
+  "Successfull saved order": "Order Successfully saved.",
+  "Search results for": "Search results for",
+  "No search results for": "No search results for"
   
 
 }

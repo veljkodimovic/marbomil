@@ -7,6 +7,8 @@ import { AuthenticationService } from '../../authentication/authentication.servi
 import { I18nService } from '../../i18n.service';
 import { HeaderService } from './header.service';
 import { Product } from '@app/core/types/product';
+import { NgForm } from '@angular/forms';
+import { SearchResultsService } from '@app/home/search-results/search-results.service';
 
 @Component({
   selector: 'app-header',
@@ -17,6 +19,7 @@ export class HeaderComponent implements OnInit {
 
   @Input() sidenav: MatSidenav;
   menuHidden = true;
+  searchParam: string;
   activeLanguage = '';
   myCart = JSON.parse(sessionStorage.getItem('my-cart'));
   cartCount = this.myCart ? this.getCartCount(this.myCart.orders) : 0;
@@ -25,7 +28,9 @@ export class HeaderComponent implements OnInit {
     private titleService: Title,
     private authenticationService: AuthenticationService,
     private i18nService: I18nService,
-    private headerService: HeaderService) {
+    private headerService: HeaderService,
+    private searchResultsService: SearchResultsService
+    ) {
     this.headerService.shoppingCartItemsCount.subscribe((item: number) => {
       if (item) {
         this.cartCount += item;
@@ -87,6 +92,16 @@ export class HeaderComponent implements OnInit {
 
   get title(): string {
     return this.titleService.getTitle();
+  }
+
+  search(searchParam: string, form: NgForm) {
+    if (searchParam) {
+      form.reset();
+      this.searchResultsService.param = searchParam;
+      this.searchResultsService.searchEvent.emit(true);
+      this.router.navigate([`/search-results/${searchParam}`]);
+    }
+
   }
 
 }

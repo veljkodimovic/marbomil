@@ -15,6 +15,7 @@ import { NotFoundComponent } from '@app/home/404/404.component';
 import { AboutUsComponent } from '@app/home/about-us/about-us.component';
 import { LocationComponent } from '@app/home/location/location.component';
 import { NewsletterSignOutComponent } from './newsletter-sign-out/newsletter-sign-out.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
 
 const routes: Routes = Route.withShell([
 
@@ -30,6 +31,7 @@ const routes: Routes = Route.withShell([
   { path: 'about-us', component: AboutUsComponent, data: { title: extract('O nama') } },
   { path: 'locations', component: LocationComponent, data: { title: extract('Gde kupiti') } },
   { path: 'newsletter-sign-out/:email', component: NewsletterSignOutComponent, data: { title: extract('Newsletter - Uspešna Odjava') } },
+  { path: 'search-results/:param', component: SearchResultsComponent, data: { title: extract('Rezultati pretrage') } },
   { path: 'home', component: HomeComponent, data: { title: extract('Home') } },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ]);

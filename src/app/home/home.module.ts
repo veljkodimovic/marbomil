@@ -39,6 +39,8 @@ import { LocationComponent } from '@app/home/location/location.component';
 import { FormsModule } from '@angular/forms';
 import { NewsletterSignOutComponent } from './newsletter-sign-out/newsletter-sign-out.component';
 import { NewsletterSignOutService } from './newsletter-sign-out/newsletter-sign-out.service';
+import { SearchResultsComponent } from './search-results/search-results.component';
+import { SearchResultsService } from './search-results/search-results.service';
 
 
 @NgModule({
@@ -72,7 +74,8 @@ import { NewsletterSignOutService } from './newsletter-sign-out/newsletter-sign-
     AboutUsComponent,
     LocationComponent,
     HomeComponent,
-    NewsletterSignOutComponent
+    NewsletterSignOutComponent,
+    SearchResultsComponent
   ],
   providers: [
     ServiceService,
@@ -83,6 +86,7 @@ import { NewsletterSignOutService } from './newsletter-sign-out/newsletter-sign-
     WarrantyService,
     VideoService,
     QualityService,
+    SearchResultsService,
     NewsletterSignOutService
   ]
 })

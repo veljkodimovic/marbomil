@@ -14,10 +14,10 @@
                 <div class="row">
                     <div class="col-10">
                         <p class="content-list-name">{{atest.title}}</p>
-                        <p>{{atest.desc}}</p>
+                        <p>{{atest.description}}</p>
                     </div>
                     <div class="col-2 content-list-links">
-                        <a style="margin-left: 10px; font-size: 24px;"  (click)="goTo(atest)"><i class="fas fa-download"></i></a>
+                      <a href="{{apiUrl}}/{{atest.fileUrl}}" target="_blank" style="margin-left: 10px; font-size: 24px;" ><i class="fas fa-download"></i></a>
                     </div>
                 </div>
             </div>

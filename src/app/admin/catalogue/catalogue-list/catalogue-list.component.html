@@ -25,8 +25,8 @@
           <div class="col-10">
             <p>
               <a class="admin-list-name"  (click)="goTo(catalogue)">{{catalogue.title}} <small>v{{catalogue.version}}</small></a>
-              <a style="margin-left: 10px; font-size: 24px;"  (click)="goTo(catalogue)"><i class="fas fa-download"></i></a></p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eget blandit justo.</p>
+              <a href="{{apiUrl}}/{{catalogue.fileUrl}}" target="_blank" style="margin-left: 10px; font-size: 24px;" ><i class="fas fa-download"></i></a>
+              <p>{{catalogue.description}}</p>
           </div>
           <div class="col-2 admin-list-links">
             <a  (click)="goTo(catalogue)"><i class="fas fa-pencil-alt"></i></a>

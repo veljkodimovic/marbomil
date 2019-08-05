@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Banner} from '@app/core/types/banner';
+import { Banner } from '@app/core/types/banner';
 import { CatalogueService } from '@app/admin/catalogue/catalogue.service';
-import {Catalogue} from '@app/core/types/catalogue';
+import { Catalogue } from '@app/core/types/catalogue';
+import { environment } from '@env/environment.prod';
 
 @Component({
   selector: 'app-home-catalogue',
@@ -10,8 +11,11 @@ import {Catalogue} from '@app/core/types/catalogue';
 })
 export class CatalogueComponent implements OnInit {
 
+  apiUrl: string;
   catalogueData: Catalogue[];
-  constructor(private svc: CatalogueService) { }
+  constructor(private svc: CatalogueService) {
+    this.apiUrl = environment.serverUrl;
+  }
 
   ngOnInit() {
     this.svc.getAllCatalogues().subscribe(data => {

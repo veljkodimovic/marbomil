@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NewsletterService } from './newsletter.service';
 import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-newsletter',
@@ -10,52 +11,90 @@ import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 export class NewsletterComponent implements OnInit {
   @ViewChild(DeleteModalComponent)
   private modal: DeleteModalComponent;
-  emails: string[];
-  temp: string[];
-  email: string;
-  emailSelected: string;
+  emails: any[] = [];
+  temp: any[];
+  email: any;
+  emailSelected: any;
 
-  constructor(private newsletterServce: NewsletterService) { }
+  constructor(private newsletterServce: NewsletterService,
+    private notificationService: NotificationsService, ) { }
 
   ngOnInit() {
-    // this.getAllEmails();
-    const emails = ['email1@gmail.com', 'email2@gmail.com', 'email3@gmail.com'];
-    this.temp = [...emails];
-    this.emails = emails;
+    this.getAllSubscribers();
   }
 
-  getAllEmails() {
-    this.newsletterServce.getAllEmails().subscribe((emails: string[]) => {
+  getAllSubscribers() {
+    this.newsletterServce.getAllSubscribers().subscribe((emails: any[]) => {
       this.temp = [...emails];
       this.emails = emails;
     });
   }
 
-  addAddress(email: string) {
-    this.newsletterServce.subscribeToNewsletter(email).subscribe(() => {
-      this.getAllEmails();
+  addAddress(email: any) {
+    this.newsletterServce.subscribeToNewsletter({ firstName: 'User', lastName: 'User', email: email }).subscribe((response: any) => {
+      this.email = null;
+      this.handleResponse(response);
+      this.getAllSubscribers();
     });
   }
 
-  openModal(email: string) {
+  openModal(email: any) {
     this.emailSelected = email;
     this.modal.openModal();
   }
 
   performDelete(event: any) {
     this.newsletterServce.signOutFromNewsletter(this.emailSelected).subscribe((data: any) => {
-      this.getAllEmails();
+      this.getAllSubscribers();
     });
   }
 
   updateFilter(event: any) {
     const val = event.target.value.toLowerCase().trim();
     // filter our data
-    const temp = this.temp.filter((d: string) => {
-      return (d.toLowerCase().indexOf(val) !== -1 || !val);
+    const temp = this.temp.filter((d: any) => {
+      return (d.email.toLowerCase().indexOf(val) !== -1 || !val);
     });
     // update the rows
     this.emails = temp;
+  }
+
+  handleResponse(response: any) {
+    if (!response.ok) {
+      const body = JSON.parse(response._body);
+      if (body.title) {
+        this.notificationService.error(body.title, body.description,
+          {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: false,
+            clickToClose: false,
+            maxLength: 100
+          });
+      } else {
+        let description = '';
+        for (const errorDescription of body) {
+          description += errorDescription + '<br>';
+        }
+        this.notificationService.warn('Greška pri slanju', description,
+          {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: false,
+            clickToClose: false,
+            maxLength: 100
+          });
+      }
+    } else {
+      this.notificationService.success('Success', 'Uspešno ste se prijavili na newsletter.',
+        {
+          timeOut: 1000,
+          showProgressBar: true,
+          pauseOnHover: false,
+          clickToClose: false,
+          maxLength: 100
+        });
+    }
   }
 
 }

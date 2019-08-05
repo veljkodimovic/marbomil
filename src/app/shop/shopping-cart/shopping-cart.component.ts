@@ -71,7 +71,8 @@ export class ShoppingCartComponent implements OnInit {
       purchase.items.push({ productId: o.id, quantity: o.count });
     });
     purchase.note = this.note;
-    this.shoppingCartService.confirmShopping(purchase).subscribe(() => {
+    this.shoppingCartService.confirmShopping(purchase).subscribe((data) => {
+      console.log(data);
       sessionStorage.removeItem('my-cart');
       this.headerService.shoppingCartItemsCount.emit(null);
       this.router.navigate(['/shopping-confirmed']);

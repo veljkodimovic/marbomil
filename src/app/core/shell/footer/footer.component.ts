@@ -26,7 +26,7 @@ export class FooterComponent implements OnInit {
   ngOnInit() {}
 
   registerNewsletter() {
-    const body = {'email': this.newsletterEmail};
+    const body = {firstName: 'User', lastName: 'User', email: this.newsletterEmail};
 
     this.svc.registerNewsletter(body)
     .finally(() => {  })

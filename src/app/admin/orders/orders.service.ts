@@ -8,7 +8,7 @@ import 'rxjs/add/operator/catch';
 
 const routes = {
   orders: () => `/orders/`,
-  getOrdersForLoggedUser: () => `/orders/loggeduser`,
+  getOrdersForLoggedUser: () => `/orders/loggedbuyer`,
 };
 
 @Injectable({

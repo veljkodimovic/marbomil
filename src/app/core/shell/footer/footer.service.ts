@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 import { PersistenceService } from '@app/core/persistence.service';
 
 const routes = {
-  email: () => `/contact/newsletter/registration`
+  newsletters: () => `/newsletters/subscribers`
 };
 
 @Injectable()
@@ -14,8 +13,8 @@ export class FooterService {
   headers: Headers;
   constructor(private http: Http, private persistenceService: PersistenceService) {}
 
-  registerNewsletter(body: any): Observable<any> {
-    return this.http.post(routes.email(), body)
+  registerNewsletter(email: any): Observable<any> {
+    return this.http.post(routes.newsletters(), email)
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }

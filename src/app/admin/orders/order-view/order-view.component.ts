@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 import { Order } from '@app/core/types/order';
 import { OrdersService } from '../orders.service';
@@ -6,6 +6,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { NotificationsService } from 'angular2-notifications';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { CustomersService } from '@app/admin/customers/customers.service';
+import { Customer } from '@app/core/types/customer';
+import { ProductService } from '@app/admin/product/product.service';
+import { Product } from '@app/core/types/product';
 
 @Component({
   selector: 'app-order-view',
@@ -16,58 +20,79 @@ export class OrderViewComponent implements OnInit {
 
   @ViewChild(DeleteModalComponent)
   private modal: DeleteModalComponent;
-  // image: any;
   data: any;
-  order: Order = new Order(0, '', []);
+  order: Order = new Order([], '', null, new Date());
   serviceUrl: any;
   link: any;
   isLoading: boolean;
   isEditMode = true;
   disableSave = false;
   blockAll = false;
-  // @ViewChild('gmap')
-  // gmapElement: ElementRef;
-  // map: google.maps.Map;
 
   success: any = this.translate.get('Success');
   savingError: any = this.translate.get('Saving error');
   successfullSavedOrder: any = this.translate.get('Successfull saved order');
+  customers: Customer[];
+  statuses = [
+    { id: 'ReadyForProcessing', name: 'Ready For Processing' },
+    { id: 'Accepted', name: 'Accepted' },
+    { id: 'Rejected', name: 'Rejected' },
+    { id: 'Completed', name: 'Completed' }
+  ];
+  products: Product[];
+  orderProducts: any[] = [];
+  newOrder: any = { productId: null, quantity: null };
 
   constructor(private ordersService: OrdersService,
     private translate: TranslateService,
     private notificationService: NotificationsService,
+    private customersService: CustomersService,
+    private productsService: ProductService,
     private router: Router,
     private route: ActivatedRoute) {
     this.data = {};
   }
 
   ngOnInit() {
-    if (this.router.url.indexOf('new') !== -1) {
-      this.isEditMode = false;
-    } else {
-      this.isEditMode = true;
-      this.getOrderDetails();
-    }
+    this.customersService.getAllCustomers().subscribe((customers: Customer[]) => {
+      this.customers = customers;
+      this.productsService.getProducts().subscribe((products: Product[]) => {
+        this.products = products;
+        this.products.forEach((p: Product) => {
+          p.bindLabel = `${p.orderNumber} - ${p.title}`;
+        });
+      });
+      if (this.router.url.indexOf('new') !== -1) {
+        this.isEditMode = false;
+      } else {
+        this.isEditMode = true;
+        this.getOrderDetails();
+      }
+    });
   }
 
   getOrderDetails(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.ordersService.getOrderById(Number(id)).subscribe((data: Order) => {
       this.order = data;
-      // if (this.service.latitude.length && this.service.longitude.length) {
-      //   const uluru = {lat: parseFloat(this.service.latitude), lng: parseFloat(this.service.longitude)};
-      //   const mapProp = {
-      //     center: uluru,
-      //     zoom: 15,
-      //     mapTypeId: google.maps.MapTypeId.ROADMAP
-      //   };
-      //   this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
-      //   const marker = new google.maps.Marker({
-      //     position: uluru,
-      //     map: this.map
-      //   });
-      // }
+      // this.order.items.forEach(product => {
+      //   this.orderProducts.push({productId: product.id, quantity: product.quantity});
+      // });
     });
+  }
+
+  addProduct(form: NgForm, element: HTMLElement) {
+    const newOrder = {...this.newOrder};
+    if (this.orderProducts.find(op => op.productId === newOrder.productId)) {
+      const q = this.orderProducts.find(op => op.productId === newOrder.productId).quantity + newOrder.quantity;
+      this.orderProducts.find(op => op.productId === newOrder.productId).quantity = q;
+      form.reset();
+      element.focus();
+    } else {
+      this.orderProducts.push(newOrder);
+      form.reset();
+      element.focus();
+    }
   }
 
   saveOnClick() {
@@ -83,7 +108,8 @@ export class OrderViewComponent implements OnInit {
           this.handleResponse(response);
         });
     } else {
-      this.ordersService.createOrder(this.order)
+      this.order.items = this.orderProducts;
+      this.ordersService.createOrderByAdmin(this.order)
         .finally(() => { this.isLoading = false; })
         .subscribe((response: any) => {
           this.blockAll = false;
@@ -91,6 +117,20 @@ export class OrderViewComponent implements OnInit {
           const id = +response._body;
           this.order.id = id;
         });
+    }
+  }
+
+  getItemById(productId: number) {
+    return this.products.find(p => p.id === productId);
+  }
+
+  calculatePrice() {
+    if (this.orderProducts) {
+      let price = 0;
+      this.orderProducts.forEach((op) => {
+        price += op.quantity * this.getItemById(op.productId).price;
+      });
+      return price;
     }
   }
 

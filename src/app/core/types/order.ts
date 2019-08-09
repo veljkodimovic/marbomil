@@ -1,11 +1,14 @@
 export class Order {
     id: number;
-    name: string;
     items: any[];
+    note: string;
+    buyerId: number;
+    date: Date;
 
-    constructor(id: number, name: string, items: any[]) {
-        this.id = id;
-        this.name = name;
+    constructor(items: any[], note: string, buyerId: number, date: Date) {
         this.items = items;
+        this.note = note;
+        this.buyerId = buyerId;
+        this.date = date;
     }
 }

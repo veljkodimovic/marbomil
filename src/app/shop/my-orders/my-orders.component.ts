@@ -28,6 +28,7 @@ export class MyOrdersComponent implements OnInit {
 
   openDetails(order: Order, content: any) {
     this.activeOrder = order;
+    console.log(this.activeOrder);
     this.modalService.open(content, { size: 'lg' });
   }
 

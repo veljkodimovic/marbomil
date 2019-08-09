@@ -1,47 +1,108 @@
 <div class="container-fluid">
-    <div class="row">
-      <div class="col">
-        <h1 class="admin-headline container" translate>
-          My Orders
-        </h1>
-      </div>
+  <div class="row">
+    <div class="col">
+      <h1 class="admin-headline container" translate>
+        My Orders
+      </h1>
     </div>
   </div>
-  <div class="container">
-    <div class="row admin-list" *ngIf="ordersData">
-      <div class="col-lg-6" *ngFor="let order of ordersData">
-        <div class="admin-list-item">
-          <div class="row">
-            <div class="col-10">
-              <p><a class="admin-list-name" (click)="openDetails(order, content)">{{'Order No.' | translate}} {{order.id}}</a></p>
-              <div class="row admin-list-contact">
-                <p class="col-sm-6">                    
-                    <span *ngIf="order.date"><i class="fas fa-calendar-alt"></i> {{order.date | date:'dd.MM.yyyy'}} <i class="fas fa-clock"></i> {{order.date | date:'HH:mm'}} <br></span>                      
-                  <span><i class="fas fa-money-bill-alt"></i> {{calculatePrice(order) | currency:'RSD ':'symbol'}}<br></span>
-                </p>
-              </div>
+</div>
+<div class="container">
+  <div class="row admin-list" *ngIf="ordersData">
+    <div class="col-lg-6" *ngFor="let order of ordersData">
+      <div class="admin-list-item">
+        <div class="row">
+          <div class="col-10">
+            <p><a class="admin-list-name" (click)="openDetails(order, content)">{{'Order No.' | translate}}
+                {{order.id}}</a></p>
+            <div class="row admin-list-contact">
+              <p class="col-sm-6">
+                <span class="{{order.status}}"><i class="fas fa-circle"></i> {{order.status}}</span><br />
+                <span *ngIf="order.createdDate"><i class="fas fa-calendar-alt"></i>
+                  {{order.createdDate | date:'dd.MM.yyyy'}} <i class="fas fa-clock"></i>
+                  {{order.createdDate | date:'HH:mm'}} <br></span>
+                <span><i class="fas fa-money-bill-alt"></i>
+                  {{calculatePrice(order)}}<small> RSD</small><br>
+                </span>
+              </p>
             </div>
-            <div class="col-2 admin-list-links">
-              <a (click)="openDetails(order, content)"><i class="fas fa-eye"></i></a>
-            </div>
+          </div>
+          <div class="col-2 admin-list-links">
+            <a (click)="openDetails(order, content)"><i class="fas fa-eye"></i></a>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <ng-template #content let-modal>
-      <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title" translate>Order Details</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-          <span aria-hidden="true">&times;</span>
-        </button>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" translate>Order Details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="col-12 row">
+
+      <label class="col-3"><strong translate>Status: </strong></label>
+      <div class="col-9 {{activeOrder.status}}"><i class="fas fa-circle"></i> {{activeOrder.status}}</div>
+      <label class="col-3"><strong translate>Bayer: </strong></label>
+      <div class="col-9">{{activeOrder.buyerUsername}}</div>
+      <label class="col-3"><strong translate>Creation Date: </strong></label>
+      <div class="col-9"><i class="fas fa-calendar-alt" *ngIf="activeOrder.createdDate"></i>
+        {{activeOrder.createdDate | date:'dd.MM.yyyy'}} <i *ngIf="activeOrder.createdDate" class="fas fa-clock"></i>
+        {{activeOrder.createdDate | date:'HH:mm'}}</div>
+      <label class="col-3"><strong translate>Last Change Date: </strong></label>
+      <div class="col-9"><i class="fas fa-calendar-alt" *ngIf="activeOrder.lastChangeDate"></i>
+        {{activeOrder.lastChangeDate | date:'dd.MM.yyyy'}} <i *ngIf="activeOrder.lastChangeDate"
+          class="fas fa-clock"></i> {{activeOrder.lastChangeDate | date:'HH:mm'}}</div>
+      <label class="col-3"><strong translate>Confirmation Date: </strong></label>
+      <div class="col-9"><i class="fas fa-calendar-alt" *ngIf="activeOrder.confirmationDate"></i>
+        {{activeOrder.confirmationDate | date:'dd.MM.yyyy'}} <i *ngIf="activeOrder.confirmationDate"
+          class="fas fa-clock"></i> {{activeOrder.confirmationDate | date:'HH:mm'}}</div>
+      <label class="col-3"><strong translate>Estimated Date Of Delivery: </strong></label>
+      <div class="col-9"><i class="fas fa-calendar-alt" *ngIf="activeOrder.estimatedDate"></i>
+        {{activeOrder.estimatedDate | date:'dd.MM.yyyy'}} <i *ngIf="activeOrder.estimatedDate" class="fas fa-clock"></i>
+        {{activeOrder.estimatedDate | date:'HH:mm'}}</div>
+      <label class="col-12"><strong translate>Products: </strong></label>
+      <label class="col-12">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let item of activeOrder.items">
+            <div class="row">
+              <div class="col-3">
+                <span class="list-column" translate>Product Code</span><br /> {{item.productCode}}
+              </div>
+              <div class="col-3">
+                <span class="list-column" translate>Quantity</span> <br /> {{item.quantity}}
+              </div>
+              <div class="col-3">
+                <span class="list-column" translate>Price</span> <br /> {{item.priceWithDiscount}} <small>RSD</small>
+              </div>
+              <div class="col-3">
+                <span class="list-column" translate>Total</span> <br /> {{item.priceWithDiscount * item.quantity}}
+                <small>RSD</small>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-12 text-center">
+                <span class="list-column total-price" translate>Total Price</span> <br />
+                <strong>{{calculatePrice(activeOrder)}}</strong> <small>RSD</small>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </label>
+      <label class="col-12"><strong translate>Note: </strong></label>
+      <div class="col-12">
+        <textarea class="note-area" readonly>{{activeOrder.note}}</textarea>
       </div>
-      <div class="modal-body">
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="modal.close('Save click')">Close</button>
-      </div>
-    </ng-template>
-  
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>

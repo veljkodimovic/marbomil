@@ -16,6 +16,7 @@ import { AdminModule } from './admin/admin.module';
 import { MockModule } from './mock/mock.module';
 import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
@@ -31,7 +32,7 @@ import { AppRoutingModule } from './app-routing.module';
     SharedModule,
     ShopModule,
     HomeModule,
-    // AboutModule,
+    NgSelectModule,
     AdminModule,
     MockModule,
     LoginModule,

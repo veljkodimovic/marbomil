@@ -1,0 +1,17 @@
+@import "src/theme/theme-variables";
+
+.Completed {
+    color: $blue;
+}
+
+.ReadyForProcessing {
+    color: $yellow;
+}
+
+.Accepted {
+    color: $green;
+}
+
+.Rejected {
+    color: $red;
+}

@@ -16,92 +16,116 @@
   <form name="form" (ngSubmit)="f.form.valid && saveOnClick()" #f="ngForm" novalidate>
     <simple-notifications></simple-notifications>
     <div class="row">
-      <div class="col-md-5">
-        <!-- <div #gmap style="width:100%; height:400px;"></div> -->
-      </div>
-      <div class="col-md-6 offset-md-1">
+      <div class="col-md-12">
         <div class="" *ngIf="order">
-          <div class="form-group row">
+          <!-- <div class="form-group row">
             <label for="title" class="col-md-2 col-form-label" translate>Name</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="title" [(ngModel)]="order.name" name="name" #name="ngModel" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required maxlength="100">
+              <input type="text" class="form-control" id="title" [(ngModel)]="order.name" name="name" #name="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required maxlength="100">
               <div *ngIf="f.submitted && name.invalid" class="invalid-feedback">
-                  <div *ngIf="name.errors.required" translate>This field is required</div>
+                <div *ngIf="name.errors.required" translate>This field is required</div>
+              </div>
+            </div>
+          </div> -->
+          <div class="form-group row">
+            <label for="title" class="col-md-4 col-form-label" translate>Buyer</label>
+            <div class="col-md-8">
+              <ng-select required="required" class="custom" [items]="customers" [bindLabel]="'companyName'"
+                [bindValue]="'id'" [selectOnTab]="true" [virtualScroll]="true" [(ngModel)]="order.buyerId" name="buyer"
+                #buyer="ngModel"></ng-select>
+              <div *ngIf="f.submitted && buyer.invalid" class="invalid-feedback">
+                <div *ngIf="buyer.errors.required" translate>This field is required</div>
               </div>
             </div>
           </div>
-          <!-- <div class="form-group row">
-            <label for="street" class="col-md-2 col-form-label">Adresa</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="street" name="street" [(ngModel)]="order.street">
+          <div class="form-group row">
+            <label for="title" class="col-md-4 col-form-label" translate>Status</label>
+            <div class="col-md-8">
+              <ng-select required="required" class="custom" [items]="statuses" [bindLabel]="'name'" [bindValue]="'id'"
+                [selectOnTab]="true" [virtualScroll]="true" [(ngModel)]="order.status" name="status" #status="ngModel">
+              </ng-select>
+              <div *ngIf="f.submitted && status.invalid" class="invalid-feedback">
+                <div *ngIf="status.errors.required" translate>This field is required</div>
+              </div>
             </div>
           </div>
           <div class="form-group row">
-            <label for="city" class="col-md-2 col-form-label">Grad</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="city" name="city" [(ngModel)]="order.city">
+            <label for="title" class="col-md-4 col-form-label" translate>Note</label>
+            <div class="col-md-8">
+                <textarea class="note-area" [(ngModel)]="order.note" name="note"></textarea>
             </div>
           </div>
-          <div class="form-group row">
-            <label for="postal" class="col-md-2 col-form-label">Poštanski broj</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="postal" name="postal" [(ngModel)]="order.postal">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="region" class="col-md-2 col-form-label">Opština</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="region" name="region" [(ngModel)]="order.region">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="country" class="col-md-2 col-form-label">Drzava</label>
-            <div class="col-md-10">
-              <select class="form-control" id="country" name="country" [(ngModel)]="order.country">
-                <option value=""></option>
-                <option value="Srbija">Srbija</option>
-                <option value="Hrvatska">Hrvatska</option>
-                <option value="Makedonija">Makedonija</option>
-                <option value="Crna Gora">Crna Gora</option>
-                <option value="Republika Srpska">Republika Srpska</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="latitude" class="col-md-2 col-form-label">Latitude</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="latitude" name="latitude" [(ngModel)]="order.latitude">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="longitude" class="col-md-2 col-form-label">Longitude</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="longitude" name="longitude" [(ngModel)]="order.longitude">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="phone" class="col-md-2 col-form-label">Telefon</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="order.phone">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="email" class="col-md-2 col-form-label">Email</label>
-            <div class="col-md-10">
-              <input type="email" class="form-control" id="email" name="email" [(ngModel)]="order.email">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="website" class="col-md-2 col-form-label">Website</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="website" name="website" [(ngModel)]="order.website">
-            </div>
-          </div> -->
           <div class="row">
-            <div class="col-sm-10 offset-md-2">
-              <button type="submit" class="btn btn-primary" (click)="scrollTop(f)" translate><i class="fas fa-save"></i>Save</button>
+            <label class="col-sm-12">
+              Products
+            </label>
+            <div class="col-sm-12">
+              <form class="products-form" name="productsForm" (ngSubmit)="addProduct(fp, product)" #fp="ngForm"
+                novalidate>
+                <div class="form-group row">
+                  <label for="title" class="col-md-4 col-form-label" translate>Product</label>
+                  <div class="col-md-8">
+                    <ng-select required="required" class="custom" [items]="products" [bindLabel]="'bindLabel'"
+                      [bindValue]="'id'" [selectOnTab]="true" [virtualScroll]="true" [(ngModel)]="newOrder.productId"
+                      name="newProduct" #newProduct="ngModel" #product></ng-select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="title" class="col-md-4 col-form-label" translate>Quantity</label>
+                  <div class="col-md-8">
+                    <input type="number" class="form-control" id="quantity" [(ngModel)]="newOrder.quantity"
+                      name="quantity" #quantity="ngModel" required min="1">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-8 offset-md-4">
+                    <button type="submit" class="btn btn-primary" [disabled]="!newOrder.productId || !newOrder.quantity"
+                      translate><i class="fas fa-plus"></i>Add</button>
+                  </div>
+                </div>
+                <ul class="list-group mt-4">
+                  <li class="list-group-item" *ngFor="let item of orderProducts">
+                    <a class="remove-link" style="float: right;"><i class="fas fa-trash"
+                        (click)="removeProduct(item)"></i></a>
+                    <div class="row">
+                      <div class="col-3">
+                        <span class="list-column" translate>Product Code</span><br />
+                        {{getItemById(item.productId).code}}
+                      </div>
+                      <div class="col-3">
+                        <span class="list-column" translate>Quantity</span> <br /> {{item.quantity}}
+                      </div>
+                      <div class="col-3">
+                        <span class="list-column" translate>Price</span> <br /> {{getItemById(item.productId).price}}
+                        <small>RSD</small>
+                      </div>
+                      <div class="col-3">
+                        <span class="list-column" translate>Total</span> <br />
+                        {{getItemById(item.productId).price * item.quantity}}
+                        <small>RSD</small>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item" *ngIf="orderProducts && orderProducts.length">
+                    <div class="row">
+                      <div class="col-12 text-center">
+                        <span class="list-column total-price" translate>Total Price</span> <br />
+                        <strong>{{calculatePrice()}}</strong> <small>RSD</small>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </form>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-8 offset-md-4">
+              <button type="submit" class="btn btn-primary" (click)="scrollTop(f)" translate><i
+                  class="fas fa-save"></i>Save</button>
               <a routerLink="/admin/orders" class="btn btn-secondary" translate><i class="fas fa-ban"></i>Cancel</a>
-              <a class="btn btn-danger" *ngIf="isEditMode" (click)="openModal()" translate><i class="fas fa-trash"></i>Delete</a>
+              <a class="btn btn-danger" *ngIf="isEditMode" (click)="openModal()" translate><i
+                  class="fas fa-trash"></i>Delete</a>
             </div>
           </div>
         </div>

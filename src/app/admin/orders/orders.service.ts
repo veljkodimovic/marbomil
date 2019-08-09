@@ -58,6 +58,13 @@ export class OrdersService {
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
 
+  createOrderByAdmin(body: Order): Observable<any> {
+    this.options = this.persistenceService.getApiHeader();
+    return this.http.post(`${routes.orders()}admin`, body, this.options)
+      .map((res: Response) => res)
+      .catch((res: Response) => this.persistenceService.handleError(res));
+  }
+
   updateOrder(body: Order): Observable<any> {
     this.options = this.persistenceService.getApiHeader();
     return this.http.put(routes.orders(), body, this.options)

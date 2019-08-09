@@ -1,0 +1,35 @@
+@import "src/theme/theme-variables";
+
+.list-column { 
+    color: $blue-dark;
+    font-size: 11px;
+}
+
+.note-area { 
+    border: solid 1px $gray-300;
+    width: 100%;
+    font-style: italic;
+    padding: 12px;
+}
+
+.total-price {
+    color: $red;
+    font-size: 15px;
+}
+
+// statuses colors 
+.Completed {
+    color: $blue;
+}
+
+.ReadyForProcessing {
+    color: $yellow;
+}
+
+.Accepted {
+    color: $green;
+}
+
+.Rejected {
+    color: $red;
+}

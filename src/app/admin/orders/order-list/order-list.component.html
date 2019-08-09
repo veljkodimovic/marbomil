@@ -25,10 +25,15 @@
           <div class="col-10">
             <p><a class="admin-list-name" (click)="goTo(order)">{{'Order No.' | translate}} {{order.id}}</a></p>
             <div class="row admin-list-contact">
-              <p class="col-sm-6">
-                  <span *ngIf="order.date"><i class="fas fa-calendar-alt"></i> {{order.date | date:'dd.MM.yyyy'}} <i class="fas fa-clock"></i> {{order.date | date:'HH:mm'}} <br></span>                  
-                  <span><i class="fas fa-money-bill-alt"></i> {{calculatePrice(order) | currency:'RSD ':'symbol'}}<br></span>
-              </p>
+                <p class="col-sm-6">
+                    <span class="{{order.status}}"><i class="fas fa-circle"></i> {{order.status}}</span><br />
+                    <span *ngIf="order.createdDate"><i class="fas fa-calendar-alt"></i>
+                      {{order.createdDate | date:'dd.MM.yyyy'}} <i class="fas fa-clock"></i>
+                      {{order.createdDate | date:'HH:mm'}} <br></span>
+                    <span><i class="fas fa-money-bill-alt"></i>
+                      {{calculatePrice(order)}}<small> RSD</small><br>
+                    </span>
+                  </p>
             </div>
           </div>
           <div class="col-2 admin-list-links">

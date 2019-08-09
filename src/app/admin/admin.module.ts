@@ -3,13 +3,10 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
-import { ImageCropperComponent, CropperSettings, ImageCropperModule } from 'ng2-img-cropper';
-
+import { ImageCropperModule } from 'ng2-img-cropper';
 import { SimpleNotificationsModule } from 'angular2-notifications';
-
 import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
-import { MaterialModule } from '@app/material.module';
 import { AdminRoutingModule } from './admin-routing.module';
 import { BannerViewComponent } from './banner/banner-view/banner-view.component';
 import { BannerListComponent } from './banner/banner-list/banner-list.component';
@@ -61,6 +58,7 @@ import { OrderViewComponent } from './orders/order-view/order-view.component';
 import { OrdersService } from './orders/orders.service';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { NewsletterService } from './newsletter/newsletter.service';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   imports: [
@@ -73,6 +71,7 @@ import { NewsletterService } from './newsletter/newsletter.service';
     ImageCropperModule,
     FormsModule,
     AngularEditorModule,
+    NgSelectModule,
     AdminRoutingModule
   ],
   declarations: [

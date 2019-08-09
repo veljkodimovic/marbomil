@@ -33,6 +33,7 @@
     "@fortawesome/fontawesome-free-webfonts": "^1.0.5",
     "@kolkov/angular-editor": "^0.13.1",
     "@ng-bootstrap/ng-bootstrap": "^4.1.0",
+    "@ng-select/ng-select": "^2.0.3",
     "@ngx-translate/core": "^9.0.1",
     "@types/googlemaps": "^3.30.18",
     "angular-2-local-storage": "^2.0.0",

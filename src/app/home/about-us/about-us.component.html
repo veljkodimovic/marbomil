@@ -1,11 +1,11 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="!isLoading">
     <div class="row">
         <div class="col">
             <h1 class="admin-headline container" translate>About Us</h1>
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container" *ngIf="!isLoading">
     <div class="row mb-5 align-items-center">
         <div class="col-sm-6">
             <p><b>Marbomil</b> je domaći brend vodovodnih delova i opreme za kupatila. </p>
@@ -38,3 +38,4 @@
         </div>
     </div>
 </div>
+<app-loader [isLoading]="isLoading"></app-loader>

@@ -1,10 +1,10 @@
 /// <reference types="@types/googlemaps" />
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {Service} from '@app/core/types/service';
-import {Banner} from '@app/core/types/banner';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Service } from '@app/core/types/service';
+import { Banner } from '@app/core/types/banner';
 import { PersistenceService } from '@app/core/persistence.service';
-import {ServiceService} from '@app/home/service/service.service';
-import {BannerService} from '@app/admin/banner/banner.service';
+import { ServiceService } from '@app/home/service/service.service';
+import { BannerService } from '@app/admin/banner/banner.service';
 // import { } from '@types/googlemaps';
 
 @Component({
@@ -21,6 +21,7 @@ export class ServiceComponent implements OnInit {
   serviceMontenegro: Service[] = [];
   serviceRSrpska: Service[] = [];
   banner: Banner;
+  isLoading: boolean;
   private apiUrl: string;
   @ViewChild('gmapSrb') gmapSrb: ElementRef;
   @ViewChild('gmapCro') gmapCro: ElementRef;
@@ -35,11 +36,12 @@ export class ServiceComponent implements OnInit {
 
   constructor(private svc: ServiceService,
     private persistenceService: PersistenceService,
-              private svcBanner: BannerService) {
-                this.apiUrl = persistenceService.apiUrl;
-              }
+    private svcBanner: BannerService) {
+    this.apiUrl = persistenceService.apiUrl;
+  }
 
   ngOnInit() {
+    this.isLoading = true;
     const mapProp = {
       zoom: 15,
       maxZoom: 18,
@@ -69,7 +71,7 @@ export class ServiceComponent implements OnInit {
         const markers: any = [];
         this.serviceSerbia.forEach(function (service: Service) {
           if (parseFloat(service.latitude) > 0 && parseFloat(service.longitude) > 0) {
-            const latLng = {lat: parseFloat(service.latitude), lng: parseFloat(service.longitude)};
+            const latLng = { lat: parseFloat(service.latitude), lng: parseFloat(service.longitude) };
             const marker = new google.maps.Marker({
               position: latLng,
               map: mapSrb
@@ -94,7 +96,7 @@ export class ServiceComponent implements OnInit {
         const markers: any = [];
         this.serviceMontenegro.forEach(function (service: Service) {
           if (parseFloat(service.latitude) > 0 && parseFloat(service.longitude) > 0) {
-            const latLng = {lat: parseFloat(service.latitude), lng: parseFloat(service.longitude)};
+            const latLng = { lat: parseFloat(service.latitude), lng: parseFloat(service.longitude) };
             const marker = new google.maps.Marker({
               position: latLng,
               map: mapCro
@@ -119,7 +121,7 @@ export class ServiceComponent implements OnInit {
         const markers: any = [];
         this.serviceMacedonia.forEach(function (service: Service) {
           if (parseFloat(service.latitude) > 0 && parseFloat(service.longitude) > 0) {
-            const latLng = {lat: parseFloat(service.latitude), lng: parseFloat(service.longitude)};
+            const latLng = { lat: parseFloat(service.latitude), lng: parseFloat(service.longitude) };
             const marker = new google.maps.Marker({
               position: latLng,
               map: mapMcd
@@ -144,7 +146,7 @@ export class ServiceComponent implements OnInit {
         const markers: any = [];
         this.serviceMontenegro.forEach(function (service: Service) {
           if (parseFloat(service.latitude) > 0 && parseFloat(service.longitude) > 0) {
-            const latLng = {lat: parseFloat(service.latitude), lng: parseFloat(service.longitude)};
+            const latLng = { lat: parseFloat(service.latitude), lng: parseFloat(service.longitude) };
             const marker = new google.maps.Marker({
               position: latLng,
               map: mapMne
@@ -169,7 +171,7 @@ export class ServiceComponent implements OnInit {
         const markers: any = [];
         this.serviceRSrpska.forEach(function (service: Service) {
           if (parseFloat(service.latitude) > 0 && parseFloat(service.longitude) > 0) {
-            const latLng = {lat: parseFloat(service.latitude), lng: parseFloat(service.longitude)};
+            const latLng = { lat: parseFloat(service.latitude), lng: parseFloat(service.longitude) };
             const marker = new google.maps.Marker({
               position: latLng,
               map: mapBih
@@ -191,6 +193,9 @@ export class ServiceComponent implements OnInit {
       this.svcBanner.getBannerById(2).subscribe(data => {
         this.banner = data;
       });
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 200);
     });
 
   }

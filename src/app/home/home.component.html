@@ -1,11 +1,13 @@
-
-<app-home-carousel>
-</app-home-carousel>
-<app-home-shop>
-</app-home-shop>
-<app-home-equipment>
-</app-home-equipment>
-<app-home-promo>
-</app-home-promo>  
-<app-home-sections>
-</app-home-sections>
+<app-loader [isLoading]="isLoading"></app-loader>
+<div *ngIf="!isLoading">
+    <app-home-carousel>
+    </app-home-carousel>
+    <app-home-shop>
+    </app-home-shop>
+    <app-home-equipment>
+    </app-home-equipment>
+    <app-home-promo>
+    </app-home-promo>
+    <app-home-sections>
+    </app-home-sections>
+</div>

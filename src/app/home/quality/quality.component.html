@@ -1,11 +1,11 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="!isLoading">
   <div class="row justify-content-center">
     <div class="col-auto" *ngIf="banner">
       <img src="{{apiUrl}}/{{banner.imageCropUrl}}" alt="">
     </div>
   </div>
 </div>
-<div class="container desc-blocks">
+<div class="container desc-blocks" *ngIf="!isLoading">
   <div class="row">
     <div class="col-sm-6 desc-block">
       <img src="../../../assets/images/icons/ideja.png"  alt="">
@@ -55,3 +55,4 @@
     </div>
   </div>
 </div>
+<app-loader [isLoading]="isLoading"></app-loader>

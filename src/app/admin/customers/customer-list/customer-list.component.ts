@@ -16,18 +16,21 @@ export class CustomerListComponent implements OnInit {
   private modal: DeleteModalComponent;
   customersData: Customer[];
   activeCustomer: Customer;
+  isLoading: boolean;
 
   constructor(private customerService: CustomersService,
     private router: Router,
     private modalService: NgbModal) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.getAllCustomers();
   }
 
   getAllCustomers() {
     this.customerService.getAllCustomers().subscribe(data => {
           this.customersData = data;
+          this.isLoading = false;
     });
   }
 

@@ -56,8 +56,12 @@ export class VideoViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     if (this.router.url.indexOf('new') !== -1) {
       this.isEditMode = false;
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 300);
     } else {
       this.isEditMode = true;
       this.getVideoDetails();
@@ -112,14 +116,15 @@ export class VideoViewComponent implements OnInit {
       this.cropper.setImage(imageCrop);
       this.videoUrl = 'https://www.youtube.com/embed/' + this.video.url;
       this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.videoUrl);
+      this.isLoading = false;
     });
   }
 
   saveOnClick() {
+    this.isLoading = true;
     this.disableSave = true;
     this.blockAll = true;
     let noChanges = true;
-
     if (!this.data.image) {
       noChanges = false;
       this.video.image = this.persistenceService.placeholderImage;

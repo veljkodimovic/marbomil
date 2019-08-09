@@ -30,11 +30,16 @@ export class ShoppingCartComponent implements OnInit {
   note: string;
   apiUrl: string;
   modalRef: any;
+  isLoading: boolean;
   constructor(private persistenceService: PersistenceService, private headerService: HeaderService, private modalService: NgbModal, private router: Router, private shoppingCartService: ShoppingCartService) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.apiUrl = this.persistenceService.apiUrl;
     this.cart = JSON.parse(sessionStorage.getItem('my-cart')) ? JSON.parse(sessionStorage.getItem('my-cart')).orders : null;
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 500);
   }
 
   changeCountOfItem() {
@@ -65,6 +70,7 @@ export class ShoppingCartComponent implements OnInit {
 
   confirmPurchase() {
     this.modalRef.close();
+    this.isLoading = true;
     const orders = JSON.parse(sessionStorage.getItem('my-cart')).orders;
     const purchase = new Purchase('', []);
     orders.forEach((o: any) => {
@@ -72,9 +78,9 @@ export class ShoppingCartComponent implements OnInit {
     });
     purchase.note = this.note;
     this.shoppingCartService.confirmShopping(purchase).subscribe((data) => {
-      console.log(data);
       sessionStorage.removeItem('my-cart');
       this.headerService.shoppingCartItemsCount.emit(null);
+      this.isLoading = false;
       this.router.navigate(['/shopping-confirmed']);
     });
   }

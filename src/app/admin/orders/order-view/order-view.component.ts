@@ -54,20 +54,22 @@ export class OrderViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     this.customersService.getAllCustomers().subscribe((customers: Customer[]) => {
       this.customers = customers;
       this.productsService.getProducts().subscribe((products: Product[]) => {
         this.products = products;
         this.products.forEach((p: Product) => {
           p.bindLabel = `${p.orderNumber} - ${p.title}`;
+          if (this.router.url.indexOf('new') !== -1) {
+            this.isEditMode = false;
+            this.isLoading = false;
+          } else {
+            this.isEditMode = true;
+            this.getOrderDetails();
+          }
         });
       });
-      if (this.router.url.indexOf('new') !== -1) {
-        this.isEditMode = false;
-      } else {
-        this.isEditMode = true;
-        this.getOrderDetails();
-      }
     });
   }
 
@@ -78,11 +80,12 @@ export class OrderViewComponent implements OnInit {
       // this.order.items.forEach(product => {
       //   this.orderProducts.push({productId: product.id, quantity: product.quantity});
       // });
+      this.isLoading = false;
     });
   }
 
   addProduct(form: NgForm, element: HTMLElement) {
-    const newOrder = {...this.newOrder};
+    const newOrder = { ...this.newOrder };
     if (this.orderProducts.find(op => op.productId === newOrder.productId)) {
       const q = this.orderProducts.find(op => op.productId === newOrder.productId).quantity + newOrder.quantity;
       this.orderProducts.find(op => op.productId === newOrder.productId).quantity = q;
@@ -96,6 +99,7 @@ export class OrderViewComponent implements OnInit {
   }
 
   saveOnClick() {
+    this.isLoading = true;
     this.disableSave = true;
     this.blockAll = true;
 

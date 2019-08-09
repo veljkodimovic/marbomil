@@ -52,6 +52,7 @@ export class ProductListComponent implements OnInit {
   categoryViews: CategoryView[] = [];
   collectionViews: CollectionView[] = [];
   activeCollectionId: number;
+  isLoading: boolean;
   constructor(private svc: ProductService,
     private collectionsService: CollectionService,
     private route: ActivatedRoute
@@ -60,6 +61,7 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     this.getProductData();
   }
 
@@ -122,6 +124,7 @@ export class ProductListComponent implements OnInit {
         });
       });
     });
+    this.isLoading = false;
   }
 
   openModal(product: Product) {

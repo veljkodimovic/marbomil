@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" [hidden]="isLoading">
   <div class="row">
     <div class="col-sm-12" *ngIf="customer">
       <h1 class="admin-headline" *ngIf="isEditMode" translate>Edit existing customer
@@ -175,3 +175,4 @@
   <delete-modal (deleteConfirmed)="performDelete($event)">
   </delete-modal>
 </div>
+<app-loader [isLoading]="isLoading"></app-loader>

@@ -17,7 +17,7 @@ export class BannerListComponent implements OnInit {
   private modal: DeleteModalComponent;
   private apiUrl: string;
   bannerData: Banner[];
-
+  isLoading: boolean;
   activeBanner: Banner;
 
   constructor(private svc: BannerService,
@@ -30,8 +30,10 @@ export class BannerListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     this.svc.getAllBanners().subscribe(data => {
       this.bannerData = data;
+      this.isLoading = false;
     });
   }
 

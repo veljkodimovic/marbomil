@@ -16,10 +16,12 @@ export class LocationComponent implements OnInit {
   salesData: Sales[] = [];
   @ViewChild('gmapSales') gmapSales: ElementRef;
   mapSales: google.maps.Map;
+  isLoading: boolean;
 
   constructor(private svc: SalesService) { }
 
   ngOnInit() {
+    this.isLoading = true;
     const mapProp = {
       zoom: 15,
       maxZoom: 18,
@@ -59,6 +61,9 @@ export class LocationComponent implements OnInit {
       } else {
         this.gmapSales.nativeElement.remove();
       }
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 300);
     });
   }
 

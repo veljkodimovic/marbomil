@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CollectionService } from '../collections.service';
 import { Collection } from '@app/core/types/collection';
 import { PersistenceService } from '@app/core/persistence.service';
@@ -18,23 +18,24 @@ export class CollectionListComponent implements OnInit {
   private apiUrl: string;
   collectionData: any = [];
   categoryData: any = [];
-
+  isLoading: boolean;
   activeCollection: Collection;
 
   constructor(private svc: CollectionService,
     private persistenceService: PersistenceService,
     private router: Router,
     private modalService: NgbModal) {
-      this.apiUrl = persistenceService.apiUrl;
-    }
+    this.apiUrl = persistenceService.apiUrl;
+  }
 
   ngOnInit() {
-    this.svc.getAllCollections().subscribe(data => {
-      this.collectionData = data;
-    });
-
-    this.svc.getAllCategories().subscribe(data => {
-      this.categoryData = data;
+    this.isLoading = true;
+    this.svc.getAllCollections().subscribe(dataCa => {
+      this.collectionData = dataCa;
+      this.svc.getAllCategories().subscribe(dataCo => {
+        this.categoryData = dataCo;
+        this.isLoading = false;
+      });
     });
   }
 

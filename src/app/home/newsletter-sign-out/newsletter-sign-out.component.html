@@ -1,4 +1,4 @@
-<div class="container" style="padding-top: 80px;">
+<div class="container" style="padding-top: 80px;" *ngIf="!isLoading">
     <div class="col-sm-12 text-center" translate>
       <div class="alert alert-primary" role="alert" *ngIf="showInfo">
         Address <strong>{{email}}</strong> is successfully signed out from newsletter subscriptions list.
@@ -13,3 +13,4 @@
       </div>
     </div>
   </div>
+  <app-loader [isLoading]="isLoading"></app-loader>

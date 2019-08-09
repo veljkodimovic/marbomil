@@ -18,6 +18,7 @@ export class VideoListComponent implements OnInit {
   videoData: Video[];
 
   activeVideo: Video;
+  isLoading: boolean;
 
   constructor(private svc: VideoService,
     private persistenceService: PersistenceService,
@@ -27,8 +28,10 @@ export class VideoListComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.isLoading = true;
     this.svc.getAllVideos().subscribe(data => {
       this.videoData = data;
+      this.isLoading = false;
     });
   }
 

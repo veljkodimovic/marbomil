@@ -1,4 +1,4 @@
-<div class="container" style="padding-top: 80px;">
+<div class="container" style="padding-top: 80px;" *ngIf="!isLoading">
   <div class="row">
     <div class="col-sm-12">
       <h3 class="category-collection-title"><span translate>Search results for </span>"<strong>{{searchParam}}</strong>"
@@ -11,3 +11,4 @@
     </div>
   </div>
 </div>
+<app-loader [isLoading]="isLoading"></app-loader>

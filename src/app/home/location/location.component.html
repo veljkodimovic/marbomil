@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" [hidden]="isLoading">
     <div class="row">
         <div class="col-sm-12 page-title-icon">
             <h1 translate>Marmobil locations</h1>
@@ -12,3 +12,4 @@
         </div>
     </div>
 </div>
+<app-loader [isLoading]="isLoading"></app-loader>

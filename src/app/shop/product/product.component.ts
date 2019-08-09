@@ -54,6 +54,7 @@ export class ProductComponent implements OnInit {
   }
 
   getProductsByCollectionId(collectionId: number) {
+    this.isLoading = true;
     this.svc.getProductsByCollectionId(collectionId).subscribe((products: Product[]) => {
       this.productData = products;
       this.productData.forEach((product: any) => {
@@ -64,6 +65,7 @@ export class ProductComponent implements OnInit {
         const j = b.orderNumber > 0 ? b.orderNumber : 9999999;
         return i - j;
       });
+      this.isLoading = false;
     });
   }
 

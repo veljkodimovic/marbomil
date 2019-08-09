@@ -52,8 +52,12 @@ export class BannerViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     if (this.router.url.indexOf('new') !== -1) {
       this.isEditMode = false;
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 300);
     } else {
       this.isEditMode = true;
       this.getBannerDetails();
@@ -113,10 +117,12 @@ export class BannerViewComponent implements OnInit {
       imageCrop.src = 'data:image/jpeg;base64,' + this.banner.imageCrop;
       this.cropper.settings = this.cropperSettings;
       this.cropper.setImage(imageCrop);
+      this.isLoading = false;
     });
   }
 
   saveOnClick() {
+    this.isLoading = true;
     this.disableSave = true;
     this.blockAll = true;
     let noChanges = true;

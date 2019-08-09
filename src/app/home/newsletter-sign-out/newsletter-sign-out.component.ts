@@ -11,15 +11,18 @@ export class NewsletterSignOutComponent implements OnInit {
   email: string;
   showInfo: boolean;
   showAlert: boolean;
+  isLoading: boolean;
 
   constructor(private route: ActivatedRoute, private newsletterSingOutService: NewsletterSignOutService) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.email = this.route.snapshot.paramMap.get('email');
     this.signOutFromNewsletter(this.email);
     setTimeout(() => {
       if (!this.showInfo) {
         this.showAlert = true;
+        this.isLoading = false;
       }
     }, 2000);
   }
@@ -29,6 +32,7 @@ export class NewsletterSignOutComponent implements OnInit {
       console.log(data);
       this.showInfo = true;
       this.showAlert = false;
+      this.isLoading = false;
     });
   }
 

@@ -11,13 +11,16 @@ import { environment } from '@env/environment';
 export class AtestComponent implements OnInit {
   apiUrl: string;
   atestData: Atest[];
+  isLoading: boolean;
   constructor(private svc: AtestService) {
     this.apiUrl = environment.serverUrl;
   }
 
   ngOnInit() {
+    this.isLoading = true;
     this.svc.getAllAtests().subscribe(data => {
       this.atestData = data;
+      this.isLoading = false;
     });
   }
 

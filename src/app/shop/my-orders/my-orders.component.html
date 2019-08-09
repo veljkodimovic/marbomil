@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="!isLoading">
   <div class="row">
     <div class="col">
       <h1 class="admin-headline container" translate>
@@ -7,7 +7,7 @@
     </div>
   </div>
 </div>
-<div class="container">
+<div class="container" *ngIf="!isLoading">
   <div class="row admin-list" *ngIf="ordersData">
     <div class="col-lg-6" *ngFor="let order of ordersData">
       <div class="admin-list-item">
@@ -35,6 +35,7 @@
     </div>
   </div>
 </div>
+<app-loader [isLoading]="isLoading"></app-loader>
 
 <ng-template #content let-modal>
   <div class="modal-header">

@@ -15,6 +15,7 @@ export class VideoComponent implements OnInit {
   banner: Banner;
   private apiUrl: string;
   videoData: Video[];
+  isLoading: boolean;
   constructor(private svc: VideoService,
     private persistenceService: PersistenceService,
               private sanitizer: DomSanitizer) {
@@ -22,6 +23,7 @@ export class VideoComponent implements OnInit {
               }
 
   ngOnInit() {
+    this.isLoading = true;
     this.svc.getBannerById(4).subscribe(data => {
       this.banner = data;
     });
@@ -32,6 +34,7 @@ export class VideoComponent implements OnInit {
         video.url = 'https://www.youtube.com/embed/' + video.url;
         video.url = sanitizer.bypassSecurityTrustResourceUrl(video.url);
       });
+      this.isLoading = false;
     });
   }
 

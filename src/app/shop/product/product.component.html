@@ -12,7 +12,7 @@
     </div>
   </div>
 </div>
-<div class="container" style="padding-top: 80px;">
+<div class="container" style="padding-top: 80px;" *ngIf="!isLoading">
   <div class="row">
     <div class="col-sm-3">
       <div class="sidenav">
@@ -58,3 +58,4 @@
     </div>
   </div>
 </div>
+<app-loader [isLoading]="isLoading"></app-loader>

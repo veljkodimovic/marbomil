@@ -15,11 +15,13 @@ export class NewsletterComponent implements OnInit {
   temp: any[];
   email: any;
   emailSelected: any;
+  isLoading: boolean;
 
   constructor(private newsletterServce: NewsletterService,
     private notificationService: NotificationsService, ) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.getAllSubscribers();
   }
 
@@ -27,6 +29,7 @@ export class NewsletterComponent implements OnInit {
     this.newsletterServce.getAllSubscribers().subscribe((emails: any[]) => {
       this.temp = [...emails];
       this.emails = emails;
+      this.isLoading = false;
     });
   }
 

@@ -12,14 +12,17 @@ export class QualityComponent implements OnInit {
 
   banner: Banner;
   private apiUrl: string;
+  isLoading: boolean;
   constructor(private svc: BannerService,
     private persistenceService: PersistenceService) {
       this.apiUrl = persistenceService.apiUrl;
     }
 
   ngOnInit() {
+    this.isLoading = true;
     this.svc.getBannerById(4).subscribe(data => {
       this.banner = data;
+      this.isLoading = false;
     });
   }
 

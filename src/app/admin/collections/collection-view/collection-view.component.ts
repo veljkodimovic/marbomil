@@ -69,8 +69,12 @@ export class CollectionViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     if (this.router.url.indexOf('new') !== -1) {
       this.isEditMode = false;
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 300);
     } else {
       this.isEditMode = true;
       this.getCollectionDetails();
@@ -79,12 +83,11 @@ export class CollectionViewComponent implements OnInit {
     this.svc.getAllCollections().subscribe((data: any) => {
       this.collections = data;
       this.collections.splice(this.collections.indexOf(this.collection), 1);
+      this.svc.getAllCategories().subscribe((dataC: any) => {
+        this.categories = dataC;
+        this.isLoading = false;
+      });
     });
-
-    this.svc.getAllCategories().subscribe((data: any) => {
-      this.categories = data;
-    });
-
   }
 
   getCollectionDetails(): void {
@@ -107,7 +110,7 @@ export class CollectionViewComponent implements OnInit {
     this.fileType = this.fileType.slice(-4);
     const myReader: FileReader = new FileReader();
     const that = this;
-    myReader.onloadend = function(loadEvent: any) {
+    myReader.onloadend = function (loadEvent: any) {
       image.src = loadEvent.target.result;
       that.originalImg = image.src;
       that.cropper.setImage(image);
@@ -147,13 +150,13 @@ export class CollectionViewComponent implements OnInit {
           description += errorDescription + '<br>';
         }
         this.notificationService.warn('Greška pri snimanju', description,
-        {
-          timeOut: 5000,
-          showProgressBar: true,
-          pauseOnHover: false,
-          clickToClose: false,
-          maxLength: 100
-        });
+          {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: false,
+            clickToClose: false,
+            maxLength: 100
+          });
       }
     } else {
       this.notificationService.success('Success', 'Kolekcija je uspešno sačuvana.',
@@ -175,7 +178,7 @@ export class CollectionViewComponent implements OnInit {
     this.disableSave = true;
     this.blockAll = true;
     let noChanges = true;
-
+    this.isLoading = true;
     if (!this.data.image) {
       noChanges = false;
       this.collection.image = this.persistenceService.placeholderImage;

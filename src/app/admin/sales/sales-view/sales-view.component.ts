@@ -41,8 +41,12 @@ export class SalesViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     if (this.router.url.indexOf('new') !== -1) {
       this.isEditMode = false;
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 300);
     } else {
       this.isEditMode = true;
       this.getSalesDetails();
@@ -64,10 +68,12 @@ export class SalesViewComponent implements OnInit {
         position: uluru,
         map: this.map
       });
+      this.isLoading = false;
     });
   }
 
   saveOnClick() {
+    this.isLoading = true;
       this.disableSave = true;
       this.blockAll = true;
 

@@ -40,8 +40,12 @@ export class CustomerViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     if (this.router.url.indexOf('new') !== -1) {
       this.isEditMode = false;
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 300);
     } else {
       this.isEditMode = true;
       this.getCustomerDetails();
@@ -52,10 +56,12 @@ export class CustomerViewComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.customersService.getCustomerById(Number(id)).subscribe((data: Customer) => {
       this.customer = data;
+      this.isLoading = false;
     });
   }
 
   saveOnClick() {
+    this.isLoading = true;
     this.disableSave = true;
     this.blockAll = true;
 

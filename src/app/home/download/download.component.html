@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="!isLoading">
   <div class="row">
     <div class="col">
       <h1 class="admin-headline container" translate>
@@ -7,7 +7,7 @@
     </div>
   </div>
 </div>
-<div class="container">
+<div class="container" *ngIf="!isLoading">
     <div class="row justify-content-center" *ngIf="catalogueData">
         <div class="col-sm-9">
             <h3 class="headline-subtitle" translate>Catalogues</h3>
@@ -41,3 +41,4 @@
         </div>
     </div>
 </div>
+<app-loader [isLoading]="isLoading"></app-loader>

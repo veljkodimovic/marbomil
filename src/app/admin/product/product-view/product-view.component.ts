@@ -99,8 +99,12 @@ export class ProductViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     if (this.router.url.indexOf('new') !== -1) {
       this.isEditMode = false;
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 300);
     } else {
       this.isEditMode = true;
       this.getProductDetails();
@@ -108,13 +112,10 @@ export class ProductViewComponent implements OnInit {
 
     this.svc.getAllCollections().subscribe((data: any) => {
       this.collectionData = data;
+      this.svc.getAllCategories().subscribe((dataC: any) => {
+        this.categories = dataC;
+      });
     });
-
-    this.svc.getAllCategories().subscribe((data: any) => {
-      this.categories = data;
-    });
-
-
   }
 
   updateCollections() {
@@ -147,6 +148,7 @@ export class ProductViewComponent implements OnInit {
         this.cropper2.settings = this.cropperSettings2;
         this.cropper2.setImage(image2);
       }
+      this.isLoading = false;
     });
   }
 
@@ -222,7 +224,7 @@ export class ProductViewComponent implements OnInit {
     const myReader: FileReader = new FileReader();
     const that = this;
 
-    myReader.onloadend = function(loadEvent: any) {
+    myReader.onloadend = function (loadEvent: any) {
 
       image.src = loadEvent.target.result;
 
@@ -251,7 +253,7 @@ export class ProductViewComponent implements OnInit {
     this.fileType2 = this.fileType2.slice(-4);
     const myReader: FileReader = new FileReader();
     const that = this;
-    myReader.onloadend = function(loadEvent: any) {
+    myReader.onloadend = function (loadEvent: any) {
       image.src = loadEvent.target.result;
       that.originalImg = image.src;
       that.cropper2.setImage(image);
@@ -272,88 +274,88 @@ export class ProductViewComponent implements OnInit {
   }
 
   saveOnClick() {
-
+    this.isLoading = true;
     this.product.images = [];
     this.product.orderNumber = this.product.orderNumber;
     this.disableSave = true;
     this.blockAll = true;
-      if (!this.isEditMode) {
-        if (this.images.length > 0) {
-          for (const value of this.images) {
-            const imageString = value.imageCrop.split('base64,');
-            const imageStringOrig = this.images[value.index].image.split('base64,');
-            this.product.images.push({
-              id: 0, index: value.index,
-              imageCrop: imageString[imageString.length - 1],
-              image: imageStringOrig[imageStringOrig.length - 1],
-              imageExtension: value.imageExtension
-            });
-          }
+    if (!this.isEditMode) {
+      if (this.images.length > 0) {
+        for (const value of this.images) {
+          const imageString = value.imageCrop.split('base64,');
+          const imageStringOrig = this.images[value.index].image.split('base64,');
+          this.product.images.push({
+            id: 0, index: value.index,
+            imageCrop: imageString[imageString.length - 1],
+            image: imageStringOrig[imageStringOrig.length - 1],
+            imageExtension: value.imageExtension
+          });
+        }
+      } else {
+        this.product.images.push({
+          id: 0, index: 0,
+          image: this.persistenceService.placeholderImage,
+          imageCrop: this.persistenceService.placeholderImage,
+          imageExtension: this.persistenceService.placeholderExtension
+        });
+      }
+    }
+
+    if (this.data2.image) {
+      const imageString2 = this.data2.image.split('base64,');
+      if (this.setImageDrawing) {
+        this.product.drawingImage = imageString2[imageString2.length - 1];
+        this.product.drawingImageExtension = this.fileType2;
+        //  var imageStringOrig = this.originalImg.split('base64,');
+        // this.collection.image = imageStringOrig[imageStringOrig.length - 1];
+      }
+    }
+
+    if (this.isEditMode) {
+      for (const value of this.images) {
+        if (value.image) {
+          const imageString = value.image.split('base64,');
+          const imageStringCropp = value.imageCrop.split('base64,');
+          this.product.images.push({
+            id: value.id,
+            index: value.index,
+            imageCrop: imageStringCropp[imageStringCropp.length - 1],
+            image: imageString[imageString.length - 1],
+            imageExtension: value.imageExtension,
+            productId: value.productId
+          });
         } else {
           this.product.images.push({
-            id: 0, index: 0,
-            image: this.persistenceService.placeholderImage,
-            imageCrop: this.persistenceService.placeholderImage,
-            imageExtension: this.persistenceService.placeholderExtension
+            id: value.id,
+            index: value.index,
+            productId: value.productId
           });
         }
       }
-
-      if (this.data2.image) {
-        const imageString2 = this.data2.image.split('base64,');
-        if (this.setImageDrawing) {
-          this.product.drawingImage = imageString2[imageString2.length - 1];
-          this.product.drawingImageExtension = this.fileType2;
-          //  var imageStringOrig = this.originalImg.split('base64,');
-          // this.collection.image = imageStringOrig[imageStringOrig.length - 1];
-        }
+      if (this.product.images.length === 0) {
+        this.product.images.push({
+          id: 0, index: 0,
+          image: this.persistenceService.placeholderImage,
+          imageCrop: this.persistenceService.placeholderImage,
+          imageExtension: this.persistenceService.placeholderExtension
+        });
       }
-
-      if (this.isEditMode) {
-        for (const value of this.images) {
-          if (value.image) {
-            const imageString = value.image.split('base64,');
-            const imageStringCropp = value.imageCrop.split('base64,');
-            this.product.images.push({
-              id: value.id,
-              index: value.index,
-              imageCrop: imageStringCropp[imageStringCropp.length - 1],
-              image: imageString[imageString.length - 1],
-              imageExtension: value.imageExtension,
-              productId: value.productId
-            });
-          } else {
-            this.product.images.push({
-              id: value.id,
-              index: value.index,
-              productId: value.productId
-            });
-          }
-        }
-        if (this.product.images.length === 0) {
-          this.product.images.push({
-            id: 0, index: 0,
-            image: this.persistenceService.placeholderImage,
-            imageCrop: this.persistenceService.placeholderImage,
-            imageExtension: this.persistenceService.placeholderExtension
-          });
-        }
-        this.svc.updateProduct(this.product)
-          .finally(() => { this.isLoading = false; })
-          .subscribe((response: any) => {
-            this.blockAll = false;
-            this.handleResponse(response);
-            // this.router.navigate(['/admin/product']);
-          });
-      } else {
-        this.svc.createProduct(this.product)
-          .finally(() => { this.isLoading = false; })
-          .subscribe((response: any) => {
-            this.blockAll = false;
-            this.handleResponse(response);
-            // this.router.navigate(['/admin/product']);
-          });
-      }
+      this.svc.updateProduct(this.product)
+        .finally(() => { this.isLoading = false; })
+        .subscribe((response: any) => {
+          this.blockAll = false;
+          this.handleResponse(response);
+          // this.router.navigate(['/admin/product']);
+        });
+    } else {
+      this.svc.createProduct(this.product)
+        .finally(() => { this.isLoading = false; })
+        .subscribe((response: any) => {
+          this.blockAll = false;
+          this.handleResponse(response);
+          // this.router.navigate(['/admin/product']);
+        });
+    }
   }
 
   handleResponse(response: any) {
@@ -375,13 +377,13 @@ export class ProductViewComponent implements OnInit {
           description += errorDescription + '<br>';
         }
         this.notificationService.warn('Greška pri snimanju', description,
-        {
-          timeOut: 5000,
-          showProgressBar: true,
-          pauseOnHover: false,
-          clickToClose: false,
-          maxLength: 100
-        });
+          {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: false,
+            clickToClose: false,
+            maxLength: 100
+          });
       }
     } else {
       this.notificationService.success('Success', 'Proizvod je uspešno sačuvan.',
@@ -392,11 +394,11 @@ export class ProductViewComponent implements OnInit {
           clickToClose: false,
           maxLength: 100
         });
-        setTimeout(() => {
-          // tslint:disable-next-line:max-line-length
-          this.router.navigate(['/admin/product'], { queryParams: { categoryId: this.product.categoryId, collectionId: this.product.collectionId }});
-        }, 1000);
-        this.isEditMode = true;
+      setTimeout(() => {
+        // tslint:disable-next-line:max-line-length
+        this.router.navigate(['/admin/product'], { queryParams: { categoryId: this.product.categoryId, collectionId: this.product.collectionId } });
+      }, 1000);
+      this.isEditMode = true;
     }
   }
 

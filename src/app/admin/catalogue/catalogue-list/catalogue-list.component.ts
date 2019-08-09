@@ -17,6 +17,7 @@ export class CatalogueListComponent implements OnInit {
   catalogueData: Catalogue[];
   apiUrl: string;
   activeCatalogue: Catalogue;
+  isLoading: boolean;
 
   constructor(private svc: CatalogueService,
     private router: Router
@@ -25,8 +26,10 @@ export class CatalogueListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     this.svc.getAllCatalogues().subscribe(data => {
       this.catalogueData = data;
+      this.isLoading = false;
     });
   }
 

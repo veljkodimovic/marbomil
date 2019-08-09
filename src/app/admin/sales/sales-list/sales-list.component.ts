@@ -16,14 +16,17 @@ export class SalesListComponent implements OnInit {
   salesData: Sales[];
 
   activeSales: Sales;
+  isLoading: boolean;
 
   constructor(private svc: SalesService,
     private router: Router,
     private modalService: NgbModal) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.svc.getAllSales().subscribe(data => {
       this.salesData = data;
+      this.isLoading = false;
     });
   }
 

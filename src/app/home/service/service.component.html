@@ -1,11 +1,11 @@
-<div class="container-fluid">
+<div class="container-fluid" [hidden]="isLoading">
   <div class="row justify-content-center">
     <div class="col-auto" *ngIf="banner">
       <img src="{{apiUrl}}/{{banner.imageCropUrl}}" alt="">
     </div>
   </div>
 </div>
-<div class="container">
+<div class="container" [hidden]="isLoading">
   <div class="row">
     <div class="col-sm-12 page-title-icon">
       <img src="../../../assets/images/icons/montaza.png" width="50" alt="">
@@ -105,3 +105,4 @@
     </div>
   </div>
 </div>
+<app-loader [isLoading]="isLoading"></app-loader>

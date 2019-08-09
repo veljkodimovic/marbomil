@@ -14,18 +14,21 @@ export class CategoriesComponent implements OnInit {
 
   categoryData: Category[];
   apiUrl: string;
+  isLoading: boolean;
 
   constructor(private svc: CategoryService,
     private router: Router
   ) {
     this.apiUrl = environment.serverUrl;
-   }
+  }
 
 
   ngOnInit() {
-      this.svc.getAllCategories().subscribe(data => {
-        this.categoryData = data;
-      });
+    this.isLoading = true;
+    this.svc.getAllCategories().subscribe(data => {
+      this.categoryData = data;
+      this.isLoading = false;
+    });
   }
 
   goTo(category: Category) {

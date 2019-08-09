@@ -18,6 +18,7 @@ export class AtestListComponent implements OnInit {
   atestData: Atest[];
 
   activeAtest: Atest;
+  isLoading: boolean;
 
   constructor(private svc: AtestService,
     private router: Router,
@@ -28,8 +29,10 @@ export class AtestListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     this.svc.getAllAtests().subscribe(data => {
       this.atestData = data;
+      this.isLoading = false;
     });
   }
 

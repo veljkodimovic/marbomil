@@ -15,18 +15,22 @@ export class DownloadComponent implements OnInit {
   apiUrl: string;
   atestData: Atest[];
   catalogueData: Catalogue[];
+  isLoading: boolean;
   constructor(private atestSvc: AtestService,
     private catalogueSvc: CatalogueService) {
     this.apiUrl = environment.serverUrl;
   }
 
   ngOnInit() {
-    this.atestSvc.getAllAtests().subscribe(data => {
-      this.atestData = data;
+    this.isLoading = true;
+    this.atestSvc.getAllAtests().subscribe(dataA => {
+      this.atestData = dataA;
+      this.catalogueSvc.getAllCatalogues().subscribe(dataC => {
+        this.catalogueData = dataC;
+        this.isLoading = false;
+      });
     });
-    this.catalogueSvc.getAllCatalogues().subscribe(data => {
-      this.catalogueData = data;
-    });
+
   }
 
 }

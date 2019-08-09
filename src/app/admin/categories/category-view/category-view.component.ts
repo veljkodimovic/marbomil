@@ -34,11 +34,11 @@ export class CategoryViewComponent implements OnInit {
   fileType: string;
 
   constructor(private svc: CategoryService,
-              private renderer: Renderer,
-              private notificationService: NotificationsService,
-              private persistenceService: PersistenceService,
-              private router: Router,
-              private route: ActivatedRoute) {
+    private renderer: Renderer,
+    private notificationService: NotificationsService,
+    private persistenceService: PersistenceService,
+    private router: Router,
+    private route: ActivatedRoute) {
     this.cropperSettings = new CropperSettings();
     this.cropperSettings.width = 400;
     this.cropperSettings.height = 270;
@@ -53,8 +53,12 @@ export class CategoryViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     if (this.router.url.indexOf('new') !== -1) {
       this.isEditMode = false;
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 300);
     } else {
       this.isEditMode = true;
       this.getCategoryDetails();
@@ -73,7 +77,7 @@ export class CategoryViewComponent implements OnInit {
     this.fileType = this.fileType.slice(-4);
     const myReader: FileReader = new FileReader();
     const that = this;
-    myReader.onloadend = function(loadEvent: any) {
+    myReader.onloadend = function (loadEvent: any) {
       image.src = loadEvent.target.result;
       that.originalImg = image.src;
       that.cropper.setImage(image);
@@ -105,6 +109,7 @@ export class CategoryViewComponent implements OnInit {
       image.src = 'data:image/jpeg;base64,' + this.category.image;
       this.cropper.settings = this.cropperSettings;
       this.cropper.setImage(image);
+      this.isLoading = false;
     });
   }
 
@@ -112,7 +117,7 @@ export class CategoryViewComponent implements OnInit {
     this.disableSave = true;
     this.blockAll = true;
     let noChanges = true;
-
+    this.isLoading = true;
     if (!this.data.image) {
       noChanges = false;
       this.category.image = this.persistenceService.placeholderImage;
@@ -169,13 +174,13 @@ export class CategoryViewComponent implements OnInit {
           description += errorDescription + '<br>';
         }
         this.notificationService.warn('Greška pri snimanju', description,
-        {
-          timeOut: 5000,
-          showProgressBar: true,
-          pauseOnHover: false,
-          clickToClose: false,
-          maxLength: 100
-        });
+          {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: false,
+            clickToClose: false,
+            maxLength: 100
+          });
       }
     } else {
       this.notificationService.success('Success', 'Kategorija je uspešno sačuvana.',

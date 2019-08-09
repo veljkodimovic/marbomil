@@ -16,18 +16,21 @@ export class OrderListComponent implements OnInit {
   private modal: DeleteModalComponent;
   ordersData: Order[];
   activeOrder: Order;
+  isLoading: boolean;
 
   constructor(private orderService: OrdersService,
     private router: Router,
     private modalService: NgbModal) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.getAllOrders();
   }
 
   getAllOrders() {
     this.orderService.getAllOrders().subscribe(data => {
       this.ordersData = data;
+      this.isLoading = false;
     });
   }
 

@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SearchResultsComponent implements OnInit {
   searchParam: string;
+  isLoading: boolean;
 
   constructor(private searchResultsService: SearchResultsService, private route: ActivatedRoute) {
     this.searchResultsService.searchEvent.subscribe(() => {
@@ -17,6 +18,7 @@ export class SearchResultsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     if (!this.searchResultsService.param) {
       this.doSearch(this.route.snapshot.paramMap.get('param'));
     } else {
@@ -25,7 +27,11 @@ export class SearchResultsComponent implements OnInit {
   }
 
   doSearch(param: string) {
+    this.isLoading = true;
     this.searchParam = param;
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 500);
   }
 
 }

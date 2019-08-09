@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" [hidden]="isLoading">
   <div class="row">
     <div class="col">
       <h1 class="admin-headline container">
@@ -11,7 +11,7 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container" [hidden]="isLoading">
   <div class="row justify-content-end mb-4">
     <div class="col-auto">
       <div class="form-group row">
@@ -75,3 +75,4 @@
   <delete-modal (deleteConfirmed)="performDelete($event)">
   </delete-modal>
 </div>
+<app-loader [isLoading]="isLoading"></app-loader>

@@ -32,17 +32,21 @@ export class ServiceViewComponent implements OnInit {
   map: google.maps.Map;
 
   constructor(private svc: ServiceService,
-              private renderer: Renderer,
-              private notificationService: NotificationsService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private sanitizer: DomSanitizer) {
+    private renderer: Renderer,
+    private notificationService: NotificationsService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer) {
     this.data = {};
   }
 
   ngOnInit() {
+    this.isLoading = true;
     if (this.router.url.indexOf('new') !== -1) {
       this.isEditMode = false;
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 300);
     } else {
       this.isEditMode = true;
       this.getServiceDetails();
@@ -55,7 +59,7 @@ export class ServiceViewComponent implements OnInit {
     this.svc.getServiceById(Number(id)).subscribe(data => {
       this.service = data;
       if (this.service.latitude.length && this.service.longitude.length) {
-        const uluru = {lat: parseFloat(this.service.latitude), lng: parseFloat(this.service.longitude)};
+        const uluru = { lat: parseFloat(this.service.latitude), lng: parseFloat(this.service.longitude) };
         const mapProp = {
           center: uluru,
           zoom: 15,
@@ -67,10 +71,12 @@ export class ServiceViewComponent implements OnInit {
           map: this.map
         });
       }
+      this.isLoading = false;
     });
   }
 
   saveOnClick() {
+    this.isLoading = true;
     this.disableSave = true;
     this.blockAll = true;
 
@@ -113,13 +119,13 @@ export class ServiceViewComponent implements OnInit {
           description += errorDescription + '<br>';
         }
         this.notificationService.warn('Greška pri snimanju', description,
-        {
-          timeOut: 5000,
-          showProgressBar: true,
-          pauseOnHover: false,
-          clickToClose: false,
-          maxLength: 100
-        });
+          {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: false,
+            clickToClose: false,
+            maxLength: 100
+          });
       }
     } else {
       this.notificationService.success('Success', 'Servisna lokacija je uspešno sačuvana.',

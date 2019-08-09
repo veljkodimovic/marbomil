@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="!isLoading">
   <div class="col-sm-12" *ngIf="cart && cart.length">
     <div class="row header">
       <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2 d-none d-sm-block"></div>
@@ -43,6 +43,8 @@
         </div>
   </div>
 </div>
+
+<app-loader [isLoading]="isLoading"></app-loader>
 
 <ng-template #confirm let-c="close" let-d="dismiss">
     <div class="modal-header">

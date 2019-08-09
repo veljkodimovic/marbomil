@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, ViewChild} from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { CategoryService } from '@app/admin/categories/categories.service';
 import { Category } from '@app/core/types/category';
 import { PersistenceService } from '@app/core/persistence.service';
@@ -18,7 +18,7 @@ export class CategoryListComponent implements OnInit {
   private apiUrl: string;
   categoryData: Category[];
   categoryAllData: any = [];
-
+  isLoading: boolean;
   activeCategory: Category;
 
   constructor(private svc: CategoryService,
@@ -30,9 +30,11 @@ export class CategoryListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     this.svc.getAllCategories().subscribe(data => {
       this.categoryData = data;
       this.categoryAllData = data;
+      this.isLoading = false;
     });
   }
 

@@ -16,14 +16,17 @@ export class ServiceListComponent implements OnInit {
   serviceData: Service[];
 
   activeService: Service;
+  isLoading: boolean;
 
   constructor(private svc: ServiceService,
     private router: Router,
     private modalService: NgbModal) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.svc.getAllServices().subscribe(data => {
       this.serviceData = data;
+      this.isLoading = false;
     });
   }
 

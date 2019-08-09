@@ -15,12 +15,18 @@ export class ContactComponent implements OnInit {
   contactName: string;
   contactSubject: string;
   contactMessage: string;
+  isLoading: boolean;
 
   constructor(private svc: ContactService,
               private notificationService: NotificationsService,
               private router: Router) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.isLoading = true;
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 300);
+  }
 
   onSubmit() {
     const message = `Dobili ste novu poruku sa sajta marbomil.rs <br>

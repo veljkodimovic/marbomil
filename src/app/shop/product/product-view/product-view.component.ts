@@ -24,6 +24,7 @@ export class ProductViewComponent implements OnInit {
   apiUrl: string;
   activeImage: string;
   quantity = 0;
+  isLoading: boolean;
 
   constructor(private svc: ProductService,
     private persistenceService: PersistenceService,
@@ -35,7 +36,7 @@ export class ProductViewComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.isLoading = true;
     const id = this.route.snapshot.paramMap.get('id');
     this.svc.getProductById(Number(id)).subscribe(data => {
       this.product = data;
@@ -45,7 +46,6 @@ export class ProductViewComponent implements OnInit {
       this.activeImage = this.apiUrl + '/' + images[0].imageUrl;
       images.forEach(function (image: any) {
         const imageUrl = that.apiUrl + '/' + image.imageUrl;
-        console.log(imageUrl);
       });
 
 
@@ -54,6 +54,7 @@ export class ProductViewComponent implements OnInit {
       });
       this.svc.getCollectionById(this.product.collectionId).subscribe(dataColl => {
         this.productCollectionMain = dataColl;
+        this.isLoading = false;
       });
     });
 

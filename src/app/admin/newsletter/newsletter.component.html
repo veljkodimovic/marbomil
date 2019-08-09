@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" [hidden]="isLoading">
   <div class="row">
     <div class="col">
       <h1 class="admin-headline container" translate>
@@ -10,7 +10,7 @@
     </div>
   </div>
 </div>
-<div class="container">
+<div class="container" [hidden]="isLoading">
   <div class="form-group row">
     <div class="col-6 mt-1">
       <input type="text" class="form-control" id="title" [(ngModel)]="email" name="email" maxlength="100" placeholder="{{'Email' | translate}}">
@@ -42,3 +42,4 @@
   <delete-modal (deleteConfirmed)="performDelete($event)">
     </delete-modal>
 </div>
+<app-loader [isLoading]="isLoading"></app-loader>

@@ -43,6 +43,7 @@ export class CategoryViewComponent implements OnInit {
   }
 
   getCollectionsById(id: number) {
+    this.isLoading = true;
     this.svc.getCollectionsByCategoryId(id).subscribe((collections: Collection[]) => {
       this.collections = collections;
       this.svc.getProductsNotCollectionAssigned(id).subscribe((products: Product[]) => {
@@ -50,6 +51,7 @@ export class CategoryViewComponent implements OnInit {
         this.products.forEach((product: any) => {
           product.count = 1;
         });
+        this.isLoading = false;
       });
     });
   }

@@ -13,13 +13,16 @@ export class CatalogueComponent implements OnInit {
 
   apiUrl: string;
   catalogueData: Catalogue[];
+  isLoading: boolean;
   constructor(private svc: CatalogueService) {
     this.apiUrl = environment.serverUrl;
   }
 
   ngOnInit() {
+    this.isLoading = true;
     this.svc.getAllCatalogues().subscribe(data => {
       this.catalogueData = data;
+      this.isLoading = false;
     });
   }
 

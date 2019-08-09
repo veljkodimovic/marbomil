@@ -25,16 +25,20 @@ export class AtestViewComponent implements OnInit {
   @ViewChild('file') file: ElementRef;
 
   constructor(private svc: AtestService,
-              private renderer: Renderer,
-              private notificationService: NotificationsService,
-              private router: Router,
-              private route: ActivatedRoute) {
+    private renderer: Renderer,
+    private notificationService: NotificationsService,
+    private router: Router,
+    private route: ActivatedRoute) {
     this.data = {};
   }
 
   ngOnInit() {
+    this.isLoading = true;
     if (this.router.url.indexOf('new') !== -1) {
       this.isEditMode = false;
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 300);
     } else {
       this.isEditMode = true;
       this.getAtestDetails();
@@ -46,10 +50,12 @@ export class AtestViewComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.svc.getAtestById(Number(id)).subscribe(data => {
       this.atest = data;
+      this.isLoading = false;
     });
   }
 
   saveOnClick() {
+    this.isLoading = true;
     this.disableSave = true;
     this.blockAll = true;
 
@@ -102,17 +108,17 @@ export class AtestViewComponent implements OnInit {
             maxLength: 100
           });
       } else {
-        that.atest.fileExtension =  '.' + re.exec(file.name)[1];
+        that.atest.fileExtension = '.' + re.exec(file.name)[1];
         that.atest.file = loadEvent.target.result;
         that.atest.file = that.atest.file.replace('data:application/pdf;base64,', '');
         that.notificationService.success('Fajl je učitan', 'Izabrani fajl je uspešno učitan',
-        {
-          timeOut: 2000,
-          showProgressBar: true,
-          pauseOnHover: false,
-          clickToClose: false,
-          maxLength: 100
-        });
+          {
+            timeOut: 2000,
+            showProgressBar: true,
+            pauseOnHover: false,
+            clickToClose: false,
+            maxLength: 100
+          });
       }
     };
     myReader.readAsDataURL(file);
@@ -137,13 +143,13 @@ export class AtestViewComponent implements OnInit {
           description += errorDescription + '<br>';
         }
         this.notificationService.warn('Greška pri snimanju', description,
-        {
-          timeOut: 5000,
-          showProgressBar: true,
-          pauseOnHover: false,
-          clickToClose: false,
-          maxLength: 100
-        });
+          {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: false,
+            clickToClose: false,
+            maxLength: 100
+          });
       }
     } else {
       this.notificationService.success('Success', 'Atest je uspešno sačuvan.',
@@ -163,7 +169,7 @@ export class AtestViewComponent implements OnInit {
 
   uploadImage() {
     console.log('Formaaa');
-    }
+  }
 
   openModal() {
     this.modal.openModal();

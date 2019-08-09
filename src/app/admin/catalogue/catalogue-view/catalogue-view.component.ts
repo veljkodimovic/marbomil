@@ -36,8 +36,12 @@ export class CatalogueViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     if (this.router.url.indexOf('new') !== -1) {
       this.isEditMode = false;
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 300);
     } else {
       this.isEditMode = true;
       this.getCatalogueDetails();
@@ -49,10 +53,12 @@ export class CatalogueViewComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.svc.getCatalogueById(Number(id)).subscribe(data => {
       this.catalogue = data;
+      this.isLoading = false;
     });
   }
 
   saveOnClick() {
+    this.isLoading = true;
     this.disableSave = true;
     this.blockAll = true;
 

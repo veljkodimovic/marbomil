@@ -1,4 +1,4 @@
-<div class="container" style="padding-top: 80px;">
+<div *ngIf="!isLoading" class="container" style="padding-top: 80px;">
   <div class="row">
     <div class="col-sm-12">
       <div class="row categories-list">
@@ -15,3 +15,4 @@
     </div>
   </div>
 </div>
+<app-loader [isLoading]="isLoading"></app-loader>

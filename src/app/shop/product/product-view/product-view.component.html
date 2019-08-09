@@ -19,7 +19,7 @@
     </div>
   </div>
 </div>
-<div *ngIf="product" class="container single-product">
+<div *ngIf="product && !isLoading" class="container single-product">
   <div class="row">
     <div class="col-sm-5">
       <img class="single-product-image" src="{{activeImage}}" alt="{{product.title}}">
@@ -59,3 +59,4 @@
     </div>
   </div>
 </div>
+<app-loader [isLoading]="isLoading"></app-loader>

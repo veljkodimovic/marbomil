@@ -31,7 +31,7 @@ export class NewsletterComponent implements OnInit {
   }
 
   addAddress(email: any) {
-    this.newsletterServce.subscribeToNewsletter({ firstName: 'User', lastName: 'User', email: email }).subscribe((response: any) => {
+    this.newsletterServce.subscribeToNewsletter({ email: email }).subscribe((response: any) => {
       this.email = null;
       this.handleResponse(response);
       this.getAllSubscribers();
@@ -44,7 +44,7 @@ export class NewsletterComponent implements OnInit {
   }
 
   performDelete(event: any) {
-    this.newsletterServce.signOutFromNewsletter(this.emailSelected).subscribe((data: any) => {
+    this.newsletterServce.signOutFromNewsletter(this.emailSelected.email).subscribe((data: any) => {
       this.getAllSubscribers();
     });
   }

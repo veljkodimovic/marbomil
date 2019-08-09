@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 const routes = {
-  newsletter: () => `/newsletter/signout/`
+  newsletter: () => `/newsletters/`
 };
 
 @Injectable({

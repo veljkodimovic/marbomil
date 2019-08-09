@@ -21,9 +21,7 @@ export class NewsletterSignOutComponent implements OnInit {
       if (!this.showInfo) {
         this.showAlert = true;
       }
-
     }, 2000);
-
   }
 
   signOutFromNewsletter(email: string) {

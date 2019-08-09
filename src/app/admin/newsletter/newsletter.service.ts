@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 const routes = {
-  newsletter: () => `/newsletters/subscribers`,
+  newsletter: () => `/newsletters/`,
 };
 
 @Injectable({
@@ -36,7 +36,7 @@ export class NewsletterService {
   }
 
   signOutFromNewsletter(email: any) {
-    return this.http.delete(`${routes.newsletter()}/${email.id}`)
+    return this.http.delete(`${routes.newsletter()}/${email}`)
       .map((res: any) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }

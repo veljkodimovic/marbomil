@@ -4,9 +4,9 @@ import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { merge } from 'rxjs/observable/merge';
 import { filter, map, mergeMap } from 'rxjs/operators';
-
+import { NgxPermissionsService } from 'ngx-permissions';
 import { environment } from '@env/environment';
-import { Logger, I18nService } from '@app/core';
+import { Logger, I18nService, AuthenticationService } from '@app/core';
 
 const log = new Logger('App');
 
@@ -21,16 +21,18 @@ export class AppComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private titleService: Title,
     private translateService: TranslateService,
-    private i18nService: I18nService) {
-      // redirection on home route
+    private i18nService: I18nService,
+    private permissionsService: NgxPermissionsService,
+    private authService: AuthenticationService) {
+    // redirection on home route
     router.events.subscribe((val: any) => {
       if (val && val.url && val.url === '/') {
         setTimeout(() => {
-          this.router.navigate(['/home'], { replaceUrl: true});
+          this.router.navigate(['/home'], { replaceUrl: true });
         });
       }
     });
-    }
+  }
 
   ngOnInit() {
     // Setup logger
@@ -66,7 +68,10 @@ export class AppComponent implements OnInit {
         }
       });
 
-    // this.router.navigate(['home']);
+    if (this.authService.isAuthenticated()) {
+      this.permissionsService.loadPermissions([JSON.parse(localStorage.getItem('username')).role]);
+    }
+
   }
 
 }

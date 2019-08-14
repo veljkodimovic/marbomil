@@ -13,12 +13,14 @@ import { FooterService } from './shell/footer/footer.service';
 import { RouteReusableStrategy } from './route-reusable-strategy';
 import { AuthenticationService } from './authentication/authentication.service';
 import { AuthenticationGuard } from './authentication/authentication.guard';
+import { RoleGuard } from './authentication/role.guard';
 import { I18nService } from './i18n.service';
 import { HttpService } from './http/http.service';
 import { HttpCacheService } from './http/http-cache.service';
 import { PersistenceService } from './persistence.service';
 import { HeaderService } from '@app/core/shell/header/header.service';
 import { FormsModule } from '@angular/forms';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 export function createHttpService(backend: ConnectionBackend,
   defaultOptions: RequestOptions,
@@ -35,7 +37,8 @@ export function createHttpService(backend: ConnectionBackend,
     NgbModule,
     MaterialModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    NgxPermissionsModule
   ],
   declarations: [
     HeaderComponent,

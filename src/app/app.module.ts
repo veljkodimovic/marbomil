@@ -18,6 +18,7 @@ import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AppRoutingModule } from './app-routing.module';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { AppRoutingModule } from './app-routing.module';
     AdminModule,
     MockModule,
     LoginModule,
+    NgxPermissionsModule.forRoot(),
     AppRoutingModule
   ],
   declarations: [AppComponent],

@@ -3,6 +3,8 @@ import { OrdersService } from '@app/admin/orders/orders.service';
 import { Order } from '@app/core/types/order';
 import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProductService } from '../product/product.service';
+import { Product } from '@app/core/types/product';
 
 @Component({
   selector: 'app-my-orders',
@@ -14,12 +16,16 @@ export class MyOrdersComponent implements OnInit {
   ordersData: Order[];
   activeOrder: Order;
   isLoading: boolean;
+  products: Product[] = [];
 
-  constructor(private orderService: OrdersService, private modalService: NgbModal) { }
+  constructor(private orderService: OrdersService, private productsService: ProductService, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.isLoading = true;
-    this.getOrdersForLoggedUser();
+    this.productsService.getProducts().subscribe((products: Product[]) => {
+      this.products = products;
+      this.getOrdersForLoggedUser();
+    });
   }
 
   getOrdersForLoggedUser() {
@@ -42,6 +48,10 @@ export class MyOrdersComponent implements OnInit {
       price += item.price * item.quantity;
     });
     return price;
+  }
+
+  getItemById(productId: number) {
+    return this.products.find(p => p.id === productId);
   }
 
 }

@@ -72,17 +72,20 @@
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let item of activeOrder.items">
             <div class="row">
-              <div class="col-3">
-                <span class="list-column" translate>Product Code</span><br /> {{item.productCode}}
+              <div class="col-6">
+                <span class="list-column" translate>Product Code - Title</span><br />
+                {{getItemById(item.productId).code}} - {{getItemById(item.productId).title}}
               </div>
-              <div class="col-3">
+              <div class="col-2">
                 <span class="list-column" translate>Quantity</span> <br /> {{item.quantity}}
               </div>
-              <div class="col-3">
-                <span class="list-column" translate>Price</span> <br /> {{item.priceWithDiscount}} <small>RSD</small>
+              <div class="col-2">
+                <span class="list-column" translate>Price</span> <br /> {{getItemById(item.productId).price}}
+                <small>RSD</small>
               </div>
-              <div class="col-3">
-                <span class="list-column" translate>Total</span> <br /> {{item.priceWithDiscount * item.quantity}}
+              <div class="col-2">
+                <span class="list-column" translate>Total</span> <br />
+                {{getItemById(item.productId).price * item.quantity}}
                 <small>RSD</small>
               </div>
             </div>

@@ -5,6 +5,7 @@ import { finalize } from 'rxjs/operators';
 
 import { environment } from '@env/environment';
 import { Logger, I18nService, AuthenticationService } from '@app/core';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 const log = new Logger('Login');
 
@@ -25,12 +26,18 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private i18nService: I18nService,
-    private authenticationService: AuthenticationService) {
+    private authenticationService: AuthenticationService,
+    private permissionsService: NgxPermissionsService) {
     this.createForm();
   }
 
   ngOnInit() {
-    this.authenticationService.logout();
+    if (this.authenticationService.isAuthenticated()) {
+      const route = JSON.parse(localStorage.getItem('username')).role === 'Admin' ? 'admin' : '/';
+      this.router.navigate([route]);
+    } else {
+      this.authenticationService.logout();
+    }
 
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
@@ -51,16 +58,20 @@ export class LoginComponent implements OnInit {
           const usernameKey = 'username';
           this.authenticationService.getUserContext().subscribe((userData: any) => {
             console.log('user/context', userData);
-            if (userData.firstName && userData.lastName) {
+            if (userData.role === 'Admin') {
               localStorage.setItem(usernameKey, JSON.stringify({ fname: userData.firstName, lname: userData.lastName, role: userData.role }));
+              this.permissionsService.loadPermissions([userData.role]);
+              this.router.navigate(['admin']);
             } else if (userData.contactPerson) {
-              localStorage.setItem(usernameKey, JSON.stringify({ contactPerson: userData.contactPerson, role: userData.role }));
+              localStorage.setItem(usernameKey, JSON.stringify({ contactPerson: userData.contactPerson, role: 'Buyer' }));
+              this.permissionsService.loadPermissions(['Buyer']);
+              this.router.navigateByUrl(this.returnUrl.toLowerCase());
             } else {
               localStorage.setItem(usernameKey, JSON.stringify({ fname: 'user', lname: 'user', role: userData.role }));
+              this.router.navigateByUrl(this.returnUrl.toLowerCase());
             }
-
+            // this.router.navigateByUrl(this.returnUrl.toLowerCase());
           });
-          this.router.navigateByUrl(this.returnUrl.toLowerCase());
         }
       }, (error: any) => {
         log.debug(`Login error: ${error}`);

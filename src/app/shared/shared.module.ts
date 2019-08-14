@@ -5,6 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '@app/material.module';
 import { LoaderComponent } from './loader/loader.component';
 import { DeleteModalComponent } from './delete-modal/delete-modal';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { DeleteModalComponent } from './delete-modal/delete-modal';
   ],
   exports: [
     LoaderComponent,
-    DeleteModalComponent
+    DeleteModalComponent,
+    NgxPermissionsModule
   ]
 })
 export class SharedModule { }

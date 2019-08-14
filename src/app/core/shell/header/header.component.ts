@@ -94,6 +94,11 @@ export class HeaderComponent implements OnInit {
     return this.titleService.getTitle();
   }
 
+  goToHome() {
+    const route = JSON.parse(localStorage.getItem('username')) && JSON.parse(localStorage.getItem('username')).role === 'Admin' ? 'admin' : '/';
+    this.router.navigate([route]);
+  }
+
   search(searchParam: string, form: NgForm) {
     if (searchParam) {
       form.reset();

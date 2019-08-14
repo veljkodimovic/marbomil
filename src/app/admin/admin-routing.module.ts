@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { Route, extract } from '@app/core';
+import { Route, extract, AuthenticationGuard } from '@app/core';
 import { AdminComponent } from './admin.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { BannerViewComponent } from './banner/banner-view/banner-view.component';
@@ -27,43 +27,44 @@ import { CustomersComponent } from './customers/customers.component';
 import { OrderViewComponent } from './orders/order-view/order-view.component';
 import { OrdersComponent } from './orders/orders.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
+import { RoleGuard } from '@app/core/authentication/role.guard';
 
-const routes: Routes = Route.withShellAdmin([
-  { path: 'admin/banners', component: BannerComponent, data: { title: extract('Banner') } },
-  { path: 'admin/banner/:id', component: BannerViewComponent, data: { title: extract('Banner View') } },
-  { path: 'admin/banner/new', component: BannerViewComponent, data: { title: extract('Banner View') } },
-  { path: 'admin/category', component: CategoriesComponent, data: { title: extract('Category') } },
-  { path: 'admin/category/:id', component: CategoryViewComponent, data: { title: extract('Category View') } },
-  { path: 'admin/category/new', component: CategoryViewComponent, data: { title: extract('Category View') } },
-  { path: 'admin/collection', component: CollectionsComponent, data: { title: extract('Collection') } },
-  { path: 'admin/collection/:id', component: CollectionViewComponent, data: { title: extract('Collection View') } },
-  { path: 'admin/collection/new', component: CollectionViewComponent, data: { title: extract('Collection View') } },
-  { path: 'admin/video', component: VideoComponent, data: { title: extract('Video') } },
-  { path: 'admin/video/:id', component: VideoViewComponent, data: { title: extract('Video View') } },
-  { path: 'admin/video/new', component: VideoViewComponent, data: { title: extract('Video View') } },
-  { path: 'admin/atest', component: AtestComponent, data: { title: extract('Atest') } },
-  { path: 'admin/atest/:id', component: AtestViewComponent, data: { title: extract('Atest View') } },
-  { path: 'admin/atest/new', component: AtestViewComponent, data: { title: extract('Atest View') } },
-  { path: 'admin/catalogue', component: CatalogueComponent, data: { title: extract('Catalogue') } },
-  { path: 'admin/catalogue/:id', component: CatalogueViewComponent, data: { title: extract('Catalogue View') } },
-  { path: 'admin/catalogue/new', component: CatalogueViewComponent, data: { title: extract('Catalogue View') } },
-  { path: 'admin/service', component: ServiceComponent, data: { title: extract('Service') } },
-  { path: 'admin/service/:id', component: ServiceViewComponent, data: { title: extract('Service View') } },
-  { path: 'admin/service/new', component: ServiceViewComponent, data: { title: extract('Service View') } },
-  { path: 'admin/sales', component: SalesComponent, data: { title: extract('Sales') } },
-  { path: 'admin/sales/:id', component: SalesViewComponent, data: { title: extract('Sales View') } },
-  { path: 'admin/sales/new', component: SalesViewComponent, data: { title: extract('Sales View') } },
-  { path: 'admin/product', component: ProductComponent, data: { title: extract('Product') } },
-  { path: 'admin/product/:id', component: ProductViewComponent, data: { title: extract('Product View') } },
-  { path: 'admin/product/new', component: ProductViewComponent, data: { title: extract('Product View') } },
-  { path: 'admin/customers', component: CustomersComponent, data: { title: extract('Customers') } },
-  { path: 'admin/customer/:id', component: CustomerViewComponent, data: { title: extract('Customer View') } },
-  { path: 'admin/customer/new', component: CustomerViewComponent, data: { title: extract('Customer View') } },
-  { path: 'admin/orders', component: OrdersComponent, data: { title: extract('Orders') } },
-  { path: 'admin/order/:id', component: OrderViewComponent, data: { title: extract('Order View') } },
-  { path: 'admin/order/new', component: OrderViewComponent, data: { title: extract('Order View') } },
-  { path: 'admin/newsletter', component: NewsletterComponent, data: { title: extract('Newsletter') } },
-  { path: 'admin', component: AdminComponent, data: { title: extract('Admin') } }
+const routes: Routes = Route.withShell([
+  { path: 'admin/banners', component: BannerComponent, data: { title: extract('Banner'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/banner/:id', component: BannerViewComponent, data: { title: extract('Banner View'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/banner/new', component: BannerViewComponent, data: { title: extract('Banner View'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/category', component: CategoriesComponent, data: { title: extract('Category'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/category/:id', component: CategoryViewComponent, data: { title: extract('Category View'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/category/new', component: CategoryViewComponent, data: { title: extract('Category View'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/collection', component: CollectionsComponent, data: { title: extract('Collection'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/collection/:id', component: CollectionViewComponent, data: { title: extract('Collection View'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/collection/new', component: CollectionViewComponent, data: { title: extract('Collection View'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/video', component: VideoComponent, data: { title: extract('Video'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/video/:id', component: VideoViewComponent, data: { title: extract('Video View'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/video/new', component: VideoViewComponent, data: { title: extract('Video View'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/atest', component: AtestComponent, data: { title: extract('Atest'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/atest/:id', component: AtestViewComponent, data: { title: extract('Atest View'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/atest/new', component: AtestViewComponent, data: { title: extract('Atest View'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/catalogue', component: CatalogueComponent, data: { title: extract('Catalogue'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/catalogue/:id', component: CatalogueViewComponent, data: { title: extract('Catalogue View'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/catalogue/new', component: CatalogueViewComponent, data: { title: extract('Catalogue View'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/service', component: ServiceComponent, data: { title: extract('Service'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/service/:id', component: ServiceViewComponent, data: { title: extract('Service View'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/service/new', component: ServiceViewComponent, data: { title: extract('Service View'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/sales', component: SalesComponent, data: { title: extract('Sales'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/sales/:id', component: SalesViewComponent, data: { title: extract('Sales View'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/sales/new', component: SalesViewComponent, data: { title: extract('Sales View'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/product', component: ProductComponent, data: { title: extract('Product'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/product/:id', component: ProductViewComponent, data: { title: extract('Product View'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/product/new', component: ProductViewComponent, data: { title: extract('Product View'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/customers', component: CustomersComponent, data: { title: extract('Customers'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/customer/:id', component: CustomerViewComponent, data: { title: extract('Customer View'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/customer/new', component: CustomerViewComponent, data: { title: extract('Customer View'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/orders', component: OrdersComponent, data: { title: extract('Orders'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/order/:id', component: OrderViewComponent, data: { title: extract('Order View'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/order/new', component: OrderViewComponent, data: { title: extract('Order View'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin/newsletter', component: NewsletterComponent, data: { title: extract('Newsletter'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] },
+  { path: 'admin', component: AdminComponent, data: { title: extract('Admin'), onlyFor: ['Admin'] }, canActivate: [AuthenticationGuard, RoleGuard] }
 ]);
 
 @NgModule({

@@ -61,14 +61,14 @@ export class OrderViewComponent implements OnInit {
         this.products = products;
         this.products.forEach((p: Product) => {
           p.bindLabel = `${p.orderNumber} - ${p.title}`;
-          if (this.router.url.indexOf('new') !== -1) {
-            this.isEditMode = false;
-            this.isLoading = false;
-          } else {
-            this.isEditMode = true;
-            this.getOrderDetails();
-          }
         });
+        if (this.router.url.indexOf('new') !== -1) {
+          this.isEditMode = false;
+          this.isLoading = false;
+        } else {
+          this.isEditMode = true;
+          this.getOrderDetails();
+        }
       });
     });
   }
@@ -77,9 +77,10 @@ export class OrderViewComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.ordersService.getOrderById(Number(id)).subscribe((data: Order) => {
       this.order = data;
-      // this.order.items.forEach(product => {
-      //   this.orderProducts.push({productId: product.id, quantity: product.quantity});
-      // });
+      console.log(data);
+      this.order.items.forEach(product => {
+        this.orderProducts.push({productId: product.productId, quantity: product.quantity});
+      });
       this.isLoading = false;
     });
   }

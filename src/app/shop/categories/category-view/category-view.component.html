@@ -47,11 +47,12 @@
           <a>
             <img src="{{apiUrl}}/{{product.images[0].imageCropUrl}}" alt="{{product.title}}" (click)="goToProduct(product)">
             <div class="content-box-description" (click)="goToProduct(product)">
-              <h5 class="" [ngClass]="{ 'product-title' : isAuth }">{{product.title}}</h5>
-              <h4 [hidden]="!isAuth" class="text-center small-price">{{product.price}}.00 <label class="unit">RSD</label></h4>
-              <h3 [hidden]="!isAuth" class="text-center big-price"><b>{{product.price}}.00 <label class="unit">RSD</label></b></h3>
+              <h5>{{product.title}}</h5>
+              <div [hidden]="!isAuth" *ngxPermissionsOnly="['Buyer']" style="height: 25px;"></div>
+              <h4 [hidden]="!isAuth" *ngxPermissionsOnly="['Buyer']" class="text-center small-price">{{product.price}}.00 <label class="unit">RSD</label></h4>
+              <h3 [hidden]="!isAuth" *ngxPermissionsOnly="['Buyer']" class="text-center big-price"><b>{{product.price}}.00 <label class="unit">RSD</label></b></h3>
             </div>
-            <div class="row cart-box" [hidden]="!isAuth">
+            <div class="row cart-box" [hidden]="!isAuth" *ngxPermissionsOnly="['Buyer']">
                 {{counts[i]}}
               <div class="col-md-4">
                   <input type="number" class="form-control" id="count" [(ngModel)]="product.count" name="count" #count="ngModel" min="1">

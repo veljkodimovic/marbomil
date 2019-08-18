@@ -41,6 +41,14 @@ import { NewsletterSignOutComponent } from './newsletter-sign-out/newsletter-sig
 import { NewsletterSignOutService } from './newsletter-sign-out/newsletter-sign-out.service';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { SearchResultsService } from './search-results/search-results.service';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { SetPasswordComponent } from './set-password/set-password.component';
+import { SetPasswordService } from './set-password/set-password.service';
+import { ForgotPasswordService } from './forgot-password/forgot-password.service';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ResetPasswordService } from './reset-password/reset-password.service';
+import { ChangePasswordService } from './change-password/change-password.service';
 
 
 @NgModule({
@@ -75,7 +83,11 @@ import { SearchResultsService } from './search-results/search-results.service';
     LocationComponent,
     HomeComponent,
     NewsletterSignOutComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    ForgotPasswordComponent,
+    ChangePasswordComponent,
+    SetPasswordComponent,
+    ResetPasswordComponent
   ],
   providers: [
     ServiceService,
@@ -87,7 +99,11 @@ import { SearchResultsService } from './search-results/search-results.service';
     VideoService,
     QualityService,
     SearchResultsService,
-    NewsletterSignOutService
+    NewsletterSignOutService,
+    SetPasswordService,
+    ForgotPasswordService,
+    ResetPasswordService,
+    ChangePasswordService
   ]
 })
 export class HomeModule { }

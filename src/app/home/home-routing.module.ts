@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { Route, extract } from '@app/core';
+import { Route, extract, AuthenticationGuard } from '@app/core';
 import { HomeComponent } from './home.component';
 import { ServiceComponent } from './service/service.component';
 import { WarrantyComponent } from './warranty/warranty.component';
@@ -16,6 +16,10 @@ import { AboutUsComponent } from '@app/home/about-us/about-us.component';
 import { LocationComponent } from '@app/home/location/location.component';
 import { NewsletterSignOutComponent } from './newsletter-sign-out/newsletter-sign-out.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { SetPasswordComponent } from './set-password/set-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = Route.withShell([
 
@@ -32,6 +36,10 @@ const routes: Routes = Route.withShell([
   { path: 'locations', component: LocationComponent, data: { title: extract('Gde kupiti') } },
   { path: 'newsletter-sign-out/:email', component: NewsletterSignOutComponent, data: { title: extract('Newsletter - Uspešna Odjava') } },
   { path: 'search-results/:param', component: SearchResultsComponent, data: { title: extract('Rezultati pretrage') } },
+  { path: 'forgot-password', component: ForgotPasswordComponent, data: { title: extract('Zaboravljena lozinka') } },
+  { path: 'change-password', component: ChangePasswordComponent, data: { title: extract('Promena lozinke') }, canActivate: [AuthenticationGuard] },
+  { path: 'set-password/:registrationCode', component: SetPasswordComponent, data: { title: extract('Kreiranje lozinke') } },
+  { path: 'reset-password/:forgotPasswordCode', component: ResetPasswordComponent, data: { title: extract('Promena lozinke') } },
   { path: 'home', component: HomeComponent, data: { title: extract('Home') } },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ]);

@@ -24,6 +24,7 @@
           <a *ngIf="!isAuth()" class="nav-item nav-link text-uppercase" id="login" [routerLink]="['/login']"  translate><i class="fas fa-sign-in-alt"></i> Login</a>
           <div *ngIf="isAuth()" ngbDropdownMenu aria-labelledby="loggedUser" class="dropdown-menu">
             <a *ngxPermissionsOnly="['Buyer']" class="dropdown-item nav-link text-uppercase" (click)="goToMyOrders()" ngbDropdownItem translate>My Orders <i class="fa fa-list-alt"></i></a>
+            <a class="dropdown-item nav-link text-uppercase" [routerLink]="['/change-password']" ngbDropdownItem translate>Change password <i class="fas fa-unlock-alt"></i></a>
             <a class="dropdown-item nav-link text-uppercase" (click)="logout()" ngbDropdownItem translate>Logout <i class="fas fa-sign-out-alt"></i></a>
           </div>
         </div>

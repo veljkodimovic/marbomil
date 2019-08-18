@@ -64,7 +64,7 @@
           <div class="form-group row"  *ngIf="isEditMode && order.status === 'Rejected'">
               <label for="title" class="col-md-4 col-form-label" translate>Reason</label>
               <div class="col-md-8">
-                <textarea class="note-area" [(ngModel)]="order.rejecetedNote" name="rejNote" required="required" #rejNote="ngModel"></textarea>
+                <textarea class="note-area" [(ngModel)]="order.rejectedNote" name="rejNote" required="required" #rejNote="ngModel"></textarea>
                 <div *ngIf="f.submitted && rejNote.invalid" class="invalid-feedback">
                     <div *ngIf="rejNote.errors.required" translate>This field is required</div>
                   </div>

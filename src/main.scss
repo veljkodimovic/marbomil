@@ -16,5 +16,28 @@
 // ng-select styles
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
+// ngx-datepicker
+@import "~ngx-bootstrap/datepicker/bs-datepicker.css";
+
+body {
+    .bs-datepicker-container .bs-datepicker-head {
+      background-color: $blue-dark;
+    }
+  
+    .bs-datepicker-container .bs-datepicker-body .select-end {
+      background-color: $black !important;
+    }
+  
+    .bs-datepicker-container .bs-datepicker-body .select-start {
+      background-color: $black !important;
+    }
+  
+    .bs-datepicker-container .bs-datepicker-body table td.week span {
+      color: $blue-dark !important;
+    }
+  }
+
+  
 // Theme customization
 @import "theme/theme";
+

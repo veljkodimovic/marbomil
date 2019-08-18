@@ -49,6 +49,8 @@
 
       <label class="col-3"><strong translate>Status: </strong></label>
       <div class="col-9 {{activeOrder.status}}"><i class="fas fa-circle"></i> {{activeOrder.status}}</div>
+      <label class="col-3" *ngIf="activeOrder.status === 'Rejected'"><strong translate>Reason: </strong></label>
+      <div class="col-9" *ngIf="activeOrder.status === 'Rejected'">{{activeOrder.rejectedNote}}</div>
       <label class="col-3"><strong translate>Bayer: </strong></label>
       <div class="col-9">{{activeOrder.buyerUsername}}</div>
       <label class="col-3"><strong translate>Creation Date: </strong></label>
@@ -59,12 +61,12 @@
       <div class="col-9"><i class="fas fa-calendar-alt" *ngIf="activeOrder.lastChangeDate"></i>
         {{activeOrder.lastChangeDate | date:'dd.MM.yyyy'}} <i *ngIf="activeOrder.lastChangeDate"
           class="fas fa-clock"></i> {{activeOrder.lastChangeDate | date:'HH:mm'}}</div>
-      <label class="col-3"><strong translate>Confirmation Date: </strong></label>
+      <label class="col-3"><strong translate >Confirmation Date: </strong></label>
       <div class="col-9"><i class="fas fa-calendar-alt" *ngIf="activeOrder.confirmationDate"></i>
         {{activeOrder.confirmationDate | date:'dd.MM.yyyy'}} <i *ngIf="activeOrder.confirmationDate"
           class="fas fa-clock"></i> {{activeOrder.confirmationDate | date:'HH:mm'}}</div>
-      <label class="col-3"><strong translate>Estimated Date Of Delivery: </strong></label>
-      <div class="col-9"><i class="fas fa-calendar-alt" *ngIf="activeOrder.estimatedDate"></i>
+      <label class="col-3" *ngIf="activeOrder.status === 'Accepted'"><strong translate>Estimated Date Of Delivery: </strong></label>
+      <div class="col-9"><i class="fas fa-calendar-alt" *ngIf="activeOrder.status === 'Accepted'"></i>
         {{activeOrder.estimatedDate | date:'dd.MM.yyyy'}} <i *ngIf="activeOrder.estimatedDate" class="fas fa-clock"></i>
         {{activeOrder.estimatedDate | date:'HH:mm'}}</div>
       <label class="col-12"><strong translate>Products: </strong></label>

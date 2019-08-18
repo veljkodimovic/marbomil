@@ -73,13 +73,27 @@ export class OrderViewComponent implements OnInit {
     });
   }
 
+  filterStatuses(statusId: string) {
+    if (statusId === 'ReadyForProcessing') {
+      return this.statuses;
+    } else if (statusId === 'Accepted') {
+      this.statuses = [this.statuses[1], this.statuses[2], this.statuses[3]];
+    } else if (statusId === 'Rejected') {
+      this.statuses = [this.statuses[1], this.statuses[2]];
+    } else if (statusId === 'Completed') {
+      this.statuses = [this.statuses[3]];
+    }
+  }
+
   getOrderDetails(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.ordersService.getOrderById(Number(id)).subscribe((data: Order) => {
       this.order = data;
-      console.log(data);
+      this.order.estimatedDate = new Date(this.order.estimatedDate);
+      this.order.createdDate = new Date(this.order.createdDate);
+      this.filterStatuses(this.order.status);
       this.order.items.forEach(product => {
-        this.orderProducts.push({productId: product.productId, quantity: product.quantity});
+        this.orderProducts.push({ productId: product.productId, quantity: product.quantity });
       });
       this.isLoading = false;
     });
@@ -99,21 +113,38 @@ export class OrderViewComponent implements OnInit {
     }
   }
 
+  updateOrder() {
+    this.ordersService.updateOrder(this.order)
+      .finally(() => { this.isLoading = false; })
+      .subscribe((response: any) => {
+        this.blockAll = false;
+        this.handleResponse(response);
+      });
+
+  }
+
   saveOnClick() {
     this.isLoading = true;
     this.disableSave = true;
     this.blockAll = true;
 
     if (this.isEditMode) {
-
-      this.ordersService.updateOrder(this.order)
-        .finally(() => { this.isLoading = false; })
-        .subscribe((response: any) => {
-          this.blockAll = false;
-          this.handleResponse(response);
+      if (this.order.status === 'Accepted') {
+        this.ordersService.acceptOrder(this.order.id, this.order.estimatedDate).subscribe(() => {
+          this.updateOrder();
         });
+      } else if (this.order.status === 'Rejected') {
+        this.ordersService.rejectOrder(this.order.id, this.order.rejecetedNote).subscribe(() => {
+          this.updateOrder();
+        });
+      } else if (this.order.status === 'Completed') {
+        this.ordersService.completeOrder(this.order.id).subscribe(() => {
+          this.updateOrder();
+        });
+      }
     } else {
       this.order.items = this.orderProducts;
+      this.order.status = 'ReadyForProcessing';
       this.ordersService.createOrderByAdmin(this.order)
         .finally(() => { this.isLoading = false; })
         .subscribe((response: any) => {

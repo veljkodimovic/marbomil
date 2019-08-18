@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class ContactComponent implements OnInit {
 
-  model = new ContactFormClass('', '', '');
+  model = new ContactFormClass('', '', '', '');
   contactName: string;
   contactSubject: string;
   contactMessage: string;
@@ -35,6 +35,7 @@ export class ContactComponent implements OnInit {
     <b>Tekst poruke:<b> ${this.contactMessage}`;
     this.model.subject = 'Nova poruka sa sajta marbomil.rs';
     this.model.message = message;
+    this.model.name = this.contactName;
 
     this.svc.sendEmail(this.model)
     .finally(() => {  })

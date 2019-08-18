@@ -24,8 +24,11 @@ export class VideoComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
-    this.svc.getBannerById(4).subscribe(data => {
-      this.banner = data;
+    this.svc.getAllBanners().subscribe(data => {
+      const max = data.length;
+      const index =  Math.floor(Math.random() * Math.floor(max));
+      this.banner = data[index];
+      this.isLoading = false;
     });
     this.svc.getAllVideos().subscribe(data => {
       this.videoData = data;

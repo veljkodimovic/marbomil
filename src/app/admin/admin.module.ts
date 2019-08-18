@@ -59,6 +59,7 @@ import { OrdersService } from './orders/orders.service';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { NewsletterService } from './newsletter/newsletter.service';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   imports: [
@@ -72,6 +73,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FormsModule,
     AngularEditorModule,
     NgSelectModule,
+    BsDatepickerModule.forRoot(),
     AdminRoutingModule
   ],
   declarations: [

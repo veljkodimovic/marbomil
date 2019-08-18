@@ -44,6 +44,14 @@ export class VideoService {
       .catch((err) => this.persistenceService.handleError(err));
   }
 
+  getAllBanners(): Observable<any[]> {
+    return this.http.get(routes.banners())
+      .map((res: Response) => res.json())
+      .map(body =>
+        body)
+      .catch(err => this.persistenceService.handleError(err));
+  }
+
   // end of service
 
 }

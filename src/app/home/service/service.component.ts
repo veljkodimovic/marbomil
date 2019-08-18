@@ -190,8 +190,11 @@ export class ServiceComponent implements OnInit {
         this.gmapBih.nativeElement.parentNode.parentNode.remove();
       }
       // tslint:disable-next-line:no-shadowed-variable
-      this.svcBanner.getBannerById(2).subscribe(data => {
-        this.banner = data;
+      this.svc.getAllBanners().subscribe(data => {
+        const max = data.length;
+        const index =  Math.floor(Math.random() * Math.floor(max));
+        this.banner = data[index];
+        this.isLoading = false;
       });
       setTimeout(() => {
         this.isLoading = false;

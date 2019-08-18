@@ -78,4 +78,37 @@ export class OrdersService {
       .map((res: Response) => res)
       .catch((res: Response) => this.persistenceService.handleError(res));
   }
+
+  acceptOrder(id: number, estimatedDate: Date) {
+    const date = estimatedDate.toString().replace('Z', '');
+    const body = {
+      id: id,
+      estimatedDate: estimatedDate
+    };
+    this.options = this.persistenceService.getApiHeader();
+    return this.http.post(`${routes.orders()}accept`, body, this.options)
+      .map((res: Response) => res)
+      .catch((res: Response) => this.persistenceService.handleError(res));
+  }
+
+  rejectOrder(id: number, rejectedNote: string) {
+    const body = {
+      id: id,
+      rejectedNote: rejectedNote
+    };
+    this.options = this.persistenceService.getApiHeader();
+    return this.http.post(`${routes.orders()}reject`, body, this.options)
+      .map((res: Response) => res)
+      .catch((res: Response) => this.persistenceService.handleError(res));
+  }
+
+  completeOrder(id: number) {
+    const body = {
+      id: id
+    };
+    this.options = this.persistenceService.getApiHeader();
+    return this.http.post(`${routes.orders()}complete`, body, this.options)
+      .map((res: Response) => res)
+      .catch((res: Response) => this.persistenceService.handleError(res));
+  }
 }

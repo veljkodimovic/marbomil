@@ -31,15 +31,15 @@
           <div class="form-group row">
             <label for="title" class="col-md-4 col-form-label" translate>Buyer</label>
             <div class="col-md-8">
-              <ng-select required="required" class="custom" [items]="customers" [bindLabel]="'companyName'"
-                [bindValue]="'id'" [selectOnTab]="true" [virtualScroll]="true" [(ngModel)]="order.buyerId" name="buyer"
-                #buyer="ngModel"></ng-select>
+              <ng-select [disabled]="isEditMode" required="required" class="custom" [items]="customers"
+                [bindLabel]="'companyName'" [bindValue]="'id'" [selectOnTab]="true" [virtualScroll]="true"
+                [(ngModel)]="order.buyerId" name="buyer" #buyer="ngModel"></ng-select>
               <div *ngIf="f.submitted && buyer.invalid" class="invalid-feedback">
                 <div *ngIf="buyer.errors.required" translate>This field is required</div>
               </div>
             </div>
           </div>
-          <div class="form-group row">
+          <div class="form-group row" *ngIf="isEditMode">
             <label for="title" class="col-md-4 col-form-label" translate>Status</label>
             <div class="col-md-8">
               <ng-select required="required" class="custom" [items]="statuses" [bindLabel]="'name'" [bindValue]="'id'"
@@ -50,10 +50,30 @@
               </div>
             </div>
           </div>
+          <div class="form-group row" *ngIf="isEditMode && order.status === 'Accepted'">
+            <label for="title" class="col-md-4 col-form-label" translate>Estimated Delivery Date</label>
+            <div class="col-md-8">
+              <input type="text" placeholder="Datepicker" class="form-control"
+                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" bsDatepicker [(ngModel)]="order.estimatedDate" [minDate]="order.createdDate"
+                name="estimated" #estimated="ngModel" required="required">
+              <div *ngIf="f.submitted && estimated.invalid" class="invalid-feedback">
+                <div *ngIf="estimated.errors.required" translate>This field is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row"  *ngIf="isEditMode && order.status === 'Rejected'">
+              <label for="title" class="col-md-4 col-form-label" translate>Reason</label>
+              <div class="col-md-8">
+                <textarea class="note-area" [(ngModel)]="order.rejecetedNote" name="rejNote" required="required" #rejNote="ngModel"></textarea>
+                <div *ngIf="f.submitted && rejNote.invalid" class="invalid-feedback">
+                    <div *ngIf="rejNote.errors.required" translate>This field is required</div>
+                  </div>
+              </div>
+            </div>
           <div class="form-group row">
             <label for="title" class="col-md-4 col-form-label" translate>Note</label>
             <div class="col-md-8">
-                <textarea class="note-area" [(ngModel)]="order.note" name="note"></textarea>
+              <textarea class="note-area" [(ngModel)]="order.note" name="note"></textarea>
             </div>
           </div>
           <div class="row">
@@ -124,8 +144,8 @@
               <button type="submit" class="btn btn-primary" (click)="scrollTop(f)" translate><i
                   class="fas fa-save"></i>Save</button>
               <a routerLink="/admin/orders" class="btn btn-secondary" translate><i class="fas fa-ban"></i>Cancel</a>
-              <a class="btn btn-danger" *ngIf="isEditMode" (click)="openModal()" translate><i
-                  class="fas fa-trash"></i>Delete</a>
+              <!-- <a class="btn btn-danger" *ngIf="isEditMode" (click)="openModal()" translate><i
+                  class="fas fa-trash"></i>Delete</a> -->
             </div>
           </div>
         </div>

@@ -1,70 +1,91 @@
 <div class="container" style="padding-top: 80px;" *ngIf="!isLoading">
-  <div class="row">
-    <div class="col-sm-12">
-      <h3 class="category-collection-title"><span translate>Search results for </span>"<strong>{{searchParam}}</strong>"
-      </h3>
-      <!--categories-->
-      <div class="row categories-list padding" *ngIf="searchResults.categories.length">
-          <h4 class="category-collection-title col-12"><span translate>Categories</span></h4>
-        <div class="col-sm-3 categories-list-item content-box" *ngFor="let category of searchResults.categories">
-          <a (click)="goToCategory(category)">
-            <img src="{{apiUrl}}/{{category.imageCropUrl}}" alt="{{category.title}}">
-            <div class="content-box-description">
-              <h5>{{category.title}}</h5>
-            </div>
-          </a>
-        </div>
+  <!-- <div class="row"> -->
+  <div class="col-sm-12">
+    <h3 class="category-collection-title"><span translate>Search results for </span>"<strong>{{searchParam}}</strong>"
+    </h3>
+    <div class="row">
+      <div class="col-md-2 filter-content">
+        <button type="button" class="btn btn-sm mb-3 filter-btn"
+          (click)="showProducts = !showProducts"
+          [ngClass]="{'btn-disabled': !showProducts, 'btn-primary': showProducts}" translate>
+          Products <span class="badge badge-light"></span>
+        </button>
+        <button type="button" class="btn btn-sm mb-3 filter-btn"
+          (click)="showCategories = !showCategories"
+          [ngClass]="{'btn-disabled': !showCategories, 'btn-primary': showCategories}" translate>
+          Categories <span class="badge badge-light"></span>
+        </button>
+        <button type="button" class="btn btn-sm mb-3 filter-btn"
+          (click)="showCollections = !showCollections"
+          [ngClass]="{'btn-disabled': !showCollections, 'btn-primary': showCollections}" translate>
+          Collections <span class="badge badge-light"></span>
+        </button>
       </div>
-      <!--collections-->
-      <div class="row categories-list padding" *ngIf="searchResults.collections.length">
-          <h4 class="category-collection-title col-12"><span translate>Collections</span></h4>
-        <div class="col-sm-3 categories-list-item content-box" *ngFor="let collection of searchResults.collections">
-          <a (click)="goToCollection(collection)">
-            <img src="{{apiUrl}}/{{collection.imageCropUrl}}" alt="{{collection.title}}">
-            <div class="content-box-description">
-              <h5>{{collection.title}}</h5>
-            </div>
-          </a>
-        </div>
-      </div>
-      <!--products-->
-      <div class="row categories-list padding" *ngIf="searchResults.products.length">
+      <div class="col-md-10">
+        <!--products-->
+        <div class="row categories-list padding" *ngIf="searchResults.products.length && showProducts">
           <h4 class="category-collection-title col-12"><span translate>Products</span></h4>
-        <div class="col-sm-3 product-categories-item content-box" *ngFor="let product of searchResults.products">
-          <a>
-            <img src="{{apiUrl}}/{{product.images[0].imageCropUrl}}" alt="{{product.title}}"
-              (click)="goToProduct(product)">
-            <div class="content-box-description" (click)="goToProduct(product)">
-              <h5>{{product.title}}</h5>
-              <div [hidden]="!isAuth" *ngxPermissionsOnly="['Buyer']" style="height: 25px;"></div>
-              <h4 [hidden]="!isAuth" *ngxPermissionsOnly="['Buyer']" class="text-center small-price">{{product.price}}.00 <label
-                  class="unit">RSD</label>
-              </h4>
-              <h3 [hidden]="!isAuth" *ngxPermissionsOnly="['Buyer']" class="text-center big-price"><b>{{product.price}}.00 <label
-                    class="unit">RSD</label></b></h3>
-            </div>
-            <div class="row cart-box" [hidden]="!isAuth" *ngxPermissionsOnly="['Buyer']">
-              {{counts[i]}}
-              <div class="col-md-4">
-                <input type="number" class="form-control" id="count" [(ngModel)]="product.count" name="count"
-                  #count="ngModel" min="1">
+          <div class="col-sm-3 product-categories-item content-box" *ngFor="let product of searchResults.products">
+            <a>
+              <img src="{{apiUrl}}/{{product.images[0].imageCropUrl}}" alt="{{product.title}}"
+                (click)="goToProduct(product)">
+              <div class="content-box-description" (click)="goToProduct(product)">
+                <h5>{{product.title}}</h5>
+                <div [hidden]="!isAuth" *ngxPermissionsOnly="['Buyer']" style="height: 25px;"></div>
+                <h4 [hidden]="!isAuth" *ngxPermissionsOnly="['Buyer']" class="text-center small-price">
+                  {{product.price}}.00 <label class="unit">RSD</label>
+                </h4>
+                <h3 [hidden]="!isAuth" *ngxPermissionsOnly="['Buyer']" class="text-center big-price">
+                  <b>{{product.price}}.00 <label class="unit">RSD</label></b></h3>
               </div>
-              <div class="col-md-8">
-                <button class="btn btn-sm btn-default" (click)="addToCart(product)" translate><i
-                    class="fas fa-shopping-cart"></i></button>
+              <div class="row cart-box" [hidden]="!isAuth" *ngxPermissionsOnly="['Buyer']">
+                {{counts[i]}}
+                <div class="col-md-4">
+                  <input type="number" class="form-control" id="count" [(ngModel)]="product.count" name="count"
+                    #count="ngModel" min="1">
+                </div>
+                <div class="col-md-8">
+                  <button class="btn btn-sm btn-default" (click)="addToCart(product)" translate><i
+                      class="fas fa-shopping-cart"></i></button>
+                </div>
               </div>
-            </div>
-          </a>
+            </a>
+          </div>
         </div>
-      </div>
-    <!--no items alert-->
-    <div class="col-sm-12 text-center"
-      *ngIf="!searchResults || (searchResults && !searchResults.categories.length && !searchResults.collections.length && !searchResults.products.length)">
-      <div class="alert alert-primary" role="alert">
-        <span translate>No search results for</span><strong> "{{searchParam}}"</strong>
+        <!--categories-->
+        <div class="row categories-list padding" *ngIf="searchResults.categories.length && showCategories">
+          <h4 class="category-collection-title col-12"><span translate>Categories</span></h4>
+          <div class="col-sm-3 categories-list-item content-box" *ngFor="let category of searchResults.categories">
+            <a (click)="goToCategory(category)">
+              <img src="{{apiUrl}}/{{category.imageCropUrl}}" alt="{{category.title}}">
+              <div class="content-box-description">
+                <h5>{{category.title}}</h5>
+              </div>
+            </a>
+          </div>
+        </div>
+        <!--collections-->
+        <div class="row categories-list padding" *ngIf="searchResults.collections.length && showCollections">
+          <h4 class="category-collection-title col-12"><span translate>Collections</span></h4>
+          <div class="col-sm-3 categories-list-item content-box" *ngFor="let collection of searchResults.collections">
+            <a (click)="goToCollection(collection)">
+              <img src="{{apiUrl}}/{{collection.imageCropUrl}}" alt="{{collection.title}}">
+              <div class="content-box-description">
+                <h5>{{collection.title}}</h5>
+              </div>
+            </a>
+          </div>
+        </div>
+        <!--no items alert-->
+        <div class="col-sm-12 text-center no-results-alert"
+          *ngIf="!searchResults || (searchResults && (!searchResults.categories.length || !showCategories) && (!searchResults.collections.length || !showCollections) && (!searchResults.products.length || !showProducts))">
+          <div class="alert alert-primary" role="alert">
+            <span translate>No search results for</span><strong> "{{searchParam}}"</strong>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+  <!-- </div> -->
 </div>
 <app-loader [isLoading]="isLoading"></app-loader>

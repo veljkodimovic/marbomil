@@ -18,6 +18,9 @@ export class SearchResultsComponent implements OnInit {
   isLoading: boolean;
   apiUrl: string;
   isAuth: boolean;
+  showProducts = true;
+  showCategories = true;
+  showCollections = true;
   counts: number[] = [];
   searchResults: any = {
     categories: [],

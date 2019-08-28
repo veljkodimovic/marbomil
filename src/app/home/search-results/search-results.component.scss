@@ -6,6 +6,19 @@
     border-bottom: 2px solid #000;
 }
 
+.filter-content { 
+    border-right: 1px solid $gray-300;
+    padding: 60px 20px 0px 20px;
+}
+
+.filter-btn { 
+    min-width: 100%;
+}
+
+.no-results-alert { 
+    padding-top: 60px;
+}
+
 .product-title { 
     min-height: 45px;
 }

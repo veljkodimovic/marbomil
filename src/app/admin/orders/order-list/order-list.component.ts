@@ -4,6 +4,8 @@ import { Order } from '@app/core/types/order';
 import { Router } from '@angular/router';
 import { OrdersService } from '../orders.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CustomersService } from '@app/admin/customers/customers.service';
+import { Customer } from '@app/core/types/customer';
 
 @Component({
   selector: 'app-order-list',
@@ -17,8 +19,22 @@ export class OrderListComponent implements OnInit {
   ordersData: Order[];
   activeOrder: Order;
   isLoading: boolean;
+  priceFrom: number;
+  priceTo: number;
+
+  selectedStatuses = ['ReadyForProcessing', 'Accepted', 'Completed'];
+  statuses = [
+    { id: 'ReadyForProcessing', name: 'Ready For Processing' },
+    { id: 'Accepted', name: 'Accepted' },
+    { id: 'Rejected', name: 'Rejected' },
+    { id: 'Completed', name: 'Completed' }
+  ];
+  allOrders: Order[];
+  customers: Customer[];
+  selectedCustomers: any;
 
   constructor(private orderService: OrdersService,
+    private customersService: CustomersService,
     private router: Router,
     private modalService: NgbModal) { }
 
@@ -28,10 +44,33 @@ export class OrderListComponent implements OnInit {
   }
 
   getAllOrders() {
-    this.orderService.getAllOrders().subscribe(data => {
-      this.ordersData = data;
-      this.isLoading = false;
+    this.customersService.getAllCustomers().subscribe((customers: Customer[]) => {
+      this.customers = customers;
+      this.orderService.getAllOrders().subscribe(data => {
+        this.allOrders = data;
+        this.filterOrders(this.allOrders);
+        this.isLoading = false;
+      });
     });
+  }
+
+  filterOrders(data: Order[]) {
+    // this.priceFrom = this.priceFrom ? this.priceFrom : 0;
+    // this.priceTo = this.priceTo ? this.priceTo : 0;
+    this.ordersData = [...this.allOrders];
+    if (this.selectedStatuses && this.selectedStatuses.length) {
+      this.ordersData = [...data.filter(o => this.selectedStatuses.includes(o.status))];
+    }
+    if (this.priceFrom) {
+      this.ordersData = [...this.ordersData.filter(o => this.calculatePrice(o) >= this.priceFrom)];
+    }
+    if (this.priceTo) {
+      this.ordersData = [...this.ordersData.filter(o => this.calculatePrice(o) <= this.priceTo)];
+    }
+    if (this.selectedCustomers && this.selectedCustomers.length) {
+      this.ordersData = [...this.ordersData.filter(o => this.selectedCustomers.includes(o.buyerId))];
+    }
+
   }
 
   calculatePrice(order: Order) {

@@ -1,7 +1,7 @@
 <div class="container" *ngIf="!isLoading">
   <div class="row">
     <div class="col-sm-12 page-title-icon">
-      <h1>Kontakt</h1>
+      <h1 translate>Contact</h1>
     </div>
   </div>
   <div class="row">
@@ -9,21 +9,21 @@
       <form (ngSubmit)="onSubmit()" class="contact-form">
         <simple-notifications></simple-notifications>
         <div class="form-group">
-          <label for="name">Ime i prezime</label>
+          <label for="name" translate>Full Name:</label>
           <input type="text" class="form-control form-control-lg" name="name" id="name" [(ngModel)]="contactName">
         </div>
         <div class="form-group">
-          <label for="email">Email:</label>
+          <label for="email" translate>Email:</label>
           <input type="email" class="form-control form-control-lg" name="email" id="email" [(ngModel)]="model.email">
         </div>
         <div class="form-group">
-          <label for="subject">Naslov Poruke</label>
+          <label for="subject" translate>Subject:</label>
           <input type="text" class="form-control form-control-lg" name="subject" id="subject" [(ngModel)]="contactSubject">
         </div>
         <div class="form-group">
           <textarea class="form-control form-control-lg" name="note" id="note" rows="3" [(ngModel)]="contactMessage"></textarea>
         </div>
-        <button type="submit" class="btn large-btn btn-primary mb-2">Pošalji</button>
+        <button type="submit" class="btn large-btn btn-primary mb-2" translate>Send</button>
       </form>
     </div>
   </div>

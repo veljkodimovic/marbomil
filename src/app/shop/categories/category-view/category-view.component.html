@@ -3,7 +3,7 @@
     <div class="col-12">
       <ul class="breadcrumbs">
         <li>
-          <a routerLink="/categories">Proizvodi</a><i class="fas fa-chevron-right"></i>
+          <a routerLink="/categories" translate>Products</a><i class="fas fa-chevron-right"></i>
         </li>
       </ul>
     </div>
@@ -41,7 +41,7 @@
           </a>
         </div>
       </div>
-      <h3 class="category-collection-title" *ngIf="products && products.length">Products Out Of Collections</h3>
+      <h3 class="category-collection-title" *ngIf="products && products.length" translate>Products Out Of Collections</h3>
       <div class="row categories-list" *ngIf="products && products.length">
         <div class="col-sm-4 product-categories-item content-box" *ngFor="let product of products">
           <a>

@@ -13,11 +13,11 @@
       <div class="admin-list-item">
         <div class="row">
           <div class="col-10">
-            <p><a class="admin-list-name" (click)="openDetails(order, content)">{{'Order No.' | translate}}
+            <p><a class="admin-list-name" (click)="openDetails(order, content)">{{'Order No' | translate}}
                 {{order.id}}</a></p>
             <div class="row admin-list-contact">
               <p class="col-sm-6">
-                <span class="{{order.status}}"><i class="fas fa-circle"></i> {{order.status}}</span><br />
+                <span class="{{order.status}}"><i class="fas fa-circle"></i> {{order.status | translate}}</span><br />
                 <span *ngIf="order.createdDate"><i class="fas fa-calendar-alt"></i>
                   {{order.createdDate | date:'dd.MM.yyyy'}} <i class="fas fa-clock"></i>
                   {{order.createdDate | date:'HH:mm'}} <br></span>
@@ -48,7 +48,7 @@
     <div class="col-12 row">
 
       <label class="col-3"><strong translate>Status: </strong></label>
-      <div class="col-9 {{activeOrder.status}}"><i class="fas fa-circle"></i> {{activeOrder.status}}</div>
+      <div class="col-9 {{activeOrder.status}}"><i class="fas fa-circle"></i> {{activeOrder.status | translate}}</div>
       <label class="col-3" *ngIf="activeOrder.status === 'Rejected'"><strong translate>Reason: </strong></label>
       <div class="col-9" *ngIf="activeOrder.status === 'Rejected'">{{activeOrder.rejectedNote}}</div>
       <label class="col-3"><strong translate>Bayer: </strong></label>
@@ -109,6 +109,6 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="modal.close('Save click')">Close</button>
+    <button type="button" class="btn btn-primary" (click)="modal.close('Save click')" translate>Close</button>
   </div>
 </ng-template>

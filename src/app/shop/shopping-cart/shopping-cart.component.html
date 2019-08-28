@@ -2,22 +2,22 @@
   <div class="col-sm-12" *ngIf="cart && cart.length">
     <div class="row header">
       <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2 d-none d-sm-block"></div>
-      <div class="col-lg-5 col-md-5 col-sm-4 col-xs-4 d-none d-sm-block">Product</div>
-      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 d-none d-sm-block">Price</div>
-      <div class="col-lg-1 col-md-2 col-sm-2 col-xs-2 d-none d-sm-block">Count</div>
-      <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2 d-none d-sm-block">Total price</div>
+      <div class="col-lg-5 col-md-5 col-sm-4 col-xs-4 d-none d-sm-block" translate>Product</div>
+      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 d-none d-sm-block" translate>Price</div>
+      <div class="col-lg-1 col-md-2 col-sm-2 col-xs-2 d-none d-sm-block" translate>Quantity</div>
+      <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2 d-none d-sm-block" translate>Total price</div>
       <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 d-none d-sm-block"></div>
     </div>
     <div class="row header" *ngFor="let item of cart">
       <div class="col-lg-3 col-md-2 col-sm-2"><img src="{{apiUrl}}/{{item.images[0].imageCropUrl}}" alt="{{item.title}}" class="product-img"></div>
-      <div class="col-lg-5 col-md-5 col-sm-4 col-padding"><strong class="d-block d-sm-none">Title: </strong>{{item.title}}</div>
-      <div class="col-lg-1 col-md-1 col-sm-1 col-padding"><strong class="d-block d-sm-none">Price: </strong>{{item.price}}</div>
-      <div class="col-lg-1 col-md-2 col-sm-2"><strong class="d-block d-sm-none">Count: </strong><input type="number" class="form-control count-field" id="count" [(ngModel)]="item.count" name="count" #count="ngModel" min="1" (ngModelChange)="changeCountOfItem()"></div>
-      <div class="col-lg-1 col-md-1 col-sm-2 col-padding"><strong class="d-block d-sm-none">Total price: </strong>{{item.price * item.count}}</div>
+      <div class="col-lg-5 col-md-5 col-sm-4 col-padding"><strong class="d-block d-sm-none" translate>Title: </strong>{{item.title}}</div>
+      <div class="col-lg-1 col-md-1 col-sm-1 col-padding"><strong class="d-block d-sm-none" translate>Price: </strong>{{item.price}}</div>
+      <div class="col-lg-1 col-md-2 col-sm-2"><strong class="d-block d-sm-none" translate>Quantity: </strong><input type="number" class="form-control count-field" id="count" [(ngModel)]="item.count" name="count" #count="ngModel" min="1" (ngModelChange)="changeCountOfItem()"></div>
+      <div class="col-lg-1 col-md-1 col-sm-2 col-padding"><strong class="d-block d-sm-none" translate>Total price: </strong>{{item.price * item.count}}</div>
       <div class="col-lg-1 col-md-1 col-sm-1 text-right col-padding"><a class="remove-link" (click)="removeFromCart(item)"><i class="fas fa-trash"></i></a></div>
     </div>
     <div class="row header">
-      <div class="col-12 text-center"><strong>Total price: </strong>{{totalPrice(cart)}}</div>
+      <div class="col-12 text-center"><strong translate>Total price: </strong>{{totalPrice(cart)}}</div>
     </div>
     <div class="row">
       <div class="col-12 text-center mb-4">
@@ -26,18 +26,18 @@
     </div>
     <div class="row">
         <div class="col-12 text-center">
-            <button class="btn btn-primary" (click)="openConfirmModal(confirm)">Finish purchase</button>
+            <button class="btn btn-primary" (click)="openConfirmModal(confirm)" translate>Finish purchase</button>
         </div>
     </div>
   </div>
   <div class="col-sm-12" style="padding-top: 80px;" *ngIf="!cart || !cart.length">
       <div class="col-sm-12 text-center" translate>
-          <div class="alert alert-primary" role="alert">
+          <div class="alert alert-primary" role="alert" translate>
             No products in a cart
           </div>
           <div class="row">
             <div class="col-12 text-center">
-              <button class="btn btn-primary" [routerLink]="['/categories']">Go to shop</button>
+              <button class="btn btn-primary" [routerLink]="['/categories']" translate>Go to shop</button>
             </div>
           </div>
         </div>
@@ -48,16 +48,16 @@
 
 <ng-template #confirm let-c="close" let-d="dismiss">
     <div class="modal-header">
-      <h4 class="modal-title">Confirm purchase</h4>
+      <h4 class="modal-title" translate>Confirm purchase</h4>
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-      <p>Are you sure you want to confirm your purchase?</p>
+      <p translate>Are you sure you want to confirm your purchase?</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-light" (click)="c('Close click')">No</button>
-      <button type="button" class="btn btn-primary" (click)="confirmPurchase()">Yes</button>
+      <button type="button" class="btn btn-light" (click)="c('Close click')" translate>No</button>
+      <button type="button" class="btn btn-primary" (click)="confirmPurchase()" translate>Yes</button>
     </div>
   </ng-template>

@@ -25,7 +25,7 @@ const routes: Routes = Route.withShell([
 
   { path: 'servis', component: ServiceComponent, data: { title: extract('Servisi') } },
   { path: 'garancija', component: WarrantyComponent, data: { title: extract('Garancija') } },
-  { path: 'kvalitet', component: QualityComponent, data: { title: extract('Kvalitet') } },
+  { path: 'quaility', component: QualityComponent, data: { title: extract('Kvalitet') } },
   { path: 'kontakt', component: ContactComponent, data: { title: extract('Kontakt') } },
   { path: 'video', component: VideoComponent, data: { title: extract('Video') } },
   { path: 'katalog', component: CatalogueComponent, data: { title: extract('Katalog') } },

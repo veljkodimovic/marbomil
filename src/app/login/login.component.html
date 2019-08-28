@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-12 page-title-icon">
-      <h1>Login</h1>
+      <h1 translate>Login</h1>
     </div>
     <div class="col-sm-6 offset-sm-3">
       <div class="login-container" fxLayout="row" fxLayoutAlign="center">
@@ -9,25 +9,23 @@
           <div class="login-error" [hidden]="!error || isLoading" translate>
             Username or password incorrect.
           </div>
-          <br/>
+          <br />
           <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control form-control-lg" formControlName="username"  id="username" >
+            <label for="username" translate>Username</label>
+            <input type="text" class="form-control form-control-lg" formControlName="username" id="username">
           </div>
           <div class="form-group">
-            <label for="username">Password</label>
-            <input type="password" class="form-control form-control-lg" formControlName="password"  id="password" >
+            <label for="password" translate>Password</label>
+            <input type="password" class="form-control form-control-lg" formControlName="password" id="password">
           </div>
           <div class="form-group">
-            <!-- <input type="checkbox" formControlName="remember"  class="form-check-input" id="remember"> -->
-            <a class="btn btn-link btn-sm" [routerLink] = "['/forgot-password']" translate><i class="fas fa-unlock-alt"></i> Forgot password </a>
-            <!-- <label class="form-check-label" for="remember">Remember me</label> -->
+            <a class="btn btn-link btn-sm" [routerLink]="['/forgot-password']" translate><i
+                class="fas fa-unlock-alt"></i> Forgot password </a>
           </div>
-          <button type="submit" [disabled]="loginForm.invalid || isLoading" class="btn large-btn btn-primary mb-2">Login</button>
+          <button type="submit" [disabled]="loginForm.invalid || isLoading" class="btn large-btn btn-primary mb-2"
+            translate>Login</button>
         </form>
       </div>
     </div>
   </div>
 </div>
-
-

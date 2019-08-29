@@ -6,12 +6,14 @@ import { MaterialModule } from '@app/material.module';
 import { LoaderComponent } from './loader/loader.component';
 import { DeleteModalComponent } from './delete-modal/delete-modal';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     FlexLayoutModule,
     MaterialModule,
-    CommonModule
+    CommonModule,
+    TranslateModule
   ],
   declarations: [
     LoaderComponent,

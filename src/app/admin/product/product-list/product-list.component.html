@@ -1,10 +1,10 @@
 <div class="container-fluid" [hidden]="isLoading">
   <div class="row">
     <div class="col">
-      <h1 class="admin-headline container">
-        Proizvodi
-        <a class="admin-headline-link" routerLink="/admin">
-          <i class="fas fa-chevron-left"></i> Nazad
+      <h1 class="admin-headline container" translate>
+        Products
+        <a class="admin-headline-link" routerLink="/admin" translate>
+          <i class="fas fa-chevron-left"></i> Back
         </a>
       </h1>
     </div>
@@ -15,11 +15,11 @@
   <div class="row justify-content-end mb-4">
     <div class="col-auto">
       <div class="form-group row">
-        <label for="category" class="col-auto col-form-label" translate>Kategorija</label>
+        <label for="category" class="col-auto col-form-label" translate>Category</label>
         <div class="col-auto">
           <select class="form-control" id="category" name="category" [(ngModel)]="activeCategoryId"
             (change)="updateProducts(true)">
-            <option value="">Sve Kategorije</option>
+            <option value="" translate>All Categories</option>
             <option *ngFor="let cat of categories;index as i" [ngValue]="cat.id" name="cat.title">{{cat.title}}</option>
           </select>
         </div>
@@ -27,19 +27,19 @@
     </div>
     <div class="col-auto">
       <div class="form-group row">
-        <label for="collection" class="col-auto col-form-label" translate>Kolekcija</label>
+        <label for="collection" class="col-auto col-form-label" translate>Collection</label>
         <div class="col-auto">
           <select class="form-control" id="collection" name="collection" [(ngModel)]="activeCollectionId"
             (change)="updateProducts()" [disabled]="!activeCategoryId">
-            <option value="">Sve Kolekcije</option>
+            <option value="" translate>All collections</option>
             <option *ngFor="let coll of collections;index as i" [ngValue]="coll.id" name="coll.title">{{coll.title}}</option>
           </select>
         </div>
       </div>
     </div>
     <div class="col-auto ml-auto">
-      <a class="btn btn-primary" routerLink="/admin/product/new">
-        <i class="fas fa-plus"></i> Dodaj novi
+      <a class="btn btn-primary" routerLink="/admin/product/new" translate>
+        <i class="fas fa-plus"></i> Add new i
       </a>
     </div>
   </div>

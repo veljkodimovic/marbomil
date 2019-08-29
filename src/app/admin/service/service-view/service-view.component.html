@@ -1,14 +1,14 @@
 <div class="container" [hidden]="isLoading">
   <div class="row">
     <div class="col-sm-12" *ngIf="service">
-      <h1 class="admin-headline" *ngIf="isEditMode">Izmena Postojećeg
-        <a class="admin-headline-link" routerLink="/admin/service">
-          <i class="fas fa-chevron-left"></i> Nazad na listu
+      <h1 class="admin-headline" *ngIf="isEditMode" translate>Edit service
+        <a class="admin-headline-link" routerLink="/admin/service" translate>
+          <i class="fas fa-chevron-left"></i> Back to list
         </a>
       </h1>
-      <h1 class="admin-headline" *ngIf="!isEditMode">Kreiranje Novog
-        <a class="admin-headline-link" routerLink="/admin/service">
-          <i class="fas fa-chevron-left"></i> Nazad na listu
+      <h1 class="admin-headline" *ngIf="!isEditMode" translate>Create service
+        <a class="admin-headline-link" routerLink="/admin/service" translate>
+          <i class="fas fa-chevron-left"></i> Back to list
         </a>
       </h1>
     </div>
@@ -22,86 +22,86 @@
       <div class="col-md-6 offset-md-1">
         <div class="" *ngIf="service">
           <div class="form-group row">
-            <label for="title" class="col-md-2 col-form-label">Naziv</label>
+            <label for="title" class="col-md-2 col-form-label" translate>Title</label>
             <div class="col-md-10">
               <input type="text" class="form-control" id="title" [(ngModel)]="service.title" name="name" #name="ngModel" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required maxlength="100">
               <div *ngIf="f.submitted && name.invalid" class="invalid-feedback">
-                  <div *ngIf="name.errors.required">Ovo polje je obavezno</div>
+                  <div *ngIf="name.errors.required" translate>This field is required</div>
               </div>
             </div>
           </div>
           <div class="form-group row">
-            <label for="street" class="col-md-2 col-form-label">Adresa</label>
+            <label for="street" class="col-md-2 col-form-label" translate>Address</label>
             <div class="col-md-10">
               <input type="text" class="form-control" id="street" name="street" [(ngModel)]="service.street">
             </div>
           </div>
           <div class="form-group row">
-            <label for="city" class="col-md-2 col-form-label">Grad</label>
+            <label for="city" class="col-md-2 col-form-label" translate>City</label>
             <div class="col-md-10">
               <input type="text" class="form-control" id="city" name="city" [(ngModel)]="service.city">
             </div>
           </div>
           <div class="form-group row">
-            <label for="postal" class="col-md-2 col-form-label">Poštanski broj</label>
+            <label for="postal" class="col-md-2 col-form-label" translate>Postal Code</label>
             <div class="col-md-10">
               <input type="text" class="form-control" id="postal" name="postal" [(ngModel)]="service.postal">
             </div>
           </div>
           <div class="form-group row">
-            <label for="region" class="col-md-2 col-form-label">Opština</label>
+            <label for="region" class="col-md-2 col-form-label" translate>Municipality</label>
             <div class="col-md-10">
               <input type="text" class="form-control" id="region" name="region" [(ngModel)]="service.region">
             </div>
           </div>
           <div class="form-group row">
-            <label for="country" class="col-md-2 col-form-label">Drzava</label>
+            <label for="country" class="col-md-2 col-form-label" translate>Country</label>
             <div class="col-md-10">
               <select class="form-control" id="country" name="country" [(ngModel)]="service.country">
                 <option value=""></option>
-                <option value="Srbija">Srbija</option>
-                <option value="Hrvatska">Hrvatska</option>
-                <option value="Makedonija">Makedonija</option>
-                <option value="Crna Gora">Crna Gora</option>
-                <option value="Republika Srpska">Republika Srpska</option>
+                <option value="Srbija" translate>Serbia</option>
+                <option value="Hrvatska" translate>Croatia</option>
+                <option value="Makedonija" translate>Republic of Macedonia</option>
+                <option value="Crna Gora" translate>Montenegro</option>
+                <option value="Republika Srpska" translate>Republika Srpska</option>
               </select>
             </div>
           </div>
           <div class="form-group row">
-            <label for="latitude" class="col-md-2 col-form-label">Latitude</label>
+            <label for="latitude" class="col-md-2 col-form-label" translate>Latitude</label>
             <div class="col-md-10">
               <input type="text" class="form-control" id="latitude" name="latitude" [(ngModel)]="service.latitude">
             </div>
           </div>
           <div class="form-group row">
-            <label for="longitude" class="col-md-2 col-form-label">Longitude</label>
+            <label for="longitude" class="col-md-2 col-form-label" translate>Longitude</label>
             <div class="col-md-10">
               <input type="text" class="form-control" id="longitude" name="longitude" [(ngModel)]="service.longitude">
             </div>
           </div>
           <div class="form-group row">
-            <label for="phone" class="col-md-2 col-form-label">Telefon</label>
+            <label for="phone" class="col-md-2 col-form-label" translate>Phone</label>
             <div class="col-md-10">
               <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="service.phone">
             </div>
           </div>
           <div class="form-group row">
-            <label for="email" class="col-md-2 col-form-label">Email</label>
+            <label for="email" class="col-md-2 col-form-label" translate>Email</label>
             <div class="col-md-10">
               <input type="email" class="form-control" id="email" name="email" [(ngModel)]="service.email">
             </div>
           </div>
           <div class="form-group row">
-            <label for="website" class="col-md-2 col-form-label">Website</label>
+            <label for="website" class="col-md-2 col-form-label" translate>Website</label>
             <div class="col-md-10">
               <input type="text" class="form-control" id="website" name="website" [(ngModel)]="service.website">
             </div>
           </div>
           <div class="row">
             <div class="col-sm-10 offset-md-2">
-              <button type="submit" class="btn btn-primary" (click)="scrollTop(f)"><i class="fas fa-save"></i> Sačuvaj</button>
-              <a routerLink="/admin/service" class="btn btn-secondary"><i class="fas fa-ban"></i> Otkaži</a>
-              <a class="btn btn-danger" *ngIf="isEditMode" (click)="openModal()"><i class="fas fa-trash"></i> Izbriši</a>
+              <button type="submit" class="btn btn-primary" (click)="scrollTop(f)" translate><i class="fas fa-save"></i> Save</button>
+              <a routerLink="/admin/service" class="btn btn-secondary" translate><i class="fas fa-ban"></i> Cancel</a>
+              <a class="btn btn-danger" *ngIf="isEditMode" (click)="openModal()" translate><i class="fas fa-trash"></i> Delete</a>
             </div>
           </div>
         </div>

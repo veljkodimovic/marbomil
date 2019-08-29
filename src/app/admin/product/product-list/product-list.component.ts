@@ -7,6 +7,7 @@ import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal'
 import { CollectionService } from '../../collections/collections.service';
 import { Collection } from '@app/core/types/collection';
 import { environment } from '@env/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 class CollectionView {
   id: number;
@@ -53,8 +54,11 @@ export class ProductListComponent implements OnInit {
   collectionViews: CollectionView[] = [];
   activeCollectionId: number;
   isLoading: boolean;
+  productsOutOfCollections: any = this.translateService.get('Products Out Of Collections');
+  unknownCategory: any = this.translateService.get('Unknown category');
   constructor(private svc: ProductService,
     private collectionsService: CollectionService,
+    private translateService: TranslateService,
     private route: ActivatedRoute
   ) {
     this.apiUrl = environment.serverUrl;
@@ -90,12 +94,12 @@ export class ProductListComponent implements OnInit {
 
   getCollectionNameById(collectionId: number): string {
     // tslint:disable-next-line:max-line-length
-    return this.allCollections.find((c: Collection) => c.id === collectionId) ? this.allCollections.find((c: Collection) => c.id === collectionId).title : 'Products Out Of Collections';
+    return this.allCollections.find((c: Collection) => c.id === collectionId) ? this.allCollections.find((c: Collection) => c.id === collectionId).title : this.productsOutOfCollections.value;
   }
 
   getCategoryNameById(categoryId: number): string {
     // tslint:disable-next-line:max-line-length
-    return this.categories.find((c: Collection) => c.id === categoryId) ? this.categories.find((c: Collection) => c.id === categoryId).title : 'Unknown Category';
+    return this.categories.find((c: Collection) => c.id === categoryId) ? this.categories.find((c: Collection) => c.id === categoryId).title : this.unknownCategory.value;
   }
 
   devideProductsByCollection() {

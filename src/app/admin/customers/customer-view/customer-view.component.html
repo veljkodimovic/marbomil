@@ -1,12 +1,12 @@
 <div class="container" [hidden]="isLoading">
   <div class="row">
     <div class="col-sm-12" *ngIf="customer">
-      <h1 class="admin-headline" *ngIf="isEditMode" translate>Edit existing customer
+      <h1 class="admin-headline" *ngIf="isEditMode" translate>Edit customer
         <a class="admin-headline-link" routerLink="/admin/customers" translate>
           <i class="fas fa-chevron-left"></i> Back to list
         </a>
       </h1>
-      <h1 class="admin-headline" *ngIf="!isEditMode" translate>Create new customer
+      <h1 class="admin-headline" *ngIf="!isEditMode" translate>Create customer
         <a class="admin-headline-link" routerLink="/admin/customers" translate>
           <i class="fas fa-chevron-left"></i> Back to list
         </a>

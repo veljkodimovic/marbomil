@@ -29,15 +29,20 @@ export class OrderViewComponent implements OnInit {
   disableSave = false;
   blockAll = false;
 
+  readyForProcessing: any = this.translate.get('ReadyForProcessing');
+  accepted: any = this.translate.get('Accepted');
+  rejeceted: any = this.translate.get('Rejected');
+  completed: any = this.translate.get('Completed');
+
   success: any = this.translate.get('Success');
   savingError: any = this.translate.get('Saving error');
   successfullSavedOrder: any = this.translate.get('Successfull saved order');
   customers: Customer[];
   statuses = [
-    { id: 'ReadyForProcessing', name: 'Ready For Processing' },
-    { id: 'Accepted', name: 'Accepted' },
-    { id: 'Rejected', name: 'Rejected' },
-    { id: 'Completed', name: 'Completed' }
+    { id: 'ReadyForProcessing', name: this.readyForProcessing.value },
+    { id: 'Accepted', name: this.accepted.value },
+    { id: 'Rejected', name: this.rejeceted.value },
+    { id: 'Completed', name: this.completed.value }
   ];
   products: Product[];
   orderProducts: any[] = [];

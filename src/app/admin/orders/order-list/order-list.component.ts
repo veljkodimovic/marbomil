@@ -6,6 +6,7 @@ import { OrdersService } from '../orders.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CustomersService } from '@app/admin/customers/customers.service';
 import { Customer } from '@app/core/types/customer';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-order-list',
@@ -22,12 +23,17 @@ export class OrderListComponent implements OnInit {
   priceFrom: number;
   priceTo: number;
 
+  readyForProcessing: any = this.translateService.get('ReadyForProcessing');
+  accepted: any = this.translateService.get('Accepted');
+  rejeceted: any = this.translateService.get('Rejected');
+  completed: any = this.translateService.get('Completed');
+
   selectedStatuses = ['ReadyForProcessing', 'Accepted', 'Completed'];
   statuses = [
-    { id: 'ReadyForProcessing', name: 'Ready For Processing' },
-    { id: 'Accepted', name: 'Accepted' },
-    { id: 'Rejected', name: 'Rejected' },
-    { id: 'Completed', name: 'Completed' }
+    { id: 'ReadyForProcessing', name: this.readyForProcessing.value },
+    { id: 'Accepted', name: this.accepted.value },
+    { id: 'Rejected', name: this.rejeceted.value },
+    { id: 'Completed', name: this.completed.value }
   ];
   allOrders: Order[];
   customers: Customer[];
@@ -36,6 +42,7 @@ export class OrderListComponent implements OnInit {
   constructor(private orderService: OrdersService,
     private customersService: CustomersService,
     private router: Router,
+    private translateService: TranslateService,
     private modalService: NgbModal) { }
 
   ngOnInit() {

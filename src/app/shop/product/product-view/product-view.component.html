@@ -3,7 +3,7 @@
     <div class="col-12">
       <ul class="breadcrumbs">
         <li>
-          <a routerLink="/categories">Proizvodi</a><i class="fas fa-chevron-right"></i>
+          <a routerLink="/categories" translate>Products</a><i class="fas fa-chevron-right"></i>
         </li>
         <li *ngIf="productCategory">
           <a routerLink="/categories/{{productCategory.id}}">{{productCategory.title}}</a><i
@@ -33,13 +33,12 @@
     <div class="col-sm-6 offset-sm-1">
       <h1>{{product.title}}</h1>
       <div class="single-product-data">
-        <p><span>Šifra:</span> {{product.code}}</p>
-        <p *ngIf="product.dimension"><span>Dimenzije proizvoda:</span> {{product.dimension}}</p>
+        <p><span translate>Code:</span> {{product.code}}</p>
+        <p *ngIf="product.dimension"><span translate>Dimensions:</span> {{product.dimension}}</p>
         <!--<p><span>Dimenzije proizvoda (ŠxVxD):</span> {{product.width}}x{{product.height}}x{{product.depth}}</p>-->
-        <!--<p class="single-product-price">-->
-        <!--{{product.price * ((100 - product.discount)/100) | number : '1.2-2'}} <span class="single-product-price-currency">RSD</span>-->
-        <!--<span *ngIf="product.discount > 0" class="single-product-price-old">{{product.price | number : '1.2-2'}}  <span class="single-product-price-currency">RSD</span></span>-->
-        <!--</p>-->
+        <p class="single-product-price">
+        {{product.price | number : '1.2-2'}} <span class="single-product-price-currency">RSD</span>
+        </p>
       </div>
       <p class="single-product-description" [innerHtml]="product.description">
         <!-- {{product.description}} -->
@@ -54,8 +53,7 @@
         </div>
         <button class="col-4" (click)="addToCart(product)" class="add-to-cart btn btn-primary" translate>Add to cart</button>
       </div>
-      <a [hidden]="isAuth()" [routerLink]="[ '/login' ]" class="add-to-cart btn btn-primary btn-lg" translate>Log in to
-        web shop</a>
+      <a [hidden]="isAuth()" [routerLink]="[ '/login' ]" class="add-to-cart btn btn-primary btn-lg" translate>Log in to web shop</a>
     </div>
   </div>
 </div>

@@ -1,14 +1,14 @@
 <div class="container" [hidden]="isLoading">
   <div class="row">
     <div class="col-sm-12" *ngIf="collection">
-      <h1 class="admin-headline" *ngIf="isEditMode">Izmena Postojećeg
-        <a class="admin-headline-link" routerLink="/admin/collection">
-          <i class="fas fa-chevron-left"></i> Nazad na listu
+      <h1 class="admin-headline" *ngIf="isEditMode" translate>Edit collection
+        <a class="admin-headline-link" routerLink="/admin/collection" translate>
+          <i class="fas fa-chevron-left"></i> Back to list
         </a>
       </h1>
-      <h1 class="admin-headline" *ngIf="!isEditMode">Kreiranje Novog
-        <a class="admin-headline-link" routerLink="/admin/collection">
-          <i class="fas fa-chevron-left"></i> Nazad na listu
+      <h1 class="admin-headline" *ngIf="!isEditMode" translate>Create collection
+        <a class="admin-headline-link" routerLink="/admin/collection" translate>
+          <i class="fas fa-chevron-left"></i> Back to list
         </a>
       </h1>
     </div>
@@ -19,24 +19,24 @@
       <div class="col-md-5">
 
         <div class="form-group position-fix">
-          <label class="control-label" translate>Slika</label> <span class="mandatory">*</span>
+          <label class="control-label" translate>Image</label> <span class="mandatory">*</span>
           <div class="initial-image image-collections">
             <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
           </div>
           <div class="image-note inline">
-            <label class="control-label" translate>Napomena:</label>
-            <p class="form-control-static">Minimalna dimenzija slike je <span>900x600px</span>. Za slike većih dimenzija, razmera će biti sačuvana.</p>
+            <label class="control-label" translate>Note</label>
+            <p class="form-control-static">{{'Min dimension of image' | translate}} <span>900x600px</span>. {{'For higher resolutions' | translate}}</p>
           </div>
           <div [hidden]="true">
             <input #fileInput type="file" id="imgFile" [hidden]="true" (change)="fileChangeListener($event)">
           </div>
           <div class="image-buttons">
-            <span class="btn btn-primary" translate (click)="uploadImage()">Dodaj Sliku</span>
-            <span class="btn btn-danger" translate (click)="removeImage()">Obriši Sliku</span>
+            <span class="btn btn-primary" translate (click)="uploadImage()" translate>Add image</span>
+            <span class="btn btn-danger" translate (click)="removeImage()" translate>Delete image</span>
           </div>
         </div>
         <div class="form-group margin-top-30">
-          <label class="control-label" translate>Pregled</label>
+          <label class="control-label" translate>Preview</label>
           <div class="image-preview preview-collections">
               <span class="result rounded" *ngIf="data.image">
                 <img class="cropper-size" style="max-height:240px" [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
@@ -47,16 +47,16 @@
       <div class="col-md-6 offset-md-1">
         <div class="" *ngIf="collection">
           <div class="form-group row">
-            <label for="name" class="col-md-2 col-form-label">Naziv</label>
+            <label for="name" class="col-md-2 col-form-label" translate>Title</label>
             <div class="col-md-10">
               <input type="text" class="form-control" id="name" [(ngModel)]="collection.title" name="name" #name="ngModel" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required maxlength="100">
               <div *ngIf="f.submitted && name.invalid" class="invalid-feedback">
-                  <div *ngIf="name.errors.required">Ovo polje je obavezno</div>
+                  <div *ngIf="name.errors.required" translate>This field is required</div>
               </div>
             </div>
           </div>
           <div class="form-group row">
-            <label for="category" class="col-md-2 col-form-label">Kategorija</label>
+            <label for="category" class="col-md-2 col-form-label" translate>Category</label>
             <div class="col-md-10">
               <select class="form-control" id="category" [(ngModel)]="collection.categoryId" name="categoryId">
                 <option value=""></option>
@@ -66,9 +66,9 @@
           </div>
           <div class="row">
             <div class="col-sm-10 offset-md-2">
-              <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Sačuvaj</button>
-              <a routerLink="/admin/collection" class="btn btn-secondary"><i class="fas fa-ban"></i> Otkaži</a>
-              <a class="btn btn-danger" *ngIf="isEditMode" (click)="openModal()"><i class="fas fa-trash"></i> Izbriši</a>
+              <button type="submit" class="btn btn-primary" translate><i class="fas fa-save"></i> Save</button>
+              <a routerLink="/admin/collection" class="btn btn-secondary" translate><i class="fas fa-ban"></i> Cancel</a>
+              <a class="btn btn-danger" *ngIf="isEditMode" (click)="openModal()" translate><i class="fas fa-trash"></i> Delete</a>
             </div>
           </div>
         </div>

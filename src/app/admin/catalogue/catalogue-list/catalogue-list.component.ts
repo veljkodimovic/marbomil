@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Catalogue } from '../../../core/types/catalogue';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteModalComponent } from '@app/shared/delete-modal/delete-modal';
-import { environment } from '@env/environment.prod';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-catalogue-list',

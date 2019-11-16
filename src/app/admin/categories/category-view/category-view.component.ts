@@ -23,7 +23,7 @@ export class CategoryViewComponent implements OnInit {
   cropperSettings: CropperSettings;
   image: any;
   data: any;
-  category: Category = new Category(0, '', '', '', '', '', '.jpg');
+  category: Category = new Category(0, '', null, '', '', '', '', '.jpg');
   categories: any[] = [];
   isLoading: boolean;
   setImage = false;

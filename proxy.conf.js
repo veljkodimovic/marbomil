@@ -11,7 +11,7 @@ const HttpsProxyAgent = require('https-proxy-agent');
 const proxyConfig = [
   {
     context: '/',
-    target: 'http://localhost:8889',
+    target: 'http://www.marbomil.co.rs/',
     changeOrigin: true,
     secure: false
   }

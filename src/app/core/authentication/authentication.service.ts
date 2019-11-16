@@ -33,6 +33,7 @@ export interface TokenData {
 }
 
 const credentialsKey = 'credentials';
+const userDetailsKey = 'username';
 
 const routes = {
   login: () => `/login/`,
@@ -129,10 +130,9 @@ export class AuthenticationService {
     } else {
       sessionStorage.removeItem(credentialsKey);
       localStorage.removeItem(credentialsKey);
-
+      sessionStorage.removeItem(userDetailsKey);
+      localStorage.removeItem(userDetailsKey);
       this._tokenData = null;
-      sessionStorage.removeItem(credentialsKey);
-      localStorage.removeItem(credentialsKey);
     }
   }
 

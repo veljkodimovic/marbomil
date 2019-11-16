@@ -99,7 +99,7 @@ export class ProductListComponent implements OnInit {
 
   getCategoryNameById(categoryId: number): string {
     // tslint:disable-next-line:max-line-length
-    return this.categories.find((c: Collection) => c.id === categoryId) ? this.categories.find((c: Collection) => c.id === categoryId).title : this.unknownCategory.value;
+    return this.categories.find((c: Category) => c.id === categoryId) ? this.categories.find((c: Category) => c.id === categoryId).title : this.unknownCategory.value;
   }
 
   devideProductsByCollection() {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Banner } from '@app/core/types/banner';
 import { CatalogueService } from '@app/admin/catalogue/catalogue.service';
 import { Catalogue } from '@app/core/types/catalogue';
-import { environment } from '@env/environment.prod';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-home-catalogue',

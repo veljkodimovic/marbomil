@@ -70,13 +70,19 @@
           <div class="form-group row">
             <label for="latitude" class="col-md-2 col-form-label" translate>Latitude</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="latitude" name="latitude" [(ngModel)]="sales.latitude">
+              <input type="text" class="form-control" id="latitude" name="latitude" [(ngModel)]="sales.latitude"  #latitude="ngModel" [ngClass]="{ 'is-invalid': f.submitted && latitude.invalid }" required>
+              <div *ngIf="f.submitted && latitude.invalid" class="invalid-feedback">
+                <div *ngIf="latitude.errors.required" translate>This field is required</div>
+            </div>
             </div>
           </div>
           <div class="form-group row">
             <label for="longitude" class="col-md-2 col-form-label" translate>Longitude</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="longitude" name="longitude" [(ngModel)]="sales.longitude">
+              <input type="text" class="form-control" id="longitude" name="longitude" [(ngModel)]="sales.longitude" #longitude="ngModel" [ngClass]="{ 'is-invalid': f.submitted && longitude.invalid }" required>
+              <div *ngIf="f.submitted && longitude.invalid" class="invalid-feedback">
+                <div *ngIf="longitude.errors.required" translate>This field is required</div>
+            </div>
             </div>
           </div>
           <div class="form-group row">

@@ -3,7 +3,7 @@ import { Category } from '@app/core/types/category';
 import { Collection } from '@app/core/types/collection';
 import { Router } from '@angular/router';
 import { CategoryService } from '@app/shop/categories/categories.service';
-import { environment } from '@env/environment.prod';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-categories',

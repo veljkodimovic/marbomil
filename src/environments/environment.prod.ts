@@ -4,7 +4,8 @@ import env from './.env';
 export const environment = {
   production: true,
   version: env.npm_package_version,
-  serverUrl: 'http://localhost:8889',
+  // serverUrl: 'http://localhost:8889',
+  serverUrl: 'http://www.marbomil.co.rs',
   defaultLanguage: 'sr-Latn',
   supportedLanguages: [
     'en-US',

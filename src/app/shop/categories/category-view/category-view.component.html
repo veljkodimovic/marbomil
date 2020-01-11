@@ -49,8 +49,9 @@
             <div class="content-box-description" (click)="goToProduct(product)">
               <h5>{{product.title}}</h5>
               <div [hidden]="!isAuth" *ngxPermissionsOnly="['Buyer']" style="height: 25px;"></div>
-              <h4 [hidden]="!isAuth" *ngxPermissionsOnly="['Buyer']" class="text-center small-price">{{product.price}}.00 <label class="unit">RSD</label></h4>
-              <h3 [hidden]="!isAuth" *ngxPermissionsOnly="['Buyer']" class="text-center big-price"><b>{{product.price}}.00 <label class="unit">RSD</label></b></h3>
+              <h4 [hidden]="!isAuth || (product.dimensions && product.dimensions.length)" *ngxPermissionsOnly="['Buyer']" class="text-center small-price">{{product.price}}.00 <label class="unit">RSD</label></h4>
+              <h3 [hidden]="!isAuth || (product.dimensions && product.dimensions.length)" *ngxPermissionsOnly="['Buyer']" class="text-center big-price"><b>{{product.price}}.00 <label class="unit">RSD</label></b></h3>
+              <h5 [hidden]="!isAuth" *ngFor="let d of product.dimensions">{{d.dimension}} - <strong>{{d.price}} RSD</strong></h5>
             </div>
             <!-- <div class="row cart-box" [hidden]="!isAuth" *ngxPermissionsOnly="['Buyer']">
                 {{counts[i]}}

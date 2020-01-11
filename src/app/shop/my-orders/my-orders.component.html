@@ -75,8 +75,8 @@
           <li class="list-group-item" *ngFor="let item of activeOrder.items">
             <div class="row">
               <div class="col-6">
-                <span class="list-column" translate>Product Code - Title</span><br />
-                {{getItemById(item.productId).code}} - {{item.title}}
+                <span class="list-column" translate>Product Code - Title <span *ngIf="item.dimension">[{{'Dimension' | translate}}]</span></span><br />
+                {{getItemById(item.productId).code}} - {{item.title}} <span *ngIf="item.dimension">[{{item.dimension}}]</span>
               </div>
               <div class="col-2">
                 <span class="list-column" translate>Quantity</span> <br /> {{item.quantity}}

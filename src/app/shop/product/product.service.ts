@@ -14,7 +14,8 @@ const routes = {
   collection: () => `/collection/`,
   category: () => `/category/`,
   products: () => `/product/`,
-  productsbycollection: () => `/product/collection/`
+  productsbycollection: () => `/product/collection/`,
+  productsbycategorynotcollectionassigned: () => `/product/category/notcollectionassigned/`
 };
 
 @Injectable()
@@ -86,8 +87,8 @@ export class ProductService {
     let myCart = JSON.parse(sessionStorage.getItem('my-cart'));
     // tslint:disable-next-line:max-line-length
     if (myCart) {
-      const item: Product = myCart.orders.find((p: Product) => p.id === product.id);
-      item ? myCart.orders.find((p: Product) => p.id === product.id).count += product.count : myCart.orders.push(product);
+      // const item: Product = myCart.orders.find((p: Product) => p.id === product.id);
+      myCart.orders.push(product);
     } else {
       myCart = { orders: [product] };
     }
@@ -109,6 +110,14 @@ export class ProductService {
 
   getProductsByCollectionId(collectionId: number): Observable<Product[]> {
     return this.http.get(`${routes.productsbycollection()}${collectionId}`)
+      .map((res: Response) => res.json())
+      .map(body =>
+        body)
+      .catch(err => this.persistenceService.handleError(err));
+  }
+
+  getProductsNotCollectionAssignedByCategoryId(categoryId: number): Observable<Product[]> {
+    return this.http.get(`${routes.productsbycategorynotcollectionassigned()}${categoryId}`)
       .map((res: Response) => res.json())
       .map(body =>
         body)

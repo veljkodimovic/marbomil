@@ -22,19 +22,23 @@
 <div *ngIf="product && !isLoading" class="container single-product">
   <div class="row">
     <div class="col-sm-5">
-      <img class="single-product-image" src="{{activeImage}}" alt="{{product.title}}">
+      <img class="single-product-image" [src]="activeImage ? activeImage : '../../../../../assets/images/placeholder.png'" alt="{{product.title}}">
       <div class="row single-product-thumbnails">
         <div *ngFor="let productImage of product.images" class="col-4">
-          <img (click)="setActive(productImage)" src="{{apiUrl}}/{{productImage.imageCropUrl}}" alt="{{product.title}}">
+          <img [src]="apiUrl + '/' + productImage.imageCropUrl" alt="{{productImage.title}}">
         </div>
       </div>
-      <img src="{{apiUrl}}/{{product.drawingImageUrl}}" alt="{{product.title}}">
+      <img *ngIf="product.drawingImageUrl" [src]="product.drawingImageUrl ? apiUrl + '/' + product.drawingImageUrl : '../../../../../assets/images/placeholder.png'" alt="{{product.title}}">
     </div>
     <div class="col-sm-6 offset-sm-1">
       <h1>{{product.title}}</h1>
       <div class="single-product-data">
         <p><span translate>Code:</span> {{product.code}}</p>
-        <p *ngIf="product.dimension"><span translate>Dimensions:</span> {{product.dimension}}</p>
+        <p *ngIf="product.dimensions && product.dimensions.length"><span translate>Select dimension:</span></p>
+        <ng-select class="mb-2" *ngIf="product.dimensions && product.dimensions.length" [(ngModel)]="selectedDimension" (ngModelChange)="setPrice()">
+          <ng-option *ngFor="let d of product.dimensions" [value]="d">{{d.dimension}}</ng-option>
+        </ng-select>
+        <!-- <div *ngFor="let d of product.dimensions" class="ml-4">{{d.dimension}} <strong>{{d.price}} RSD</strong></div> -->
         <!--<p><span>Dimenzije proizvoda (ŠxVxD):</span> {{product.width}}x{{product.height}}x{{product.depth}}</p>-->
         <p class="single-product-price">
         {{product.price | number : '1.2-2'}} <span class="single-product-price-currency">RSD</span>
@@ -47,6 +51,12 @@
       <!--Cene su iskazane u dinarima sa uključenim PDV-om. Ne možemo Vam garantovati da su sve fotografije potpuno verne, a cene ažurne, iako će Marbomil nastojati da ove informacije budu tačne.-->
       <!--</p>-->
       <div class="col-12 row" [hidden]="!isAuth()" *ngxPermissionsOnly="['Buyer']">
+<!--           
+        <div class="col-4 quantity-input">
+            <ng-select class="custom" [items]="product.dimensions" [bindLabel]="" [bindValue]=""
+            [selectOnTab]="true" [virtualScroll]="true" [(ngModel)]="product.dimension" name="dimension" #dimension="ngModel">
+          </ng-select>
+        </div> -->
         <div class="col-4 quantity-input">
           <input type="number" class="form-control" id="count" [(ngModel)]="product.count" name="count" min="1"
             #count="ngModel">

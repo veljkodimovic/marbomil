@@ -67,7 +67,8 @@ export class LoginComponent implements OnInit {
               this.permissionsService.loadPermissions(['Buyer']);
               this.router.navigateByUrl(this.returnUrl.toLowerCase());
             } else {
-              localStorage.setItem(usernameKey, JSON.stringify({ fname: 'user', lname: 'user', role: userData.role }));
+              localStorage.setItem(usernameKey, JSON.stringify({ fname: 'user', lname: 'user', role: 'Buyer' }));
+              this.permissionsService.loadPermissions(['Buyer']);
               this.router.navigateByUrl(this.returnUrl.toLowerCase());
             }
             // this.router.navigateByUrl(this.returnUrl.toLowerCase());

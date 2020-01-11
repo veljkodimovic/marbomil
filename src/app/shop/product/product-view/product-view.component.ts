@@ -1,9 +1,9 @@
-import { NgModule, Component, Renderer, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { PersistenceService } from '@app/core/persistence.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { Product } from '@app/core/types/product';
+import { Product, Dimension } from '@app/core/types/product';
 import { Collection } from '@app/core/types/collection';
 import { Category } from '@app/core/types/category';
 import { AuthenticationService } from '@app/core';
@@ -25,6 +25,7 @@ export class ProductViewComponent implements OnInit {
   activeImage: string;
   quantity = 0;
   isLoading: boolean;
+  selectedDimension: Dimension;
 
   constructor(private svc: ProductService,
     private persistenceService: PersistenceService,
@@ -41,9 +42,14 @@ export class ProductViewComponent implements OnInit {
     this.svc.getProductById(Number(id)).subscribe(data => {
       this.product = data;
       this.product.count = 1;
+      this.selectedDimension = this.product.dimensions ? this.product.dimensions[0] : new Dimension();
+      if (this.selectedDimension) {
+        this.setPrice();
+      }
       const that = this;
       const images = this.product.images;
-      this.activeImage = this.apiUrl + '/' + images[0].imageUrl;
+      const imgUrl = images[0] && images[0].imageUrl ? images[0].imageUrl : null;
+      this.activeImage = imgUrl ? this.apiUrl + '/' + images[0].imageUrl : null;
       images.forEach(function (image: any) {
         const imageUrl = that.apiUrl + '/' + image.imageUrl;
       });
@@ -65,6 +71,11 @@ export class ProductViewComponent implements OnInit {
     this.svc.getAllCategories().subscribe((data: any) => {
       this.categories = data;
     });
+  }
+
+  setPrice() {
+    this.product.price = this.selectedDimension.price;
+    this.product.dimension = this.selectedDimension.dimension;
   }
 
   goTo(collection: Collection) {

@@ -27,8 +27,7 @@
           <h4 class="category-collection-title col-12"><span translate>Products</span></h4>
           <div class="col-sm-3 product-categories-item content-box" *ngFor="let product of searchResults.products">
             <a>
-              <img src="{{apiUrl}}/{{product.images[0].imageCropUrl}}" alt="{{product.title}}"
-                (click)="goToProduct(product)">
+                <img [src]="product.images && product.images.length && product.images[0].imageCropUrl ? apiUrl + '/' + product.images[0].imageCropUrl : '../../../../assets/images/placeholder.png'" alt="{{product.title}}" (click)="goToProduct(product)">
               <div class="content-box-description" (click)="goToProduct(product)">
                 <h5>{{product.title}}</h5>
                 <div [hidden]="!isAuth" *ngxPermissionsOnly="['Buyer']" style="height: 25px;"></div>
@@ -38,7 +37,7 @@
                 <h3 [hidden]="!isAuth" *ngxPermissionsOnly="['Buyer']" class="text-center big-price">
                   <b>{{product.price}}.00 <label class="unit">RSD</label></b></h3>
               </div>
-              <div class="row cart-box" [hidden]="!isAuth" *ngxPermissionsOnly="['Buyer']">
+              <!-- <div class="row cart-box" [hidden]="!isAuth" *ngxPermissionsOnly="['Buyer']">
                 {{counts[i]}}
                 <div class="col-md-4">
                   <input type="number" class="form-control" id="count" [(ngModel)]="product.count" name="count"
@@ -48,7 +47,7 @@
                   <button class="btn btn-sm btn-default" (click)="addToCart(product)" translate><i
                       class="fas fa-shopping-cart"></i></button>
                 </div>
-              </div>
+              </div> -->
             </a>
           </div>
         </div>
@@ -57,7 +56,7 @@
           <h4 class="category-collection-title col-12"><span translate>Categories</span></h4>
           <div class="col-sm-3 categories-list-item content-box" *ngFor="let category of searchResults.categories">
             <a (click)="goToCategory(category)">
-              <img src="{{apiUrl}}/{{category.imageCropUrl}}" alt="{{category.title}}">
+              <img [src]="category && category.imageCropUrl ? apiUrl + '/' + category.imageCropUrl : '../../../../assets/images/placeholder.png'" alt="{{category.title}}" (click)="goToCategory(category)">
               <div class="content-box-description">
                 <h5>{{category.title}}</h5>
               </div>
@@ -69,7 +68,7 @@
           <h4 class="category-collection-title col-12"><span translate>Collections</span></h4>
           <div class="col-sm-3 categories-list-item content-box" *ngFor="let collection of searchResults.collections">
             <a (click)="goToCollection(collection)">
-              <img src="{{apiUrl}}/{{collection.imageCropUrl}}" alt="{{collection.title}}">
+              <img [src]="collection && collection.imageCropUrl ? apiUrl + '/' + collection.imageCropUrl : '../../../../assets/images/placeholder.png'" alt="{{collection.title}}" (click)="goToCollection(collection)">
               <div class="content-box-description">
                 <h5>{{collection.title}}</h5>
               </div>

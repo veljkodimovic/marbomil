@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 import { NotificationsService } from 'angular2-notifications';
-import { Product } from '../../../core/types/product';
+import { Product, Dimension } from '../../../core/types/product';
 import { Collection } from '../../../core/types/collection';
 import { Category } from '../../../core/types/category';
 import { ImageModel } from '../../../core/types/imageModel';
@@ -34,7 +34,7 @@ export class ProductViewComponent implements OnInit {
   image: any;
   data: any;
   data2: any;
-  product: Product = new Product(0, '', '', '', 0, 0, 0, '', null, null, '', 0, 0, 0, 0, [], '', '', '.jpg');
+  product: Product = new Product(0, '', '', '', 0, 0, 0, '', null, null, [], 0, 0, 0, 0, [], '', '', '.jpg');
   link: any;
   isLoading: boolean;
   setImage = false;
@@ -60,6 +60,7 @@ export class ProductViewComponent implements OnInit {
   nestoImage: any;
   fileType: string;
   fileType2: string;
+  dimension = new Dimension();
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -426,6 +427,15 @@ export class ProductViewComponent implements OnInit {
     this.cropper2.reset();
     this.product.drawingImage = null;
     this.product.drawingImageExtension = '';
+  }
+
+  addDimension() {
+    this.product.dimensions.push(this.dimension);
+    this.dimension = new Dimension();
+  }
+
+  removeDimension(index: number) {
+    this.product.dimensions.splice(index, 1);
   }
 
 

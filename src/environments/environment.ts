@@ -6,7 +6,7 @@
 export const environment = {
   production: false,
   version: '(dev)',
-  serverUrl: 'http://www.marbomil.co.rs',
+  serverUrl: 'http://localhost:8889',
   defaultLanguage: 'sr-Latn',
   supportedLanguages: [
     'en-US',

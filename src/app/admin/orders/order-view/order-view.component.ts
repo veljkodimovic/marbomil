@@ -44,9 +44,9 @@ export class OrderViewComponent implements OnInit {
     { id: 'Rejected', name: this.rejeceted.value },
     { id: 'Completed', name: this.completed.value }
   ];
-  products: Product[];
+  products: Product[] = [];
   orderProducts: any[] = [];
-  newOrder: any = { productId: null, quantity: null };
+  newOrder: any = { productId: null, quantity: null, dimension: null, price: null };
 
   constructor(private ordersService: OrdersService,
     private translate: TranslateService,
@@ -98,7 +98,7 @@ export class OrderViewComponent implements OnInit {
       this.order.createdDate = new Date(this.order.createdDate);
       this.filterStatuses(this.order.status);
       this.order.items.forEach(product => {
-        this.orderProducts.push({ productId: product.productId, quantity: product.quantity });
+        this.orderProducts.push({ productId: product.productId, quantity: product.quantity, price: product.price, dimension: product.dimension });
       });
       this.isLoading = false;
     });
@@ -106,26 +106,26 @@ export class OrderViewComponent implements OnInit {
 
   addProduct(form: NgForm, element: HTMLElement) {
     const newOrder = { ...this.newOrder };
-    if (this.orderProducts.find(op => op.productId === newOrder.productId)) {
-      const q = this.orderProducts.find(op => op.productId === newOrder.productId).quantity + newOrder.quantity;
-      this.orderProducts.find(op => op.productId === newOrder.productId).quantity = q;
-      form.reset();
-      element.focus();
-    } else {
-      this.orderProducts.push(newOrder);
-      form.reset();
-      element.focus();
-    }
+    newOrder.price = this.newOrder.dimension ? this.newOrder.price : this.getItemById(newOrder.productId).price;
+    this.orderProducts.push(newOrder);
+    this.newOrder = { productId: null, quantity: null, dimension: null, price: null };
+    form.reset();
+    element.focus();
+  }
+
+  onSelectDimension($event: any) {
+    this.newOrder.dimension = $event ? $event.dimension : null;
+    this.newOrder.price = $event ? $event.price : null;
   }
 
   updateOrder() {
+    this.order.items = this.orderProducts;
     this.ordersService.updateOrder(this.order)
       .finally(() => { this.isLoading = false; })
       .subscribe((response: any) => {
         this.blockAll = false;
         this.handleResponse(response);
       });
-
   }
 
   saveOnClick() {
@@ -146,6 +146,8 @@ export class OrderViewComponent implements OnInit {
         this.ordersService.completeOrder(this.order.id).subscribe(() => {
           this.updateOrder();
         });
+      } else if (this.order.status === 'ReadyForProcessing') {
+        this.updateOrder();
       }
     } else {
       this.order.items = this.orderProducts;
@@ -169,7 +171,7 @@ export class OrderViewComponent implements OnInit {
     if (this.orderProducts) {
       let price = 0;
       this.orderProducts.forEach((op) => {
-        price += op.quantity * this.getItemById(op.productId).price;
+        price += op.quantity * op.price;
       });
       return price;
     }
@@ -233,6 +235,10 @@ export class OrderViewComponent implements OnInit {
 
   openModal() {
     this.modal.openModal();
+  }
+
+  removeProduct(index: number) {
+    this.orderProducts.splice(index, 1);
   }
 
   performDelete(event: any) {

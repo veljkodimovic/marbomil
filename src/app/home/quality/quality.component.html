@@ -1,7 +1,7 @@
 <div class="container-fluid" *ngIf="!isLoading">
   <div class="row justify-content-center">
     <div class="col-auto" *ngIf="banner">
-      <img src="{{apiUrl}}/{{banner.imageCropUrl}}" alt="">
+      <img [src]="banner && banner.imageCropUrl ? apiUrl + '/' + banner.imageCropUrl : '../../../assets/images/placeholder.png'" alt="banner.title">
     </div>
   </div>
 </div>

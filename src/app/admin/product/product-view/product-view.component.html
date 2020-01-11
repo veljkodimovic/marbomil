@@ -37,29 +37,11 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="price" class="col-md-2 col-form-label" translate>Price</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="price" [(ngModel)]="product.price" name="price">
-            </div>
-          </div>
-          <div class="form-group row">
             <label for="orderNumber" class="col-md-2 col-form-label" translate>Position number</label>
             <div class="col-md-10">
               <input type="text" class="form-control" id="orderNumber" [(ngModel)]="product.orderNumber" name="orderNumber">
             </div>
           </div>
-          <!-- <div class="form-group row">
-            <label for="discount" class="col-md-2 col-form-label">Popust</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="discount" [(ngModel)]="product.discount" name="discount">
-            </div>
-          </div> -->
-          <!-- <div class="form-group row">
-            <label for="discountdate" class="col-md-2 col-form-label">Popust do</label>
-            <div class="col-md-10">
-              <input type="date" class="form-control" id="discountdate" [(ngModel)]="product.discountDate" name="discountDate">
-            </div>
-          </div> -->
           <div class="form-group row">
             <label for="category" class="col-md-2 col-form-label" translate>Category</label>
             <div class="col-md-10">
@@ -80,42 +62,45 @@
           <div class="form-group row">
             <label for="text" class="col-md-2 col-form-label" translate>Description</label>
             <div class="col-md-10">
-              <!-- <textarea type="text" class="form-control" id="text" [(ngModel)]="product.description" name="desc"></textarea> -->
               <angular-editor [(ngModel)]="product.description" [config]="editorConfig" name="product-description"></angular-editor>
             </div>
           </div>
-          <div class="form-group row">
+          <hr>
+          <div class="form-group row dimensions-content">
               <label for="dimension" class="col-md-2 col-form-label" translate>Dimensions</label>
-              <div class="col-md-10">
-                <input type="text" class="form-control" id="dimension" [(ngModel)]="product.dimension" name="dimension">
+                <ul class="list-group col-md-10 mb-4 ul-padding">
+                  <li class="list-group-item d-flex justify-content-between align-items-center w-75" *ngFor="let d of product.dimensions; let i = index;">
+                    {{d.dimension}} <strong>{{d.price}} RSD</strong>
+                    <i class="fa fa-times pointer" (click)="removeDimension(i)"></i>
+                  </li>
+                </ul>
+                <label class="col-md-2"></label>
+              <div class="col-md-10 mb-4">
+                <label for="dimension" class="col-md-2 col-form-label" translate>Dimension</label>
+                <input type="text" class="col-md-9 form-control" id="dimension" [(ngModel)]="dimension.dimension" name="dimension">
+              </div>
+              <label class="col-md-2"></label>
+              <div class="col-md-10 mb-4">
+                <label for="price" class="col-md-2 col-form-label" translate>Price</label>
+                <input type="number" class="col-md-9 form-control" id="price" [(ngModel)]="dimension.price" name="price">
+              </div>
+              <div class="offset-8 col-md-1">
+                <button type="button" class="btn btn-primary btn-sm text-center" [disabled]="!dimension.price || !dimension.dimension" (click)="addDimension()" translate>Add</button>
               </div>
             </div>
-          <!-- <div class="form-group row">
-            <label for="width" class="col-md-2 col-form-label">Širina</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="width" [(ngModel)]="product.width" name="widthData">
+            <hr>
+            <div class="form-group row" *ngIf="!product.dimensions || !product.dimensions.length">
+              <label for="price" class="col-md-2 col-form-label" translate>Price</label>
+              <div class="col-md-10">
+                <input type="text" class="form-control" id="price" [(ngModel)]="product.price" name="price">
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <label for="height" class="col-md-2 col-form-label">Visina</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="height" [(ngModel)]="product.height" name="heightData">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="stock" class="col-md-2 col-form-label">Dubina</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="stock" [(ngModel)]="product.depth" name="depthData">
-            </div>
-          </div> -->
           <div class="form-group row">
             <label for="depth" class="col-md-2 col-form-label" translate>Quantity</label>
             <div class="col-md-10">
               <input type="text" class="form-control" id="depth" [(ngModel)]="product.numberOnSite" name="numberOnSite">
             </div>
-          </div>
-
-          
+          </div>          
         </div>
       </div>
       <div class="col-md-12">

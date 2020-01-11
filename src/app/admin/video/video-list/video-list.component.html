@@ -22,7 +22,8 @@
     <div class="col-sm-6 col-md-4" *ngFor="let video of videoData">
       <div class="admin-list-item">
         <a (click)="goTo(video)">
-          <img src="{{apiUrl}}/{{video.imageCropUrl}}" alt="">
+          <img [src]="video && video.imageCropUrl ? apiUrl + '/' + video.imageCropUrl : '../../../assets/images/placeholder.png'" alt="video.title">
+          
         </a>
         <div class="row admin-list-video">
           <div class="col-9">

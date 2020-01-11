@@ -2,19 +2,21 @@
   <div class="col-sm-12" *ngIf="cart && cart.length">
     <div class="row header">
       <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2 d-none d-sm-block"></div>
-      <div class="col-lg-5 col-md-5 col-sm-4 col-xs-4 d-none d-sm-block" translate>Product</div>
+      <div class="col-lg-5 col-md-5 col-sm-4 col-xs-4 d-none d-sm-block"> {{'Product' | translate}} [<span translate>Dimension</span>]</div>
       <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 d-none d-sm-block" translate>Price</div>
       <div class="col-lg-1 col-md-2 col-sm-2 col-xs-2 d-none d-sm-block" translate>Quantity</div>
       <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2 d-none d-sm-block" translate>Total price</div>
       <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 d-none d-sm-block"></div>
     </div>
-    <div class="row header" *ngFor="let item of cart">
-      <div class="col-lg-3 col-md-2 col-sm-2"><img src="{{apiUrl}}/{{item.images[0].imageCropUrl}}" alt="{{item.title}}" class="product-img"></div>
-      <div class="col-lg-5 col-md-5 col-sm-4 col-padding"><strong class="d-block d-sm-none" translate>Title: </strong>{{item.title}}</div>
+    <div class="row header" *ngFor="let item of cart let i = index;">
+      <div class="col-lg-3 col-md-2 col-sm-2">
+        <img [src]="item.images && item.images.length && item.images[0].imageCropUrl ? apiUrl + '/' + item.images[0].imageCropUrl : '../../../../assets/images/placeholder.png'" alt="{{item.title}}" class="product-img">
+      </div>
+      <div class="col-lg-5 col-md-5 col-sm-4 col-padding"><strong class="d-block d-sm-none">{{'Title:' | translate}} <span *ngIf="item.dimension">[{{'Dimension' | translate}}]</span> </strong>{{item.title}} <span *ngIf="item.dimension">[{{item.dimension}}]</span></div>
       <div class="col-lg-1 col-md-1 col-sm-1 col-padding"><strong class="d-block d-sm-none" translate>Price: </strong>{{item.price}}</div>
       <div class="col-lg-1 col-md-2 col-sm-2"><strong class="d-block d-sm-none" translate>Quantity: </strong><input type="number" class="form-control count-field" id="count" [(ngModel)]="item.count" name="count" #count="ngModel" min="1" (ngModelChange)="changeCountOfItem()"></div>
       <div class="col-lg-1 col-md-1 col-sm-2 col-padding"><strong class="d-block d-sm-none" translate>Total price: </strong>{{item.price * item.count}}</div>
-      <div class="col-lg-1 col-md-1 col-sm-1 text-right col-padding"><a class="remove-link" (click)="removeFromCart(item)"><i class="fas fa-trash"></i></a></div>
+      <div class="col-lg-1 col-md-1 col-sm-1 text-right col-padding"><a class="remove-link" (click)="removeFromCart(i)"><i class="fas fa-trash"></i></a></div>
     </div>
     <div class="row header">
       <div class="col-12 text-center"><strong translate>Total price: </strong>{{totalPrice(cart)}}</div>

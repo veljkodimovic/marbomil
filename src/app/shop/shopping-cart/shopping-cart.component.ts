@@ -4,7 +4,6 @@ import { PersistenceService } from '@app/core/persistence.service';
 import { HeaderService } from '@app/core/shell/header/header.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import { Order } from '@app/core/types/order';
 import { ShoppingCartService } from './shopping-cart.service';
 
 class Purchase {
@@ -58,10 +57,11 @@ export class ShoppingCartComponent implements OnInit {
     return price;
   }
 
-  removeFromCart(order: Product) {
-    sessionStorage.setItem('my-cart', JSON.stringify({ orders: this.cart.filter((o: Product) => o.id !== order.id) }));
+  removeFromCart(index: number) {
+    this.headerService.shoppingCartItemsCount.emit(-this.cart[index].count);
+    this.cart.splice(index, 1);
+    sessionStorage.setItem('my-cart', JSON.stringify({ orders: this.cart }));
     this.cart = JSON.parse(sessionStorage.getItem('my-cart')).orders;
-    this.headerService.shoppingCartItemsCount.emit(-order.count);
   }
 
   openConfirmModal(content: any) {
@@ -74,7 +74,7 @@ export class ShoppingCartComponent implements OnInit {
     const orders = JSON.parse(sessionStorage.getItem('my-cart')).orders;
     const purchase = new Purchase('', []);
     orders.forEach((o: any) => {
-      purchase.items.push({ productId: o.id, quantity: o.count });
+      purchase.items.push({ productId: o.id, quantity: o.count, dimension: o.dimension, price: o.price });
     });
     purchase.note = this.note;
     this.shoppingCartService.confirmShopping(purchase).subscribe((data) => {

@@ -44,18 +44,41 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
     this.isLoading = true;
     this.route.queryParams.subscribe(params => {
-      this.activeCollectionId = Number(params['id']);
       this.activeCategoryId = Number(params['categoryId']);
-      this.categorySvc.getMenuStructure().subscribe((menuData: any[]) => {
-        this.menuData = menuData;
-        this.getProductsByCollectionId(this.activeCollectionId);
-      });
+      if (params['id']) {
+        this.activeCollectionId = Number(params['id']);
+        this.categorySvc.getMenuStructure().subscribe((menuData: any[]) => {
+          this.menuData = menuData;
+          this.getProductsByCollectionId(this.activeCollectionId);
+        });
+      } else {
+        this.categorySvc.getMenuStructure().subscribe((menuData: any[]) => {
+          this.menuData = menuData;
+          this.getProductsWithoutCollectionByCategoryId(this.activeCategoryId);
+        });
+      }
     });
   }
 
   getProductsByCollectionId(collectionId: number) {
     this.isLoading = true;
     this.svc.getProductsByCollectionId(collectionId).subscribe((products: Product[]) => {
+      this.productData = products;
+      this.productData.forEach((product: any) => {
+        product.count = 1;
+      });
+      this.productData.sort(function (a: any, b: any) {
+        const i = a.orderNumber > 0 ? a.orderNumber : 9999999;
+        const j = b.orderNumber > 0 ? b.orderNumber : 9999999;
+        return i - j;
+      });
+      this.isLoading = false;
+    });
+  }
+
+  getProductsWithoutCollectionByCategoryId(categoryId: number) {
+    this.isLoading = true;
+    this.svc.getProductsNotCollectionAssignedByCategoryId(categoryId).subscribe((products: Product[]) => {
       this.productData = products;
       this.productData.forEach((product: any) => {
         product.count = 1;

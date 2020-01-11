@@ -20,6 +20,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ShoppingConfirmedComponent } from './shopping-confirmed/shopping-confirmed.component';
 import { ShoppingCartService } from '@app/shop/shopping-cart/shopping-cart.service';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
     NgbModule,
     MaterialModule,
     FormsModule,
+    NgSelectModule,
     ShopRoutingModule
   ],
   declarations: [

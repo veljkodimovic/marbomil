@@ -1,3 +1,8 @@
+export class Dimension {
+  dimension: string;
+  price: number;
+}
+
 export class Product {
   id: number;
   title: string;
@@ -9,7 +14,7 @@ export class Product {
   discountDate: string;
   collectionId: number;
   categoryId: number;
-  dimension: string;
+  dimensions: Dimension[];
   width: number;
   height: number;
   depth: number;
@@ -22,10 +27,11 @@ export class Product {
   updatedImages: any[];
   deletedImages: any[];
   count?: number;
+  dimension?: string;
   bindLabel?: string;
 
   constructor(id: number, title: string, code: string, description: string, price: number, orderNumber: number,
-    discount: number, discountDate: string, collectionId: number, categoryId: number, dimension: string, width: number,
+    discount: number, discountDate: string, collectionId: number, categoryId: number, dimensions: Dimension[], width: number,
     height: number, numberOnSite: number, depth: number, images: any[], drawingImage: string, drawingImageUrl: string,
     drawingImageExtension: string) {
     this.id = id;
@@ -37,7 +43,7 @@ export class Product {
     this.discount = discount;
     this.discountDate = discountDate;
     this.collectionId = collectionId;
-    this.dimension = dimension;
+    this.dimensions = dimensions;
     this.width = width;
     this.height = height;
     this.numberOnSite = numberOnSite;

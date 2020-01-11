@@ -52,7 +52,7 @@
             <div class="row">
               <div class="col-11 col-sm-4" style="margin-bottom: 10px;">
                 <a routerLink="/admin/product/{{product.id}}">
-                  <img src="{{apiUrl}}/{{product.images[0].imageCropUrl}}">
+                  <img [src]="product.images && product.images.length && product.images[0].imageCropUrl ? apiUrl + '/' + product.images[0].imageCropUrl : '../../../../assets/images/placeholder.png'" alt="{{product.title}}">
                 </a>
               </div>
               <div class="col-11 col-sm-7 order-2 order-sm-1">

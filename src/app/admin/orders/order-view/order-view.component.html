@@ -91,6 +91,16 @@
                       name="newProduct" #newProduct="ngModel" #product></ng-select>
                   </div>
                 </div>
+                <div class="form-group row" *ngIf="getItemById(newOrder.productId) && getItemById(newOrder.productId).dimensions && getItemById(newOrder.productId).dimensions.length">
+                  <label for="title" class="col-md-4 col-form-label" translate>Dimension</label>
+                  <div class="col-md-8">
+                    <!-- <input type="number" class="form-control" id="quantity" [(ngModel)]="newOrder.dimension"
+                      name="quantity" #quantity="ngModel" required min="1"> -->
+                      <ng-select required="required" class="custom" [items]="getItemById(newOrder.productId).dimensions" [bindLabel]="'dimension'"
+                      [bindValue]="" [selectOnTab]="true" [virtualScroll]="true" [(ngModel)]="dimension"
+                      name="newProduct" #newProduct="ngModel" #product (ngModelChange)="onSelectDimension($event)"></ng-select>
+                  </div>
+                </div>
                 <div class="form-group row">
                   <label for="title" class="col-md-4 col-form-label" translate>Quantity</label>
                   <div class="col-md-8">
@@ -100,29 +110,31 @@
                 </div>
                 <div class="row">
                   <div class="col-sm-8 offset-md-4">
-                    <button type="submit" class="btn btn-primary" [disabled]="!newOrder.productId || !newOrder.quantity"
+                    <button type="submit" class="btn btn-primary" *ngIf="getItemById(newOrder.productId) && getItemById(newOrder.productId).dimensions && getItemById(newOrder.productId).dimensions.length" [disabled]="!newOrder.productId || !newOrder.quantity || !newOrder.dimension"
+                      translate><i class="fas fa-plus"></i>Add</button>
+                    <button type="submit" class="btn btn-primary" *ngIf="!(getItemById(newOrder.productId) && getItemById(newOrder.productId).dimensions && getItemById(newOrder.productId).dimensions.length)" [disabled]="!newOrder.productId || !newOrder.quantity"
                       translate><i class="fas fa-plus"></i>Add</button>
                   </div>
                 </div>
                 <ul class="list-group mt-4">
-                  <li class="list-group-item" *ngFor="let item of orderProducts">
+                  <li class="list-group-item" *ngFor="let item of orderProducts; let i = index;">
                     <a class="remove-link" style="float: right;"><i class="fas fa-trash"
-                        (click)="removeProduct(item)"></i></a>
+                        (click)="removeProduct(i)"></i></a>
                     <div class="row">
                       <div class="col-6">
-                        <span class="list-column" translate>Product Code - Title</span><br />
-                        {{getItemById(item.productId).code}} - {{getItemById(item.productId).title}}
+                        <span class="list-column">{{'Product Code - Title' | translate}} <span *ngIf="item.dimension" >[<span translate="{{'Dimension' | translate}}"></span>]</span></span><br />
+                        {{getItemById(item.productId).code}} - {{getItemById(item.productId).title}} <span *ngIf="item.dimension">[{{item.dimension}}]</span>
                       </div>
                       <div class="col-2">
                         <span class="list-column" translate>Quantity</span> <br /> {{item.quantity}}
                       </div>
                       <div class="col-2">
-                        <span class="list-column" translate>Price</span> <br /> {{getItemById(item.productId).price}}
+                        <span class="list-column" translate>Price</span> <br /> {{item.price}}
                         <small>RSD</small>
                       </div>
                       <div class="col-2">
                         <span class="list-column" translate>Total</span> <br />
-                        {{getItemById(item.productId).price * item.quantity}}
+                        {{item.price * item.quantity}}
                         <small>RSD</small>
                       </div>
                     </div>

@@ -100,9 +100,9 @@ export class CatalogueViewComponent implements OnInit {
 
     myReader.onloadend = function (loadEvent: any) {
       const sizeKb = that.calculateKBFromBytes(+loadEvent.loaded);
-      if (sizeKb > 1024) {
+      if (sizeKb > 20 * 1024) {
         that.file.nativeElement.value = '';
-        that.notificationService.error('File size', 'Maximum file size should be 1MB.',
+        that.notificationService.error('File size', 'Maximum file size should be 20MB.',
           {
             timeOut: 5000,
             showProgressBar: true,

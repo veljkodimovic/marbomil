@@ -4,7 +4,7 @@
       <div class="row categories-list">
         <div class="col-sm-3 categories-list-item content-box" *ngFor="let category of categoryData">
           <a (click)="goTo(category)">
-            <img [src]="category && category.imageCropUrl ? apiUrl + '/' + category.imageCropUrl : '../../../../assets/images/placeholder.png'" alt="{{category.title}}" (click)="goToCategory(category)">
+            <img [src]="category && category.imageCropUrl ? apiUrl + '/' + category.imageCropUrl : '../../../../assets/images/placeholder.png'" alt="{{category.title}}">
             <div class="content-box-description">
               <h5>{{category.title}}</h5>
               

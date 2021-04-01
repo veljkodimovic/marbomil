@@ -36,13 +36,21 @@ export class LocationComponent implements OnInit {
       const markers: any = [];
       this.salesData.forEach(sales => {
         const latLng = { lat: parseFloat(sales.latitude), lng: parseFloat(sales.longitude) };
-        const content = `<h3>${sales.title}</h3>
-                        <p>${sales.street} <br>
-                            ${sales.postal} ${sales.city} <br>
-                            ${sales.country}</p>
-                        <p>${sales.phone} <br>
-                            <a href="mailto:${sales.email}">${sales.email}</a> <br>
-                            <a href="${sales.website}">${sales.website}</a></p>`;
+        const title = sales.title ? sales.title : '';
+        const street = sales.street ? sales.street : '';
+        const postal = sales.postal ? sales.postal : '';
+        const city = sales.city ? sales.city : '';
+        const country = sales.country ? sales.country : '';
+        const phone = sales.phone ? sales.phone : '';
+        const email = sales.email ? sales.email : '';
+        const website = sales.website ? sales.website : '';
+        const content = `<h3>${title}</h3>
+      <p>${street} <br>
+      ${postal} ${city} <br>
+      ${country}</p>
+      <p>${phone} <br>
+      <a href="mailto:${email}">${email}</a> <br>
+      <a href="${website}">${website}</a></p>`;
         const marker = new google.maps.Marker({
           position: latLng,
           map: mapSales
@@ -55,15 +63,13 @@ export class LocationComponent implements OnInit {
           infowindow.open(mapSales, this);
         });
       });
+      this.isLoading = false;
       if (markers.length) {
         this.mapSales.fitBounds(boundsSrb);
         this.mapSales.setCenter(boundsSrb.getCenter());
       } else {
         this.gmapSales.nativeElement.remove();
       }
-      setTimeout(() => {
-        this.isLoading = false;
-      }, 300);
     });
   }
 
